@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <title>Al-Arz School · Teacher — SKL prototype</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Sans+Arabic:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Sans+Arabic:wght@400;600;700&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
 <style>
   :root{
     --accent:#4f46e5; --accent-2:#7c5cff; --accent-soft:#eef0fe; --cedar:#0e8a4f;
@@ -271,36 +271,66 @@
     .device{width:min(100vw,440px);height:952px;margin:0 auto;border-radius:66px;padding:5px}
     .device::before{display:block}.bezel,.viewport{border-radius:61px}.home-indicator{display:block}
   }
-  /* ---- course content (Udemy-style) ---- */
-  .cring{--p:0;width:58px;height:58px;border-radius:50%;flex:0 0 auto;display:grid;place-items:center;background:conic-gradient(var(--accent) calc(var(--p)*1%),var(--surface-3) 0)}
-  .cring::before{content:"";grid-area:1/1;width:46px;height:46px;border-radius:50%;background:var(--surface)}
-  .cring b{grid-area:1/1;position:relative;font-size:13px;font-weight:800}
-  .btn.cont{justify-content:flex-start;padding:14px 16px;font-size:14.5px;text-align:start}
-  .btn.cont svg{flex:0 0 auto;width:20px;height:20px;fill:#fff}
-  .btn.cont .ell{min-width:0}
-  .csec{background:var(--surface);border:1px solid var(--line);border-radius:16px;margin-top:10px;overflow:hidden;box-shadow:0 1px 2px rgba(16,24,40,.04),0 8px 24px -18px rgba(16,24,40,.25)}
-  :root[data-theme="dark"] .csec{box-shadow:none}
-  .csec-h{width:100%;display:flex;align-items:center;gap:10px;padding:13px 14px;background:transparent;border:none;color:var(--text);cursor:pointer;font:inherit;text-align:start;transition:background .2s}
-  .csec.open .csec-h{background:var(--surface-2)}
-  .csec-t{font-weight:800;font-size:14.5px;line-height:1.3}
-  .csec-n{font-size:11.5px;font-weight:800;color:var(--muted);background:var(--surface-3);padding:3px 8px;border-radius:999px;flex:0 0 auto}
-  .csec-n.full{background:var(--ok-bg);color:var(--ok)}
-  .csec-h .chev{width:18px;height:18px;stroke:var(--muted);fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;transition:transform .3s;flex:0 0 auto}
-  .csec.open .chev{transform:rotate(180deg)}
-  .csec-b{overflow:hidden;transition:height .32s cubic-bezier(.2,.8,.2,1)}
-  .csec-in{padding:0 14px 4px;border-top:1px solid var(--line)}
-  .citem{display:flex;align-items:center;gap:11px;padding:11px 0;border-bottom:1px solid var(--line);cursor:pointer}
-  .citem:last-child{border-bottom:none}
-  .citem:active{opacity:.75}
-  .citem-t{font-weight:600;font-size:13.5px;line-height:1.35}
-  .citem.done .citem-t{color:var(--muted)}
-  .citem.now .citem-t{color:var(--accent);font-weight:800}
-  .citem .sub{font-size:11.5px}
-  .cchk{width:22px;height:22px;border-radius:50%;border:2px solid var(--line);flex:0 0 auto;display:grid;place-items:center;color:#fff;transition:.15s;cursor:pointer}
-  .citem.done .cchk{background:var(--ok);border-color:var(--ok)}
-  .cchk svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:3.2;stroke-linecap:round;stroke-linejoin:round}
+  /* ---- class materials ---- */
+  .cm-lesson{padding:14px}
+  .cm-list{margin-top:12px;border-top:1px solid var(--line)}
+  .cm-att{display:flex;align-items:center;gap:11px;padding:11px 0;border-bottom:1px solid var(--line);cursor:pointer}
+  .cm-att:last-child{border-bottom:none}
+  .cm-att:active{opacity:.75}
+  .cm-att.off .cm-t{color:var(--muted)}
+  .cm-t{font-weight:600;font-size:13.5px;line-height:1.35;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+  .cm-att .sub{font-size:11.5px}
+  .cm-new{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:800;color:var(--accent);background:var(--accent-soft);padding:2px 8px 2px 6px;border-radius:999px;line-height:1.4}
+  .cm-new::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+  .cm-off{color:var(--ok);font-weight:700}
+  .cm-hint{margin-top:3px}
+  .cm-seen{margin-top:6px;max-width:220px;cursor:pointer}
+  .cm-bar{height:4px;border-radius:99px;background:var(--surface-3);overflow:hidden;margin-top:4px}
+  .cm-bar i{display:block;height:100%;border-radius:99px;background:color-mix(in srgb,var(--accent) 60%,transparent)}
+  .cm-bar.lg{height:8px}
   .icon-btn.cdl{width:34px;height:34px;border-radius:10px}
   .icon-btn.cdl svg{width:17px;height:17px;stroke-linecap:round;stroke-linejoin:round}
+  .icon-btn.cdl.saved{color:var(--ok);background:var(--ok-bg);border-color:color-mix(in srgb,var(--ok) 30%,transparent)}
+  .cm-att .icon-btn.cdl{width:32px;height:32px}
+  .cm-attach{display:flex;align-items:center;justify-content:center;gap:6px;width:100%;margin-top:8px;padding:10px;border:1.5px dashed var(--line);border-radius:12px;background:transparent;color:var(--accent);font:inherit;font-weight:700;font-size:13px;cursor:pointer}
+  .cm-attach svg{width:15px;height:15px}
+  .cm-count{margin-top:4px}
+  .cm-book{cursor:pointer}
+  .cm-cover{width:56px;height:76px;border-radius:5px 10px 10px 5px;background:linear-gradient(135deg,var(--bc),color-mix(in srgb,var(--bc) 55%,#000));color:#fff;display:flex;flex-direction:column;justify-content:space-between;padding:7px 7px 6px 10px;box-shadow:inset 4px 0 0 rgba(0,0,0,.2),0 6px 14px -6px rgba(0,0,0,.45);flex:0 0 auto}
+  .cm-cover span{font-size:8px;font-weight:800;letter-spacing:.08em!important}
+  .cm-cover b{font-size:22px;font-weight:800;line-height:1}
+  .cm-cover i{font-style:normal;font-size:9px;font-weight:700;opacity:.85}
+  .cm-pick{max-height:200px;overflow-y:auto;border:1px solid var(--line);border-radius:14px;padding:2px 12px;overscroll-behavior:contain}
+  .cm-opt{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--line);cursor:pointer}
+  .cm-opt:last-child{border-bottom:none}
+  .cm-radio{width:18px;height:18px;border-radius:50%;border:2px solid var(--line);flex:0 0 auto;transition:border .15s}
+  .cm-opt.on .cm-radio{border:5.5px solid var(--accent)}
+  .cm-types{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+  .cm-type{display:flex;flex-direction:column;align-items:center;gap:6px;padding:10px 2px 8px;border-radius:12px;border:1.5px solid var(--line);background:var(--surface);color:var(--text);font:inherit;font-size:10.5px;font-weight:700;cursor:pointer;line-height:1.15;text-align:center}
+  .cm-type .set-ic{width:30px;height:30px;border-radius:9px}
+  .cm-type .set-ic svg{width:17px;height:17px}
+  .cm-type.on{border-color:var(--accent);background:var(--accent-soft);color:var(--accent)}
+  .cm-cam{margin-top:12px;border:1.5px dashed var(--line);border-radius:14px;padding:18px;text-align:center;cursor:pointer;background:var(--surface-2)}
+  .cm-cam.on{border-style:solid;padding:10px}
+  .cm-cam-ic{width:54px;height:54px;border-radius:50%;margin:0 auto;display:grid;place-items:center;background:#111827;color:#fff}
+  .cm-cam-ic svg{width:26px;height:26px;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linejoin:round}
+  .cm-shot{border-radius:10px;overflow:hidden;line-height:0}
+  .cm-shot svg{width:100%;height:auto}
+  .cm-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+  .cm-chip{display:inline-flex;align-items:center;gap:6px;max-width:100%;padding:6px 10px;border-radius:999px;border:1px solid var(--line);background:var(--surface-2);color:var(--text);font:inherit;font-size:12px;font-weight:600;cursor:pointer}
+  .cm-chip svg{width:14px;height:14px;flex:0 0 auto}
+  .cm-chip .ell{max-width:200px}
+  .btn.cm-log-btn{padding:10px;font-size:13px;margin-top:10px}
+  .btn.cm-log-btn svg{width:15px;height:15px}
+  .tag.cm-clip{gap:3px}
+  .tag.cm-clip svg{width:12px;height:12px}
+  .bd-stage{flex:1;min-height:0;position:relative;overflow:hidden;background:#0f1113;touch-action:none;cursor:grab}
+  .bd-stage.drag{cursor:grabbing}
+  .bd-img{position:absolute;left:50%;top:50%;width:100%;transform:translate(-50%,-50%);transform-origin:center center;transition:transform .2s ease}
+  .bd-img.drag{transition:none}
+  .bd-img svg{display:block;width:100%;height:auto}
+  :root[data-theme="dark"] .cm-new,:root[data-theme="dark"] .cm-attach,:root[data-theme="dark"] .cm-type.on{color:#a5b4fc}
+  :root[data-theme="dark"] .cm-cam-ic{background:#000}
   /* viewer */
   .viewer{position:absolute;inset:0;z-index:74;background:var(--bg);display:flex;flex-direction:column;transform:translateY(100%);visibility:hidden;transition:transform .38s cubic-bezier(.2,.8,.2,1),visibility 0s linear .38s}
   .viewer.open{transform:none;visibility:visible;transition:transform .38s cubic-bezier(.2,.8,.2,1)}
@@ -426,25 +456,7 @@
   .vp-end-t{font-weight:800;font-size:16px}
   .btn.sm{width:auto;padding:9px 14px;font-size:13px;box-shadow:none}
   .vp-info{margin:12px 14px 0}
-  /* quiz */
-  .qz-o{display:block;width:100%;text-align:start;padding:11px 12px;border-radius:12px;border:1.5px solid var(--line);background:var(--surface);color:var(--text);font:inherit;font-size:13.5px;font-weight:600;margin-top:8px;cursor:pointer;transition:.15s}
-  .qz-o.sel{border-color:var(--accent);background:var(--accent-soft)}
-  .qz-o.ok{border-color:var(--ok);background:var(--ok-bg);color:var(--ok)}
-  .qz-o.bad{border-color:var(--danger);background:var(--danger-bg);color:var(--danger)}
-  /* instructor view */
   .sheet-wrap.over{z-index:76}
-  .mstat{margin-top:6px;cursor:pointer;max-width:230px}
-  .mstat .sub{font-size:11px}
-  .mbar{position:relative;height:5px;border-radius:99px;background:var(--surface-3);overflow:hidden;margin-top:5px}
-  .mbar i,.mbar b{position:absolute;inset-block:0;inset-inline-start:0;border-radius:99px}
-  .mbar i{background:color-mix(in srgb,var(--accent) 35%,transparent)}
-  .mbar b{background:var(--ok)}
-  .mbar.lg{height:8px}
-  .mitem.off .citem-t{color:var(--muted)}
-  .mitem .icon-btn.cdl{width:32px;height:32px}
-  .madd{display:flex;align-items:center;gap:8px;width:100%;padding:12px 0;border:none;border-top:1px dashed var(--line);background:transparent;color:var(--accent);font:inherit;font-weight:700;font-size:13.5px;cursor:pointer}
-  .madd svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round}
-  :root[data-theme="dark"] .madd,:root[data-theme="dark"] .citem.now .citem-t{color:#a5b4fc}
   .mfile{border-style:dashed;text-align:center;background:var(--surface-2);cursor:pointer}
   .mfile.on{border-color:var(--ok);background:var(--ok-bg)}
   select.input{appearance:auto}
@@ -474,7 +486,7 @@
         <div class="app">
           <div class="screens" id="screens"></div>
           <div class="toast" id="toast"></div>
-          <div class="viewer" id="viewer" aria-hidden="true"><div class="vbar"><div class="icon-btn" onclick="closeViewer()" aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></div><div class="grow" style="min-width:0"><div class="vtitle ell" id="v-title" data-noi18n dir="auto"></div><div class="sub" id="v-sub"></div></div><div class="icon-btn" id="v-dl" onclick="downloadItem(vw.id)" aria-label="Download"><svg viewBox="0 0 24 24"><path d="M12 4v11M7 10.5l5 5 5-5M5 20h14"/></svg></div></div><div class="vbody" id="v-body"></div><div class="vfoot"><button class="btn secondary" id="v-done" onclick="openItemStats(vw.id)"></button><button class="btn" id="v-next" onclick="nextItem()"></button></div></div>
+          <div class="viewer" id="viewer" aria-hidden="true"><div class="vbar"><div class="icon-btn" onclick="closeViewer()" aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></div><div class="grow" style="min-width:0"><div class="vtitle ell" id="v-title" data-noi18n dir="auto"></div><div class="sub" id="v-sub"></div></div><div class="icon-btn" id="v-dl" onclick="downloadAtt(vw.id)" aria-label="Download"><svg viewBox="0 0 24 24"><path d="M12 4v11M7 10.5l5 5 5-5M5 20h14"/></svg></div></div><div class="vbody" id="v-body"></div><div class="vfoot"><button class="btn secondary" id="v-done" onclick="openSeen(vw.id)"></button><button class="btn" id="v-next" onclick="nextItem()"></button></div></div>
           <div class="act-wrap" id="actsheet" data-noi18n><div class="act-back" onclick="closeLangActions()"></div><div class="act" id="act-body"></div></div>
           <div class="sheet-wrap" id="sheet"><div class="sheet-back" data-close-sheet></div><div class="sheet"><div class="grab"></div><div id="sheet-body"></div></div></div>
           <div class="drawer-wrap" id="drawer">
@@ -494,7 +506,7 @@
                 <div class="drawer-item" data-goto="examtt" onclick="go('examtt')"><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="16" rx="3"/><path d="M3.5 9.5h17M8 3v4M16 3v4"/><path d="M8 14h3M8 17h6"/></svg><span class="lbl">Exam timetable</span></div>
                 <div class="drawer-item" data-goto="exams" onclick="go('exams')"><svg viewBox="0 0 24 24"><rect x="6" y="4" width="12" height="17" rx="2.5"/><path d="M9 4h6v3H9z"/><path d="M9 12h6M9 16h4"/></svg><span class="lbl">Exams</span></div>
                 <div class="drawer-item" data-goto="timetable" onclick="go('timetable')"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 8v4.5l3 2"/></svg><span class="lbl">Timetable</span></div>
-                <div class="drawer-item" data-goto="materials" onclick="go('materials')"><svg viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg><span class="lbl">Course materials</span></div>
+                <div class="drawer-item" data-goto="materials" onclick="go('materials')"><svg viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg><span class="lbl">Class materials</span></div>
                 <div class="drawer-item" data-goto="reports" onclick="go('reports')"><svg viewBox="0 0 24 24"><path d="M4 20h16"/><path d="M7 20v-6M12 20V8M17 20v-9"/></svg><span class="lbl">Reports</span></div>
                 <div class="drawer-item" data-goto="inbox" onclick="go('inbox')"><svg viewBox="0 0 24 24"><path d="M4 5.5h16v11H9l-4 3.5v-3.5H4z"/></svg><span class="lbl">Inbox &amp; announcements</span></div>
                 <div class="drawer-sep"></div>
@@ -586,7 +598,7 @@ function trCore(s,depth){const m=String(s).match(/^(\s*)([\s\S]*?)(\s*)$/),core=
 const LTR_RE=/([\w.+-]+@[\w-]+(?:\.[\w-]+)+|ARZ-[A-Z]+-\d+|\+961(?: \d+)+|\d[\d:.,/]*\s?[–-]\s?\d[\d:.,/]*|\d+(?:[.:/]\d+)+|(?<![\w.])\/\d+(?:\.\d+)?)/g;
 const isoLTR=s=>s.replace(LTR_RE,'⁦$1⁩');
 function trText(s){if(s==null)return s;s=String(s);if(uiLang==='en')return s;let r=trCore(s,0);if(uiLang==='ar')r=isoLTR(r);return r;}
-const I18N_SKIP='textarea,script,style,.subj,.bub,[data-noi18n]';
+const I18N_SKIP='textarea,script,style,svg,.subj,.bub,[data-noi18n]';
 function translateEl(root){if(!root)return;
   const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT),nodes=[];while(w.nextNode())nodes.push(w.currentNode);
   nodes.forEach(n=>{const p=n.parentElement;if(!p||p.closest(I18N_SKIP))return;
@@ -596,7 +608,7 @@ function translateEl(root){if(!root)return;
     n.nodeValue=trText(src);});
   const els=[...root.querySelectorAll('[placeholder]')];if(root.hasAttribute&&root.hasAttribute('placeholder'))els.push(root);
   els.forEach(el=>{if(el.dataset.enPh==null)el.dataset.enPh=el.getAttribute('placeholder');el.setAttribute('placeholder',trText(el.dataset.enPh));});
-  if(isRTL())root.querySelectorAll('.tnum').forEach(el=>{const tx=el.textContent.replace(/[\u2066\u2069]/g,'');
+  if(isRTL())root.querySelectorAll('.tnum').forEach(el=>{if(el.closest('svg'))return;const tx=el.textContent.replace(/[\u2066\u2069]/g,'');
     if(!/^[\d\s.,:/%–—+-]+$/.test(tx)||el.dataset.iso)return;el.dataset.iso=1;
     const w2=document.createTreeWalker(el,NodeFilter.SHOW_TEXT);let tn;while((tn=w2.nextNode()))tn.nodeValue=tn.nodeValue.replace(/[\u2066\u2069]/g,'');
     el.insertBefore(document.createTextNode('\u2066'),el.firstChild);el.appendChild(document.createTextNode('\u2069'));});}
@@ -702,10 +714,10 @@ const calEvents=[
 let selDay=0;
 const teachWeek={
   Mon:[{t:'08:40',c:'Mathematics EB9 B',r:'204'},{t:'10:40',c:'Mathematics EB9 A',r:'204'},{t:'12:40',c:'Mathematics S1 B',r:'207'}],
-  Tue:[{t:'07:50',c:'Mathematics S1 B',r:'207'},{t:'10:40',c:'Mathematics EB9 B',r:'204'}],
+  Tue:[{t:'07:50',c:'Mathematics S1 B',r:'207'},{t:'08:40',c:'Mathematics EB9 B',r:'204'}],
   Wed:[{t:'08:40',c:'Mathematics EB9 A',r:'204'},{t:'11:30',c:'Mathematics EB9 B',r:'204'}],
-  Thu:[{t:'07:50',c:'Mathematics EB9 B',r:'204'},{t:'13:30',c:'Mathematics EB9 A',r:'204'}],
-  Fri:[{t:'10:40',c:'Mathematics S1 B',r:'207'}],
+  Thu:[{t:'09:30',c:'Mathematics EB9 B',r:'204'},{t:'13:30',c:'Mathematics EB9 A',r:'204'}],
+  Fri:[{t:'08:40',c:'Mathematics EB9 B',r:'204'},{t:'10:40',c:'Mathematics S1 B',r:'207'}],
 };
 let ttDay='Mon';
 let examsT=[
@@ -713,19 +725,13 @@ let examsT=[
   {id:'e2',cls:'EB9 A',title:'Quiz — Radicals',type:'MCQ',q:10,status:'published',date:'13 Nov'},
   {id:'e3',cls:'EB9 B',title:'1st term exam',type:'Mixed',q:20,status:'draft',date:'30 Nov'},
 ];
-let materials=[
-  {t:'pdf',n:'Mathematics EB9 — CRDP textbook',cls:'EB9 B'},
-  {t:'slides',n:'Thales\' theorem — summary notes',cls:'EB9 B'},
-  {t:'video',n:'Factorisation & identities',cls:'EB9 A'},
-  {t:'pdf',n:'Brevet past papers — Maths',cls:'EB9 A'},
-  {t:'link',n:'CRDP digital resources',cls:'All'},
-];
-let exType='MCQ',matType='pdf';
+let exType='MCQ';
 
-/* ================= COURSE MATERIALS · instructor view ·
-   same content, PDF reader, slides viewer and canvas video player as the student app (preview mode) ================= */
-const MAT_TYPES={pdf:{l:'PDF',col:'#0ea5e9'},slides:{l:'Slides',col:'#f59e0b'},video:{l:'Video',col:'#ef4444'},link:{l:'Link',col:'#8b5cf6'},quiz:{l:'Quiz',col:'#10b981'}};
-const MAT_ICO={pdf:'<path d="M7 3h8l4 4v14H7z"/><path d="M14 3v5h5"/><path d="M9.5 13h5M9.5 16.5h3.5"/>',slides:'<rect x="3" y="4" width="18" height="12.5" rx="2"/><path d="M12 16.5V20M8 20.5h8"/><path d="M7.5 12.5l3-3 2.5 2 3.5-3.5"/>',video:'<rect x="3" y="5" width="18" height="14" rx="3"/><path d="M10 9l5 3-5 3z"/>',link:'<path d="M10 14a4.5 4.5 0 0 0 6.4 0l3-3a4.5 4.5 0 0 0-6.4-6.4l-1 1"/><path d="M14 10a4.5 4.5 0 0 0-6.4 0l-3 3a4.5 4.5 0 0 0 6.4 6.4l1-1"/>',quiz:'<circle cx="12" cy="12" r="9"/><path d="M9.6 9.4a2.5 2.5 0 1 1 3.4 2.3c-.7.3-1 .8-1 1.5v.4"/><circle cx="12" cy="16.9" r=".6" fill="currentColor" stroke="none"/>'};
+/* ================= CLASS MATERIALS · teacher view ·
+   a backup to the classroom: board photos, notes and files posted after each lesson (no course progress).
+   Same PDF reader, slides viewer and canvas video player as the student & parent apps (preview mode) ================= */
+const MAT_TYPES={board:{l:'Board photo',col:'#10b981'},pdf:{l:'PDF',col:'#0ea5e9'},slides:{l:'Slides',col:'#f59e0b'},video:{l:'Video',col:'#ef4444'},link:{l:'Link',col:'#8b5cf6'}};
+const MAT_ICO={board:'<rect x="3" y="4" width="18" height="12.5" rx="1.6"/><path d="M7.5 20.5 9.5 16.5M16.5 20.5 14.5 16.5"/><path d="M6.5 10.5c1.2-1.6 2.4-1.6 3.6 0s2.4 1.6 3.6 0 2.4-1.6 3.6 0"/>',pdf:'<path d="M7 3h8l4 4v14H7z"/><path d="M14 3v5h5"/><path d="M9.5 13h5M9.5 16.5h3.5"/>',slides:'<rect x="3" y="4" width="18" height="12.5" rx="2"/><path d="M12 16.5V20M8 20.5h8"/><path d="M7.5 12.5l3-3 2.5 2 3.5-3.5"/>',video:'<rect x="3" y="5" width="18" height="14" rx="3"/><path d="M10 9l5 3-5 3z"/>',link:'<path d="M10 14a4.5 4.5 0 0 0 6.4 0l3-3a4.5 4.5 0 0 0-6.4-6.4l-1 1"/><path d="M14 10a4.5 4.5 0 0 0-6.4 0l-3 3a4.5 4.5 0 0 0 6.4 6.4l1-1"/>'};
 function matIco(t){return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">${MAT_ICO[t]||MAT_ICO.pdf}</svg>`;}
 function hx(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
 const DOC_L={
@@ -782,162 +788,283 @@ const TOPICS={
     examples:[{title:'Compare 1.2² and 1.3² without a calculator',steps:['1.2 and 1.3 are both in [0 ; +∞[','The square function is increasing there','1.2 < 1.3','So 1.2² < 1.3²']}],
     exercises:['Draw the variation table of f(x) = x² − 4.','Solve 1/x > 2.','Compare √5 and √7 without a calculator.']},
 };
-/* course content per level · EB9 ids match the student app (m1…m18) */
-const MAT_SRC={
-  EB9:[
-    {n:'Ch.1 Real numbers & radicals',items:[
-      {id:'m1',t:'pdf',n:'Mathematics EB9 — CRDP textbook',topic:'radicals',pages:12,size:'2.4 MB',textbook:1},
-      {id:'m2',t:'video',n:'Radicals — introduction',topic:'radicals',dur:'08:35'},
-      {id:'m3',t:'slides',n:'Radicals — summary notes',topic:'radicals',slides:14},
-      {id:'m4',t:'quiz',n:'Quick check — radicals',topic:'radicals'}]},
-    {n:'Ch.2 Algebraic calculus',items:[
-      {id:'m5',t:'video',n:'Remarkable identities',topic:'identities',dur:'10:12'},
-      {id:'m6',t:'pdf',n:'Factorisation — worked examples',topic:'identities',pages:6,size:'1.1 MB'},
-      {id:'m7',t:'slides',n:'Expanding & factorising',topic:'identities',slides:10},
-      {id:'m8',t:'link',n:'CRDP digital resources — algebra',url:'https://www.crdp.org'}]},
-    {n:'Ch.3 Thales’ theorem',items:[
-      {id:'m9',t:'video',n:'Thales’ theorem explained (14:20)',topic:'thales',dur:'14:20',video:'thales'},
-      {id:'m10',t:'slides',n:'Thales — converse & applications',topic:'thales',slides:12},
-      {id:'m11',t:'pdf',n:'Worksheet — Thales’ theorem',topic:'thales',pages:4,size:'640 KB'},
-      {id:'m12',t:'quiz',n:'Quick check — Thales',topic:'thales'},
-      {id:'m13',t:'link',n:'GeoGebra — Thales construction',url:'https://www.geogebra.org/geometry'}]},
-    {n:'Ch.4 Pythagoras & trigonometry',items:[
-      {id:'m14',t:'video',n:'Pythagoras’ theorem',topic:'pythagoras',dur:'09:48',video:'pythagoras'},
-      {id:'m15',t:'slides',n:'Trigonometric ratios',topic:'trig',slides:15},
-      {id:'m16',t:'pdf',n:'Trigonometry formula sheet',topic:'trig',pages:2,size:'310 KB'},
-      {id:'m17',t:'video',n:'Solving right triangles',topic:'trig',dur:'12:05'},
-      {id:'m18',t:'quiz',n:'Chapter test — trigonometry',topic:'trig'}]},
-  ],
-  S1:[
-    {n:'Ch.1 Second-degree equations',items:[
-      {id:'s1',t:'pdf',n:'Mathematics S1 — CRDP textbook',topic:'quadratics',pages:10,size:'2.2 MB',textbook:1},
-      {id:'s2',t:'video',n:'Solving ax² + bx + c = 0',topic:'quadratics',dur:'11:05'},
-      {id:'s3',t:'slides',n:'The discriminant Δ',topic:'quadratics',slides:12},
-      {id:'s4',t:'quiz',n:'Quick check — quadratics',topic:'quadratics'}]},
-    {n:'Ch.2 Vectors',items:[
-      {id:'s5',t:'slides',n:'Vectors — definitions & operations',topic:'vectors',slides:10},
-      {id:'s6',t:'pdf',n:'Worksheet — Chasles’ relation',topic:'vectors',pages:4,size:'520 KB'},
-      {id:'s7',t:'video',n:'Vectors in the plane',topic:'vectors',dur:'09:30'},
-      {id:'s8',t:'link',n:'GeoGebra — adding vectors',url:'https://www.geogebra.org/geometry'}]},
-    {n:'Ch.3 Functions',items:[
-      {id:'s9',t:'video',n:'Reference functions',topic:'functions',dur:'10:40'},
-      {id:'s10',t:'pdf',n:'Variation tables — worked examples',topic:'functions',pages:6,size:'900 KB'},
-      {id:'s11',t:'quiz',n:'Chapter test — functions',topic:'functions'}]},
-  ],
-};
-const QUIZZES={
-  m4:[{q:'√50 simplifies to…',a:['2√5','5√2','25√2','10√5'],c:1},{q:'(√7)² = …',a:['7','49','√14','14'],c:0},{q:'1/√2 with a rational denominator is…',a:['2/√2','√2','√2/2','1/2'],c:2}],
-  m12:[{q:'(MN) // (BC), AM = 2, AB = 6 and AN = 3. Then AC = …',a:['4','9','6','12'],c:1},{q:'To apply Thales’ theorem we need…',a:['(MN) ⊥ (BC)','AB = AC','(MN) // (BC)','a right angle'],c:2},{q:'The converse of Thales’ theorem is used to prove that…',a:['two lines are parallel','a triangle is right-angled','two angles are equal','a length is maximal'],c:0}],
-  m18:[{q:'In a right triangle, the hypotenuse is…',a:['the shortest side','the side opposite the right angle','any side','the height'],c:1},{q:'cos B = …',a:['opposite / hypotenuse','opposite / adjacent','adjacent / hypotenuse','hypotenuse / adjacent'],c:2},{q:'Right angle at A, AB = 6 and AC = 8. BC = …',a:['10','14','48','√14'],c:0}],
-  s4:[{q:'For x² − 5x + 6 = 0, Δ = …',a:['1','49','−1','25'],c:0},{q:'If Δ < 0, the equation has…',a:['two roots','one double root','no real root'],c:2},{q:'The roots of x² − 5x + 6 = 0 are…',a:['1 and 6','2 and 3','−2 and −3'],c:1}],
-  s11:[{q:'On [0 ; +∞[, x ↦ x² is…',a:['increasing','decreasing','constant'],c:0},{q:'1/x is not defined for…',a:['x = 1','x = 0','x < 0'],c:1},{q:'√x is defined for…',a:['all real x','x ≥ 0','x > 1'],c:1}],
-};
+/* class materials data · EB9 B Maths lessons match the student & parent apps (same dates, periods, attachments) */
 const MAT_CLS={m9b:'EB9',m9a:'EB9',m10:'S1'};
-const MAT={};Object.keys(MAT_CLS).forEach(k=>{MAT[k]=JSON.parse(JSON.stringify(MAT_SRC[MAT_CLS[k]]));MAT[k].forEach(s=>s.items.forEach(it=>{it.st='published';}));});
-MAT.m9a.forEach(s=>s.items.forEach(it=>{if(it.id==='m17'||it.id==='m18')it.st='draft';}));
-MAT.m10.forEach(s=>s.items.forEach(it=>{if(it.id==='s11')it.st='draft';}));
-const MAT_UPDATED={m9b:'Fri 13 Nov',m9a:'Thu 12 Nov',m10:'Wed 11 Nov'};
-const MAT_PACE={m9b:0,m9a:2,m10:1};
-/* Omar Haddad (EB9 B) — same seed as the student app */
-const OMAR_DONE=new Set(['m1','m2','m3','m4','m5','m6','m7','m8']),OMAR_NOW='m9';
-const MAT_OPEN={};
-let matCls='m9b',vw={id:null,type:null,page:1,slide:0,n:0,zoom:1},vid=null;
-const VID_LEN=120; /* condensed demo: a whole lesson plays in about 2 minutes at 1× while the clock shows the real lecture time */
+let cmLessons=[
+  {id:'l1',cls:'m9b',d:16,p:'P2',topic:"Ch.4 Thales' theorem — converse",att:[
+    {id:'a1',t:'board',n:'Board — converse of Thales',board:'thales-converse',seen:22,fresh:1},
+    {id:'a2',t:'pdf',n:'Exercises 1–6 — converse of Thales',topic:'thales',pages:2,size:'280 KB',seen:19,fresh:1}]},
+  {id:'l3',cls:'m9b',d:12,p:'P3',topic:"Ch.4 Thales' theorem",att:[
+    {id:'a3',t:'slides',n:"Thales' theorem — key ideas",topic:'thales',slides:12,seen:26},
+    {id:'a4',t:'video',n:"Thales' theorem explained",topic:'thales',video:'thales',dur:'04:50',size:'18 MB',seen:24}]},
+  {id:'l6',cls:'m9b',d:10,p:'P2',topic:'Ch.3 Radicals — rationalising denominators',att:[
+    {id:'a11',t:'board',n:'Board — rationalising denominators',board:'radicals-rat',seen:27},
+    {id:'a12',t:'pdf',n:'Exercises p.84 — hints',topic:'radicals',pages:1,size:'140 KB',seen:25}]},
+  {id:'l8',cls:'m9b',d:6,p:'P2',topic:'Ch.3 Radicals — simplifying',att:[
+    {id:'a15',t:'board',n:'Board — simplifying radicals',board:'radicals-simp',seen:27},
+    {id:'a16',t:'pdf',n:'Class notes — simplifying radicals',topic:'radicals',pages:3,size:'420 KB',seen:26},
+    {id:'a17',t:'video',n:'Simplifying radicals in 5 minutes',topic:'radicals',dur:'05:10',size:'20 MB',seen:23}]},
+  {id:'la1',cls:'m9a',d:12,p:'P7',topic:'Ch.3 Radicals — rationalising denominators',att:[
+    {id:'b1',t:'board',n:'Board — rationalising denominators',board:'radicals-rat',seen:21},
+    {id:'b2',t:'pdf',n:'Exercises — conjugate expressions',topic:'radicals',pages:2,size:'260 KB',seen:17}]},
+  {id:'la2',cls:'m9a',d:11,p:'P2',topic:'Ch.3 Radicals — operations',att:[
+    {id:'b3',t:'slides',n:'Radicals — operations',topic:'radicals',slides:10,seen:23}]},
+  {id:'ls1',cls:'m10',d:13,p:'P4',topic:'Ch.2 Second-degree equations — discriminant',att:[
+    {id:'c1',t:'board',n:'Board — the discriminant',board:'discriminant',seen:15},
+    {id:'c2',t:'pdf',n:'Series 2 — the discriminant',topic:'quadratics',pages:2,size:'300 KB',seen:11}]},
+  {id:'ls2',cls:'m10',d:10,p:'P1',topic:'Vectors — introduction',att:[
+    {id:'c3',t:'slides',n:'Vectors — introduction',topic:'vectors',slides:10,seen:21},
+    {id:'c4',t:'video',n:'Vectors in the plane',topic:'vectors',dur:'06:10',size:'24 MB',seen:19}]},
+];
+const cmRev={
+  m9b:[{id:'r1',t:'pdf',kind:'past',n:'1st term exam 2025 — Maths EB9 (with solutions)',topic:'identities',pages:4,size:'520 KB',hdr:'1st term exam 2025',seen:20},
+       {id:'r2',t:'pdf',kind:'past',n:'Brevet 2024 — Mathematics (MEHE, 1st session)',topic:'pythagoras',pages:3,size:'610 KB',hdr:'MEHE · Brevet 2024',seen:18},
+       {id:'r3',t:'pdf',kind:'past',n:'Brevet 2024 — Mathematics solutions',topic:'thales',pages:4,size:'540 KB',hdr:'MEHE · Brevet 2024',seen:14},
+       {id:'r4',t:'slides',kind:'sum',n:'Summary — Radicals & Thales',topic:'thales',slides:8,seen:22}],
+  m9a:[{id:'r5',t:'pdf',kind:'past',n:'1st term exam 2025 — Maths EB9 (with solutions)',topic:'identities',pages:4,size:'520 KB',hdr:'1st term exam 2025',seen:16},
+       {id:'r6',t:'pdf',kind:'past',n:'Brevet 2024 — Mathematics (MEHE, 1st session)',topic:'pythagoras',pages:3,size:'610 KB',hdr:'MEHE · Brevet 2024',seen:15},
+       {id:'r7',t:'pdf',kind:'past',n:'Brevet 2024 — Mathematics solutions',topic:'thales',pages:4,size:'540 KB',hdr:'MEHE · Brevet 2024',seen:11},
+       {id:'r8',t:'slides',kind:'sum',n:'Summary — Radicals & Thales',topic:'thales',slides:8,seen:19}],
+  m10:[{id:'r9',t:'pdf',kind:'past',n:'1st term exam 2025 — Maths S1 (with solutions)',topic:'quadratics',pages:4,size:'560 KB',hdr:'1st term exam 2025',seen:13},
+       {id:'r10',t:'slides',kind:'sum',n:'Summary — second-degree equations',topic:'quadratics',slides:8,seen:16}],
+};
+const cmTb={
+  m9b:[{id:'t1',t:'pdf',n:'Mathematics EB9 — CRDP textbook',topic:'radicals',pages:12,size:'2.4 MB',textbook:1,seen:28}],
+  m9a:[{id:'t2',t:'pdf',n:'Mathematics EB9 — CRDP textbook',topic:'radicals',pages:12,size:'2.4 MB',textbook:1,seen:26}],
+  m10:[{id:'t3',t:'pdf',n:'Mathematics S1 — CRDP textbook',topic:'quadratics',pages:10,size:'2.2 MB',textbook:1,seen:24}],
+};
+cmLessons.forEach(l=>l.att.forEach(a=>{a.cls=l.cls;}));[cmRev,cmTb].forEach(src=>Object.keys(src).forEach(k=>src[k].forEach(a=>{a.cls=k;})));
+/* downloads on this phone ("saved offline") — the textbook starts saved */
+const cmOffline=new Set(['t1']);
+try{const s=JSON.parse(localStorage.getItem('skl-mat-offline-t')||'null');if(Array.isArray(s))s.forEach(x=>cmOffline.add(x));}catch(e){}
+function cmSaveOffline(){try{localStorage.setItem('skl-mat-offline-t',JSON.stringify([...cmOffline]));}catch(e){}}
+let matCls='m9b',cmTab='lesson',vw={id:null,type:null,page:1,slide:0,n:0,zoom:1,px:0,py:0},vid=null,cmSeq=1;
+const VID_LEN=120; /* condensed demo: a whole video plays in about 2 minutes at 1× while the clock shows the real duration */
 
 /* ---- helpers ---- */
 function matCourse(cls){cls=cls||matCls;const c=classes.find(x=>x.id===cls)||classes[0];return {c:'M',n:'Mathematics',col:SUBJ.M,tch:'Ms. Dana Khoury',hdr:'Mathematics '+MAT_CLS[c.id],grp:c.grp};}
-function secsOf(cls){return MAT[cls||matCls]||[];}
-function itemsOf(cls){return secsOf(cls).flatMap((s,si)=>s.items.map(it=>Object.assign({sec:si},it)));}
-function findItem(id,cls){const secs=secsOf(cls);for(let si=0;si<secs.length;si++){const ii=secs[si].items.findIndex(x=>x.id===id);if(ii>-1)return {si,ii,item:secs[si].items[ii]};}return null;}
-function isDone(){return false;}
-function markDone(){} /* preview mode: opening or finishing an item never counts as a student completion */
-function nextAfter(id){const its=itemsOf(),i=its.findIndex(x=>x.id===id);return i>-1?its[i+1]||null:null;}
-function topicOf(it){return TOPICS[it.topic]||TOPICS[MAT_CLS[matCls]==='S1'?'quadratics':'radicals'];}
+function cmLessonsOf(cls){return cmLessons.filter(l=>l.cls===(cls||matCls)).sort((a,b)=>b.d-a.d||b.p.localeCompare(a.p));}
+function cmLessonFor(l){return cmLessons.find(x=>x.cls===l.cls&&x.d===l.d&&x.p===l.p)||null;}
+function cmListOf(where,cls){return where==='lesson'?cmLessonsOf(cls).flatMap(l=>l.att):where==='rev'?(cmRev[cls]||[]):(cmTb[cls]||[]);}
+function findAtt(id){for(const l of cmLessons){const i=l.att.findIndex(a=>a.id===id);if(i>-1)return {att:l.att[i],cls:l.cls,where:'lesson',lesson:l,arr:l.att,i};}
+  for(const [src,where] of [[cmRev,'rev'],[cmTb,'tb']])for(const k of Object.keys(src)){const i=src[k].findIndex(a=>a.id===id);if(i>-1)return {att:src[k][i],cls:k,where,lesson:null,arr:src[k],i};}
+  return null;}
+function findItem(id){const f=findAtt(id);return f?{item:f.att,ii:f.i}:null;}
+function nextAfter(id){const f=findAtt(id);if(!f)return null;const L=cmListOf(f.where,f.cls),i=L.findIndex(a=>a.id===id);return i>-1?L[i+1]||null:null;}
+function topicOf(it){return TOPICS[it.topic]||TOPICS[MAT_CLS[it.cls||matCls]==='S1'?'quadratics':'radicals'];}
+function cmTopicKey(text,cls){const s=String(text||'');return /thales/i.test(s)?'thales':/pythag/i.test(s)?'pythagoras':/trig/i.test(s)?'trig':/radical/i.test(s)?'radicals':/factor|identit|algebra/i.test(s)?'identities':/vector/i.test(s)?'vectors':/function/i.test(s)?'functions':/degree|discrimin|quadratic|trinomial/i.test(s)?'quadratics':MAT_CLS[cls]==='S1'?'quadratics':'radicals';}
 function hostOf(u){return String(u||'').replace(/^https?:\/\//,'').replace(/^www\./,'').split('/')[0];}
-function itemMeta(it){const L=MAT_TYPES[it.t].l,parts=it.t==='pdf'?[L,`${it.pages} pages`,`<span dir="ltr">${it.size}</span>`]:it.t==='slides'?[L,`${it.slides} slides`]:it.t==='video'?[L,it.dur]:it.t==='quiz'?[L,`${(QUIZZES[it.id]||[]).length} questions`]:it.t==='link'?[L,`<span dir="ltr">${hostOf(it.url)}</span>`]:[L];return parts.map(x=>`<bdi>${x}</bdi>`).join(' · ');}
 function parseDur(s){const m=String(s||'').match(/(\d+):(\d{2})/);return m?(+m[1])*60+(+m[2]):300;}
 function fmtT(s){s=Math.max(0,Math.floor(s));return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');}
-function secMeta(s){const n=s.items.length,mins=Math.round(s.items.filter(x=>x.t==='video').reduce((a,x)=>a+parseDur(x.dur),0)/60),pages=s.items.filter(x=>x.t==='pdf').reduce((a,x)=>a+(x.pages||0),0);return [n===1?'1 item':`${n} items`].concat(mins?[`${mins} min`]:[],pages?[`${pages} pages`]:[]).map(x=>`<bdi>${x}</bdi>`).join(' · ');}
-function matOpen(){if(!MAT_OPEN[matCls])MAT_OPEN[matCls]=new Set([0]);return MAT_OPEN[matCls];}
-function toggleSec(si){const set=matOpen(),el=document.querySelector(`#scr-materials .csec[data-sec="${si}"]`);if(!el)return;const b=el.querySelector('.csec-b');
-  if(set.has(si)){set.delete(si);b.style.height=b.scrollHeight+'px';void b.offsetHeight;b.style.height='0px';el.classList.remove('open');}
-  else{set.add(si);el.classList.add('open');b.style.height=b.scrollHeight+'px';const end=e=>{if(e.target!==b)return;b.removeEventListener('transitionend',end);if(set.has(si))b.style.height='';};b.addEventListener('transitionend',end);}}
-function matPick(id){matCls=id;refreshMat(true);}
-function refreshMat(top){const sc=document.getElementById('scr-materials');if(sc){const st=sc.scrollTop;rebuild('materials');sc.scrollTop=top?0:st;if(current==='materials')setLead(sc);}if(vw.id&&viewerOpen())vFoot();}
-function openItem(id){const f=findItem(id);if(!f)return;const it=f.item;
-  if(it.t==='pdf')openPdf(it);else if(it.t==='slides')openSlides(it);else if(it.t==='video')openVideo(it);else if(it.t==='link')openLinkItem(it);else if(it.t==='quiz')openQuizItem(it);}
-
-/* ---- class analytics (roster students + the rest of the class) ---- */
 function hash01(s){let h=2166136261;for(const ch of String(s)){h^=ch.charCodeAt(0);h=Math.imul(h,16777619);}return ((h>>>0)%10000)/10000;}
-function itemStats(id,cls){cls=cls||matCls;const c=classes.find(x=>x.id===cls),f=findItem(id,cls),size=c.students,ros=rosters[cls]||[],rest=Math.max(0,size-ros.length);
-  if(!f||f.item.st!=='published')return {size,viewed:0,completed:0,rows:ros.map(s=>({s,st:'none'})),rest,live:false};
-  const pub=itemsOf(cls).filter(x=>x.st==='published'),k=Math.max(0,pub.findIndex(x=>x.id===id))+MAT_PACE[cls],cf=Math.max(.04,.95-k*.055),vf=Math.min(1,cf+.14);
-  const rows=ros.map(s=>{let st;if(cls==='m9b'&&s.n==='Omar Haddad')st=OMAR_DONE.has(id)?'done':id===OMAR_NOW?'prog':'none';else{const h=hash01(s.n+'|'+id);st=h<cf?'done':h<vf?'prog':'none';}return {s,st};});
-  const rc=Math.round(cf*rest),rv=Math.max(rc,Math.round(vf*rest));
-  return {size,viewed:rows.filter(r=>r.st!=='none').length+rv,completed:rows.filter(r=>r.st==='done').length+rc,rows,rest,live:true};}
-function avgDone(items,cls){const its=items.filter(x=>x.st==='published');if(!its.length)return null;return Math.round(its.reduce((a,x)=>{const s=itemStats(x.id,cls);return a+s.completed/s.size;},0)/its.length*100);}
-const ST_L={done:['Completed','ok'],prog:['In progress','warn'],none:['Not started','']};
-function matRow(it){const T=MAT_TYPES[it.t],dl=it.t==='pdf'||it.t==='slides',pub=it.st==='published';let an;
-  if(pub){const s=itemStats(it.id);an=`<div class="mstat" onclick="event.stopPropagation();openItemStats('${it.id}')"><div class="sub"><bdi>Viewed ${s.viewed}/${s.size}</bdi> · <bdi>Completed ${s.completed}</bdi></div><div class="mbar"><i style="width:${Math.round(s.viewed/s.size*100)}%"></i><b style="width:${Math.round(s.completed/s.size*100)}%"></b></div></div>`;}
-  else an=`<div class="row mt6" style="gap:6px;flex-wrap:wrap"><span class="tag ${it.st==='draft'?'warn':''}" style="${it.st==='hidden'?'background:var(--surface-3);color:var(--muted)':''}">${it.st==='draft'?'Draft':'Hidden'}</span><span class="sub" style="font-size:11px">Not visible to students</span></div>`;
-  return `<div class="citem mitem${pub?'':' off'}" onclick="openItem('${it.id}')"><div class="set-ic" style="background:${T.col}1f;color:${T.col}">${matIco(it.t)}</div><div class="grow" style="min-width:0"><div class="citem-t" data-noi18n dir="auto">${hx(it.n)}</div><div class="sub mt6">${itemMeta(it)}</div>${an}</div>${dl?`<div class="icon-btn cdl" onclick="event.stopPropagation();downloadItem('${it.id}')" aria-label="Download"><svg viewBox="0 0 24 24"><path d="M12 4v11M7 10.5l5 5 5-5M5 20h14"/></svg></div>`:''}<div class="icon-btn cdl" onclick="event.stopPropagation();itemMenu('${it.id}')" aria-label="More"><svg viewBox="0 0 24 24"><circle cx="5.5" cy="12" r="1.4" fill="currentColor"/><circle cx="12" cy="12" r="1.4" fill="currentColor"/><circle cx="18.5" cy="12" r="1.4" fill="currentColor"/></svg></div></div>`;}
-function openItemStats(id){const f=findItem(id);if(!f)return;const it=f.item;if(it.st!=='published'){toast('Not visible to students');return;}const s=itemStats(id),c=classes.find(x=>x.id===matCls),T=MAT_TYPES[it.t],ns=s.size-s.viewed,ord={prog:0,none:1,done:2},rows=s.rows.slice().sort((a,b)=>ord[a.st]-ord[b.st]);
-  openSheet(`<div class="row"><div class="set-ic" style="background:${T.col}1f;color:${T.col}">${matIco(it.t)}</div><div class="grow" style="min-width:0"><h2 style="font-size:18px;font-weight:800;line-height:1.3" data-noi18n dir="auto">${hx(it.n)}</h2><div class="sub mt6">${c.grp} · Student progress</div></div></div>
-  <div class="row mt16" style="gap:8px"><div class="stat"><div class="n tnum">${s.viewed}/${s.size}</div><div class="l">Viewed</div></div><div class="stat"><div class="n tnum" style="color:var(--ok)">${s.completed}</div><div class="l">Completed</div></div><div class="stat"><div class="n tnum" style="color:var(--danger)">${ns}</div><div class="l">Not started</div></div></div>
-  <div class="mbar lg mt12"><i style="width:${Math.round(s.viewed/s.size*100)}%"></i><b style="width:${Math.round(s.completed/s.size*100)}%"></b></div>
-  <div class="card mt16" style="padding:4px 16px">${rows.map(r=>`<div class="list-item"><div class="avatar" style="width:34px;height:34px;font-size:12px;background:${r.s.c}">${initials(r.s.n)}</div><div class="grow" style="font-weight:600">${r.s.n}</div><span class="tag ${ST_L[r.st][1]}" style="${r.st==='none'?'background:var(--surface-3);color:var(--muted)':''}">${ST_L[r.st][0]}</span></div>`).join('')}</div>
-  ${s.rest?`<p class="sub mt8" style="text-align:center;font-size:12px">+ ${s.rest} more students</p>`:''}
-  ${ns?`<button class="btn mt16" onclick="closeSheet();toast('Reminder sent to ${ns} students 🔔')">Remind students who haven't started</button>`:`<div class="tag ok mt16">Everyone has opened this item</div>`}
-  <button class="btn secondary mt8" onclick="closeSheet()">Close</button>`);}
+function cmMeta(a){const L=MAT_TYPES[a.t].l,parts=a.t==='pdf'?[L,a.pages===1?'1 page':`${a.pages} pages`,`<span dir="ltr">${a.size}</span>`]:a.t==='slides'?[L,`${a.slides} slides`]:a.t==='video'?[L,`<span dir="ltr">${a.dur}</span>`]:a.t==='link'?[L,`<span dir="ltr">${hostOf(a.url)}</span>`]:[L];
+  if(a.kind)parts.push(a.kind==='past'?'Past paper':'Summary sheet');
+  return parts.map(x=>`<bdi>${x}</bdi>`).join(' · ');}
+const itemMeta=cmMeta;
+function openAtt(id){const f=findAtt(id);if(!f)return;matCls=f.cls;const a=f.att;
+  if(a.t==='pdf')openPdf(a);else if(a.t==='slides')openSlides(a);else if(a.t==='video')openVideo(a);else if(a.t==='board')openBoard(a);else if(a.t==='link')openLinkItem(a);}
+const openItem=openAtt;
+function refreshMat(){['materials','lessonlog'].forEach(id=>{const sc=document.getElementById('scr-'+id);if(!sc)return;const st=sc.scrollTop;rebuild(id);sc.scrollTop=st;if(current===id)setLead(sc);});if(vw.id&&viewerOpen())vFoot();}
+function matPick(id){matCls=id;const sc=document.getElementById('scr-materials');if(!sc)return;rebuild('materials');sc.scrollTop=0;if(current==='materials')setLead(sc);}
+function cmPickTab(k){cmTab=k;const sc=document.getElementById('scr-materials');if(!sc)return;const st=sc.scrollTop;rebuild('materials');sc.scrollTop=Math.min(st,160);if(current==='materials')setLead(sc);}
+/* ---- list rows ---- */
+const CM_DL='<svg viewBox="0 0 24 24"><path d="M12 4v11M7 10.5l5 5 5-5M5 20h14"/></svg>',CM_OK='<svg viewBox="0 0 24 24"><path d="M5 12.5 10 17.5 19 7"/></svg>',
+  CM_MORE='<svg viewBox="0 0 24 24"><circle cx="5.5" cy="12" r="1.4" fill="currentColor"/><circle cx="12" cy="12" r="1.4" fill="currentColor"/><circle cx="18.5" cy="12" r="1.4" fill="currentColor"/></svg>',
+  CM_CLIP='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 11.5l-8.2 8.2a5 5 0 0 1-7-7l8.5-8.5a3.3 3.3 0 0 1 4.7 4.7l-8.4 8.4a1.7 1.7 0 0 1-2.4-2.4l7.6-7.6"/></svg>',
+  CM_CAM='<svg viewBox="0 0 24 24"><path d="M4 8.5h3l1.6-2.5h6.8L17 8.5h3a1 1 0 0 1 1 1V18a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5a1 1 0 0 1 1-1z"/><circle cx="12" cy="13.3" r="3.6"/></svg>';
+function cmRow(a){const T=MAT_TYPES[a.t],size=(cls2(a.cls)||cls2(matCls)).students,off=cmOffline.has(a.id),pct=Math.round(a.seen/size*100);
+  return `<div class="cm-att${a.hidden?' off':''}" onclick="openAtt('${a.id}')"><div class="set-ic" style="background:${T.col}1f;color:${T.col}">${matIco(a.t)}</div>
+    <div class="grow" style="min-width:0"><div class="cm-t"><span data-noi18n dir="auto">${hx(a.n)}</span>${a.fresh&&!a.hidden?'<span class="cm-new">New</span>':''}</div>
+      <div class="sub mt6">${cmMeta(a)}${off?` · <span class="cm-off">Saved offline</span>`:''}</div>
+      ${a.t==='video'?`<div class="sub cm-hint"><bdi dir="ltr">~${hx(a.size)}</bdi> · <span>best on Wi-Fi</span></div>`:''}
+      ${a.hidden?`<div class="row mt6" style="gap:6px;flex-wrap:wrap">${mutedTag('Hidden')}<span class="sub" style="font-size:11px">Not visible to students</span></div>`
+        :`<div class="cm-seen" onclick="event.stopPropagation();openSeen('${a.id}')"><div class="sub"><span>Seen by</span> <span dir="ltr">${a.seen}/${size}</span></div><div class="cm-bar"><i style="width:${pct}%"></i></div></div>`}</div>
+    ${a.t!=='link'?`<div class="icon-btn cdl${off?' saved':''}" onclick="event.stopPropagation();downloadAtt('${a.id}')" aria-label="Download">${off?CM_OK:CM_DL}</div>`:''}
+    <div class="icon-btn cdl" onclick="event.stopPropagation();attMenu('${a.id}')" aria-label="More">${CM_MORE}</div></div>`;}
+function cmEmpty(msg){return `<div class="card" style="text-align:center;padding:26px"><div class="sub">${msg}</div></div>`;}
+function cmLessonCard(l){const log=lessons.find(x=>x.cls===l.cls&&x.d===l.d&&x.p===l.p),c=cls2(l.cls);
+  return `<div class="card mt8 cm-lesson"><div class="row" style="align-items:flex-start;gap:12px"><div class="subj" style="width:40px;height:40px;font-size:13px;background:${SUBJ.M}">M</div>
+    <div class="grow" style="min-width:0"><div class="row between" style="gap:8px;align-items:flex-start"><div style="font-weight:800">Mathematics · ${l.p}</div>${log?(log.status==='missing'?`<span class="tag warn" style="cursor:pointer" onclick="logLesson(${log.id})">Not logged</span>`:tagHtml('ok','Logged')):''}</div>
+      <div class="accent" style="font-weight:700;font-size:13.5px;margin-top:4px;line-height:1.35" data-noi18n dir="auto">${esc(l.topic)}</div><div class="sub mt6">${c.grp} · Ms. Dana Khoury</div></div></div>
+    <div class="cm-list">${l.att.length?l.att.map(cmRow).join(''):`<div class="sub" style="padding:12px 0">No attachments yet</div>`}</div>
+    <button class="cm-attach" onclick="openPost({cls:'${l.cls}',d:${l.d},p:'${l.p}'})">${CM_CLIP}<span>Attach</span></button></div>`;}
+function cmByLesson(){const L=cmLessonsOf(matCls);if(!L.length)return cmEmpty('Nothing posted for this class yet');const days=[...new Set(L.map(l=>l.d))];
+  return days.map(d=>`<div class="day-head"><span>${d===16?'Today · ':''}${fmtD(d)}</span><span>${d===16?'':inDays(d-16)}</span></div>${L.filter(l=>l.d===d).map(cmLessonCard).join('')}`).join('');}
+function cmRevision(){const list=cmRev[matCls]||[],eb9=MAT_CLS[matCls]==='EB9';
+  return `<div class="card cm-count"><div class="row" style="gap:12px"><div class="set-ic" style="background:var(--warn-bg);color:var(--warn)"><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="16" rx="3"/><path d="M3.5 9.5h17M8 3v4M16 3v4"/></svg></div><div class="grow" style="min-width:0"><div style="font-weight:800">1st term exams start Thu 26 Nov</div><div class="sub mt6">${inDays(10)}${eb9?' · Official Brevet exams · June 2027':''}</div></div></div></div>
+    <p class="sub" style="margin:12px 4px 0;font-size:12px">Past papers and summary sheets to revise for exams</p>
+    <div class="set-label">Mathematics</div><div class="card" style="padding:2px 14px">${list.length?list.map(cmRow).join(''):`<div class="sub" style="padding:14px 0">No attachments yet</div>`}</div>`;}
+function cmTextbooks(){const list=cmTb[matCls]||[];if(!list.length)return cmEmpty('No attachments yet');
+  return list.map(a=>{const off=cmOffline.has(a.id),size=cls2(a.cls).students;return `<div class="card mt8 cm-book" onclick="openAtt('${a.id}')"><div class="row" style="gap:14px;align-items:flex-start">
+    <div class="cm-cover" style="--bc:${SUBJ.M}" aria-hidden="true"><span>CRDP</span><b>M</b><i>${MAT_CLS[a.cls]}</i></div>
+    <div class="grow" style="min-width:0"><div style="font-weight:800;line-height:1.3" data-noi18n dir="auto">${hx(a.n)}</div><div class="sub mt6">${cmMeta(a)}</div><div class="sub mt6" style="font-size:12px">Sample pages from the official CRDP textbook</div>
+      <div class="row mt8" style="gap:6px;flex-wrap:wrap">${off?tagHtml('ok','Saved offline'):''}<span class="sub" style="font-size:11.5px"><span>Seen by</span> <span dir="ltr">${a.seen}/${size}</span></span></div></div>
+    <div class="icon-btn cdl${off?' saved':''}" onclick="event.stopPropagation();downloadAtt('${a.id}')" aria-label="Download">${off?CM_OK:CM_DL}</div></div></div>`;}).join('');}
 
-/* ---- manage content ---- */
-function matTouched(){MAT_UPDATED[matCls]='Today';}
-function itemMenu(id){const f=findItem(id);if(!f)return;const it=f.item,sec=secsOf()[f.si],first=f.ii===0,last=f.ii===sec.items.length-1,pub=it.st==='published',c=classes.find(x=>x.id===matCls);
-  const row=(fn,ic,label,o)=>`<div class="set-row" style="cursor:pointer;${o&&o.off?'opacity:.4;pointer-events:none;':''}" onclick="${fn}"><div class="set-ic" style="${o&&o.danger?'background:var(--danger-bg);color:var(--danger)':''}"><svg viewBox="0 0 24 24">${ic}</svg></div><div class="grow" style="font-weight:600;${o&&o.danger?'color:var(--danger)':''}">${label}</div></div>`;
+/* ---- who has seen it (no completion — opening counts as seen) ---- */
+function openSeen(id){const f=findAtt(id);if(!f)return;const a=f.att,c=cls2(f.cls),size=c.students,T=MAT_TYPES[a.t];if(a.hidden){toast('Not visible to students');return;}
+  const ros=rosters[f.cls]||[],ratio=a.seen/size,rows=ros.map(s=>({s,seen:f.cls==='m9b'&&s.n==='Omar Haddad'?!a.fresh:hash01(s.n+'|'+a.id)<ratio})),yes=rows.filter(r=>r.seen),no=rows.filter(r=>!r.seen),rest=Math.max(0,size-ros.length);
+  const li=r=>`<div class="list-item"><div class="avatar" style="width:34px;height:34px;font-size:12px;background:${r.s.c}">${initials(r.s.n)}</div><div class="grow" style="font-weight:600">${r.s.n}</div>${r.seen?`<span class="tag ok">Seen</span>`:mutedTag('Not yet')}</div>`;
+  openSheet(`<div class="row"><div class="set-ic" style="background:${T.col}1f;color:${T.col}">${matIco(a.t)}</div><div class="grow" style="min-width:0"><h2 style="font-size:18px;font-weight:800;line-height:1.3" data-noi18n dir="auto">${hx(a.n)}</h2><div class="sub mt6">${c.grp} · Who has seen it</div></div></div>
+  <div class="row mt16" style="gap:8px"><div class="stat"><div class="n tnum">${a.seen}/${size}</div><div class="l">Seen</div></div><div class="stat"><div class="n tnum">${size-a.seen}</div><div class="l">Not yet</div></div></div>
+  <div class="cm-bar lg mt12"><i style="width:${Math.round(ratio*100)}%"></i></div>
+  ${no.length?`<div class="set-label">Not yet · ${no.length}</div><div class="card" style="padding:4px 16px">${no.map(li).join('')}</div>`:''}
+  ${yes.length?`<div class="set-label">Seen · ${yes.length}</div><div class="card" style="padding:4px 16px">${yes.map(li).join('')}</div>`:''}
+  ${rest?`<p class="sub mt8" style="text-align:center;font-size:12px">${rest} more students</p>`:''}
+  <p class="sub mt8" style="text-align:center;font-size:12px">Opening an attachment counts as seen.</p>
+  <button class="btn secondary mt12" onclick="closeSheet()">Close</button>`);}
+
+/* ---- manage an attachment ---- */
+function attMenu(id){const f=findAtt(id);if(!f)return;const a=f.att;
+  const row=(fn,ic,label,o)=>`<div class="set-row" style="cursor:pointer" onclick="${fn}"><div class="set-ic" style="${o&&o.danger?'background:var(--danger-bg);color:var(--danger)':''}"><svg viewBox="0 0 24 24">${ic}</svg></div><div class="grow" style="font-weight:600;${o&&o.danger?'color:var(--danger)':''}">${label}</div></div>`;
   const eye='<path d="M3 12s3.5-6.5 9-6.5 9 6.5 9 6.5-3.5 6.5-9 6.5S3 12 3 12z"/>';
-  openSheet(`<h2 style="font-size:18px;font-weight:800;line-height:1.3" data-noi18n dir="auto">${hx(it.n)}</h2><div class="sub mt6">${itemMeta(it)} · ${pub?'Published':it.st==='draft'?'Draft':'Hidden'}</div>
-  <div class="mt12">${row(`itemPublish('${id}')`,pub?eye+'<path d="M4 4l16 16"/>':eye+'<circle cx="12" cy="12" r="2.8"/>',pub?'Hide from students':'Publish to students')}
-  ${row(`itemRename('${id}')`,'<path d="M4 20h4L19 9l-4-4L4 16z"/>','Rename')}
-  ${row(`itemMove('${id}',-1)`,'<path d="M12 19V5M6 11l6-6 6 6"/>','Move up',{off:first})}
-  ${row(`itemMove('${id}',1)`,'<path d="M12 5v14M6 13l6 6 6-6"/>','Move down',{off:last})}
-  ${row(`closeSheet();toast('Shared with ${c.grp} ✓')`,'<circle cx="18" cy="5.5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="18.5" r="2.5"/><path d="M8.2 10.8l7.6-4.1M8.2 13.2l7.6 4.1"/>','Share with class',{off:!pub})}
-  ${row(`itemDelete('${id}')`,'<path d="M5 7h14M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/>','Delete',{danger:1})}</div>`);}
-function itemPublish(id){const f=findItem(id);if(!f)return;const it=f.item;it.st=it.st==='published'?'hidden':'published';matTouched();closeSheet();refreshMat();toast(it.st==='published'?'Published to students ✓':'Hidden from students');}
-function itemRename(id){const f=findItem(id);if(!f)return;openSheet(`<h2 style="font-size:20px;font-weight:800">Rename</h2><div class="field"><label>Title</label><input class="input" id="rn-in" dir="auto" value="${hx(f.item.n)}"/></div><button class="btn mt16" onclick="itemRenameSave('${id}')">Save</button><button class="btn secondary mt8" onclick="closeSheet()">Cancel</button>`);}
-function itemRenameSave(id){const f=findItem(id),v=(document.getElementById('rn-in').value||'').trim();if(!f)return;if(!v){toast('Enter a title');return;}f.item.n=v;matTouched();closeSheet();refreshMat();toast('Renamed ✓');}
-function itemMove(id,d){const f=findItem(id);if(!f)return;const a=secsOf()[f.si].items,j=f.ii+d;if(j<0||j>=a.length)return;[a[f.ii],a[j]]=[a[j],a[f.ii]];matTouched();closeSheet();refreshMat();toast(d<0?'Moved up':'Moved down');}
-function itemDelete(id){const f=findItem(id);if(!f)return;openSheet(`<h2 style="font-size:20px;font-weight:800">Delete this item?</h2><p class="mt8" style="font-weight:700" data-noi18n dir="auto">${hx(f.item.n)}</p><p class="sub mt8" style="line-height:1.5">Students will lose access to it. This cannot be undone.</p><button class="btn mt16" style="background:var(--danger);box-shadow:none" onclick="itemDeleteGo('${id}')">Delete</button><button class="btn secondary mt8" onclick="closeSheet()">Cancel</button>`);}
-function itemDeleteGo(id){const f=findItem(id);if(!f)return;secsOf()[f.si].items.splice(f.ii,1);matTouched();closeSheet();refreshMat();toast('Item deleted');}
-function addSectionSheet(){const K=matCourse();openSheet(`<h2 style="font-size:20px;font-weight:800">Add section</h2><p class="sub mt8">${K.hdr} · ${K.grp}</p><div class="field"><label>Section title</label><input class="input" id="as-in" dir="auto" placeholder="Ch.5 …"/></div><button class="btn mt16" onclick="addSectionGo()">Create section</button>`);}
-function addSectionGo(){const secs=secsOf(),v=(document.getElementById('as-in').value||'').trim()||('Ch.'+(secs.length+1));secs.push({n:v,items:[]});matOpen().add(secs.length-1);matTouched();closeSheet();refreshMat();toast('Section added ✓');}
-let addType='pdf',addFile=false,addSeq=1;
-function addFileName(t){return {pdf:'worksheet.pdf',slides:'lesson-slides.pptx',video:'lesson-recording.mp4'}[t]||'file';}
-function addExtra(t){const file=`<div class="card mt12 mfile${addFile?' on':''}" onclick="addPickFile()"><div style="font-size:24px">${addFile?'📄':'⬆️'}</div><div class="sub mt8">${addFile?`<span dir="ltr" data-noi18n>${addFileName(t)}</span>`:'Tap to choose a file (demo)'}</div></div>`;
-  if(t==='pdf')return `<div class="field"><label>Number of pages</label><input class="input" id="ai-n" inputmode="numeric" dir="ltr" value="4"/></div>${file}`;
-  if(t==='slides')return `<div class="field"><label>Number of slides</label><input class="input" id="ai-n" inputmode="numeric" dir="ltr" value="10"/></div>${file}`;
-  if(t==='video')return `<div class="field"><label>Duration (mm:ss)</label><input class="input" id="ai-n" dir="ltr" value="08:30"/></div>${file}`;
-  if(t==='link')return `<div class="field"><label>URL</label><input class="input" id="ai-n" dir="ltr" inputmode="url" value="https://www.crdp.org"/></div>`;
-  return `<div class="card mt12" style="background:var(--surface-2)"><div class="sub">A 3-question check based on this chapter is created. You can edit the questions before publishing.</div></div>`;}
-function addItemSheet(si){const secs=secsOf();if(!secs.length){addSectionSheet();return;}addType='pdf';addFile=false;const K=matCourse();
-  openSheet(`<h2 style="font-size:20px;font-weight:800">Add item</h2><p class="sub mt8">${K.hdr} · ${K.grp}</p>
-  <div class="set-label">Type</div>
-  <div class="seg" id="ai-type">${['pdf','slides','video','link','quiz'].map((x,i)=>`<button class="${i?'':'active'}" onclick="addPickType(this,'${x}')">${MAT_TYPES[x].l}</button>`).join('')}</div>
-  <div class="field"><label>Section</label><select class="input" id="ai-sec" dir="auto">${secs.map((s,i)=>`<option value="${i}" ${i===(si==null?secs.length-1:si)?'selected':''} data-noi18n>${hx(s.n)}</option>`).join('')}</select></div>
-  <div class="field"><label>Title</label><input class="input" id="ai-title" dir="auto"/></div>
-  <div id="ai-extra">${addExtra('pdf')}</div>
-  <button class="btn mt20" onclick="addItemGo()">Create as draft</button>`);}
-function addPickType(btn,t){addType=t;btn.parentElement.querySelectorAll('button').forEach(b=>b.classList.remove('active'));btn.classList.add('active');const ex=document.getElementById('ai-extra');ex.innerHTML=addExtra(t);translateEl(ex);}
-function addPickFile(){addFile=!addFile;const ex=document.getElementById('ai-extra'),n=document.getElementById('ai-n'),keep=n?n.value:null;ex.innerHTML=addExtra(addType);const n2=document.getElementById('ai-n');if(n2&&keep!=null)n2.value=keep;translateEl(ex);}
-function addItemGo(){const secs=secsOf(),si=+document.getElementById('ai-sec').value||0,sec=secs[si],title=(document.getElementById('ai-title').value||'').trim(),nEl=document.getElementById('ai-n'),v=nEl?nEl.value.trim():'';
-  if(!sec)return;if(!title){toast('Enter a title');return;}if(['pdf','slides','video'].includes(addType)&&!addFile){toast('Choose a file first');return;}
-  const base=sec.items.find(x=>x.topic)||itemsOf().find(x=>x.topic),id='new'+(addSeq++),it={id,t:addType,n:title,topic:base?base.topic:(MAT_CLS[matCls]==='S1'?'quadratics':'radicals'),st:'draft'};
-  if(addType==='pdf'){it.pages=Math.max(1,Math.min(40,parseInt(v,10)||4));it.size=(it.pages*.18).toFixed(1)+' MB';}
-  else if(addType==='slides')it.slides=Math.max(3,Math.min(30,parseInt(v,10)||10));
-  else if(addType==='video')it.dur=/^\d{1,2}:\d{2}$/.test(v)?v.padStart(5,'0'):'08:30';
-  else if(addType==='link')it.url=/^https?:\/\//.test(v)?v:'https://'+(v||'www.crdp.org');
-  else{const q=sec.items.find(x=>x.t==='quiz')||itemsOf().find(x=>x.t==='quiz');QUIZZES[id]=q&&QUIZZES[q.id]?QUIZZES[q.id]:QUIZZES.m4;}
-  sec.items.push(it);matOpen().add(si);matTouched();closeSheet();refreshMat();toast('Item added as draft ✓');}
-function uploadMaterial(){addItemSheet(null);}
+  openSheet(`<h2 style="font-size:18px;font-weight:800;line-height:1.3" data-noi18n dir="auto">${hx(a.n)}</h2><div class="sub mt6">${cmMeta(a)} · ${cls2(f.cls).grp}</div>
+  <div class="mt12">${row(`attHide('${id}')`,a.hidden?eye+'<circle cx="12" cy="12" r="2.8"/>':eye+'<path d="M4 4l16 16"/>',a.hidden?'Show to students':'Hide from students')}
+  ${f.where==='lesson'?row(`attToRev('${id}')`,'<path d="M4 6h16M4 12h10M4 18h7"/><path d="M17 14l3 3-3 3"/>','Move to Revision'):''}
+  ${row(`attRename('${id}')`,'<path d="M4 20h4L19 9l-4-4L4 16z"/>','Rename')}
+  ${row(`attDelete('${id}')`,'<path d="M5 7h14M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/>','Delete',{danger:1})}</div>`);}
+function attHide(id){const f=findAtt(id);if(!f)return;f.att.hidden=!f.att.hidden;closeSheet();refreshMat();toast(f.att.hidden?'Hidden from students':'Visible to students ✓');}
+function attToRev(id){const f=findAtt(id);if(!f||f.where!=='lesson')return;const a=f.att;f.arr.splice(f.i,1);delete a.fresh;(cmRev[f.cls]=cmRev[f.cls]||[]).unshift(a);
+  if(!f.arr.length&&!lessons.some(x=>x.cls===f.lesson.cls&&x.d===f.lesson.d&&x.p===f.lesson.p))cmLessons.splice(cmLessons.indexOf(f.lesson),1);
+  closeSheet();refreshMat();toast('Moved to Revision');}
+function attRename(id){const f=findAtt(id);if(!f)return;openSheet(`<h2 style="font-size:20px;font-weight:800">Rename</h2><div class="field"><label>Title</label><input class="input" id="rn-in" dir="auto" value="${hx(f.att.n)}"/></div><button class="btn mt16" onclick="attRenameSave('${id}')">Save</button><button class="btn secondary mt8" onclick="closeSheet()">Cancel</button>`);}
+function attRenameSave(id){const f=findAtt(id),v=(document.getElementById('rn-in').value||'').trim();if(!f)return;if(!v){toast('Enter a title');return;}f.att.n=v;closeSheet();refreshMat();toast('Renamed ✓');}
+function attDelete(id){const f=findAtt(id);if(!f)return;openSheet(`<h2 style="font-size:20px;font-weight:800">Delete this attachment?</h2><p class="mt8" style="font-weight:700" data-noi18n dir="auto">${hx(f.att.n)}</p><p class="sub mt8" style="line-height:1.5">Students and parents will lose access to it. This cannot be undone.</p><button class="btn mt16" style="background:var(--danger);box-shadow:none" onclick="attDeleteGo('${id}')">Delete</button><button class="btn secondary mt8" onclick="closeSheet()">Cancel</button>`);}
+function attDeleteGo(id){const f=findAtt(id);if(!f)return;if(viewerOpen()&&vw.id===id)closeViewer();f.arr.splice(f.i,1);cmOffline.delete(id);cmSaveOffline();closeSheet();refreshMat();toast('Attachment deleted');}
+
+/* ---- post to class ---- */
+let cmPost=null;
+const CM_PERIOD={'07:50':'P1','08:40':'P2','09:30':'P3','10:40':'P4','11:30':'P5','12:40':'P6','13:30':'P7'};
+function cmLessonOptions(){const m=new Map(),add=(cls,d,p,topic)=>{const k=cls+'|'+d+'|'+p;if(!m.has(k))m.set(k,{k,cls,d,p,topic:topic||''});else if(topic&&!m.get(k).topic)m.get(k).topic=topic;};
+  (teachWeek.Mon||[]).forEach(s=>{const c=classes.find(x=>s.c.endsWith(x.grp));if(c)add(c.id,16,CM_PERIOD[s.t]||'P1',null);});
+  lessons.forEach(l=>add(l.cls,l.d,l.p,l.ch));cmLessons.forEach(l=>add(l.cls,l.d,l.p,l.topic));
+  const arr=[...m.values()];arr.forEach(o=>{if(!o.topic)o.topic=(CHAPTERS[o.cls]||[]).slice(-1)[0]||'';});
+  return arr.sort((a,b)=>b.d-a.d||a.cls.localeCompare(b.cls)||a.p.localeCompare(b.p));}
+function cmOpt(){const o=cmLessonOptions();return o.find(x=>x.k===cmPost.k)||o[0];}
+function cmShort(topic){return String(topic||'').replace(/^Ch\.\s?\d+\s*/,'').trim();}
+function cmSuggest(){const o=cmOpt(),s=cmShort(o&&o.topic);return {board:`Board — ${s}`,pdf:`Exercises — ${s}`,slides:`Slides — ${s}`,video:`${s} — short explanation`,link:`Link — ${s}`}[cmPost.type];}
+function addFileName(t){return {pdf:'exercises.pdf',slides:'lesson-slides.pptx',video:'short-explanation.mp4'}[t]||'file';}
+function openPost(pre){const opts=cmLessonOptions();let k=pre&&pre.cls?`${pre.cls}|${pre.d}|${pre.p}`:null;
+  if(!k||!opts.some(o=>o.k===k)){const def=opts.find(o=>o.k===`m9b|16|P2`)||opts[0];k=def.k;}
+  cmPost={k,type:'board',shot:false,file:false,sec:'lesson',edited:false};
+  openSheet(`<h2 style="font-size:20px;font-weight:800">Post to class</h2><p class="sub mt8">Students &amp; parents see it in Class materials</p>
+  <div class="set-label">Lesson</div>
+  <div class="cm-pick" id="cm-pick">${opts.map(o=>`<div class="cm-opt${o.k===k?' on':''}" data-k="${o.k}" onclick="cmPickLesson('${o.k}')"><div class="cm-radio"></div><div class="grow" style="min-width:0"><div style="font-weight:700;font-size:13px">${o.d===16?'Today · ':''}${fmtD(o.d)} · ${cls2(o.cls).grp} · ${o.p}</div><div class="sub ell" style="margin-top:2px;font-size:12px" data-noi18n dir="auto">${esc(o.topic)}</div></div></div>`).join('')}</div>
+  <div class="set-label">Attachment</div>
+  <div class="cm-types" id="cm-types">${['board','pdf','slides','video','link'].map(t=>`<button class="cm-type${t==='board'?' on':''}" data-t="${t}" onclick="cmPickType('${t}')"><span class="set-ic" style="background:${MAT_TYPES[t].col}1f;color:${MAT_TYPES[t].col}">${matIco(t)}</span><span>${MAT_TYPES[t].l}</span></button>`).join('')}</div>
+  <div id="cm-extra">${cmPostExtra()}</div>
+  <div class="field"><label>Title</label><input class="input" id="cm-title" dir="auto" value="${hx(cmSuggest())}" oninput="cmPost.edited=true"/></div>
+  <div class="set-label">Where should it appear?</div>
+  <div class="seg" id="cm-sec">${[['lesson','Lesson'],['rev','Revision'],['tb','Textbook']].map(([s,l])=>`<button class="${s==='lesson'?'active':''}" onclick="cmPickSec(this,'${s}')">${l}</button>`).join('')}</div>
+  <div class="set-row mt8" style="border:none"><div class="grow"><div style="font-weight:600">Notify students &amp; parents</div><div class="sub" style="font-size:12px">They get a notification with a link to the file</div></div><div class="switch on" id="cm-notify" onclick="this.classList.toggle('on')"></div></div>
+  <button class="btn mt12" onclick="cmPostGo()">${CM_CLIP} Post to class</button>`);
+  const el=document.querySelector('#cm-pick .cm-opt.on');if(el){const p=document.getElementById('cm-pick');p.scrollTop=el.offsetTop-p.offsetTop-6;}}
+function cmPostExtra(){const t=cmPost.type,o=cmOpt();
+  if(t==='board')return cmPost.shot?`<div class="cm-cam on" onclick="cmShot()"><div class="cm-shot" data-noi18n>${boardSVG({id:'__post',t:'board',board:'gen',topicText:o.topic,cls:o.cls,d:o.d})}</div><div class="row between mt8"><span class="tag ok">Photo captured</span><span class="accent" style="font-weight:700;font-size:13px">Retake</span></div></div>`
+    :`<div class="cm-cam" onclick="cmShot()"><div class="cm-cam-ic">${CM_CAM}</div><div style="font-weight:700;margin-top:10px">Take a photo of the board</div><div class="sub mt6">Tap to open the camera (demo)</div></div>`;
+  if(t==='link')return `<div class="field"><label>URL</label><input class="input" id="cm-url" dir="ltr" inputmode="url" value="https://www.crdp.org"/></div>`;
+  return `<div class="card mt12 mfile${cmPost.file?' on':''}" onclick="cmFile()"><div style="font-size:24px">${cmPost.file?'📄':'⬆️'}</div><div class="sub mt8">${cmPost.file?`<span dir="ltr" data-noi18n>${addFileName(t)}</span>`:'Tap to choose a file (demo)'}</div></div>${t==='video'?`<p class="sub mt8" style="font-size:12px">Short clip — keep it under 5 minutes</p>`:''}`;}
+function cmRedrawExtra(){const ex=document.getElementById('cm-extra');if(!ex)return;const u=document.getElementById('cm-url'),keep=u?u.value:null;ex.innerHTML=cmPostExtra();translateEl(ex);const u2=document.getElementById('cm-url');if(u2&&keep!=null)u2.value=keep;
+  const ti=document.getElementById('cm-title');if(ti&&!cmPost.edited)ti.value=cmSuggest();}
+function cmPickLesson(k){cmPost.k=k;document.querySelectorAll('#cm-pick .cm-opt').forEach(el=>el.classList.toggle('on',el.dataset.k===k));cmRedrawExtra();}
+function cmPickType(t){cmPost.type=t;cmPost.file=false;document.querySelectorAll('#cm-types .cm-type').forEach(el=>el.classList.toggle('on',el.dataset.t===t));cmRedrawExtra();}
+function cmPickSec(btn,s){cmPost.sec=s;btn.parentElement.querySelectorAll('button').forEach(b=>b.classList.remove('active'));btn.classList.add('active');}
+function cmShot(){cmPost.shot=true;cmRedrawExtra();}
+function cmFile(){cmPost.file=!cmPost.file;cmRedrawExtra();}
+function cmPostGo(){const o=cmOpt();if(!o)return;const t=cmPost.type,title=(document.getElementById('cm-title').value||'').trim();
+  if(t==='board'&&!cmPost.shot){toast('Take a photo of the board first');return;}
+  if(['pdf','slides','video'].includes(t)&&!cmPost.file){toast('Choose a file first');return;}
+  if(!title){toast('Enter a title');return;}
+  const a={id:'p'+(cmSeq++),t,n:title,cls:o.cls,seen:0,fresh:1,topic:cmTopicKey(o.topic,o.cls),topicText:o.topic,d:o.d};
+  if(t==='board')a.board='gen';else if(t==='pdf'){a.pages=2;a.size='300 KB';}else if(t==='slides')a.slides=8;else if(t==='video'){a.dur='03:30';a.size='14 MB';}
+  else if(t==='link'){const v=((document.getElementById('cm-url')||{}).value||'').trim();a.url=/^https?:\/\//.test(v)?v:'https://'+(v||'www.crdp.org');}
+  if(cmPost.sec==='lesson'){let L=cmLessons.find(x=>x.cls===o.cls&&x.d===o.d&&x.p===o.p);if(!L){L={id:'lx'+Date.now(),cls:o.cls,d:o.d,p:o.p,topic:o.topic,att:[]};cmLessons.push(L);}L.att.unshift(a);}
+  else if(cmPost.sec==='rev')(cmRev[o.cls]=cmRev[o.cls]||[]).unshift(a);else (cmTb[o.cls]=cmTb[o.cls]||[]).push(a);
+  const notify=document.getElementById('cm-notify').classList.contains('on'),grp=cls2(o.cls).grp;
+  matCls=o.cls;cmTab=cmPost.sec;closeSheet();
+  if(current==='materials'||current==='lessonlog'){refreshMat();const sc=document.getElementById('scr-'+current);if(current==='materials'&&sc)sc.scrollTop=0;}else{rebuild('materials');rebuild('lessonlog');show('materials');}
+  toast(notify?`Posted to ${grp} · students & parents notified ✓`:`Posted to ${grp} ✓`);}
+
+/* ---- lesson log integration ---- */
+function cmLogAtt(l){const L=cmLessonFor(l),n=L?L.att.length:0;
+  return `${n?`<div class="cm-chips">${L.att.map(a=>`<button class="cm-chip" onclick="openAtt('${a.id}')"><span style="color:${MAT_TYPES[a.t].col};display:inline-flex">${matIco(a.t)}</span><span class="ell" data-noi18n dir="auto">${hx(a.n)}</span></button>`).join('')}</div>`:''}
+  <button class="btn secondary cm-log-btn" onclick="openPost({cls:'${l.cls}',d:${l.d},p:'${l.p}'})">${CM_CLIP}<span>Attach materials</span></button>`;}
+
+/* ---- board photos: an SVG "photo" of the classroom board ---- */
+let bdSeq=0;
+const BOARDS={
+  'thales-converse':{title:"Converse of Thales' theorem",fig:'tri',lines:[['If  AM/AB = AN/AC',0],['with A, M, B and A, N, C',0],['in the same order,',0],['then (MN) // (BC)',1]],ex:['AM = 4 ; AB = 10  →  4/10 = 0.4','AN = 6 ; AC = 15  →  6/15 = 0.4'],box:'equal ratios ⇒ (MN) // (BC)'},
+  'radicals-rat':{title:'Rationalising denominators',fig:null,lines:[['6/√3 = 6√3 / (√3 × √3)',0],['       = 6√3 / 3 = 2√3',1],['1/(√5 − 2) = (√5 + 2) / (5 − 4)',0],['       = √5 + 2',1]],ex:['Homework: p.84, ex. 3 → 9'],box:'multiply by the conjugate'},
+  'radicals-simp':{title:'Simplifying radicals',fig:'squares',lines:[['√50 = √(25 × 2) = 5√2',0],['√72 = √(36 × 2) = 6√2',0],['√48 − 2√27 + √75',0],['= 4√3 − 6√3 + 5√3 = 3√3',1]],ex:[],box:'look for perfect squares'},
+  'discriminant':{title:'Second-degree equations',fig:'parab',lines:[['ax² + bx + c = 0   (a ≠ 0)',0],['Δ = b² − 4ac',1],['Δ > 0 → 2 roots ;  Δ = 0 → 1 root',0],['Δ < 0 → no real root',0]],ex:['2x² − 3x − 2 = 0  →  Δ = 25','x₁ = −1/2   ;   x₂ = 2'],box:'x = (−b ± √Δ) / 2a'},
+};
+const DAY_FULL={Mon:'Monday',Tue:'Tuesday',Wed:'Wednesday',Thu:'Thursday',Fri:'Friday',Sat:'Saturday',Sun:'Sunday'};
+function boardSVG(a){const u='bd'+(++bdSeq),f=a.id&&a.id!=='__post'?findAtt(a.id):null,L=f&&f.lesson,d=a.d||(L&&L.d)||16,cls=a.cls||(f&&f.cls)||matCls;
+  let B=BOARDS[a.board];if(!B){const T=TOPICS[a.topic||cmTopicKey(a.topicText||(L&&L.topic),cls)]||TOPICS.radicals;B={title:cmShort(a.topicText||(L&&L.topic))||T.title,fig:null,lines:(T.formulas||[]).slice(0,4).map((x,i)=>[x,i===0?1:0]),ex:[],box:''};}
+  const W='#f4f1e6',Y='#fde68a',P='#fbcfe8',Bl='#bae6fd',fig=!!B.fig,sz=fig?40:46,dn=dayName(d,'Nov');
+  const tx=(x,y,s,o)=>`<text x="${x}" y="${y}" font-size="${(o&&o.fs)||sz}" fill="${(o&&o.c)||W}" ${o&&o.a?`text-anchor="${o.a}"`:''} ${o&&o.r?`transform="rotate(${o.r} ${x} ${y})"`:''} ${o&&o.w?`font-weight="${o.w}"`:''}>${hx(s)}</text>`;
+  const ln=(x1,y1,x2,y2,c,w)=>`<path d="M${x1} ${y1} L${x2} ${y2}" stroke="${c||W}" stroke-width="${w||4}" stroke-linecap="round" fill="none"/>`;
+  let body=tx(1100,122,`${DAY_FULL[dn]||dn} ${d} November`,{fs:32,a:'end',c:'#e2e8e0'})+tx(1100,160,cls2(cls).grp,{fs:28,a:'end',c:'#cbd5c9'});
+  body+=tx(118,150,B.title,{fs:58,w:700,r:-1})+`<path d="M120 172 C 300 162, 520 176, ${Math.min(700,140+B.title.length*24)} 166" stroke="${Y}" stroke-width="4" fill="none" stroke-linecap="round"/>`;
+  let y=250;B.lines.forEach(([s,hl])=>{body+=tx(128,y,s,{c:hl?Y:W});y+=sz+22;});
+  if(B.ex.length){y+=8;B.ex.forEach(s=>{body+=tx(128,y,s,{fs:fig?34:38,c:Bl});y+=fig?46:52;});}
+  if(B.box){const bw=Math.min(620,B.box.length*20+60),by=Math.max(y+10,560);body+=`<rect x="112" y="${by-48}" width="${bw}" height="70" rx="8" fill="none" stroke="${Y}" stroke-width="4" transform="rotate(-1 112 ${by})"/>`+tx(136,by,B.box,{fs:40,c:Y});}
+  if(B.fig==='tri'){const A=[890,215],Bp=[745,480],C=[1065,480],r=.45,M=[A[0]+(Bp[0]-A[0])*r,A[1]+(Bp[1]-A[1])*r],N=[A[0]+(C[0]-A[0])*r,A[1]+(C[1]-A[1])*r];
+    body+=ln(A[0],A[1],Bp[0],Bp[1])+ln(Bp[0],Bp[1],C[0],C[1])+ln(C[0],C[1],A[0],A[1])+ln(M[0],M[1],N[0],N[1],Y,5)
+      +`<path d="M${(M[0]+N[0])/2-8} ${M[1]-9} l12 9 -12 9 M${(Bp[0]+C[0])/2-8} ${Bp[1]-9} l12 9 -12 9" stroke="${Y}" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>`
+      +tx(A[0],A[1]-18,'A',{fs:38,a:'middle'})+tx(Bp[0]-26,Bp[1]+34,'B',{fs:38,a:'middle'})+tx(C[0]+24,C[1]+34,'C',{fs:38,a:'middle'})+tx(M[0]-30,M[1]+8,'M',{fs:36,a:'middle',c:Y})+tx(N[0]+30,N[1]+8,'N',{fs:36,a:'middle',c:Y});}
+  else if(B.fig==='parab'){let dd='';for(let x=-1.4;x<=2.91;x+=.1){const X=905+x*62,Y2=375-((x+.5)*(x-2))*52;dd+=(dd?' L':'M')+X.toFixed(1)+' '+Y2.toFixed(1);}
+    body+=ln(740,375,1080,375,'#cbd5c9',3)+ln(905,210,905,520,'#cbd5c9',3)+`<path d="${dd}" stroke="${P}" stroke-width="5" fill="none" stroke-linecap="round"/>`
+      +`<circle cx="${905-.5*62}" cy="375" r="8" fill="${Y}"/><circle cx="${905+2*62}" cy="375" r="8" fill="${Y}"/>`+tx(905-.5*62,352,'x₁',{fs:30,a:'middle',c:Y})+tx(905+2*62+6,352,'x₂',{fs:30,a:'middle',c:Y});}
+  else if(B.fig==='squares'){[[760,220,2,'4'],[860,220,3,'9'],[990,220,4,'16']].forEach(([x,y0,n,l])=>{const s=24;for(let i=0;i<n;i++)for(let j=0;j<n;j++)body+=`<rect x="${x+i*s}" y="${y0+j*s}" width="${s}" height="${s}" fill="none" stroke="${W}" stroke-width="2.4"/>`;body+=tx(x+n*s/2,y0+n*s+40,l,{fs:36,a:'middle',c:Y});});
+    body+=tx(760,430,'25 = 5²   36 = 6²',{fs:34,c:Bl})+tx(760,478,'49 = 7²   64 = 8²',{fs:34,c:Bl});}
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="1200" height="800" direction="ltr" style="direction:ltr">
+<defs><linearGradient id="${u}w" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d8d2c4"/><stop offset="1" stop-color="#a9a293"/></linearGradient>
+<linearGradient id="${u}b" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#335f4d"/><stop offset=".55" stop-color="#274d3e"/><stop offset="1" stop-color="#1d3c31"/></linearGradient>
+<radialGradient id="${u}v" cx=".5" cy=".46" r=".78"><stop offset=".56" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".55"/></radialGradient>
+<radialGradient id="${u}g" cx=".22" cy=".18" r=".55"><stop offset="0" stop-color="#fff" stop-opacity=".2"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+<filter id="${u}c" x="-2%" y="-2%" width="104%" height="104%"><feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="2" seed="4" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="3" xChannelSelector="R" yChannelSelector="G"/></filter>
+<filter id="${u}n" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".8" numOctaves="3" seed="9" stitchTiles="stitch"/><feColorMatrix values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .09 0"/></filter>
+<filter id="${u}s" x="-30%" y="-60%" width="160%" height="220%"><feGaussianBlur stdDeviation="22"/></filter>
+<filter id="${u}d" x="-5%" y="-5%" width="110%" height="115%"><feGaussianBlur stdDeviation="10"/></filter></defs>
+<rect width="1200" height="800" fill="url(#${u}w)"/>
+<g transform="translate(600 400) rotate(-1.3) skewX(-1.8) scale(1.015 .995) translate(-600 -400)">
+<rect x="58" y="56" width="1096" height="676" rx="12" fill="#000" opacity=".35" filter="url(#${u}d)"/>
+<rect x="46" y="40" width="1108" height="690" rx="12" fill="#7a5a3a"/><rect x="52" y="46" width="1096" height="678" rx="9" fill="#8d6a45"/>
+<rect x="68" y="60" width="1064" height="644" rx="4" fill="url(#${u}b)"/>
+<rect x="68" y="60" width="1064" height="644" filter="url(#${u}n)"/>
+<g filter="url(#${u}s)" opacity=".2"><ellipse cx="330" cy="430" rx="260" ry="70" fill="#fff"/><ellipse cx="860" cy="610" rx="300" ry="54" fill="#fff"/><ellipse cx="760" cy="130" rx="200" ry="40" fill="#fff"/></g>
+<g filter="url(#${u}c)" font-family="Caveat, 'Segoe Print', 'Bradley Hand', 'Comic Sans MS', cursive" opacity=".94">${body}</g>
+<rect x="60" y="704" width="1080" height="22" rx="3" fill="#6b4f33"/><rect x="60" y="704" width="1080" height="5" fill="#8a6a47"/>
+<rect x="210" y="694" width="70" height="12" rx="5" fill="#f5f5f0"/><rect x="300" y="696" width="44" height="10" rx="5" fill="#fde68a"/><rect x="880" y="680" width="120" height="28" rx="6" fill="#374151"/><rect x="880" y="694" width="120" height="14" rx="3" fill="#d6c7a1"/>
+</g>
+<rect width="1200" height="800" fill="url(#${u}g)"/><rect width="1200" height="800" fill="url(#${u}v)"/>
+</svg>`;}
+function openBoard(it){
+  openViewer(it,`<div class="pdf-wrap"><div class="pdf-tools"><button class="pt-btn" onclick="bdZoom(-1)" aria-label="Zoom out">−</button><span class="pt-z tnum" id="bd-z" dir="ltr">100%</span><button class="pt-btn" onclick="bdZoom(1)" aria-label="Zoom in">+</button><button class="pt-btn pt-fit" onclick="bdZoom(0)">Fit</button><span class="grow"></span><span class="pt-page" style="font-size:11.5px">Drag to move</span></div>
+  <div class="bd-stage" id="bd-stage"><div class="bd-img" id="bd-img" data-noi18n>${boardSVG(it)}</div></div></div>`);
+  vw.zoom=1;vw.px=0;vw.py=0;bdBind();bdApply();}
+function bdApply(){const im=document.getElementById('bd-img'),st=document.getElementById('bd-stage');if(!im||!st)return;const mx=Math.max(0,(im.offsetWidth*vw.zoom-st.clientWidth)/2),my=Math.max(0,(im.offsetHeight*vw.zoom-st.clientHeight)/2);
+  vw.px=Math.max(-mx,Math.min(mx,vw.px));vw.py=Math.max(-my,Math.min(my,vw.py));im.style.transform=`translate(-50%,-50%) translate(${vw.px}px,${vw.py}px) scale(${vw.zoom})`;
+  const z=document.getElementById('bd-z');if(z)z.textContent=Math.round(vw.zoom*100)+'%';}
+function bdZoom(d){vw.zoom=d===0?1:Math.max(1,Math.min(4,vw.zoom+d*.5));if(d===0){vw.px=0;vw.py=0;}bdApply();}
+function bdBind(){const st=document.getElementById('bd-stage'),im=document.getElementById('bd-img');if(!st)return;let x0=null,y0=0,px0=0,py0=0;
+  st.addEventListener('pointerdown',e=>{x0=e.clientX;y0=e.clientY;px0=vw.px;py0=vw.py;im.classList.add('drag');st.classList.add('drag');try{st.setPointerCapture(e.pointerId);}catch(_){}});
+  st.addEventListener('pointermove',e=>{if(x0==null)return;vw.px=px0+(e.clientX-x0);vw.py=py0+(e.clientY-y0);bdApply();});
+  const up=()=>{x0=null;im.classList.remove('drag');st.classList.remove('drag');};st.addEventListener('pointerup',up);st.addEventListener('pointercancel',up);
+  st.addEventListener('dblclick',()=>bdZoom(vw.zoom>1?0:1));}
+
+/* ---- downloads: PDF (generated), board photo (PNG), video (kept offline) ---- */
+function cmFileName(n){return String(n).replace(/[\\/:*?"<>|]+/g,'-').trim()||'file';}
+function saveBlob(blob,name){try{const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),5000);}catch(e){}}
+function boardPng(a,cb){const svg=boardSVG(a),fallback=()=>cb(new Blob([svg],{type:'image/svg+xml'}));try{const im=new Image();
+  im.onload=()=>{try{const cv=document.createElement('canvas');cv.width=1600;cv.height=1067;cv.getContext('2d').drawImage(im,0,0,1600,1067);cv.toBlob(b=>b?cb(b):fallback(),'image/png');}catch(e){fallback();}};
+  im.onerror=fallback;im.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);}catch(e){fallback();}}
+function downloadAtt(id){const f=findAtt(id);if(!f)return;const a=f.att;if(a.t==='link')return;matCls=f.cls;
+  const done=()=>{cmOffline.add(id);cmSaveOffline();refreshMat();toast(a.t==='video'?'Saved offline ✓':'Downloaded · saved offline ✓');};
+  if(a.t==='pdf'||a.t==='slides'){try{saveBlob(new Blob([pdfBytesFor(a)],{type:'application/pdf'}),cmFileName(a.n)+'.pdf');}catch(e){}done();}
+  else if(a.t==='board')boardPng(a,b=>{saveBlob(b,cmFileName(a.n)+(b.type==='image/png'?'.png':'.svg'));done();});
+  else done();}
 
 /* ---- figures (plain SVG, work on white paper and as <img> for the video canvas) ---- */
 function FIG(name,col){const k='#1f2937',t=(x,y,s,o)=>`<text x="${x}" y="${y}" font-family="Plus Jakarta Sans, Arial, sans-serif" font-size="${(o&&o.fs)||15}" font-weight="${(o&&o.fw)||700}" fill="${(o&&o.fill)||k}" text-anchor="${(o&&o.a)||'middle'}">${s}</text>`;let b='';
@@ -968,7 +1095,7 @@ function FIG(name,col){const k='#1f2937',t=(x,y,s,o)=>`<text x="${x}" y="${y}" f
 
 /* ---- generated documents (textbook pages) and slide decks ---- */
 function rot(a,i){if(!a||!a.length)return [];const k=i%a.length;return a.slice(k).concat(a.slice(0,k));}
-function buildDoc(it){const T=topicOf(it),L=DOC_L[T.lang]||DOC_L.en,c=matCourse(),N=Math.max(2,it.pages||4),P=T.points,F=T.formulas||[],E=T.examples||[],X=T.exercises&&T.exercises.length?T.exercises:P;
+function buildDoc(it){const T=topicOf(it),L=DOC_L[T.lang]||DOC_L.en,c=matCourse(it.cls),N=Math.max(2,it.pages||4),P=T.points,F=T.formulas||[],E=T.examples||[],X=T.exercises&&T.exercises.length?T.exercises:P;
   const pages=[[{k:'kick',t:T.chap},{k:'h1',t:it.n},{k:'p',t:T.intro},{k:'h2',t:L.obj},{k:'ul',items:P.slice(0,3)},{k:'fig',fig:T.fig,cap:T.title}]];
   const tpl=[
     i=>[{k:'h2',t:`${i}. ${L.defs}`},{k:'def',h:L.def,t:P[i%P.length]},{k:'def',h:L.def,t:P[(i+1)%P.length]}].concat(F.length?[{k:'f',t:F[i%F.length]}]:[],[{k:'p',t:T.intro}]),
@@ -977,7 +1104,7 @@ function buildDoc(it){const T=topicOf(it),L=DOC_L[T.lang]||DOC_L.en,c=matCourse(
     i=>[{k:'h2',t:`${i}. ${L.exs}`},{k:'ol',items:rot(X,i).slice(0,5)}],
     i=>[{k:'h2',t:`${i}. ${L.rem}`},{k:'ul',items:P}].concat(F.length?[{k:'f',t:F[(i+1)%F.length]}]:[],[{k:'def',h:L.q,t:X[i%X.length]}])];
   for(let i=1;i<N;i++)pages.push(tpl[(i-1)%tpl.length](i));
-  return {lang:T.lang||'en',rtl:T.lang==='ar',pages,col:c.col,hdr:`${it.textbook?'CRDP':'Al-Arz School'} · ${c.hdr}`,chap:T.chap};}
+  return {lang:T.lang||'en',rtl:T.lang==='ar',pages,col:c.col,hdr:`${it.hdr||(it.textbook?'CRDP':'Al-Arz School')} · ${c.hdr}`,chap:T.chap};}
 function docBlockHTML(b,col){switch(b.k){
   case 'kick':return `<div class="pp-kick">${hx(b.t)}</div>`;
   case 'h1':return `<h1>${hx(b.t)}</h1>`;
@@ -991,7 +1118,7 @@ function docBlockHTML(b,col){switch(b.k){
   case 'fig':return `<figure class="pp-fig${b.small?' sm':''}">${FIG(b.fig,col)}<figcaption>${hx(b.cap)}</figcaption></figure>`;}
   return '';}
 function docPageHTML(d,blocks,i){return `<div class="pp"><div class="pp-hd"><span>${hx(d.hdr)}</span><span>${hx(d.chap)}</span></div>${blocks.map(b=>docBlockHTML(b,d.col)).join('')}<div class="pp-ft">${i+1}</div></div>`;}
-function buildDeck(it){const T=topicOf(it),L=DOC_L[T.lang]||DOC_L.en,c=matCourse(),N=Math.max(3,it.slides||8),P=T.points,F=T.formulas||[],E=T.examples||[],X=T.exercises&&T.exercises.length?T.exercises:P;
+function buildDeck(it){const T=topicOf(it),L=DOC_L[T.lang]||DOC_L.en,c=matCourse(it.cls),N=Math.max(3,it.slides||8),P=T.points,F=T.formulas||[],E=T.examples||[],X=T.exercises&&T.exercises.length?T.exercises:P;
   const S=[{k:'title',kick:c.hdr,t:it.n,sub:c.tch},{k:'bullets',h:L.obj,items:P.slice(0,3)}];
   const cyc=[
     i=>F.length?{k:'formula',h:L.prop,f:F[i%F.length],note:P[(i+1)%P.length]}:{k:'bullets',h:T.title,items:rot(P,i).slice(0,3)},
@@ -1040,23 +1167,22 @@ function pdfPagesFromDeck(d){const W=842,H=474;return d.slides.map((s,i)=>{let L
   else L=[{t:s.h,s:22,b:1,gap:14}].concat((s.items||[]).map(x=>({t:'•  '+x,s:15,ind:8,gap:6})));
   const ops=`${pdfRGB(d.col)} rg 0 0 14 ${H} re f\n`+pdfTextOps(L,60,H-70,40,110)+`0.55 0.58 0.62 rg BT /F1 10 Tf ${W-50} 22 Td (${i+1}) Tj ET\n`;return {w:W,h:H,ops};});}
 function pdfBytesFor(it){return it.t==='pdf'?makePdf(pdfPagesFromDoc(buildDoc(it))):makePdf(pdfPagesFromDeck(buildDeck(it)));}
-function downloadItem(id){const f=findItem(id);if(!f||(f.item.t!=='pdf'&&f.item.t!=='slides'))return;const it=f.item;
-  try{const blob=new Blob([pdfBytesFor(it)],{type:'application/pdf'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=String(it.n).replace(/[\\/:*?"<>|]+/g,'-').trim()+'.pdf';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),5000);}catch(e){}
-  toast('Downloaded ✓');}
+
 
 /* ---- full-screen viewer (slides up inside the phone) ---- */
 function viewerOpen(){const v=document.getElementById('viewer');return v&&v.classList.contains('open');}
 function openViewer(it,html){vpStop();const v=document.getElementById('viewer');vw={id:it.id,type:it.t,page:1,slide:0,n:0,zoom:1};
-  document.getElementById('v-title').textContent=it.n;document.getElementById('v-dl').style.display=(it.t==='pdf'||it.t==='slides')?'':'none';
+  document.getElementById('v-title').textContent=it.n;document.getElementById('v-dl').style.display=it.t==='link'?'none':'';
   const body=document.getElementById('v-body');body.innerHTML=html;translateEl(body);v.classList.add('open');v.setAttribute('aria-hidden','false');vFoot();vSub();}
 function closeViewer(){vpStop();const v=document.getElementById('viewer');v.classList.remove('open');v.setAttribute('aria-hidden','true');refreshMat();}
-function vSub(){const f=findItem(vw.id);if(!f)return;const it=f.item;let pos='';
+function vSub(){const f=findAtt(vw.id);if(!f)return;const it=f.att;let pos='';
   if(vw.type==='pdf')pos=` · ${hx(trCore('Page'))} <span dir="ltr">${vw.page} / ${vw.n}</span>`;else if(vw.type==='slides')pos=` · ${hx(trCore('Slide'))} <span dir="ltr">${vw.slide+1} / ${vw.n}</span>`;else if(vw.type==='video')pos=` · <span dir="ltr">${it.dur}</span>`;
   document.getElementById('v-sub').innerHTML=hx(trCore('Preview'))+' · '+hx(trCore(MAT_TYPES[it.t].l))+pos;}
-function vFoot(){const b=document.getElementById('v-done'),n=document.getElementById('v-next'),nx=nextAfter(vw.id);if(!b)return;const f=findItem(vw.id),pub=!!(f&&f.item.st==='published');
-  b.classList.remove('is-done');b.disabled=!pub;b.innerHTML=`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16"/><path d="M7 20v-6M12 20V8M17 20v-9"/></svg>${hx(trCore(pub?'Student progress':'Not published'))}`;
-  n.innerHTML=nx?`${hx(trCore('Next item'))}<svg class="flip-rtl" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>`:hx(trCore('Back to materials'));}
-function nextItem(){const nx=nextAfter(vw.id);if(!nx){closeViewer();return;}if(nx.t==='pdf'||nx.t==='slides'||nx.t==='video'){openItem(nx.id);return;}closeViewer();setTimeout(()=>openItem(nx.id),340);}
+function vFoot(){const b=document.getElementById('v-done'),n=document.getElementById('v-next');if(!b)return;const f=findAtt(vw.id),a=f&&f.att,nx=nextAfter(vw.id);
+  const eye='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12s3.5-6.5 9-6.5 9 6.5 9 6.5-3.5 6.5-9 6.5S3 12 3 12z"/>'+(a&&a.hidden?'<path d="M4 4l16 16"/>':'<circle cx="12" cy="12" r="2.8"/>')+'</svg>';
+  b.disabled=!a||!!a.hidden;b.innerHTML=!a?'':a.hidden?`${eye}${hx(trCore('Hidden from students'))}`:`${eye}${hx(trCore('Seen by'))} <span dir="ltr">${a.seen}/${cls2(f.cls).students}</span>`;
+  n.innerHTML=nx?`${hx(trCore('Next attachment'))}<svg class="flip-rtl" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>`:hx(trCore('Back to materials'));}
+function nextItem(){const nx=nextAfter(vw.id);if(!nx){closeViewer();return;}if(nx.t!=='link'){openAtt(nx.id);return;}closeViewer();setTimeout(()=>openAtt(nx.id),340);}
 
 /* PDF reader */
 function openPdf(it){const d=buildDoc(it);
@@ -1069,8 +1195,7 @@ function pdfLayout(keep){const sc=document.getElementById('pdf-scroll');if(!sc)r
 function pdfZoom(d){vw.zoom=d===0?1:Math.max(.6,Math.min(2.5,Math.round((vw.zoom+d*.25)*100)/100));pdfLayout(true);}
 function pdfScroll(){const sc=document.getElementById('pdf-scroll');if(!sc||vw.type!=='pdf')return;const pages=[...sc.querySelectorAll('.pdf-page')],y=sc.scrollTop+sc.clientHeight*.35;let n=1;pages.forEach((p,i)=>{if(p.offsetTop<=y)n=i+1;});
   if(sc.scrollTop+sc.clientHeight>=sc.scrollHeight-24)n=pages.length;
-  if(n!==vw.page){vw.page=n;vSub();const pg=document.getElementById('pdf-pg');if(pg)pg.textContent=`${n} / ${vw.n}`;const tb=document.getElementById('pdf-thumbs');if(tb){[...tb.children].forEach((b,i)=>b.classList.toggle('on',i===n-1));const el=tb.children[n-1];if(el)tb.scrollLeft=el.offsetLeft-tb.clientWidth/2+el.offsetWidth/2;}}
-  if(n===pages.length)markDone(vw.id);}
+  if(n!==vw.page){vw.page=n;vSub();const pg=document.getElementById('pdf-pg');if(pg)pg.textContent=`${n} / ${vw.n}`;const tb=document.getElementById('pdf-thumbs');if(tb){[...tb.children].forEach((b,i)=>b.classList.toggle('on',i===n-1));const el=tb.children[n-1];if(el)tb.scrollLeft=el.offsetLeft-tb.clientWidth/2+el.offsetWidth/2;}}}
 function pdfGo(n){const sc=document.getElementById('pdf-scroll');if(!sc)return;const p=sc.querySelectorAll('.pdf-page')[n-1];if(p)sc.scrollTo({top:p.offsetTop-14,behavior:'smooth'});}
 
 /* Slides viewer */
@@ -1083,27 +1208,18 @@ function isRtlDoc(){return document.documentElement.dir==='rtl';}
 function slideGo(i){if(vw.type!=='slides')return;i=Math.max(0,Math.min(vw.n-1,i));vw.slide=i;const tr=document.getElementById('sl-track');if(!tr)return;tr.style.transform=`translateX(${(isRtlDoc()?1:-1)*i*100}%)`;
   const ct=document.getElementById('sl-count');if(ct)ct.innerHTML=`${hx(trCore('Slide'))} <span dir="ltr">${i+1} / ${vw.n}</span>`;
   const tb=document.getElementById('sl-thumbs');if(tb){[...tb.children].forEach((b,j)=>b.classList.toggle('on',j===i));const el=tb.children[i];if(el)tb.scrollTo({left:el.offsetLeft-tb.clientWidth/2+el.offsetWidth/2,behavior:'smooth'});}
-  vSub();if(i===vw.n-1)markDone(vw.id);}
+  vSub();}
 function slBind(){const st=document.getElementById('sl-stage'),tr=document.getElementById('sl-track');if(!st)return;let x0=null,dx=0;
   st.addEventListener('pointerdown',e=>{x0=e.clientX;dx=0;tr.classList.add('drag');try{st.setPointerCapture(e.pointerId);}catch(_){}});
   st.addEventListener('pointermove',e=>{if(x0==null)return;dx=e.clientX-x0;tr.style.transform=`translateX(calc(${(isRtlDoc()?1:-1)*vw.slide*100}% + ${dx}px))`;});
   const up=()=>{if(x0==null)return;x0=null;tr.classList.remove('drag');const r=isRtlDoc(),fwd=r?dx>50:dx<-50,bwd=r?dx<-50:dx>50;slideGo(vw.slide+(fwd?1:bwd?-1:0));};
   st.addEventListener('pointerup',up);st.addEventListener('pointercancel',up);}
 
-/* Link + quiz sheets */
+/* Link sheet */
 function openLinkItem(it){const T=MAT_TYPES.link;openSheet(`<div class="row"><div class="set-ic" style="background:${T.col}1f;color:${T.col}">${matIco('link')}</div><div class="grow"><h2 style="font-size:18px;font-weight:800" data-noi18n dir="auto">${hx(it.n)}</h2><div class="sub mt6">External link</div></div></div>
   <div class="card mt16" style="padding:12px 14px;background:var(--surface-2)"><div class="sub" style="font-size:11px;font-weight:700">URL</div><div dir="ltr" style="font-weight:700;margin-top:4px;word-break:break-all;color:var(--accent)">${hx(it.url)}</div></div>
   <p class="sub mt12" style="line-height:1.5">Links open in your browser. The school checks every link before sharing it.</p>
-  <button class="btn mt16" onclick="closeSheet();markDone('${it.id}',true);toast('Opening in browser…')">Open link</button><button class="btn secondary mt8" onclick="closeSheet()">Close</button>`);}
-let quizAns={};
-function openQuizItem(it){const Q=QUIZZES[it.id]||[],T=MAT_TYPES.quiz;quizAns={};openSheet(`<div class="row"><div class="set-ic" style="background:${T.col}1f;color:${T.col}">${matIco('quiz')}</div><div class="grow"><h2 style="font-size:18px;font-weight:800" data-noi18n dir="auto">${hx(it.n)}</h2><div class="sub mt6">${itemMeta(it)}</div></div></div>
-  <div id="quiz-body">${Q.map((q,i)=>`<div class="card mt12 qz" data-q="${i}"><div style="font-weight:700;line-height:1.45" data-noi18n dir="auto">${i+1}. ${hx(q.q)}</div><div class="mt8">${q.a.map((a,j)=>`<button class="qz-o" data-noi18n dir="auto" onclick="quizPick(${i},${j})">${hx(a)}</button>`).join('')}</div></div>`).join('')}</div>
-  <div id="quiz-res"></div><button class="btn mt16" id="quiz-go" onclick="quizSubmit('${it.id}')">Submit answers</button>`);}
-function quizPick(i,j){if(quizAns.locked)return;quizAns[i]=j;document.querySelectorAll(`#quiz-body .qz[data-q="${i}"] .qz-o`).forEach((b,k)=>b.classList.toggle('sel',k===j));}
-function quizSubmit(id){const Q=QUIZZES[id]||[];if(quizAns.locked){closeSheet();return;}if(Q.some((_,i)=>quizAns[i]==null)){toast('Choose an answer for each question');return;}quizAns.locked=true;let s=0;
-  Q.forEach((q,i)=>{document.querySelectorAll(`#quiz-body .qz[data-q="${i}"] .qz-o`).forEach((b,k)=>{b.classList.toggle('ok',k===q.c);b.classList.toggle('bad',k===quizAns[i]&&k!==q.c);});if(quizAns[i]===q.c)s++;});
-  const r=document.getElementById('quiz-res');r.innerHTML=`<div class="card mt12" style="text-align:center;background:${s===Q.length?'var(--ok-bg)':'var(--warn-bg)'};border:none"><div class="tnum" style="font-size:26px;font-weight:800">${s} / ${Q.length}</div><div class="sub mt6">${s===Q.length?'Perfect score 🎉':'Review the lesson and try again'}</div></div>`;translateEl(r);
-  document.getElementById('quiz-go').textContent=trCore('Close');markDone(id,true);}
+  <button class="btn mt16" onclick="closeSheet();toast('Opening in browser…')">Open link</button><button class="btn secondary mt8" onclick="closeSheet()">Close</button>`);}
 
 /* ---- video player: canvas lesson driven by a clock (offline, no media files) ---- */
 const VP_PLAY='<svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg>',VP_PAUSE='<svg viewBox="0 0 24 24"><rect x="6.5" y="5" width="4" height="14" rx="1"/><rect x="13.5" y="5" width="4" height="14" rx="1"/></svg>';
@@ -1159,16 +1275,16 @@ function drawGeneric(g,p,v){const T=v.T,rtl=T.lang==='ar',col=v.col;g.direction=
   vAlpha(g,vk(p,.84,.88),()=>{g.fillStyle='rgba(15,23,42,.86)';g.fillRect(0,610,1280,110);g.font='700 30px "Plus Jakarta Sans","IBM Plex Sans Arabic",sans-serif';g.fillStyle='#fff';g.textAlign=al;g.fillText('✓ '+(DOC_L[T.lang]||DOC_L.en).sum+' — '+T.title,sx,675);});
   g.direction='ltr';}
 function vpEl(){return document.getElementById('vp');}
-function openVideo(it){const c=matCourse(),T=topicOf(it),D=parseDur(it.dur),S=VSCRIPTS[it.video],nx=nextAfter(it.id),NT=nx?MAT_TYPES[nx.t]:null;
+function openVideo(it){const c=matCourse(it.cls),T=topicOf(it),D=parseDur(it.dur),S=VSCRIPTS[it.video],nx=nextAfter(it.id),NT=nx?MAT_TYPES[nx.t]:null;
   const SKB='<svg viewBox="0 0 24 24"><path d="M4.5 12a7.5 7.5 0 1 0 2.2-5.3"/><path d="M4.5 4.5v4h4"/><text x="12.6" y="15.2" text-anchor="middle" font-size="7" font-weight="800" fill="#fff" stroke="none">10</text></svg>',SKF='<svg viewBox="0 0 24 24"><path d="M19.5 12a7.5 7.5 0 1 1-2.2-5.3"/><path d="M19.5 4.5v4h-4"/><text x="11.4" y="15.2" text-anchor="middle" font-size="7" font-weight="800" fill="#fff" stroke="none">10</text></svg>';
   openViewer(it,`<div class="vp-wrap"><div class="vp" id="vp" onclick="vpTap()"><canvas id="vp-c"></canvas><div class="vp-cap" id="vp-cap" dir="auto" data-noi18n></div>
     <button class="vp-big" id="vp-big" onclick="event.stopPropagation();vpToggle()" aria-label="Play">${VP_PLAY}</button>
-    <div class="vp-end" onclick="event.stopPropagation()"><div><div class="vp-end-ic">✓</div><div class="vp-end-t">Lecture completed</div><div class="row" style="gap:8px;justify-content:center;margin-top:14px"><button class="btn secondary sm" onclick="vpReplay()">Replay</button>${nx?`<button class="btn sm" onclick="nextItem()">Next item</button>`:''}</div></div></div>
+    <div class="vp-end" onclick="event.stopPropagation()"><div><div class="vp-end-ic">■</div><div class="vp-end-t">End of video</div><div class="row" style="gap:8px;justify-content:center;margin-top:14px"><button class="btn secondary sm" onclick="vpReplay()">Replay</button>${nx?`<button class="btn sm" onclick="nextItem()">Next attachment</button>`:''}</div></div></div>
     <div class="vp-ctl" dir="ltr" onclick="event.stopPropagation()"><div class="vp-seek" id="vp-seek"><div class="vp-buf" id="vp-buf"></div><div class="vp-played" id="vp-played"></div><div class="vp-thumb" id="vp-thumb"></div></div>
       <div class="vp-row"><button class="vp-b" id="vp-pp" onclick="vpToggle()" aria-label="Play">${VP_PLAY}</button><button class="vp-b" onclick="vpSkip(-10)" aria-label="Back 10 seconds">${SKB}</button><button class="vp-b" onclick="vpSkip(10)" aria-label="Forward 10 seconds">${SKF}</button><span class="vp-time" id="vp-time">00:00 / ${fmtT(D)}</span><span class="grow"></span><button class="vp-b vp-txt" id="vp-spd" onclick="vpSpeed()" aria-label="Speed">1×</button><button class="vp-b vp-txt on" id="vp-cc" onclick="vpCC()" aria-label="Captions">CC</button></div></div></div>
-    <div class="card vp-info"><div class="row" style="align-items:flex-start;gap:10px"><div class="grow" style="min-width:0"><div style="font-weight:800;font-size:15px;line-height:1.35" data-noi18n dir="auto">${hx(it.n)}</div><div class="sub mt6">${hx(c.tch)} · ${hx(c.n)}</div></div><span class="tag" style="background:var(--surface-3);color:var(--muted);flex:0 0 auto">Condensed demo lesson</span></div>
+    <div class="card vp-info"><div class="row" style="align-items:flex-start;gap:10px"><div class="grow" style="min-width:0"><div style="font-weight:800;font-size:15px;line-height:1.35" data-noi18n dir="auto">${hx(it.n)}</div><div class="sub mt6">${hx(c.tch)} · ${hx(c.n)} · ${hx(c.grp)}</div></div><span class="tag" style="background:var(--surface-3);color:var(--muted);flex:0 0 auto">Condensed demo lesson</span></div>
       <div class="sub mt12" style="line-height:1.55;color:var(--text)" data-noi18n dir="auto">${hx(T.intro)}</div></div>
-    ${nx?`<div class="set-label" style="margin:16px 18px 8px">Up next</div><div class="card" style="margin:0 14px 18px;padding:2px 14px"><div class="citem" onclick="nextItem()"><div class="set-ic" style="background:${NT.col}1f;color:${NT.col}">${matIco(nx.t)}</div><div class="grow" style="min-width:0"><div class="citem-t" data-noi18n dir="auto">${hx(nx.n)}</div><div class="sub mt6">${itemMeta(nx)}</div></div></div></div>`:''}</div>`);
+    ${nx?`<div class="set-label" style="margin:16px 18px 8px">Up next</div><div class="card" style="margin:0 14px 18px;padding:2px 14px"><div class="cm-att" onclick="nextItem()"><div class="set-ic" style="background:${NT.col}1f;color:${NT.col}">${matIco(nx.t)}</div><div class="grow" style="min-width:0"><div class="cm-t" data-noi18n dir="auto">${hx(nx.n)}</div><div class="sub mt6">${itemMeta(nx)}</div></div></div></div>`:''}</div>`);
   vid={id:it.id,t:0,D,K:D/VID_LEN,speed:1,playing:false,cc:true,raf:0,last:0,hide:0,caps:S?S.caps:genericCaps(T),draw:S?S.draw:drawGeneric,T,col:c.col,img:null};
   if(!S){const im=new Image(),vref=vid;im.onload=()=>{vref.img=im;if(vid===vref)vpDraw();};im.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(FIG(T.fig,c.col));}
   vpBindSeek();vpDraw();vpIcons();}
@@ -1184,7 +1300,7 @@ function vpPause(){if(!vid)return;vid.playing=false;cancelAnimationFrame(vid.raf
 function vpToggle(){if(vid&&vid.playing)vpPause();else vpPlay();}
 function vpTap(){if(!vid)return;const e=vpEl();if(e.classList.contains('ended'))return;if(vid.playing&&e.classList.contains('hide-ctl')){vpShowCtl();return;}vpToggle();}
 function vpShowCtl(){if(!vid)return;const e=vpEl();if(!e)return;e.classList.remove('hide-ctl');clearTimeout(vid.hide);if(vid.playing)vid.hide=setTimeout(()=>{if(vid&&vid.playing&&vpEl())vpEl().classList.add('hide-ctl');},2600);}
-function vpEnd(){if(!vid)return;vid.playing=false;vid.t=vid.D;cancelAnimationFrame(vid.raf);clearTimeout(vid.hide);const e=vpEl();e.classList.remove('playing','hide-ctl');e.classList.add('ended');vpIcons();vpDraw();markDone(vid.id,true);}
+function vpEnd(){if(!vid)return;vid.playing=false;vid.t=vid.D;cancelAnimationFrame(vid.raf);clearTimeout(vid.hide);const e=vpEl();e.classList.remove('playing','hide-ctl');e.classList.add('ended');vpIcons();vpDraw();}
 function vpReplay(){if(!vid)return;vid.t=0;vpEl().classList.remove('ended');vpPlay();}
 function vpSkip(s){if(!vid)return;vid.t=Math.max(0,Math.min(vid.D,vid.t+s));vpEl().classList.remove('ended');vpDraw();vpShowCtl();if(vid.t>=vid.D)vpEnd();}
 function vpSpeed(){if(!vid)return;const S=[.75,1,1.25,1.5,2];vid.speed=S[(S.indexOf(vid.speed)+1)%S.length];document.getElementById('vp-spd').textContent=vid.speed+'×';vpShowCtl();}
@@ -1195,30 +1311,38 @@ function vpBindSeek(){const s=document.getElementById('vp-seek');if(!s)return;le
   const up=()=>{if(!drag)return;drag=false;if(vid&&vid.t>=vid.D)vpEnd();};s.addEventListener('pointerup',up);s.addEventListener('pointercancel',up);}
 function vpStop(){if(vid){vid.playing=false;cancelAnimationFrame(vid.raf);clearTimeout(vid.hide);}vid=null;}
 
-/* ---- translations for the materials UI ---- */
+/* ---- translations for the class materials UI ---- */
 (function(){const add=(en,fr,ar)=>{if(!(en in I18N.fr))I18N.fr[en]=fr;if(!(en in I18N.ar))I18N.ar[en]=ar;};
-[['Course content','Contenu du cours','محتوى المقرر'],['Download','Télécharger','تنزيل'],['Downloaded ✓','Téléchargé ✓','تم التنزيل ✓'],['Page','Page','صفحة'],['Slide','Diapo','الشريحة'],['Slides','Diaporama','شرائح'],['Fit','Ajuster','ملاءمة'],
- ['Lecture completed','Leçon terminée','اكتمل الدرس'],['Replay','Revoir','إعادة التشغيل'],['Up next','À suivre','التالي'],['Condensed demo lesson','Leçon démo condensée','درس تجريبي مختصر'],['Next item','Élément suivant','العنصر التالي'],['Back to materials','Retour aux supports','العودة إلى المواد التعليمية'],
- ['External link','Lien externe','رابط خارجي'],['URL','URL','الرابط'],['Links open in your browser. The school checks every link before sharing it.','Les liens s’ouvrent dans votre navigateur. L’école vérifie chaque lien avant de le partager.','تُفتح الروابط في متصفحك. تتحقّق المدرسة من كل رابط قبل مشاركته.'],
- ['Open link','Ouvrir le lien','فتح الرابط'],['Opening in browser…','Ouverture dans le navigateur…','جارٍ الفتح في المتصفح…'],['Submit answers','Valider les réponses','إرسال الإجابات'],['Choose an answer for each question','Choisissez une réponse pour chaque question','اختر إجابة لكل سؤال'],
- ['Perfect score 🎉','Sans faute 🎉','علامة كاملة 🎉'],['Review the lesson and try again','Revoir la leçon et réessayer','راجع الدرس وحاول مجدداً'],['Close','Fermer','إغلاق'],
- ['Preview','Aperçu','معاينة'],['Preview what students see','Aperçu de ce que voient les élèves','معاينة ما يراه التلاميذ'],['Student progress','Progression des élèves','تقدّم التلاميذ'],['Not published','Non publié','غير منشور'],
- ['Hidden','Masqué','مخفي'],['Not visible to students','Invisible pour les élèves','غير ظاهر للتلاميذ'],['Viewed','Consulté','شوهد'],['Completed','Terminé','مكتمل'],['Not started','Pas commencé','لم يبدأ'],['In progress','En cours','قيد الإنجاز'],
- ['Average completion','Complétion moyenne','متوسط الإنجاز'],['Items','Éléments','العناصر'],['Published','Publié','منشور'],['Last updated','Dernière mise à jour','آخر تحديث'],['Today','Aujourd’hui','اليوم'],
- ['Add section','Ajouter une section','إضافة قسم'],['Add item','Ajouter un élément','إضافة عنصر'],['Section title','Titre de la section','عنوان القسم'],['Create section','Créer la section','إنشاء القسم'],['Section added ✓','Section ajoutée ✓','تمت إضافة القسم ✓'],
- ['Section','Section','القسم'],['Number of pages','Nombre de pages','عدد الصفحات'],['Number of slides','Nombre de diapos','عدد الشرائح'],['Duration (mm:ss)','Durée (mm:ss)','المدة (دقائق:ثوانٍ)'],['Tap to choose a file (demo)','Touchez pour choisir un fichier (démo)','اضغط لاختيار ملف (تجريبي)'],
- ['A 3-question check based on this chapter is created. You can edit the questions before publishing.','Un contrôle de 3 questions sur ce chapitre est créé. Vous pourrez modifier les questions avant de publier.','يُنشأ اختبار من 3 أسئلة حول هذا الفصل. يمكنك تعديل الأسئلة قبل النشر.'],
- ['Enter a title','Saisissez un titre','أدخل عنواناً'],['Choose a file first','Choisissez d’abord un fichier','اختر ملفاً أولاً'],['Item added as draft ✓','Élément ajouté en brouillon ✓','أُضيف العنصر كمسودة ✓'],
- ['Publish to students','Publier pour les élèves','نشر للتلاميذ'],['Hide from students','Masquer aux élèves','إخفاء عن التلاميذ'],['Published to students ✓','Publié pour les élèves ✓','نُشر للتلاميذ ✓'],['Hidden from students','Masqué aux élèves','أُخفي عن التلاميذ'],
- ['Rename','Renommer','إعادة التسمية'],['Save','Enregistrer','حفظ'],['Renamed ✓','Renommé ✓','تمت إعادة التسمية ✓'],['Move up','Monter','نقل للأعلى'],['Move down','Descendre','نقل للأسفل'],['Moved up','Déplacé vers le haut','نُقل للأعلى'],['Moved down','Déplacé vers le bas','نُقل للأسفل'],
- ['Share with class','Partager avec la classe','مشاركة مع الصف'],['Delete','Supprimer','حذف'],['Delete this item?','Supprimer cet élément ?','حذف هذا العنصر؟'],['Students will lose access to it. This cannot be undone.','Les élèves n’y auront plus accès. Action irréversible.','سيفقد التلاميذ الوصول إليه. لا يمكن التراجع عن ذلك.'],
- ['Cancel','Annuler','إلغاء'],['Item deleted','Élément supprimé','تم حذف العنصر'],["Remind students who haven't started",'Relancer les élèves qui n’ont pas commencé','تذكير التلاميذ الذين لم يبدأوا'],['Everyone has opened this item','Tous les élèves ont ouvert cet élément','فتح جميع التلاميذ هذا العنصر'],
- ['No items yet','Aucun élément pour l’instant','لا عناصر بعد'],['1 item','1 élément','عنصر واحد'],['Draft','Brouillon','مسودة'],['Type','Type','النوع'],['Title','Titre','العنوان'],['Create as draft','Créer en brouillon','إنشاء كمسودة'],['Quiz','Quiz','اختبار قصير'],['Video','Vidéo','فيديو'],['Link','Lien','رابط'],['PDF','PDF','PDF']
+[['Class materials','Supports de cours','المواد التعليمية'],['Shared with students & parents','Partagés avec les élèves et les parents','مشتركة مع التلاميذ والأهل'],
+ ['By lesson','Par séance','حسب الحصة'],['Revision','Révisions','مراجعة'],['Textbooks','Manuels','الكتب المدرسية'],['Textbook','Manuel','الكتاب المدرسي'],['Lesson','Séance','الحصة'],
+ ['Post to class','Publier pour la classe','نشر للصف'],['Board photo','Photo du tableau','صورة اللوح'],['Saved offline','Disponible hors ligne','محفوظ للاستخدام بدون إنترنت'],
+ ['Downloaded','Téléchargé','تم التنزيل'],['saved offline','disponible hors ligne','محفوظ بدون إنترنت'],['New','Nouveau','جديد'],['Next attachment','Pièce suivante','المرفق التالي'],
+ ['Seen by','Vu par','شاهده'],['Seen','Vu','شاهده'],['Not yet','Pas encore','لم يشاهده بعد'],['Who has seen it','Qui l’a vu','من شاهده'],['Opening an attachment counts as seen.','Ouvrir une pièce jointe compte comme vu.','فتح المرفق يُحتسب مشاهدة.'],
+ ['Attach materials','Joindre des supports','إرفاق مواد'],['Attach','Joindre','إرفاق'],['Notify students & parents','Prévenir élèves et parents','إشعار التلاميذ والأهل'],
+ ['They get a notification with a link to the file','Ils reçoivent une notification avec un lien vers le fichier','يصلهم إشعار مع رابط الملف'],['best on Wi-Fi','de préférence en Wi-Fi','يُفضّل عبر Wi-Fi'],
+ ['Not logged','Non renseigné','غير مُدوَّن'],['Move to Revision','Déplacer vers Révisions','نقل إلى المراجعة'],['Moved to Revision','Déplacé vers Révisions','نُقل إلى المراجعة'],
+ ['Show to students','Afficher aux élèves','إظهار للتلاميذ'],['Hide from students','Masquer aux élèves','إخفاء عن التلاميذ'],['Hidden from students','Masqué aux élèves','أُخفي عن التلاميذ'],['Visible to students','Visible par les élèves','ظاهر للتلاميذ'],
+ ['Delete this attachment?','Supprimer cette pièce jointe ?','حذف هذا المرفق؟'],['Students and parents will lose access to it. This cannot be undone.','Élèves et parents n’y auront plus accès. Action irréversible.','سيفقد التلاميذ والأهل الوصول إليه. لا يمكن التراجع عن ذلك.'],
+ ['Attachment deleted','Pièce jointe supprimée','تم حذف المرفق'],['Take a photo of the board','Photographier le tableau','التقط صورة للّوح'],['Take a photo of the board first','Photographiez d’abord le tableau','التقط صورة للّوح أولاً'],
+ ['Tap to open the camera (demo)','Touchez pour ouvrir l’appareil photo (démo)','اضغط لفتح الكاميرا (تجريبي)'],['Photo captured','Photo prise','تم التقاط الصورة'],['Retake','Reprendre','إعادة الالتقاط'],
+ ['Short clip — keep it under 5 minutes','Courte vidéo — moins de 5 minutes','مقطع قصير — أقل من 5 دقائق'],['Attachment','Pièce jointe','المرفق'],['Where should it appear?','Où l’afficher ?','أين يظهر؟'],
+ ['Students & parents see it in Class materials','Élèves et parents le voient dans Supports de cours','يراه التلاميذ والأهل في المواد التعليمية'],['students & parents notified','élèves et parents prévenus','تم إشعار التلاميذ والأهل'],
+ ['Past paper','Annale','امتحان سابق'],['Summary sheet','Fiche de synthèse','ملخّص'],['Official Brevet exams','Examens officiels du Brevet','امتحانات الشهادة المتوسطة الرسمية'],['June 2027','juin 2027','حزيران 2027'],
+ ['Past papers and summary sheets to revise for exams','Annales et fiches de synthèse pour réviser les examens','امتحانات سابقة وملخّصات للمراجعة قبل الامتحانات'],
+ ['Sample pages from the official CRDP textbook','Pages extraites du manuel officiel du CRDP','صفحات من الكتاب الرسمي للمركز التربوي للبحوث والإنماء'],['Drag to move','Glisser pour déplacer','اسحب للتحريك'],
+ ['End of video','Fin de la vidéo','نهاية الفيديو'],['No attachments yet','Aucune pièce jointe pour l’instant','لا مرفقات بعد'],['Nothing posted for this class yet','Rien de publié pour cette classe','لم يُنشر شيء لهذا الصف بعد'],['1 page','1 page','صفحة واحدة'],
+ ['Download','Télécharger','تنزيل'],['Page','Page','صفحة'],['Slide','Diapo','الشريحة'],['Slides','Diaporama','شرائح'],['Fit','Ajuster','ملاءمة'],['Replay','Revoir','إعادة التشغيل'],['Up next','À suivre','التالي'],
+ ['Condensed demo lesson','Vidéo démo condensée','فيديو تجريبي مختصر'],['Back to materials','Retour aux supports','العودة إلى المواد التعليمية'],['External link','Lien externe','رابط خارجي'],['URL','URL','الرابط'],
+ ['Links open in your browser. The school checks every link before sharing it.','Les liens s’ouvrent dans votre navigateur. L’école vérifie chaque lien avant de le partager.','تُفتح الروابط في متصفحك. تتحقّق المدرسة من كل رابط قبل مشاركته.'],
+ ['Open link','Ouvrir le lien','فتح الرابط'],['Opening in browser…','Ouverture dans le navigateur…','جارٍ الفتح في المتصفح…'],['Close','Fermer','إغلاق'],['Preview','Aperçu','معاينة'],['Hidden','Masqué','مخفي'],
+ ['Not visible to students','Invisible pour les élèves','غير ظاهر للتلاميذ'],['Rename','Renommer','إعادة التسمية'],['Save','Enregistrer','حفظ'],['Renamed ✓','Renommé ✓','تمت إعادة التسمية ✓'],['Delete','Supprimer','حذف'],['Cancel','Annuler','إلغاء'],
+ ['Enter a title','Saisissez un titre','أدخل عنواناً'],['Choose a file first','Choisissez d’abord un fichier','اختر ملفاً أولاً'],['Tap to choose a file (demo)','Touchez pour choisir un fichier (démo)','اضغط لاختيار ملف (تجريبي)'],
+ ['Video','Vidéo','فيديو'],['Link','Lien','رابط'],['PDF','PDF','PDF']
 ].forEach(r=>add(...r));
-const P=[['{n} slides','{n} diapos','{n} شرائح'],['{n} items','{n} éléments','{n} عناصر'],['{n} sections','{n} sections','{n} أقسام'],['{n} min','{n} min','{n} دقيقة'],['{n} pages','{n} pages','{n} صفحات'],['{n} questions','{n} questions','{n} أسئلة'],
- ['Viewed {n}','Consulté {n}','شوهد {n}'],['Completed {n}','Terminé {n}','أكمله {n}'],['Reminder sent to {n} students','Relance envoyée à {n} élèves','تم إرسال تذكير إلى {n} تلميذاً'],['{n} more students','{n} autres élèves','{n} تلاميذ آخرين'],
- ['Shared with {c}','Partagé avec {c}','تمت المشاركة مع {c}'],['Mathematics {c}','Mathématiques {c}','الرياضيات {c}'],['Average completion','Complétion moyenne','متوسط الإنجاز']];
-P.forEach(([en,fr,ar])=>{if(!I18N_P.fr.some(x=>x[0]===en))I18N_P.fr.push([en,fr]);if(!I18N_P.ar.some(x=>x[0]===en))I18N_P.ar.push([en,ar]);});
+const P=[['{n} slides','{n} diapos','{n} شرائح'],['{n} pages','{n} pages','{n} صفحات'],['{n} min','{n} min','{n} دقيقة'],['{n} more students','{n} autres élèves','{n} تلاميذ آخرين'],
+ ['Posted to {c}','Publié pour {c}','نُشر لصف {c}'],['1st term exams start {x}','Les examens du 1er trimestre commencent le {x}','تبدأ امتحانات الفصل الأول {x}'],['Seen by {n}','Vu par {n}','شاهده {n}'],
+ ['Mathematics {c}','Mathématiques {c}','الرياضيات {c}']];
+P.forEach(([en,fr,ar])=>{I18N_P.fr=I18N_P.fr.filter(x=>x[0]!==en);I18N_P.ar=I18N_P.ar.filter(x=>x[0]!==en);I18N_P.fr.push([en,fr]);I18N_P.ar.push([en,ar]);});
 Object.keys(_patCache).forEach(k=>delete _patCache[k]);})();
 
 const CEDAR='<svg viewBox="0 0 24 24"><path d="M12 2.5 7.5 8h2.2L6 12.5h2.8L4.5 17.5H11v4h2v-4h6.5l-4.3-5h2.8L14.3 8h2.2z" fill="currentColor"/></svg>';
@@ -1320,10 +1444,11 @@ const CHAPTERS={m9b:['Ch.3 Radicals — rationalising denominators','Ch.4 Thales
 let lessons=[
   {id:1,cls:'m9b',d:16,p:'P2',ch:'Ch.4 Thales\' theorem — converse',content:'',hw:'',status:'missing'},
   {id:2,cls:'m10',d:13,p:'P4',ch:'Ch.2 Second-degree equations — discriminant',content:'Discriminant Δ and number of roots; worked examples 1 – 4.',hw:'Series 2, ex. 1 – 6 (due 17 Nov)',status:'logged',rev:false},
-  {id:3,cls:'m9b',d:12,p:'P1',ch:'Ch.4 Thales\' theorem — direct',content:'Statement, configurations, ex. 1 – 3 p.102 solved in class.',hw:'Thales\' theorem worksheet (due 18 Nov)',status:'logged',rev:true},
+  {id:3,cls:'m9b',d:12,p:'P3',ch:'Ch.4 Thales\' theorem — direct',content:'Statement, configurations, ex. 1 – 3 p.102 solved in class.',hw:'Thales\' theorem worksheet (due 18 Nov)',status:'logged',rev:true},
   {id:4,cls:'m9a',d:12,p:'P7',ch:'Ch.3 Radicals — rationalising denominators',content:'Conjugate expressions; simplifying 1/(√a + √b).',hw:'p.86 ex. 12 – 15',status:'logged',rev:true},
-  {id:5,cls:'m9b',d:11,p:'P5',ch:'Ch.3 Radicals — rationalising denominators',content:'Quiz correction; rationalising with conjugates.',hw:'Exercises p.84 — Radicals',status:'logged',rev:true},
+  {id:5,cls:'m9b',d:10,p:'P2',ch:'Ch.3 Radicals — rationalising denominators',content:'Quiz correction; rationalising with conjugates.',hw:'Exercises p.84 — Radicals',status:'logged',rev:true},
   {id:6,cls:'m9a',d:11,p:'P2',ch:'Ch.3 Radicals — operations',content:'Product and quotient of radicals, simplification drills.',hw:'—',status:'logged',rev:true},
+  {id:7,cls:'m9b',d:6,p:'P2',ch:'Ch.3 Radicals — simplifying',content:'Extracting perfect squares: √50, √72 and sums of radicals solved in class.',hw:'p.81 ex. 7 – 12',status:'logged',rev:true},
 ];
 let llAddHw=false;
 
@@ -1396,7 +1521,7 @@ home:()=>`
     <div class="qtile" onclick="show('reports')"><div class="qi"><svg viewBox="0 0 24 24"><path d="M4 20h16"/><path d="M7 20v-6M12 20V8M17 20v-9"/></svg></div><div class="ql">Reports</div></div>
     <div class="qtile" onclick="show('exams')"><div class="qi"><svg viewBox="0 0 24 24"><rect x="6" y="4" width="12" height="17" rx="2.5"/><path d="M9 4h6v3H9z"/><path d="M9 12h6M9 16h4"/></svg></div><div class="ql">Exams</div></div>
     <div class="qtile" onclick="show('timetable')"><div class="qi"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 8v4.5l3 2"/></svg></div><div class="ql">Timetable</div></div>
-    <div class="qtile" onclick="show('materials')"><div class="qi"><svg viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div><div class="ql">Materials</div></div>
+    <div class="qtile" onclick="show('materials')"><div class="qi"><svg viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div><div class="ql">Class materials</div></div>
   </div>
   <div class="row between mt20"><h2 style="font-size:17px;font-weight:800">Today's classes</h2><a class="accent" style="font-size:13px;font-weight:700" onclick="show('classes')">All</a></div>
   <div class="mt12">
@@ -1621,14 +1746,12 @@ exams:()=>`
   <button class="btn mt16" onclick="createExam()">+ Create exam</button>
   <div style="height:10px"></div>`,
 
-materials:()=>{const c=classes.find(x=>x.id===matCls),K=matCourse(),secs=secsOf(),its=itemsOf(),pub=its.filter(x=>x.st==='published').length,pct=avgDone(its,matCls)||0,open=matOpen();return `
-  <div class="apphead"><span class="lead"></span><div class="grow" style="min-width:0"><h2 class="screen-title">Course materials</h2><div class="sub">Preview what students see</div></div><div class="icon-btn" onclick="uploadMaterial()" aria-label="Add item"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></div></div>
+materials:()=>{const c=cls2(matCls);return `
+  <div class="apphead"><span class="lead"></span><div class="grow" style="min-width:0"><h2 class="screen-title">Class materials</h2><div class="sub">Shared with students &amp; parents</div></div><div class="icon-btn" onclick="openPost()" aria-label="Post to class"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></div></div>
   <div class="chip-scroll mt8">${classes.map(x=>`<div class="chip ${x.id===matCls?'active':''}" onclick="matPick('${x.id}')">${x.grp}</div>`).join('')}</div>
-  <div class="card mt12"><div class="row" style="gap:14px"><div class="cring" style="--p:${pct}"><b class="tnum">${pct}%</b></div><div class="grow" style="min-width:0"><div style="font-weight:800">${K.hdr} · ${c.grp}</div><div class="sub mt6">Average completion · ${c.students} students</div><div class="progress mt8"><i style="width:${pct}%"></i></div></div></div>
-    <div class="row mt12" style="gap:8px"><div class="stat"><div class="n tnum">${its.length}</div><div class="l">Items</div></div><div class="stat"><div class="n tnum">${pub}</div><div class="l">Published</div></div><div class="stat"><div class="n" style="font-size:15px">${MAT_UPDATED[matCls]}</div><div class="l">Last updated</div></div></div></div>
-  <div class="row between" style="margin:18px 4px 0"><div class="set-label" style="margin:0">Course content</div><span class="sub" style="font-size:11.5px"><bdi>${secs.length} sections</bdi> · <bdi>${its.length} items</bdi></span></div>
-  ${secs.map((sec,si)=>{const o=open.has(si),p=avgDone(sec.items,matCls);return `<div class="csec${o?' open':''}" data-sec="${si}"><button class="csec-h" onclick="toggleSec(${si})" aria-expanded="${o}"><div class="grow" style="min-width:0"><div class="csec-t" data-noi18n dir="auto">${hx(sec.n)}</div><div class="sub mt6">${sec.items.length?secMeta(sec):'No items yet'}</div></div><span class="csec-n tnum${p===100?' full':''}">${p==null?'—':p+'%'}</span><svg class="chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button><div class="csec-b" style="${o?'':'height:0px'}"><div class="csec-in">${sec.items.map(matRow).join('')}<button class="madd" onclick="addItemSheet(${si})"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg><span>Add item</span></button></div></div></div>`;}).join('')}
-  <button class="btn secondary mt16" onclick="addSectionSheet()"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg> Add section</button>
+  <button class="btn mt12" onclick="openPost()">${CM_CLIP} Post to class</button>
+  <div class="seg mt16">${[['lesson','By lesson'],['rev','Revision'],['tb','Textbooks']].map(([k,l])=>`<button class="${cmTab===k?'active':''}" onclick="cmPickTab('${k}')">${l}</button>`).join('')}</div>
+  <div class="mt8">${cmTab==='lesson'?cmByLesson():cmTab==='rev'?cmRevision():cmTextbooks()}</div>
   <div style="height:14px"></div>`;},
 
 reports:()=>{
@@ -1772,15 +1895,16 @@ lessonlog:()=>{const days=[...new Set(lessons.map(l=>l.d))].sort((a,b)=>b-a),mis
   <div class="apphead"><span class="lead"></span><div class="grow"><h2 class="screen-title">Lesson log</h2><div class="sub">Cahier de textes · 1st term</div></div><div class="icon-btn" onclick="logLesson()"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></div></div>
   ${miss?`<div class="card mt8" style="background:var(--danger-bg);border-color:color-mix(in srgb,var(--danger) 30%,transparent)"><div class="row"><div class="icon-btn" style="background:var(--surface);border:none;color:var(--danger)"><svg viewBox="0 0 24 24"><path d="M12 4 21 20H3z"/><path d="M12 10v4M12 17.5v.5"/></svg></div><div class="grow"><div style="font-weight:700">${miss} lesson${miss>1?'s':''} not logged</div><div class="sub mt6">Mrs. Nada Frem (coordinator) reviews the log every Friday</div></div></div></div>`:''}
   ${days.map(d=>`<div class="day-head"><span>${d===16?'Today · ':''}${fmtD(d)}</span><span>${inDays(d-16)==='today'?'':inDays(d-16)}</span></div>
-    ${lessons.filter(l=>l.d===d).sort((a,b)=>a.p.localeCompare(b.p)).map(l=>{const c=cls2(l.cls);return `
+    ${lessons.filter(l=>l.d===d).sort((a,b)=>a.p.localeCompare(b.p)).map(l=>{const c=cls2(l.cls),CL=cmLessonFor(l),nAtt=CL?CL.att.length:0;return `
     <div class="card mt8"><div class="row" style="align-items:flex-start">
       <div class="subj" style="width:40px;height:40px;font-size:12px;background:${SUBJ.M}">${l.p}</div>
-      <div class="grow"><div class="row between" style="align-items:flex-start;gap:8px"><div style="font-weight:800">${c.grp} · ${l.p}</div>${l.status==='missing'?tagHtml('bad','Missing'):tagHtml('ok','Logged')}</div>
+      <div class="grow"><div class="row between" style="align-items:flex-start;gap:8px"><div style="font-weight:800">${c.grp} · ${l.p}</div><div class="row" style="gap:6px;flex:0 0 auto">${nAtt?`<span class="tag a cm-clip">${CM_CLIP}${nAtt}</span>`:''}${l.status==='missing'?tagHtml('bad','Missing'):tagHtml('ok','Logged')}</div></div>
         <div class="accent auto-dir" style="font-weight:700;font-size:13.5px;margin-top:4px">${esc(l.ch)}</div>
         ${l.status==='missing'?`<button class="btn mt12" style="padding:11px;font-size:14px" onclick="logLesson(${l.id})">Log now</button>`:`
         <div class="sub mt8" style="font-size:12.5px;line-height:1.45"><b style="color:var(--text)">Covered:</b> ${esc(l.content)}</div>
         <div class="sub mt6" style="font-size:12.5px"><b style="color:var(--text)">Homework:</b> ${esc(l.hw||'—')}</div>
         ${l.rev?`<div class="mt8">${tagHtml('a','Reviewed by Mrs. Frem ✓')}</div>`:''}`}
+        ${cmLogAtt(l)}
       </div></div></div>`;}).join('')}`).join('')}
   <div style="height:10px"></div>`;},
 
@@ -2058,7 +2182,7 @@ function saveConduct(){const [cls,si]=document.getElementById('cd-stu').value.sp
   closeSheet();rebuild('conduct');if(current==='conduct')show('conduct');toast(notify?'Note saved · parent notified 📨':'Note saved ✓');}
 
 /* 4. lesson log */
-const LL_DAYS=[16,13,12,11,10,9];
+const LL_DAYS=[16,13,12,11,10,9,6];
 function logLesson(id){const l=id?lessons.find(x=>x.id===id):null,cls=l?l.cls:'m9b';llAddHw=false;
   openSheet(`<h2 style="font-size:20px;font-weight:800">${l?'Log lesson':'New log entry'}</h2><p class="sub mt8">Cahier de textes · visible to Mrs. Frem (coordinator)</p>
   <div class="field"><label>Class</label><select class="input" id="ll-cls" onchange="llChips()">${classes.map(c=>`<option value="${c.id}" ${c.id===cls?'selected':''}>${c.grp}</option>`).join('')}</select></div>

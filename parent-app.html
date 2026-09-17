@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <title>Al-Arz School · Parent — SKL prototype</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Sans+Arabic:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Sans+Arabic:wght@400;600;700&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
 <style>
   :root{
     --accent:#e8613d; --accent-2:#f0873a; --accent-soft:#fceae4;
@@ -269,34 +269,29 @@
   .lang-opt.on{color:var(--accent)}
   @media (max-width:500px){body{padding:0;display:block;background:#000;min-height:100dvh}.stage{gap:0;width:100%}.stage-title{display:none}.device{width:100%;height:100vh;height:100dvh;border-radius:0;padding:0;box-shadow:none}.device::before,.btn-side,.home-indicator{display:none}.bezel,.viewport{border-radius:0}}
   @media (max-width:500px) and (min-height:980px){.device{width:min(100vw,440px);height:952px;margin:0 auto;border-radius:66px;padding:5px}.device::before{display:block}.bezel,.viewport{border-radius:61px}.home-indicator{display:block}}
-  /* ---- course content (Udemy-style) ---- */
-  .cring{--p:0;width:58px;height:58px;border-radius:50%;flex:0 0 auto;display:grid;place-items:center;background:conic-gradient(var(--accent) calc(var(--p)*1%),var(--surface-3) 0)}
-  .cring::before{content:"";grid-area:1/1;width:46px;height:46px;border-radius:50%;background:var(--surface)}
-  .cring b{grid-area:1/1;position:relative;font-size:13px;font-weight:800}
-  .btn.cont{justify-content:flex-start;padding:14px 16px;font-size:14.5px;text-align:start}
-  .btn.cont svg{flex:0 0 auto;width:20px;height:20px;fill:#fff}
-  .btn.cont .ell{min-width:0}
-  .csec{background:var(--surface);border:1px solid var(--line);border-radius:16px;margin-top:10px;overflow:hidden;box-shadow:0 1px 2px rgba(16,24,40,.04),0 8px 24px -18px rgba(16,24,40,.25)}
-  :root[data-theme="dark"] .csec{box-shadow:none}
-  .csec-h{width:100%;display:flex;align-items:center;gap:10px;padding:13px 14px;background:transparent;border:none;color:var(--text);cursor:pointer;font:inherit;text-align:start;transition:background .2s}
-  .csec.open .csec-h{background:var(--surface-2)}
-  .csec-t{font-weight:800;font-size:14.5px;line-height:1.3}
-  .csec-n{font-size:11.5px;font-weight:800;color:var(--muted);background:var(--surface-3);padding:3px 8px;border-radius:999px;flex:0 0 auto}
-  .csec-n.full{background:var(--ok-bg);color:var(--ok)}
-  .csec-h .chev{width:18px;height:18px;stroke:var(--muted);fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;transition:transform .3s;flex:0 0 auto}
-  .csec.open .chev{transform:rotate(180deg)}
-  .csec-b{overflow:hidden;transition:height .32s cubic-bezier(.2,.8,.2,1)}
-  .csec-in{padding:0 14px 4px;border-top:1px solid var(--line)}
-  .citem{display:flex;align-items:center;gap:11px;padding:11px 0;border-bottom:1px solid var(--line);cursor:pointer}
-  .citem:last-child{border-bottom:none}
-  .citem:active{opacity:.75}
-  .citem-t{font-weight:600;font-size:13.5px;line-height:1.35}
-  .citem.done .citem-t{color:var(--muted)}
-  .citem.now .citem-t{color:var(--accent);font-weight:800}
-  .citem .sub{font-size:11.5px}
-  .cchk{width:22px;height:22px;border-radius:50%;border:2px solid var(--line);flex:0 0 auto;display:grid;place-items:center;color:#fff;transition:.15s;cursor:pointer}
-  .citem.done .cchk{background:var(--ok);border-color:var(--ok)}
-  .cchk svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:3.2;stroke-linecap:round;stroke-linejoin:round}
+  /* ---- class materials (by lesson · revision · textbooks) ---- */
+  .ml-card{padding:14px 14px 2px}
+  .ml-topic{font-weight:800;font-size:14.5px;line-height:1.3;margin-top:3px}
+  .ml-atts{margin-top:10px;border-top:1px solid var(--line)}
+  .mrow{display:flex;align-items:center;gap:11px;padding:11px 0;border-bottom:1px solid var(--line);cursor:pointer}
+  .mrow:last-child{border-bottom:none}
+  .mrow:active{opacity:.75}
+  .mrow-t{font-weight:600;font-size:13.5px;line-height:1.35;min-width:0}
+  .mrow .sub{font-size:11.5px}
+  .mnew{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:800;color:var(--accent);background:var(--accent-soft);padding:2px 7px 2px 6px;border-radius:999px;flex:0 0 auto;white-space:nowrap;vertical-align:1px}
+  .mnew::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--accent)}
+  .mhint,.moff{display:flex;align-items:center;gap:5px;font-size:11px;margin-top:4px;line-height:1.3}
+  .mhint{color:var(--faint)}
+  .moff{color:var(--ok);font-weight:700}
+  .mhint svg,.moff svg{width:13px;height:13px;flex:0 0 auto;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+  .ml-day{display:flex;align-items:center;gap:8px;margin:20px 4px 2px;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--faint)}
+  .ml-day.today{color:var(--accent)}
+  .ml-day::after{content:"";flex:1;height:1px;background:var(--line)}
+  .ml-miss{border-color:color-mix(in srgb,var(--danger) 30%,transparent)}
+  .ml-kind{font-size:10px;font-weight:800;padding:2px 7px;border-radius:999px;background:var(--surface-3);color:var(--muted);white-space:nowrap;flex:0 0 auto}
+  .ml-kind.paper{background:var(--warn-bg);color:var(--warn)}
+  .ml-empty{text-align:center;padding:26px 16px}
+  .icon-btn.cdl.off{background:var(--ok-bg);border-color:transparent;color:var(--ok)}
   .icon-btn.cdl{width:34px;height:34px;border-radius:10px}
   .icon-btn.cdl svg{width:17px;height:17px;stroke-linecap:round;stroke-linejoin:round}
   /* viewer */
@@ -423,23 +418,15 @@
   .vp-end-t{font-weight:800;font-size:16px}
   .btn.sm{width:auto;padding:9px 14px;font-size:13px;box-shadow:none}
   .vp-info{margin:12px 14px 0}
-  /* quiz */
-  .qz-o{display:block;width:100%;text-align:start;padding:11px 12px;border-radius:12px;border:1.5px solid var(--line);background:var(--surface);color:var(--text);font:inherit;font-size:13.5px;font-weight:600;margin-top:8px;cursor:pointer;transition:.15s}
-  .qz-o.sel{border-color:var(--accent);background:var(--accent-soft)}
-  .qz-o.ok{border-color:var(--ok);background:var(--ok-bg);color:var(--ok)}
-  .qz-o.bad{border-color:var(--danger);background:var(--danger-bg);color:var(--danger)}
-  /* parent: read-only course progress in the viewer */
-  .vfoot.vfoot-p{flex-direction:column;gap:9px}
-  .vrow{display:flex;gap:8px}
-  .vrow .btn{flex:1}
-  .vstat{display:flex;align-items:center;gap:7px;font-size:12.5px;font-weight:700;color:var(--muted);line-height:1.35}
-  .vstat.ok{color:var(--ok)}
-  .vstat svg{flex:0 0 auto}
-  .vdot{width:8px;height:8px;border-radius:50%;background:var(--warn);flex:0 0 auto}
-  .btn.secondary.sent{background:var(--ok-bg);color:var(--ok)}
-  .cchk.ro{cursor:default}
-  .qz-o[disabled]{cursor:default}
-  .qz-o[disabled]:not(.ok){color:var(--text)}
+  /* board photo viewer */
+  .bd-wrap{flex:1;min-height:0;display:flex;flex-direction:column;background:#23262b}
+  .bd-scroll{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;cursor:grab;touch-action:none;scrollbar-width:none;display:flex;user-select:none;-webkit-user-select:none}
+  .bd-scroll::-webkit-scrollbar{display:none}
+  .bd-scroll.drag{cursor:grabbing}
+  .bd-canvas{margin:auto;padding:14px;flex:0 0 auto;box-sizing:border-box}
+  .bd-canvas svg{display:block;width:100%;height:auto;border-radius:3px;box-shadow:0 12px 34px rgba(0,0,0,.55);pointer-events:none}
+  .bd-cap{display:flex;align-items:center;gap:8px;padding:9px 14px;background:#2a2e34;color:#cbd5e1;font-size:12px;font-weight:600;flex:0 0 auto;line-height:1.35}
+  .bd-cap svg{width:15px;height:15px;flex:0 0 auto;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
   .viewer .btn,.viewer .icon-btn{transition-property:transform,background-color,color,box-shadow,opacity}
 </style>
 </head>
@@ -458,7 +445,7 @@
       <div class="app">
         <div class="screens" id="screens"></div>
         <div class="toast" id="toast"></div>
-        <div class="viewer" id="viewer" aria-hidden="true"><div class="vbar"><div class="icon-btn" onclick="closeViewer()" aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></div><div class="grow" style="min-width:0"><div class="vtitle ell" id="v-title" data-noi18n dir="auto"></div><div class="sub" id="v-sub"></div></div><div class="icon-btn" id="v-dl" onclick="downloadItem(vw.id)" aria-label="Download"><svg viewBox="0 0 24 24"><path d="M12 4v11M7 10.5l5 5 5-5M5 20h14"/></svg></div></div><div class="vbody" id="v-body"></div><div class="vfoot vfoot-p"><div id="v-stat"></div><div class="vrow"><button class="btn secondary" id="v-remind" onclick="remindChild(vw.id)"></button><button class="btn" id="v-next" onclick="nextItem()"></button></div></div></div>
+        <div class="viewer" id="viewer" aria-hidden="true"><div class="vbar"><div class="icon-btn" onclick="closeViewer()" aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></div><div class="grow" style="min-width:0"><div class="vtitle ell" id="v-title" data-noi18n dir="auto"></div><div class="sub" id="v-sub"></div></div><div class="icon-btn" id="v-dl" onclick="downloadItem(vw.id)" aria-label="Download"><svg viewBox="0 0 24 24"><path d="M12 4v11M7 10.5l5 5 5-5M5 20h14"/></svg></div></div><div class="vbody" id="v-body"></div><div class="vfoot"><button class="btn secondary" id="v-save" onclick="downloadItem(vw.id)"></button><button class="btn" id="v-next" onclick="nextItem()"></button></div></div>
         <div class="act-wrap" id="actsheet" data-noi18n><div class="act-back" onclick="closeLangActions()"></div><div class="act" id="act-body"></div></div>
         <div class="sheet-wrap" id="sheet"><div class="sheet-back" data-close-sheet></div><div class="sheet"><div class="grab"></div><div id="sheet-body"></div></div></div>
         <div class="drawer-wrap" id="drawer">
@@ -493,13 +480,29 @@ const isRTL=()=>uiLang==='ar';
 
 /* 'English source': ['Français', 'العربية'] */
 const D={
-/* courses & materials viewer */
-"Courses":["Cours","المواد"],
-"Course teacher":["Enseignant du cours","أستاذ المادة"],
-"About this course":["À propos du cours","عن المادة"],
-"Course content":["Contenu du cours","محتوى المقرر"],
-"Next item":["Élément suivant","العنصر التالي"],
-"Back to course":["Retour au cours","العودة إلى المقرر"],
+/* class materials & viewers */
+"Class materials":["Supports de cours","المواد التعليمية"],
+"By lesson":["Par séance","حسب الحصة"],
+"Revision":["Révisions","مراجعة"],
+"Textbooks":["Manuels","الكتب المدرسية"],
+"Past paper":["Annale","امتحان سابق"],
+"Past papers":["Annales","امتحانات سابقة"],
+"Summary sheet":["Fiche de synthèse","ملخّص"],
+"Board photo":["Photo du tableau","صورة اللوح"],
+"Saved offline":["Disponible hors ligne","محفوظ للاستخدام بدون إنترنت"],
+"Save offline":["Enregistrer hors ligne","حفظ للاستخدام بدون إنترنت"],
+"New":["Nouveau","جديد"],
+"Next attachment":["Pièce suivante","المرفق التالي"],
+"Back to materials":["Retour aux supports","العودة إلى المواد"],
+"best on Wi-Fi":["de préférence en Wi-Fi","يُفضّل عبر Wi-Fi"],
+"Brevet & 1st term exams":["Brevet et examens du 1er trimestre","الشهادة المتوسطة وامتحانات الفصل الأول"],
+"1st term exams":["Examens du 1er trimestre","امتحانات الفصل الأول"],
+"Official CRDP textbooks — sample pages":["Manuels officiels du CRDP — extraits","كتب المركز التربوي الرسمية — صفحات نموذجية"],
+"No materials for this subject yet":["Pas encore de supports pour cette matière","لا مواد لهذه المادة بعد"],
+"Drag to move":["Glisser pour déplacer","اسحب للتحريك"],
+"The teacher's board, photographed after class":["Le tableau de l’enseignant, photographié après le cours","لوح المعلّم، مصوَّر بعد الحصة"],
+"Absent that day":["Absent ce jour-là","غائب في ذلك اليوم"],
+"1 page":["1 page","صفحة واحدة"],
 "Download":["Télécharger","تنزيل"],
 "Downloaded ✓":["Téléchargé ✓","تم التنزيل ✓"],
 "Downloaded":["Téléchargé","تم التنزيل"],
@@ -523,20 +526,11 @@ const D={
 "Forward 10 seconds":["Avancer de 10 secondes","تقديم 10 ثوانٍ"],
 "Condensed demo lesson":["Leçon démo condensée","درس تجريبي مختصر"],
 "End of lesson":["Fin de la leçon","انتهى الدرس"],
-"All items completed":["Tous les éléments sont terminés","اكتملت جميع العناصر"],
 "External link":["Lien externe","رابط خارجي"],
 "URL":["URL","الرابط"],
 "Links open in your browser. The school checks every link before sharing it.":["Les liens s’ouvrent dans votre navigateur. L’école vérifie chaque lien avant de le partager.","تُفتح الروابط في متصفحك. تتحقّق المدرسة من كل رابط قبل مشاركته."],
 "Open link":["Ouvrir le lien","فتح الرابط"],
 "Opening in browser…":["Ouverture dans le navigateur…","جارٍ الفتح في المتصفح…"],
-"Not completed yet":["Pas encore terminé","لم يُنجَز بعد"],
-"Completed":["Terminé","مكتمل"],
-"Reminder sent":["Rappel envoyé","تم إرسال التذكير"],
-"Last activity":["Dernière activité","آخر نشاط"],
-"No activity yet":["Aucune activité pour l’instant","لا نشاط بعد"],
-"View only":["Consultation seule","للاطلاع فقط"],
-"Questions":["Questions","الأسئلة"],
-"Progress comes from the student app. Viewing materials here doesn't change it.":["La progression provient de l’application élève. Consulter les supports ici ne la modifie pas.","يأتي التقدّم من تطبيق التلميذ، والاطلاع على المواد هنا لا يغيّره."],
 /* shell, login, navigation */
 "Al-Arz School — Parent app":["École Al-Arz — App parents","مدرسة الأرز — تطبيق الأهل"],
 "Lebanese curriculum":["Programme libanais","المنهج اللبناني"],
@@ -1019,23 +1013,16 @@ const D={
 /* sentence patterns: [RegExp, fr, ar] — {n} placeholders are translated recursively */
 const arDays=n=>n==1?'يوم واحد':n==2?'يومان':n<=10?n+' أيام':n+' يوماً';
 const P=[
-  /* courses & materials viewer */
-  [/^(\d+) items$/,m=>m[1]+" éléments","{1} عناصر"],
-  [/^(\d+) of (\d+) items completed$/,"{1} éléments terminés sur {2}","أُنجز {1} من {2} عنصراً"],
-  [/^(\d+) of (\d+) items$/,"{1} éléments sur {2}","{1} من {2} عناصر"],
-  [/^(\d+) sections?$/,"{1} sections","{1} أقسام"],
-  [/^1 item$/,"1 élément","عنصر واحد"],
+  /* class materials & viewers */
   [/^(\d+) pages$/,"{1} pages","{1} صفحات"],
   [/^(\d+) slides$/,"{1} diapos","{1} شرائح"],
-  [/^(\d+) questions$/,"{1} questions","{1} أسئلة"],
   [/^(\d+) min$/,"{1} min","{1} دقيقة"],
   [/^(\d+) subjects$/,"{1} matières","{1} مواد"],
-  [/^(\d+)% complete$/,"{1} % terminé","{1}% مكتمل"],
-  [/^(\w+)'s progress$/,"Progression de {1}","تقدّم {1}"],
-  [/^(\w+) completed this on (.+)$/,"{1} a terminé cet élément le {2}",m=>(m[1]==='Maya'?'أنهت ':'أنهى ')+m[1]+' هذا العنصر في '+trCore(m[2])],
-  [/^Remind (\w+)$/,"Relancer {1}","تذكير {1}"],
-  [/^Reminder sent to (\w+)$/,"Rappel envoyé à {1}","تم إرسال تذكير إلى {1}"],
-  [/^Answers are shown once (\w+) completes the quiz$/,"Les réponses s’affichent une fois le quiz terminé par {1}",m=>'تظهر الإجابات بعد أن '+(m[1]==='Maya'?'تُنهي ':'يُنهي ')+m[1]+' الاختبار'],
+  [/^What (\w+) covered in class, with the teacher's notes and files$/,"Ce que {1} a vu en classe, avec les notes et fichiers de l’enseignant",m=>'ما '+(m[1]==='Maya'?'درسته ':'درسه ')+m[1]+' في الصف، مع ملاحظات المعلّم وملفاته'],
+  [/^This week: (\d+) lessons$/,"Cette semaine : {1} séances","هذا الأسبوع: {1} حصص"],
+  [/^(\d+) new materials?$/,m=>m[1]+(+m[1]>1?' nouveaux supports':' nouveau support'),"مواد جديدة: {1}"],
+  [/^1st term exams start (.+)$/,"Début des examens du 1er trimestre : {1}","تبدأ امتحانات الفصل الأول {1}"],
+  [/^Shared by (.+)$/,"Partagé par {1}","مشاركة من {1}"],
   [/^(1st term|2nd term|3rd term) (\d{4}–\d{4})$/,"{1} {2}","{1} {2}"],
   [/^Hello, (.+)$/,"Bonjour, {1}","مرحباً، {1}"],
   [/^(\d+) children$/,"{1} enfants",m=>+m[1]===2?'ولدان':m[1]+' أولاد'],
@@ -1228,7 +1215,7 @@ function trDom(root){
   }
   if(isRTL()){
     nodes.forEach(x=>{
-      const p=x.parentElement;if(!p||p.closest('.ltr,textarea,script,style,.statusbar'))return;
+      const p=x.parentElement;if(!p||p.closest('.ltr,textarea,script,style,.statusbar,svg'))return;
       const v=x.nodeValue;
       /* authored English sentences: isolate so punctuation stays in place */
       if(/(?:[A-Za-z’']{2,}[^A-Za-z؀-ۿ]+){2,}[A-Za-z]{2,}/.test(v)&&!/[؀-ۿ]/.test(v)){const sp=document.createElement('span');sp.className='ltr';sp.textContent=v;p.replaceChild(sp,x);return;}
@@ -1545,7 +1532,7 @@ const TT_SUBJ={
   1:{M:['Mathematics','Ms. Nassif','12'],Ar:['Arabic','Ms. Hamdan','12'],Fr:['French','Ms. Abi Nader','12'],En:['English','Ms. Zein','14'],Bi:['Sciences','Dr. Rahal','Lab 3'],PE:['Physical Education','Mr. Nehme','Gym'],Art:['Art','Ms. Sfeir','Art room']},
 };
 const WEEK={
-  0:{Mon:['Ar','M','En','Bi','Fr','Hi','PE'],Tue:['M','Ph','Fr','Ar','En','Hi','Bi'],Wed:['Fr','M','Ph','En','Ar','Hi','Bi'],Thu:['Ar','En','M','Ph','Fr','Bi','PE'],Fri:['M','Fr','Ar','Hi','En','Ph','Ar']},
+  0:{Mon:['Ar','M','En','Bi','Fr','Hi','PE'],Tue:['Ph','M','Fr','Ar','En','Hi','Bi'],Wed:['Fr','Ph','En','Bi','M','Hi','Ar'],Thu:['Ar','En','M','Fr','Ph','Bi','PE'],Fri:['Fr','M','Ar','Hi','En','Ph','Bi']},
   1:{Mon:['Fr','M','Ar','En','Bi','PE'],Tue:['Ar','Fr','M','Art','En','Bi'],Wed:['M','Ar','Fr','En','PE','Art'],Thu:['Fr','En','M','Ar','Bi','Fr'],Fri:['Ar','M','Fr','Bi','En','PE']},
 };
 let ttDay='Mon';
@@ -1591,24 +1578,32 @@ let profiles={
 
 /* SCREENS */
 const CEDAR_SVG='<svg viewBox="0 0 24 24"><path d="M12 2.5 7.5 8h2.2L6 12.5h2.8L4.5 17.5H11v4h2v-4h6.5l-4.3-5h2.8L14.3 8h2.2z" fill="currentColor"/></svg>';
-/* Omar · EB9 B — identical course list to the student app */
-const OMAR_COURSES=[
-  {c:'M',n:'Mathematics',col:SUBJ.M,tch:'Ms. Dana Khoury',room:'204',desc:'EB9 Lebanese curriculum: real numbers & radicals, algebraic calculus, Thales and Pythagoras, trigonometry, linear functions and statistics — preparing for the Brevet.',mats:[{t:'pdf',n:'Mathematics EB9 — CRDP textbook'},{t:'slides',n:'Radicals — summary notes'},{t:'video',n:'Thales’ theorem explained (14:20)'}]},
-  {c:'Ar',n:'Arabic',col:SUBJ.Ar,tch:'Mr. Bilal Itani',room:'105',desc:'Reading, grammar (قواعد) and composition (تعبير). Set text this term: الأيام by Taha Hussein.',mats:[{t:'pdf',n:'الأيام — study guide'},{t:'pdf',n:'Grammar rules summary'}]},
-  {c:'Fr',n:'French',col:SUBJ.Fr,tch:'Mr. Sami Daccache',room:'110',desc:'Compréhension, grammaire et production écrite. Œuvre étudiée : Le Petit Prince.',mats:[{t:'pdf',n:'Le Petit Prince — fiche de lecture'},{t:'slides',n:'Le discours rapporté'}]},
-  {c:'En',n:'English',col:SUBJ.En,tch:'Ms. Lara Zein',room:'112',desc:'Reading, comprehension and essay writing. Set text this term: The Prophet by Khalil Gibran.',mats:[{t:'pdf',n:'The Prophet — study guide'},{t:'pdf',n:'Essay structure handout'}]},
-  {c:'Ph',n:'Physics & Chemistry',col:SUBJ.Ph,tch:'Mr. Karim Aoun',room:'Lab 1',desc:'Electricity, mechanics and the chemistry of matter, with practical lab sessions.',mats:[{t:'pdf',n:'Formula sheet'},{t:'video',n:'Ohm’s law demo (09:41)'}]},
-  {c:'Bi',n:'Life & Earth Sciences',col:SUBJ.Bi,tch:'Dr. Hana Rahal',room:'Lab 2',desc:'SVT — the cell, the nervous system, genetics and ecology, with weekly lab sessions.',mats:[{t:'slides',n:'The neuron'},{t:'video',n:'Reflex arc explained (11:30)'},{t:'pdf',n:'Lab safety rules'}]},
-  {c:'Hi',n:'History, Geography & Civics',col:SUBJ.Hi,tch:'Ms. Rita Salameh',room:'108',desc:'Lebanon under the Mandate and independence (1943), the geography of Lebanon, and civic education.',mats:[{t:'pdf',n:'Timeline — Independence of Lebanon'},{t:'slides',n:'Lebanese state institutions'}]},
-  {c:'PE',n:'Physical Education',col:SUBJ.PE,tch:'Mr. Georges Nehme',room:'Gym',desc:'Fitness, athletics and team sports.',mats:[{t:'pdf',n:'1st term fixtures'}]},
-];
-
-/* ================= COURSE CONTENT · Udemy-style sections, viewers (PDF · slides · video), completion ================= */
-const MAT_TYPES={pdf:{l:'PDF',col:'#0ea5e9'},slides:{l:'Slides',col:'#f59e0b'},video:{l:'Video',col:'#ef4444'},link:{l:'Link',col:'#8b5cf6'},quiz:{l:'Quiz',col:'#10b981'}};
-const MAT_ICO={pdf:'<path d="M7 3h8l4 4v14H7z"/><path d="M14 3v5h5"/><path d="M9.5 13h5M9.5 16.5h3.5"/>',slides:'<rect x="3" y="4" width="18" height="12.5" rx="2"/><path d="M12 16.5V20M8 20.5h8"/><path d="M7.5 12.5l3-3 2.5 2 3.5-3.5"/>',video:'<rect x="3" y="5" width="18" height="14" rx="3"/><path d="M10 9l5 3-5 3z"/>',link:'<path d="M10 14a4.5 4.5 0 0 0 6.4 0l3-3a4.5 4.5 0 0 0-6.4-6.4l-1 1"/><path d="M14 10a4.5 4.5 0 0 0-6.4 0l-3 3a4.5 4.5 0 0 0 6.4 6.4l1-1"/>',quiz:'<circle cx="12" cy="12" r="9"/><path d="M9.6 9.4a2.5 2.5 0 1 1 3.4 2.3c-.7.3-1 .8-1 1.5v.4"/><circle cx="12" cy="16.9" r=".6" fill="currentColor" stroke="none"/>'};
+/* ================= CLASS MATERIALS · what the child covered in class (read-only for parents) ================= */
+/* subjects: code, name, colour, teacher */
+const SUBJECTS_BY_KID={
+  0:[
+    {c:'M',n:'Mathematics',col:SUBJ.M,tch:'Ms. Dana Khoury'},
+    {c:'Ar',n:'Arabic',col:SUBJ.Ar,tch:'Mr. Bilal Itani'},
+    {c:'Fr',n:'French',col:SUBJ.Fr,tch:'Mr. Sami Daccache'},
+    {c:'En',n:'English',col:SUBJ.En,tch:'Ms. Lara Zein'},
+    {c:'Ph',n:'Physics & Chemistry',col:SUBJ.Ph,tch:'Mr. Karim Aoun'},
+    {c:'Bi',n:'Life & Earth Sciences',col:SUBJ.Bi,tch:'Dr. Hana Rahal'},
+    {c:'Hi',n:'History, Geography & Civics',col:SUBJ.Hi,tch:'Ms. Rita Salameh'},
+  ],
+  1:[
+    {c:'M6',b:'M',n:'Mathematics',col:SUBJ.M,tch:'Ms. Nassif'},
+    {c:'Ar6',b:'Ar',n:'Arabic',col:SUBJ.Ar,tch:'Ms. Hamdan'},
+    {c:'Fr6',b:'Fr',n:'French',col:SUBJ.Fr,tch:'Ms. Abi Nader'},
+    {c:'En6',b:'En',n:'English',col:SUBJ.En,tch:'Ms. Lara Zein'},
+    {c:'Sc6',b:'Sc',n:'Sciences',col:SUBJ.Bi,tch:'Dr. Hana Rahal'},
+  ],
+};
+const SUBJECTS={};Object.values(SUBJECTS_BY_KID).flat().forEach(x=>SUBJECTS[x.c]=x);
+const COURSE_HDR={M:'Mathematics EB9',Ar:'اللغة العربية EB9',Fr:'Français EB9',En:'English EB9',Ph:'Physics & Chemistry EB9',Bi:'Life & Earth Sciences EB9',Hi:'History, Geography & Civics EB9',M6:'Mathematics EB6',Ar6:'اللغة العربية EB6',Fr6:'Français EB6',En6:'English EB6',Sc6:'Sciences EB6'};
+const MAT_TYPES={pdf:{l:'PDF',col:'#0ea5e9'},slides:{l:'Slides',col:'#f59e0b'},video:{l:'Video',col:'#ef4444'},link:{l:'Link',col:'#8b5cf6'},board:{l:'Board photo',col:'#16a34a'}};
+const MAT_ICO={pdf:'<path d="M7 3h8l4 4v14H7z"/><path d="M14 3v5h5"/><path d="M9.5 13h5M9.5 16.5h3.5"/>',slides:'<rect x="3" y="4" width="18" height="12.5" rx="2"/><path d="M12 16.5V20M8 20.5h8"/><path d="M7.5 12.5l3-3 2.5 2 3.5-3.5"/>',video:'<rect x="3" y="5" width="18" height="14" rx="3"/><path d="M10 9l5 3-5 3z"/>',link:'<path d="M10 14a4.5 4.5 0 0 0 6.4 0l3-3a4.5 4.5 0 0 0-6.4-6.4l-1 1"/><path d="M14 10a4.5 4.5 0 0 0-6.4 0l-3 3a4.5 4.5 0 0 0 6.4 6.4l1-1"/>',board:'<rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M8 20l2-4M16 20l-2-4"/><path d="M6.5 8.5l3 0M6.5 11.5h6M14.5 8.5l3 3"/>'};
 function matIco(t){return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">${MAT_ICO[t]||MAT_ICO.pdf}</svg>`;}
 function hx(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
-const COURSE_HDR={M:'Mathematics EB9',Ar:'اللغة العربية EB9',Fr:'Français EB9',En:'English EB9',Ph:'Physics & Chemistry EB9',Bi:'Life & Earth Sciences EB9',Hi:'History, Geography & Civics EB9',PE:'Physical Education EB9'};
 const DOC_L={
   en:{obj:'Objectives',def:'Definition',defs:'Key notions',prop:'Key formulas',ex:'Worked example',exs:'Exercises',rem:'Remember',sum:'Summary',q:'Quick question'},
   fr:{obj:'Objectifs',def:'Définition',defs:'Notions clés',prop:'À retenir',ex:'Exemple commenté',exs:'Exercices',rem:'L’essentiel',sum:'Synthèse',q:'Question rapide'},
@@ -1741,121 +1736,6 @@ const TOPICS={
     examples:[{title:'10-minute warm-up routine',steps:['2 min light jogging','Dynamic stretches for legs','Arm circles and lunges','3 short accelerations']}],
     exercises:['Plan your own warm-up.','Explain the rules for travelling in basketball.','Record your 1 km time each week.']},
 };
-
-/* course sections (chapters) · ids are unique across courses */
-const COURSE_SECS={
-  M:[
-    {n:'Ch.1 Real numbers & radicals',items:[
-      {id:'m1',t:'pdf',n:'Mathematics EB9 — CRDP textbook',topic:'radicals',pages:12,size:'2.4 MB',textbook:1},
-      {id:'m2',t:'video',n:'Radicals — introduction',topic:'radicals',dur:'08:35'},
-      {id:'m3',t:'slides',n:'Radicals — summary notes',topic:'radicals',slides:14},
-      {id:'m4',t:'quiz',n:'Quick check — radicals',topic:'radicals'}]},
-    {n:'Ch.2 Algebraic calculus',items:[
-      {id:'m5',t:'video',n:'Remarkable identities',topic:'identities',dur:'10:12'},
-      {id:'m6',t:'pdf',n:'Factorisation — worked examples',topic:'identities',pages:6,size:'1.1 MB'},
-      {id:'m7',t:'slides',n:'Expanding & factorising',topic:'identities',slides:10},
-      {id:'m8',t:'link',n:'CRDP digital resources — algebra',url:'https://www.crdp.org'}]},
-    {n:'Ch.3 Thales’ theorem',items:[
-      {id:'m9',t:'video',n:'Thales’ theorem explained (14:20)',topic:'thales',dur:'14:20',video:'thales'},
-      {id:'m10',t:'slides',n:'Thales — converse & applications',topic:'thales',slides:12},
-      {id:'m11',t:'pdf',n:'Worksheet — Thales’ theorem',topic:'thales',pages:4,size:'640 KB'},
-      {id:'m12',t:'quiz',n:'Quick check — Thales',topic:'thales'},
-      {id:'m13',t:'link',n:'GeoGebra — Thales construction',url:'https://www.geogebra.org/geometry'}]},
-    {n:'Ch.4 Pythagoras & trigonometry',items:[
-      {id:'m14',t:'video',n:'Pythagoras’ theorem',topic:'pythagoras',dur:'09:48',video:'pythagoras'},
-      {id:'m15',t:'slides',n:'Trigonometric ratios',topic:'trig',slides:15},
-      {id:'m16',t:'pdf',n:'Trigonometry formula sheet',topic:'trig',pages:2,size:'310 KB'},
-      {id:'m17',t:'video',n:'Solving right triangles',topic:'trig',dur:'12:05'},
-      {id:'m18',t:'quiz',n:'Chapter test — trigonometry',topic:'trig'}]},
-  ],
-  Ar:[
-    {n:'الوحدة الأولى — الأيام لطه حسين',items:[
-      {id:'ar1',t:'pdf',n:'الأيام — study guide',topic:'ayyam',pages:8,size:'1.3 MB'},
-      {id:'ar2',t:'slides',n:'طه حسين: حياته وأدبه',topic:'ayyam',slides:9},
-      {id:'ar3',t:'video',n:'قراءة وتحليل: الفصل الأول',topic:'ayyam',dur:'07:50'}]},
-    {n:'الوحدة الثانية — القواعد',items:[
-      {id:'ar4',t:'pdf',n:'Grammar rules summary',topic:'qawaed',pages:6,size:'820 KB'},
-      {id:'ar5',t:'quiz',n:'اختبار قصير — كان وأخواتها',topic:'qawaed'}]},
-  ],
-  Fr:[
-    {n:'Séquence 1 — Le Petit Prince',items:[
-      {id:'fr1',t:'pdf',n:'Le Petit Prince — fiche de lecture',topic:'petitprince',pages:8,size:'1.6 MB'},
-      {id:'fr2',t:'video',n:'Saint-Exupéry et Le Petit Prince',topic:'petitprince',dur:'06:45'},
-      {id:'fr3',t:'quiz',n:'Quiz — chapitres 1 à 5',topic:'petitprince'}]},
-    {n:'Séquence 2 — Le discours rapporté',items:[
-      {id:'fr4',t:'slides',n:'Le discours rapporté',topic:'discours',slides:10},
-      {id:'fr5',t:'pdf',n:'Exercices — discours indirect',topic:'discours',pages:4,size:'540 KB'}]},
-  ],
-  En:[
-    {n:'Unit 1 — The Prophet',items:[
-      {id:'en1',t:'pdf',n:'The Prophet — study guide',topic:'prophet',pages:10,size:'1.8 MB'},
-      {id:'en2',t:'video',n:'Khalil Gibran: life and legacy',topic:'prophet',dur:'08:10'},
-      {id:'en3',t:'link',n:'Gibran Museum, Bsharri',url:'https://www.gibrankhalilgibran.org'}]},
-    {n:'Unit 2 — Essay writing',items:[
-      {id:'en4',t:'pdf',n:'Essay structure handout',topic:'essay',pages:3,size:'420 KB'},
-      {id:'en5',t:'slides',n:'Writing a strong thesis',topic:'essay',slides:8}]},
-  ],
-  Ph:[
-    {n:'Ch.1 Electric circuits',items:[
-      {id:'ph1',t:'pdf',n:'Formula sheet',topic:'ohm',pages:2,size:'290 KB'},
-      {id:'ph2',t:'video',n:'Ohm’s law demo (09:41)',topic:'ohm',dur:'09:41'},
-      {id:'ph3',t:'slides',n:'Series and parallel circuits',topic:'ohm',slides:11}]},
-    {n:'Ch.2 Atoms, ions & molecules',items:[
-      {id:'ph4',t:'slides',n:'Atoms, ions and molecules',topic:'matter',slides:9},
-      {id:'ph5',t:'quiz',n:'Quick check — atoms',topic:'matter'},
-      {id:'ph6',t:'video',n:'Measuring density in the lab',topic:'matter',dur:'05:30'}]},
-  ],
-  Bi:[
-    {n:'Ch.1 The nervous system',items:[
-      {id:'bi1',t:'slides',n:'The neuron',topic:'neuron',slides:12},
-      {id:'bi2',t:'video',n:'Reflex arc explained (11:30)',topic:'reflex',dur:'11:30'},
-      {id:'bi3',t:'pdf',n:'Worksheet — the reflex arc',topic:'reflex',pages:4,size:'700 KB'}]},
-    {n:'Ch.2 Genetics',items:[
-      {id:'bi4',t:'pdf',n:'Chromosomes & DNA — course notes',topic:'genetics',pages:8,size:'1.5 MB'},
-      {id:'bi5',t:'quiz',n:'Quick check — genetics',topic:'genetics'}]},
-    {n:'Lab sessions',items:[
-      {id:'bi6',t:'pdf',n:'Lab safety rules',topic:'labsafety',pages:2,size:'250 KB'}]},
-  ],
-  Hi:[
-    {n:'History — Independence of Lebanon',items:[
-      {id:'hi1',t:'pdf',n:'Timeline — Independence of Lebanon',topic:'independence',pages:4,size:'900 KB'},
-      {id:'hi2',t:'video',n:'22 November 1943',topic:'independence',dur:'07:15'},
-      {id:'hi3',t:'link',n:'Lebanese Parliament — official site',url:'https://www.lp.gov.lb'}]},
-    {n:'Civics — State institutions',items:[
-      {id:'hi4',t:'slides',n:'Lebanese state institutions',topic:'institutions',slides:10},
-      {id:'hi5',t:'quiz',n:'Quick check — institutions',topic:'institutions'}]},
-    {n:'Geography — Regions of Lebanon',items:[
-      {id:'hi6',t:'pdf',n:'Map pack — regions of Lebanon',topic:'geography',pages:3,size:'2.1 MB'},
-      {id:'hi7',t:'slides',n:'Relief and climate',topic:'geography',slides:8}]},
-  ],
-  PE:[
-    {n:'Term 1 — Athletics & team sports',items:[
-      {id:'pe1',t:'pdf',n:'1st term fixtures',topic:'pe',pages:2,size:'180 KB'},
-      {id:'pe2',t:'video',n:'Warm-up routine',topic:'pe',dur:'04:20'},
-      {id:'pe3',t:'slides',n:'Basketball rules — basics',topic:'pe',slides:7}]},
-  ],
-};
-
-const QUIZZES={
-  m4:[{q:'√50 simplifies to…',a:['2√5','5√2','25√2','10√5'],c:1},{q:'(√7)² = …',a:['7','49','√14','14'],c:0},{q:'1/√2 with a rational denominator is…',a:['2/√2','√2','√2/2','1/2'],c:2}],
-  m12:[{q:'(MN) // (BC), AM = 2, AB = 6 and AN = 3. Then AC = …',a:['4','9','6','12'],c:1},{q:'To apply Thales’ theorem we need…',a:['(MN) ⊥ (BC)','AB = AC','(MN) // (BC)','a right angle'],c:2},{q:'The converse of Thales’ theorem is used to prove that…',a:['two lines are parallel','a triangle is right-angled','two angles are equal','a length is maximal'],c:0}],
-  m18:[{q:'In a right triangle, the hypotenuse is…',a:['the shortest side','the side opposite the right angle','any side','the height'],c:1},{q:'cos B = …',a:['opposite / hypotenuse','opposite / adjacent','adjacent / hypotenuse','hypotenuse / adjacent'],c:2},{q:'Right angle at A, AB = 6 and AC = 8. BC = …',a:['10','14','48','√14'],c:0}],
-  ar5:[{q:'«كان» فعل ماضٍ…',a:['تام','ناقص','مبني للمجهول'],c:1},{q:'في جملة «كان الجوُّ صافياً»، «صافياً» هو…',a:['اسم كان','خبر كان منصوب','مفعول به'],c:1},{q:'من أخوات «كان»:',a:['إنّ','ظنّ','أصبح'],c:2}],
-  fr3:[{q:'D’où vient le petit prince ?',a:['De la Lune','De l’astéroïde B 612','Du Sahara'],c:1},{q:'Quel est le métier du narrateur ?',a:['Aviateur','Géographe','Allumeur de réverbères'],c:0},{q:'Qui dit : « On ne voit bien qu’avec le cœur » ?',a:['La rose','Le serpent','Le renard'],c:2}],
-  ph5:[{q:'An atom is electrically…',a:['positive','neutral','negative'],c:1},{q:'Na⁺ is formed when sodium…',a:['gains an electron','loses an electron','loses a proton'],c:1},{q:'Density is calculated with…',a:['ρ = m / V','ρ = V / m','ρ = m × V'],c:0}],
-  bi5:[{q:'A human body cell contains…',a:['23 chromosomes','46 chromosomes','92 chromosomes'],c:1},{q:'A gene is…',a:['a portion of DNA','a type of cell','a protein'],c:0},{q:'Pair 23 in a boy is…',a:['XX','XY','YY'],c:1}],
-  hi5:[{q:'Legislative power in Lebanon belongs to…',a:['the Parliament','the Council of Ministers','the army'],c:0},{q:'The President of the Republic is elected by…',a:['the people','the Parliament','the government'],c:1},{q:'Lebanon’s Independence Day is on…',a:['22 November','1 August','25 May'],c:0}],
-};
-
-/* Maya · EB6 A — simpler course content (read-only for the parent) */
-const MAYA_COURSES=[
-  {c:'M6',b:'M',n:'Mathematics',col:SUBJ.M,tch:'Ms. Nassif',room:'012',desc:'EB6 Lebanese curriculum: fractions and decimals, perimeter and area, and problem solving.'},
-  {c:'Ar6',b:'Ar',n:'Arabic',col:SUBJ.Ar,tch:'Ms. Hamdan',room:'014',desc:'القراءة والتعبير الشفهي والكتابي، مع قصص قصيرة وقواعد مبسّطة.'},
-  {c:'Fr6',b:'Fr',n:'French',col:SUBJ.Fr,tch:'Ms. Abi Nader',room:'015',desc:'Lecture de contes, conjugaison au présent et production écrite courte.'},
-  {c:'En6',b:'En',n:'English',col:SUBJ.En,tch:'Ms. Lara Zein',room:'016',desc:'Reading short stories, vocabulary and simple paragraph writing.'},
-  {c:'Sc6',b:'Sc',n:'Sciences',col:SUBJ.Bi,tch:'Dr. Hana Rahal',room:'Lab 2',desc:'Plants, the water cycle and simple experiments in the lab.'},
-];
-Object.assign(COURSE_HDR,{M6:'Mathematics EB6',Ar6:'اللغة العربية EB6',Fr6:'Français EB6',En6:'English EB6',Sc6:'Sciences EB6'});
 Object.assign(TOPICS,{
   fractions:{lang:'en',chap:'Unit 2',title:'Fractions',fig:'identities',
     intro:'A fraction describes equal parts of a whole. In EB6 we compare, simplify and add fractions.',
@@ -1906,133 +1786,193 @@ Object.assign(TOPICS,{
     examples:[{title:'Follow a raindrop',steps:['It evaporates from the Mediterranean','It forms a cloud','It falls as snow on the mountains','It melts into a river']}],
     exercises:['Draw and label the water cycle.','Why does it snow on Mount Lebanon in winter?','Name two Lebanese rivers.']},
 });
-Object.assign(COURSE_SECS,{
-  M6:[
-    {n:'Unit 2 — Fractions',items:[
-      {id:'y1',t:'video',n:'Fractions — introduction',topic:'fractions',dur:'06:30'},
-      {id:'y2',t:'pdf',n:'Fractions worksheet',topic:'fractions',pages:4,size:'520 KB'},
-      {id:'y3',t:'quiz',n:'Quick check — fractions',topic:'fractions'}]},
-    {n:'Unit 3 — Perimeter & area',items:[
-      {id:'y4',t:'slides',n:'Perimeter and area',topic:'area',slides:9},
-      {id:'y5',t:'video',n:'Area of a rectangle',topic:'area',dur:'05:10'}]},
-  ],
-  Ar6:[
-    {n:'الوحدة الأولى — القراءة',items:[
-      {id:'y6',t:'pdf',n:'قصة «الصديق الوفي»',topic:'qissa',pages:4,size:'610 KB'},
-      {id:'y7',t:'video',n:'قراءة معبّرة',topic:'qissa',dur:'04:40'}]},
-  ],
-  Fr6:[
-    {n:'Séquence 1 — Le conte',items:[
-      {id:'y8',t:'pdf',n:'Lecture — Le conte',topic:'conte',pages:5,size:'730 KB'},
-      {id:'y9',t:'slides',n:'Les étapes du conte',topic:'conte',slides:8}]},
-    {n:'Séquence 2 — Conjugaison',items:[
-      {id:'y10',t:'video',n:'Le présent de l’indicatif',topic:'present',dur:'05:25'},
-      {id:'y11',t:'quiz',n:'Quiz — le présent',topic:'present'}]},
-  ],
-  En6:[
-    {n:'Unit 1 — Stories',items:[
-      {id:'y12',t:'pdf',n:'The Lion and the Mouse',topic:'lionmouse',pages:3,size:'450 KB'},
-      {id:'y13',t:'video',n:'Story time: The Lion and the Mouse',topic:'lionmouse',dur:'04:15'},
-      {id:'y14',t:'link',n:'British Council — LearnEnglish Kids',url:'https://learnenglishkids.britishcouncil.org'}]},
-  ],
-  Sc6:[
-    {n:'Unit 1 — Plants',items:[
-      {id:'y15',t:'slides',n:'Parts of a plant',topic:'plants',slides:10},
-      {id:'y16',t:'video',n:'How plants make food',topic:'plants',dur:'06:05'},
-      {id:'y17',t:'pdf',n:'Project — Plants (instructions)',topic:'plants',pages:2,size:'280 KB'}]},
-    {n:'Unit 2 — The water cycle',items:[
-      {id:'y18',t:'video',n:'The water cycle',topic:'watercycle',dur:'05:40'},
-      {id:'y19',t:'quiz',n:'Quick check — water cycle',topic:'watercycle'}]},
-  ],
-});
-Object.assign(QUIZZES,{
-  y3:[{q:'Which fraction is equal to 1/2?',a:['2/3','2/4','1/4'],c:1},{q:'1/4 + 2/4 = …',a:['3/8','3/4','2/4'],c:1},{q:'In 3/5, the denominator is…',a:['3','5','8'],c:1}],
-  y11:[{q:'Nous (finir) → …',a:['finons','finissons','finissez'],c:1},{q:'Tu (être) → …',a:['es','est','êtes'],c:0},{q:'Ils (chanter) → …',a:['chantez','chantons','chantent'],c:2}],
-  y19:[{q:'Water vapour forms clouds by…',a:['evaporation','condensation','collection'],c:1},{q:'Rain and snow are called…',a:['precipitation','evaporation','condensation'],c:0},{q:'What heats the water of the sea?',a:['the moon','the sun','the wind'],c:1}],
+Object.assign(TOPICS,{
+  arz:{lang:'ar',chap:'الوحدة الثانية',title:'نص «الأرز»',fig:'book',
+    intro:'نصّ وصفي عن شجرة الأرز، رمز لبنان، يربط بين جمال الطبيعة وتاريخ الوطن.',
+    points:['يصف الكاتب شموخ الأرز على قمم جبال لبنان.','يربط النص بين الأرز وصمود اللبنانيين عبر التاريخ.','يكثر الكاتب من الصور البيانية كالتشبيه والاستعارة.','يدعو النص إلى حماية الأرز والطبيعة.'],
+    formulas:[],
+    examples:[{title:'أسئلة الفهم',steps:['ما الفكرة العامة للنص؟','استخرج تشبيهاً وبيّن ركنيه.','لماذا صار الأرز رمزاً للبنان؟','ما القيمة التي يدعو إليها الكاتب؟']}],
+    exercises:['اشرح المفردات: شامخ، الصمود، الوقار.','لخّص النص في خمسة أسطر.','تعبير: صف رحلة إلى غابة الأرز في الباروك.']},
+  mylebanon:{lang:'en',chap:'Unit 3',title:'Reading — “My Lebanon”',fig:'map',
+    intro:'A descriptive text about Lebanon: its mountains, its coast, its food and the warmth of its people.',
+    points:['landscape (n.) — everything you can see in an area of land','hospitality (n.) — being friendly and generous to guests','heritage (n.) — traditions and history passed down','breathtaking (adj.) — extremely beautiful'],
+    formulas:[],
+    examples:[{title:'Use the new words',steps:['The landscape of the Chouf is breathtaking.','Lebanese hospitality is famous.','Byblos is part of our heritage.','Write your own sentence.']}],
+    exercises:['Match each word with its definition.','Write five sentences about your village or town.','Find three adjectives the writer uses to describe the sea.']},
+  shita:{lang:'ar',chap:'الوحدة الثانية',title:'قراءة: الشتاء في الجبل',fig:'book',
+    intro:'نصّ قصير عن فصل الشتاء في جبال لبنان: الثلج، والمدفأة، وحكايات الجدّة.',
+    points:['يتساقط الثلج فيغطّي سطوح البيوت.','تجتمع العائلة حول المدفأة.','تروي الجدّة حكاية قديمة.','يلعب الأولاد بالثلج في الصباح.'],
+    formulas:[],
+    examples:[{title:'أسئلة الفهم',steps:['في أيّ فصل تجري الأحداث؟','أين تجتمع العائلة؟','ماذا تفعل الجدّة؟','ماذا يفعل الأولاد في الصباح؟']}],
+    exercises:['اقرأ النص قراءة معبّرة.','اكتب ثلاث جمل عن الشتاء في قريتك.','ارسم مشهداً من النص.']},
 });
 
-/* ---- parent: per-child courses · progress is read-only (it comes from the student app) ---- */
-let curCourse=0;
-const COURSES={0:OMAR_COURSES,1:MAYA_COURSES};
-const CRS=()=>COURSES[kid]||[];
-const CHILD_SEED={
-  0:['m1','m2','m3','m4','m5','m6','m7','m8','ar1','fr1','fr2','en1','ph1','ph2','bi1','hi1','hi2','pe1'],
-  1:['y1','y2','y3','y6','y8','y9','y12','y13','y15','y16','y17'],
+/* materials per child — identical to the student app for Omar (EB9 B) */
+const MATS={
+  0:{exam:'Brevet & 1st term exams',
+    lessons:[
+      {d:'Mon 16 Nov',p:2,s:'M',topic:'Ch.4 Thales’ theorem — converse',att:[
+        {id:'ob1',t:'board',n:'Board — converse of Thales',board:'thalesConv',isNew:1},
+        {id:'ob2',t:'pdf',n:'Exercises 1–6 — converse of Thales',topic:'thales',pages:2,size:'280 KB',isNew:1}]},
+      {d:'Fri 13 Nov',p:1,s:'Fr',topic:'Le Petit Prince, ch.6–8',att:[
+        {id:'ob3',t:'pdf',n:'Questions de lecture — ch.6 à 8',topic:'petitprince',pages:1,size:'120 KB',isNew:1}]},
+      {d:'Thu 12 Nov',p:3,s:'M',topic:'Ch.4 Thales’ theorem',att:[
+        {id:'ob4',t:'slides',n:'Thales’ theorem — key ideas',topic:'thales',slides:12},
+        {id:'ob5',t:'video',n:'Thales’ theorem explained',topic:'thales',dur:'04:50',mb:18,video:'thales'}]},
+      {d:'Thu 12 Nov',p:5,s:'Ph',topic:'Measuring density (lab)',att:[
+        {id:'ob6',t:'pdf',n:'Lab sheet — measuring density',topic:'matter',pages:2,size:'310 KB'},
+        {id:'ob7',t:'board',n:'Board — ρ = m / V',board:'density'}]},
+      {d:'Wed 11 Nov',p:4,s:'Bi',topic:'Ch.2 The reflex arc',att:[
+        {id:'ob8',t:'slides',n:'The reflex arc',topic:'reflex',slides:10},
+        {id:'ob9',t:'video',n:'How a reflex works',topic:'reflex',dur:'03:40',mb:14}]},
+      {d:'Tue 10 Nov',p:2,s:'M',topic:'Ch.3 Radicals — rationalising denominators',att:[
+        {id:'ob10',t:'board',n:'Board — rationalising denominators',board:'radicalsRat'},
+        {id:'ob11',t:'pdf',n:'Exercises p.84 — hints',topic:'radicals',pages:1,size:'95 KB'}]},
+      {d:'Mon 9 Nov',p:6,s:'Hi',topic:'Lebanon’s regions',att:[
+        {id:'ob12',t:'pdf',n:'Map — Lebanon’s regions',topic:'geography',pages:1,size:'1.2 MB'},
+        {id:'ob13',t:'link',n:'CRDP interactive map',url:'https://www.crdp.org'}]},
+      {d:'Fri 6 Nov',p:2,s:'M',topic:'Ch.3 Radicals — simplifying',absent:1,att:[
+        {id:'ob14',t:'board',n:'Board — simplifying radicals',board:'radicalsSimp'},
+        {id:'ob15',t:'pdf',n:'Class notes — simplifying radicals',topic:'radicals',pages:3,size:'420 KB'},
+        {id:'ob16',t:'video',n:'Simplifying radicals in 5 minutes',topic:'radicals',dur:'05:10',mb:20}]},
+      {d:'Fri 6 Nov',p:3,s:'Ar',topic:'نص «الأرز»',absent:1,att:[
+        {id:'ob17',t:'pdf',n:'شرح النص وأسئلة الفهم',topic:'arz',pages:2,size:'260 KB'}]},
+      {d:'Fri 6 Nov',p:5,s:'En',topic:'Reading — “My Lebanon”',absent:1,att:[
+        {id:'ob18',t:'pdf',n:'Vocabulary list — My Lebanon',topic:'mylebanon',pages:1,size:'110 KB'}]},
+    ],
+    revision:[
+      {s:'M',items:[
+        {id:'or1',t:'pdf',kind:'paper',n:'1st term exam 2025 — Maths EB9 (with solutions)',topic:'identities',pages:4,size:'640 KB'},
+        {id:'or2',t:'pdf',kind:'paper',n:'Brevet 2024 — Mathematics (MEHE, 1st session)',topic:'pythagoras',pages:3,size:'520 KB'},
+        {id:'or3',t:'pdf',kind:'paper',n:'Brevet 2024 — Mathematics solutions',topic:'trig',pages:4,size:'580 KB'},
+        {id:'or4',t:'slides',kind:'summary',n:'Summary — Radicals & Thales',topic:'radicals',slides:8}]},
+      {s:'Ph',items:[{id:'or5',t:'pdf',kind:'paper',n:'Brevet 2024 — Physics & Chemistry',topic:'ohm',pages:3,size:'610 KB'}]},
+      {s:'Bi',items:[{id:'or6',t:'pdf',kind:'summary',n:'Summary — the nervous system',topic:'neuron',pages:2,size:'340 KB'}]},
+      {s:'Fr',items:[{id:'or7',t:'pdf',kind:'paper',n:'Brevet 2024 — Français, rédaction',topic:'discours',pages:2,size:'300 KB'}]},
+      {s:'Ar',items:[{id:'or8',t:'pdf',kind:'paper',n:'الشهادة المتوسطة 2024 — اللغة العربية',topic:'qawaed',pages:3,size:'450 KB'}]},
+      {s:'En',items:[{id:'or9',t:'pdf',kind:'paper',n:'Brevet 2024 — English',topic:'essay',pages:3,size:'410 KB'}]},
+    ],
+    textbooks:[
+      {id:'ot1',s:'M',t:'pdf',n:'Mathematics EB9 — CRDP textbook',topic:'radicals',pages:12,size:'2.4 MB',textbook:1},
+      {id:'ot2',s:'Ph',t:'pdf',n:'Physics & Chemistry EB9 — CRDP textbook',topic:'ohm',pages:8,size:'1.9 MB',textbook:1},
+      {id:'ot3',s:'Bi',t:'pdf',n:'Life & Earth Sciences EB9 — CRDP textbook',topic:'neuron',pages:8,size:'2.1 MB',textbook:1},
+      {id:'ot4',s:'Fr',t:'pdf',n:'Français EB9 — manuel CRDP',topic:'petitprince',pages:6,size:'1.4 MB',textbook:1},
+      {id:'ot5',s:'En',t:'pdf',n:'English EB9 — CRDP textbook',topic:'prophet',pages:6,size:'1.5 MB',textbook:1},
+      {id:'ot6',s:'Ar',t:'pdf',n:'القراءة العربية — الصف التاسع',topic:'ayyam',pages:6,size:'1.6 MB',textbook:1},
+      {id:'ot7',s:'Hi',t:'pdf',n:'History & Geography EB9 — CRDP textbook',topic:'geography',pages:8,size:'2.3 MB',textbook:1},
+    ]},
+  1:{exam:'1st term exams',
+    lessons:[
+      {d:'Mon 16 Nov',p:1,s:'Ar6',topic:'قراءة: الشتاء في الجبل',att:[
+        {id:'yb1',t:'pdf',n:'قراءة: الشتاء في الجبل',topic:'shita',pages:1,size:'150 KB',isNew:1}]},
+      {d:'Fri 13 Nov',p:3,s:'Sc6',topic:'Plants — parts and functions',att:[
+        {id:'yb2',t:'slides',n:'Plants — parts and functions',topic:'plants',slides:8},
+        {id:'yb3',t:'board',n:'Board — parts of a plant',board:'plants'}]},
+      {d:'Thu 12 Nov',p:2,s:'M6',topic:'Fractions — comparing',att:[
+        {id:'yb4',t:'board',n:'Board — comparing fractions',board:'fractions'},
+        {id:'yb5',t:'pdf',n:'Fractions worksheet',topic:'fractions',pages:2,size:'230 KB'}]},
+      {d:'Wed 11 Nov',p:4,s:'Fr6',topic:'Dictée préparée n°4',att:[
+        {id:'yb6',t:'pdf',n:'Dictée préparée n°4',topic:'present',pages:1,size:'90 KB'}]},
+    ],
+    revision:[
+      {s:'M6',items:[{id:'yr1',t:'pdf',kind:'summary',n:'Fractions — summary',topic:'fractions',pages:2,size:'210 KB'}]},
+    ],
+    textbooks:[
+      {id:'yt1',s:'M6',t:'pdf',n:'Mathématiques EB6 — manuel CRDP',topic:'fractions',pages:8,size:'1.7 MB',textbook:1},
+      {id:'yt2',s:'Sc6',t:'pdf',n:'Sciences EB6 — CRDP textbook',topic:'plants',pages:8,size:'1.8 MB',textbook:1},
+      {id:'yt3',s:'Ar6',t:'pdf',n:'القراءة العربية — الصف السادس',topic:'qissa',pages:6,size:'1.3 MB',textbook:1},
+    ]},
 };
-/* when each item was completed (chronological) */
-const DONE_ON={
-  m1:'Mon 19 Oct',m2:'Tue 20 Oct',m3:'Thu 22 Oct',m4:'Fri 23 Oct',fr1:'Mon 26 Oct',m5:'Tue 27 Oct',ar1:'Wed 28 Oct',m6:'Thu 29 Oct',fr2:'Fri 30 Oct',m7:'Mon 2 Nov',en1:'Tue 3 Nov',m8:'Wed 4 Nov',ph1:'Thu 5 Nov',ph2:'Fri 6 Nov',bi1:'Mon 9 Nov',hi1:'Tue 10 Nov',hi2:'Thu 12 Nov',pe1:'Fri 13 Nov',
-  y1:'Tue 20 Oct',y2:'Thu 22 Oct',y3:'Fri 23 Oct',y6:'Mon 26 Oct',y8:'Wed 28 Oct',y9:'Mon 2 Nov',y12:'Wed 4 Nov',y13:'Thu 5 Nov',y15:'Mon 9 Nov',y16:'Wed 11 Nov',y17:'Fri 13 Nov',
-};
-const DONE_ORDER=Object.keys(DONE_ON);
-const QUIZ_SCORE={m4:3,y3:2};
-const REMINDED=new Set();
-const COURSE_OPEN={};
+const MAT_TODAY='Mon 16 Nov';
+let matTab='lesson',matSubj='all';
 let vw={id:null,type:null,page:1,slide:0,n:0,zoom:1},vid=null;
 const VID_LEN=120; /* condensed demo: a whole lesson plays in about 2 minutes at 1× while the clock shows the real lecture time */
-let _doneCache={k:null,at:0,set:null};
-/* Omar's progress: the student app's saved progress when available (same device), otherwise the demo seed */
-function childDone(){const now=Date.now();if(_doneCache.k===kid&&now-_doneCache.at<400)return _doneCache.set;let s=null;
-  if(kid===0){try{const v=JSON.parse(localStorage.getItem('skl-course-done'));if(Array.isArray(v))s=new Set(v);}catch(e){}}
-  if(!s)s=new Set(CHILD_SEED[kid]||[]);_doneCache={k:kid,at:now,set:s};return s;}
 
-/* ---- course helpers ---- */
-function secsOf(ci){const c=CRS()[ci];return (c&&COURSE_SECS[c.c])||[];}
-function itemsOf(ci){return secsOf(ci).flatMap((s,si)=>s.items.map(it=>Object.assign({sec:si},it)));}
-function findItem(id){const cs=CRS();for(let ci=0;ci<cs.length;ci++){const secs=secsOf(ci);for(let si=0;si<secs.length;si++){const it=secs[si].items.find(x=>x.id===id);if(it)return {ci,si,item:it};}}return null;}
-function isDone(id){return childDone().has(id);}
-function courseProg(ci){const its=itemsOf(ci),d=its.filter(x=>isDone(x.id)).length;return {done:d,total:its.length,pct:its.length?Math.round(d/its.length*100):0};}
-function allProg(){let done=0,total=0,next=null;CRS().forEach((_,ci)=>{const p=courseProg(ci);done+=p.done;total+=p.total;if(!next)next=nextUnfinished(ci);});return {done,total,pct:total?Math.round(done/total*100):0,next};}
-function nextUnfinished(ci){return itemsOf(ci).find(x=>!isDone(x.id))||null;}
-function nextAfter(id){const f=findItem(id);if(!f)return null;const its=itemsOf(f.ci),i=its.findIndex(x=>x.id===id);return its[i+1]||null;}
+/* parent-side state only (never touches the student's own saved state) */
+function matLoad(k,def){try{const v=JSON.parse(localStorage.getItem(k));if(Array.isArray(v))return new Set(v);}catch(e){}return new Set(def||[]);}
+function matSave(k,set){try{localStorage.setItem(k,JSON.stringify([...set]));}catch(e){}}
+const MAT_SEEN_KEY='skl-p-mat-seen',MAT_OFF_KEY='skl-p-mat-offline';
+const matSeen=matLoad(MAT_SEEN_KEY),matOff=matLoad(MAT_OFF_KEY,['ob5','ot1']);
+let matLastFile=null;
+
+/* ---- material helpers ---- */
+const _matIdx={};
+function matIndex(k=kid){if(_matIdx[k])return _matIdx[k];const M=MATS[k],idx={};
+  M.lessons.forEach(L=>L.att.forEach(it=>idx[it.id]={item:it,s:L.s,lesson:L,area:'lesson'}));
+  M.revision.forEach(g=>g.items.forEach(it=>idx[it.id]={item:it,s:g.s,area:'revision'}));
+  M.textbooks.forEach(it=>idx[it.id]={item:it,s:it.s,area:'textbooks'});
+  return _matIdx[k]=idx;}
+function findItem(id){return matIndex()[id]||matIndex(kid?0:1)[id]||null;}
+function ctxOf(it){const f=findItem(it.id);return SUBJECTS[f?f.s:'M']||SUBJECTS.M;}
+function isNewMat(it){return !!it.isNew&&!matSeen.has(it.id);}
+function matNewCount(k=kid){return Object.values(matIndex(k)).filter(x=>isNewMat(x.item)).length;}
+function matSubjects(){const used=new Set(Object.values(matIndex()).map(x=>x.s));return SUBJECTS_BY_KID[kid].filter(x=>used.has(x.c));}
+const subjOk=code=>matSubj==='all'||matSubj===code;
+/* items in the order they're shown on the current tab (drives "Next attachment") */
+function visibleItems(){const M=MATS[kid];
+  if(matTab==='revision')return M.revision.filter(g=>subjOk(g.s)).flatMap(g=>g.items);
+  if(matTab==='textbooks')return M.textbooks.filter(it=>subjOk(it.s));
+  return M.lessons.filter(L=>subjOk(L.s)).flatMap(L=>L.att);}
+function nextAfter(id){let list=visibleItems();if(!list.some(x=>x.id===id)){const f=findItem(id);if(!f)return null;const M=MATS[kid];list=f.area==='revision'?M.revision.flatMap(g=>g.items):f.area==='textbooks'?M.textbooks:M.lessons.flatMap(L=>L.att);}
+  const i=list.findIndex(x=>x.id===id);return i>=0?list[i+1]||null:null;}
 function topicOf(it){return TOPICS[it.topic]||TOPICS.radicals;}
 function hostOf(u){return String(u||'').replace(/^https?:\/\//,'').replace(/^www\./,'').split('/')[0];}
-function itemMeta(it){const L=MAT_TYPES[it.t].l,parts=it.t==='pdf'?[L,`${it.pages} pages`,`<span dir="ltr">${it.size}</span>`]:it.t==='slides'?[L,`${it.slides} slides`]:it.t==='video'?[L,it.dur]:it.t==='quiz'?[L,`${(QUIZZES[it.id]||[]).length} questions`]:it.t==='link'?[L,`<span dir="ltr">${hostOf(it.url)}</span>`]:[L];return parts.map(x=>`<bdi>${x}</bdi>`).join(' · ');}
+function itemMeta(it){const L=MAT_TYPES[it.t].l,parts=it.t==='pdf'?[L,it.pages===1?'1 page':`${it.pages} pages`,`<span dir="ltr">${it.size}</span>`]:it.t==='slides'?[L,`${it.slides} slides`]:it.t==='video'?[L,`<span dir="ltr">${it.dur}</span>`,`<span dir="ltr">${it.mb} MB</span>`]:it.t==='link'?[L,`<span dir="ltr">${hostOf(it.url)}</span>`]:[L];return parts.map(x=>`<bdi>${x}</bdi>`).join(' · ');}
 function parseDur(s){const m=String(s||'').match(/(\d+):(\d{2})/);return m?(+m[1])*60+(+m[2]):300;}
 function fmtT(s){s=Math.max(0,Math.floor(s));return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');}
-function secMeta(s){const n=s.items.length,mins=Math.round(s.items.filter(x=>x.t==='video').reduce((a,x)=>a+parseDur(x.dur),0)/60),pages=s.items.filter(x=>x.t==='pdf').reduce((a,x)=>a+(x.pages||0),0);return [n===1?'1 item':`${n} items`].concat(mins?[`${mins} min`]:[],pages?[`${pages} pages`]:[]).map(x=>`<bdi>${x}</bdi>`).join(' · ');}
-function openSecs(ci){const key=kid+'|'+ci;if(!COURSE_OPEN[key]){const nx=nextUnfinished(ci),f=nx?findItem(nx.id):null;COURSE_OPEN[key]=new Set([f?f.si:0]);}return COURSE_OPEN[key];}
 const SVG_OK='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17.5 19 7"/></svg>';
-const SVG_BELL='<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9a6 6 0 0 1 12 0c0 5 2 6 2 6H4s2-1 2-6"/><path d="M10 20a2 2 0 0 0 4 0"/></svg>';
-/* parent view: the check shows the child's progress and can't be toggled */
-function courseItemRow(it,nowId){const d=isDone(it.id),T=MAT_TYPES[it.t],dl=it.t==='pdf'||it.t==='slides';
-  return `<div class="citem${d?' done':''}${it.id===nowId?' now':''}" onclick="openItem('${it.id}')"><span class="cchk ro" role="img" aria-label="${d?'Completed':'Not completed yet'}">${d?'<svg viewBox="0 0 24 24"><path d="M5 12.5 10 17.5 19 7"/></svg>':''}</span><div class="set-ic" style="background:${T.col}1f;color:${T.col}">${matIco(it.t)}</div><div class="grow" style="min-width:0"><div class="citem-t" data-noi18n dir="auto">${hx(it.n)}</div><div class="sub mt6">${itemMeta(it)}</div></div>${dl?`<div class="icon-btn cdl" onclick="event.stopPropagation();downloadItem('${it.id}')" aria-label="Download"><svg viewBox="0 0 24 24"><path d="M12 4v11M7 10.5l5 5 5-5M5 20h14"/></svg></div>`:''}</div>`;}
-function toggleSec(si){const set=openSecs(curCourse),el=document.querySelector(`#scr-course .csec[data-sec="${si}"]`);if(!el)return;const b=el.querySelector('.csec-b');
-  if(set.has(si)){set.delete(si);b.style.height=b.scrollHeight+'px';void b.offsetHeight;b.style.height='0px';el.classList.remove('open');}
-  else{set.add(si);el.classList.add('open');b.style.height=b.scrollHeight+'px';const end=e=>{if(e.target!==b)return;b.removeEventListener('transitionend',end);if(set.has(si))b.style.height='';};b.addEventListener('transitionend',end);}}
-function refreshCourse(){const sc=document.getElementById('scr-course');if(sc){const st=sc.scrollTop;rebuild('course');sc.scrollTop=st;if(current==='course')setLead(sc);}const cl=document.getElementById('scr-courses');if(cl){rebuild('courses');if(current==='courses')setLead(cl);}if(vw.id&&document.getElementById('viewer').classList.contains('open'))vFoot();}
-/* viewing materials as a parent never changes the child's progress */
-function markDone(){}
-function doneOn(id){return DONE_ON[id]||'Mon 16 Nov';}
-function lastActivity(ci){const its=itemsOf(ci).filter(x=>isDone(x.id));if(!its.length)return null;its.sort((a,b)=>{const ia=DONE_ORDER.indexOf(a.id),ib=DONE_ORDER.indexOf(b.id);return (ia<0?999:ia)-(ib<0?999:ib);});const it=its[its.length-1];return {it,d:doneOn(it.id)};}
+const SVG_DL='<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7 10.5l5 5 5-5M5 20h14"/></svg>';
+const SVG_WIFI='<svg viewBox="0 0 24 24"><path d="M2.5 9a14 14 0 0 1 19 0M5.5 12.5a9.5 9.5 0 0 1 13 0M8.8 16a4.8 4.8 0 0 1 6.4 0"/><circle cx="12" cy="19.3" r=".9" fill="currentColor"/></svg>';
+const SVG_OFF='<svg viewBox="0 0 24 24"><path d="M12 3.5v10M7.5 9.5l4.5 4.5 4.5-4.5"/><path d="M4.5 17.5v2h15v-2"/></svg>';
+const canSave=it=>it.t!=='link';
+/* one attachment row */
+function matRow(it){const T=MAT_TYPES[it.t],off=matOff.has(it.id),nw=isNewMat(it);
+  const right=it.t==='link'?'<span style="color:var(--faint)">›</span>'
+    :`<div class="icon-btn cdl${off?' off':''}" onclick="event.stopPropagation();downloadItem('${it.id}')" aria-label="${off?'Saved offline':it.t==='video'?'Save offline':'Download'}">${off?SVG_OK:SVG_DL}</div>`;
+  return `<div class="mrow" onclick="openItem('${it.id}')"><div class="set-ic" style="background:${T.col}1f;color:${T.col}">${matIco(it.t)}</div><div class="grow" style="min-width:0">
+    <div class="mrow-t"><span data-noi18n dir="auto">${hx(it.n)}</span>${it.kind?` <span class="ml-kind${it.kind==='paper'?' paper':''}">${it.kind==='paper'?'Past paper':'Summary sheet'}</span>`:''}${nw?' <span class="mnew">New</span>':''}</div>
+    <div class="sub mt6">${itemMeta(it)}</div>
+    ${it.t==='video'&&!off?`<div class="mhint">${SVG_WIFI}<span><bdi dir="ltr">~${it.mb} MB</bdi> · best on Wi-Fi</span></div>`:''}
+    ${off?`<div class="moff">${SVG_OFF}<span>Saved offline</span></div>`:''}
+  </div>${right}</div>`;}
+function matLessonCard(L){const S=SUBJECTS[L.s];return `<div class="card ml-card mt8${L.absent?' ml-miss':''}">
+  <div class="row" style="gap:12px;align-items:flex-start"><div class="subj" style="width:38px;height:38px;font-size:13px;background:${S.col}">${S.b||S.c}</div>
+    <div class="grow" style="min-width:0"><div class="row" style="gap:6px;flex-wrap:wrap"><span class="sub" style="font-weight:700;font-size:12px">${S.n} · Period ${L.p}</span>${L.absent?'<span class="tag bad" style="padding:2px 8px;font-size:10.5px">Absent</span>':''}</div>
+      <div class="ml-topic" data-noi18n dir="auto">${hx(L.topic)}</div><div class="sub mt6">${teacherShort(S.tch)}</div></div></div>
+  <div class="ml-atts">${L.att.map(matRow).join('')}</div></div>`;}
+function matBody(){const M=MATS[kid];
+  const empty='<div class="card ml-empty mt12"><div class="sub">No materials for this subject yet</div></div>';
+  if(matTab==='revision'){const gs=M.revision.filter(g=>subjOk(g.s)),E=EXAMS[kid],nx=E.list[0];
+    return `<div class="card mt12"><div class="row"><div class="set-ic" style="background:var(--danger-bg);color:var(--danger)">${svg('exam',19)}</div><div class="grow" style="min-width:0"><div style="font-weight:800">${M.exam}</div><div class="sub mt6">1st term exams start ${nx.day} ${nx.d} · ${inDays(daysTo(nx.d))}</div></div></div></div>
+      ${gs.length?gs.map(g=>{const S=SUBJECTS[g.s];return `<div class="set-label">${S.n}</div><div class="card" style="padding:2px 14px">${g.items.map(matRow).join('')}</div>`;}).join(''):empty}`;}
+  if(matTab==='textbooks'){const its=M.textbooks.filter(it=>subjOk(it.s));
+    return `<p class="sub mt12" style="margin-inline:4px">Official CRDP textbooks — sample pages</p>${its.length?`<div class="card mt8" style="padding:2px 14px">${its.map(matRow).join('')}</div>`:empty}`;}
+  const ls=M.lessons.filter(L=>subjOk(L.s));if(!ls.length)return empty;
+  let h='',day=null;ls.forEach(L=>{if(L.d!==day){day=L.d;h+=`<div class="ml-day${L.d===MAT_TODAY?' today':''}">${L.d===MAT_TODAY?`Today · ${L.d}`:L.d}</div>`;}h+=matLessonCard(L);});return h;}
+function openMaterials(tab){if(tab)matTab=tab;rebuild('materials');show('materials');}
+function matSetTab(tab){matTab=tab;refreshMaterials(true);}
+function matSetSubj(code){matSubj=code;refreshMaterials(true);}
+function refreshMaterials(keepScroll){const sc=document.getElementById('scr-materials');if(sc){const st=sc.scrollTop;rebuild('materials');if(keepScroll)sc.scrollTop=st;if(current==='materials'){sc.classList.add('active');setLead(sc);}}
+  rebuild('home');if(current==='home'){const h=document.getElementById('scr-home');if(h){h.classList.add('active');setLead(h);}}renderDrawer();
+  if(vw.id&&viewerOpen())vFoot();}
 function tchInitials(n){return String(n).replace(/^(Mr|Mrs|Ms|Dr)\.\s+/,'').split(' ').map(x=>x[0]).slice(0,2).join('');}
 function teacherShort(n){return String(n).replace(/^(Mr|Mrs|Ms|Dr)\. (?:\S+ )*(\S+)$/,'$1. $2');}
-function openCourse(i){curCourse=i;rebuild('course');show('course');}
-function msgCourseTeacher(){const c=CRS()[curCourse];if(!c)return;const t=teacherShort(c.tch);if(!threads[tkey(t)])threads[tkey(t)]={unread:0,msgs:[]};openThread(t,kid);}
-function remindChild(id){const k=kid+'|'+id;if(REMINDED.has(k))return;REMINDED.add(k);toast(`Reminder sent to ${first()} ✓`);if(viewerOpen())vFoot();}
-function openItem(id){const f=findItem(id);if(!f)return;const it=f.item;curCourse=f.ci;
-  if(it.t==='pdf')openPdf(it);else if(it.t==='slides')openSlides(it);else if(it.t==='video')openVideo(it);else if(it.t==='link')openLinkItem(it);else if(it.t==='quiz')openQuizItem(it);}
-function vStatHTML(id){return isDone(id)?`<div class="vstat ok">${SVG_OK}<span>${hx(first())} completed this on ${doneOn(id)}</span></div>`:`<div class="vstat"><span class="vdot"></span><span>Not completed yet</span></div>`;}
-/* viewer footer: child's status + remind + next */
-function vFoot(){const st=document.getElementById('v-stat'),r=document.getElementById('v-remind'),n=document.getElementById('v-next');if(!st||!vw.id)return;
-  const d=isDone(vw.id),nx=nextAfter(vw.id),sent=REMINDED.has(kid+'|'+vw.id);
-  st.innerHTML=vStatHTML(vw.id);
-  r.style.display=d?'none':'';r.classList.toggle('sent',sent);r.disabled=sent;
-  r.innerHTML=sent?`${SVG_OK}<span>Reminder sent</span>`:`${SVG_BELL}<span>Remind ${hx(first())}</span>`;
-  n.innerHTML=nx?`<span>Next item</span><svg class="flip-rtl" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>`:`<span>Back to course</span>`;
-  trDom(st);trDom(r);trDom(n);}
-/* Link + quiz sheets (view only) */
-function openLinkItem(it){const T=MAT_TYPES.link;openSheet(`<div class="row"><div class="set-ic" style="background:${T.col}1f;color:${T.col}">${matIco('link')}</div><div class="grow"><h2 style="font-size:18px;font-weight:800" data-noi18n dir="auto">${hx(it.n)}</h2><div class="sub mt6">External link</div></div></div>
+function openItem(id){const f=findItem(id);if(!f)return;const it=f.item;
+  if(it.isNew&&!matSeen.has(id)){matSeen.add(id);matSave(MAT_SEEN_KEY,matSeen);}
+  if(it.t==='pdf')openPdf(it);else if(it.t==='slides')openSlides(it);else if(it.t==='video')openVideo(it);else if(it.t==='board')openBoard(it);else if(it.t==='link'){openLinkItem(it);refreshMaterials(true);}}
+/* viewer footer: download / saved offline + next attachment */
+function vFoot(){const sv=document.getElementById('v-save'),n=document.getElementById('v-next');if(!sv||!vw.id)return;const f=findItem(vw.id),it=f&&f.item;if(!it)return;
+  const off=matOff.has(it.id),nx=nextAfter(it.id);
+  sv.style.display=canSave(it)?'':'none';sv.classList.toggle('is-done',off);
+  sv.innerHTML=off?`${SVG_OK}<span>Saved offline</span>`:`${SVG_DL}<span>${it.t==='video'?'Save offline':'Download'}</span>`;
+  n.innerHTML=nx?`<span>Next attachment</span><svg class="flip-rtl" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>`:`<span>Back to materials</span>`;
+  trDom(sv);trDom(n);}
+/* Link sheet */
+function openLinkItem(it){const T=MAT_TYPES.link,f=findItem(it.id),S=SUBJECTS[f.s];openSheet(`<div class="row"><div class="set-ic" style="background:${T.col}1f;color:${T.col}">${matIco('link')}</div><div class="grow"><h2 style="font-size:18px;font-weight:800" data-noi18n dir="auto">${hx(it.n)}</h2><div class="sub mt6">External link</div></div></div>
   <div class="card mt16" style="padding:12px 14px;background:var(--surface-2)"><div class="sub" style="font-size:11px;font-weight:700">URL</div><div class="ltr" dir="ltr" data-noi18n style="font-weight:700;margin-top:4px;word-break:break-all;color:var(--accent)">${hx(it.url)}</div></div>
-  <div class="mt12">${vStatHTML(it.id)}</div>
+  ${f.lesson?`<div class="sub mt12">Shared by ${teacherShort(S.tch)} · ${f.lesson.d}</div>`:''}
   <p class="sub mt12" style="line-height:1.5">Links open in your browser. The school checks every link before sharing it.</p>
   <button class="btn mt16" onclick="closeSheet();toast('Opening in browser…')">Open link</button><button class="btn secondary mt8" onclick="closeSheet()">Close</button>`);}
-function openQuizItem(it){const Q=QUIZZES[it.id]||[],T=MAT_TYPES.quiz,d=isDone(it.id),sc=QUIZ_SCORE[it.id],nm=first(),sent=REMINDED.has(kid+'|'+it.id);
-  openSheet(`<div class="row"><div class="set-ic" style="background:${T.col}1f;color:${T.col}">${matIco('quiz')}</div><div class="grow"><h2 style="font-size:18px;font-weight:800" data-noi18n dir="auto">${hx(it.n)}</h2><div class="sub mt6">${itemMeta(it)}</div></div><span class="tag" style="background:var(--surface-3);color:var(--muted);flex:0 0 auto">View only</span></div>
-  <div class="card mt12" style="text-align:center;background:${d?'var(--ok-bg)':'var(--surface-2)'};border:none">${d?`${sc!=null?`<div class="tnum" style="font-size:26px;font-weight:800;color:var(--ok)">${sc} / ${Q.length}</div>`:''}<div class="sub mt6" style="color:var(--ok);font-weight:700">${hx(nm)} completed this on ${doneOn(it.id)}</div>`:`<div style="font-weight:800">Not completed yet</div><div class="sub mt6">Answers are shown once ${hx(nm)} completes the quiz</div>`}</div>
-  <div class="set-label">Questions</div>
-  ${Q.map((q,i)=>`<div class="card mt12 qz"><div style="font-weight:700;line-height:1.45" data-noi18n dir="auto">${i+1}. ${hx(q.q)}</div><div class="mt8">${q.a.map((a,j)=>`<button class="qz-o${d&&j===q.c?' ok':''}" data-noi18n dir="auto" disabled>${hx(a)}</button>`).join('')}</div></div>`).join('')}
-  ${d?'':`<button class="btn mt16${sent?' secondary sent':''}" ${sent?'disabled':''} onclick="remindChild('${it.id}');closeSheet()">${sent?'Reminder sent':`Remind ${hx(nm)}`}</button>`}<button class="btn secondary mt8" onclick="closeSheet()">Close</button>`);}
 
 /* ---- figures (plain SVG, work on white paper and as <img> for the video canvas) ---- */
 function FIG(name,col){const k='#1f2937',t=(x,y,s,o)=>`<text x="${x}" y="${y}" font-family="Plus Jakarta Sans, Arial, sans-serif" font-size="${(o&&o.fs)||15}" font-weight="${(o&&o.fw)||700}" fill="${(o&&o.fill)||k}" text-anchor="${(o&&o.a)||'middle'}">${s}</text>`;let b='';
@@ -2059,7 +1999,7 @@ function FIG(name,col){const k='#1f2937',t=(x,y,s,o)=>`<text x="${x}" y="${y}" f
 
 /* ---- generated documents (textbook pages) and slide decks ---- */
 function rot(a,i){if(!a||!a.length)return [];const k=i%a.length;return a.slice(k).concat(a.slice(0,k));}
-function buildDoc(it){const T=topicOf(it),L=DOC_L[T.lang]||DOC_L.en,f=findItem(it.id),c=CRS()[f?f.ci:0],N=Math.max(2,it.pages||4),P=T.points,F=T.formulas||[],E=T.examples||[],X=T.exercises&&T.exercises.length?T.exercises:P;
+function buildDoc(it){const T=topicOf(it),L=DOC_L[T.lang]||DOC_L.en,c=ctxOf(it),N=Math.max(1,it.pages||4),P=T.points,F=T.formulas||[],E=T.examples||[],X=T.exercises&&T.exercises.length?T.exercises:P;
   const pages=[[{k:'kick',t:T.chap},{k:'h1',t:it.n},{k:'p',t:T.intro},{k:'h2',t:L.obj},{k:'ul',items:P.slice(0,3)},{k:'fig',fig:T.fig,cap:T.title}]];
   const tpl=[
     i=>[{k:'h2',t:`${i}. ${L.defs}`},{k:'def',h:L.def,t:P[i%P.length]},{k:'def',h:L.def,t:P[(i+1)%P.length]}].concat(F.length?[{k:'f',t:F[i%F.length]}]:[],[{k:'p',t:T.intro}]),
@@ -2082,7 +2022,7 @@ function docBlockHTML(b,col){switch(b.k){
   case 'fig':return `<figure class="pp-fig${b.small?' sm':''}">${FIG(b.fig,col)}<figcaption>${hx(b.cap)}</figcaption></figure>`;}
   return '';}
 function docPageHTML(d,blocks,i){return `<div class="pp"><div class="pp-hd"><span>${hx(d.hdr)}</span><span>${hx(d.chap)}</span></div>${blocks.map(b=>docBlockHTML(b,d.col)).join('')}<div class="pp-ft">${i+1}</div></div>`;}
-function buildDeck(it){const T=topicOf(it),L=DOC_L[T.lang]||DOC_L.en,f=findItem(it.id),c=CRS()[f?f.ci:0],N=Math.max(3,it.slides||8),P=T.points,F=T.formulas||[],E=T.examples||[],X=T.exercises&&T.exercises.length?T.exercises:P;
+function buildDeck(it){const T=topicOf(it),L=DOC_L[T.lang]||DOC_L.en,c=ctxOf(it),N=Math.max(3,it.slides||8),P=T.points,F=T.formulas||[],E=T.examples||[],X=T.exercises&&T.exercises.length?T.exercises:P;
   const S=[{k:'title',kick:COURSE_HDR[c.c]||c.n,t:it.n,sub:c.tch},{k:'bullets',h:L.obj,items:P.slice(0,3)}];
   const cyc=[
     i=>F.length?{k:'formula',h:L.prop,f:F[i%F.length],note:P[(i+1)%P.length]}:{k:'bullets',h:T.title,items:rot(P,i).slice(0,3)},
@@ -2131,20 +2071,24 @@ function pdfPagesFromDeck(d){const W=842,H=474;return d.slides.map((s,i)=>{let L
   else L=[{t:s.h,s:22,b:1,gap:14}].concat((s.items||[]).map(x=>({t:'•  '+x,s:15,ind:8,gap:6})));
   const ops=`${pdfRGB(d.col)} rg 0 0 14 ${H} re f\n`+pdfTextOps(L,60,H-70,40,110)+`0.55 0.58 0.62 rg BT /F1 10 Tf ${W-50} 22 Td (${i+1}) Tj ET\n`;return {w:W,h:H,ops};});}
 function pdfBytesFor(it){return it.t==='pdf'?makePdf(pdfPagesFromDoc(buildDoc(it))):makePdf(pdfPagesFromDeck(buildDeck(it)));}
-function downloadItem(id){const f=findItem(id);if(!f||(f.item.t!=='pdf'&&f.item.t!=='slides'))return;const it=f.item;
-  try{const blob=new Blob([pdfBytesFor(it)],{type:'application/pdf'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=String(it.n).replace(/[\\/:*?"<>|]+/g,'-').trim()+'.pdf';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),5000);}catch(e){}
-  toast('Downloaded ✓');}
+function saveBlob(blob,name){matLastFile={name,type:blob.type,size:blob.size};try{const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),5000);}catch(e){}}
+const fileName=n=>String(n).replace(/[\\/:*?"<>|]+/g,'-').trim();
+function downloadItem(id){const f=findItem(id);if(!f||!canSave(f.item))return;const it=f.item,first=!matOff.has(id);
+  if(it.t==='pdf'||it.t==='slides'){try{saveBlob(new Blob([pdfBytesFor(it)],{type:'application/pdf'}),fileName(it.n)+'.pdf');}catch(e){}}
+  else if(it.t==='board')boardPng(it);
+  matOff.add(id);matSave(MAT_OFF_KEY,matOff);
+  toast(it.t==='video'?'Saved offline ✓':first?'Saved offline ✓':'Downloaded ✓');refreshMaterials(true);}
 
 /* ---- full-screen viewer (slides up inside the phone) ---- */
 function viewerOpen(){const v=document.getElementById('viewer');return v&&v.classList.contains('open');}
 function openViewer(it,html){vpStop();const v=document.getElementById('viewer');vw={id:it.id,type:it.t,page:1,slide:0,n:0,zoom:1};
-  document.getElementById('v-title').textContent=it.n;document.getElementById('v-dl').style.display=(it.t==='pdf'||it.t==='slides')?'':'none';
+  document.getElementById('v-title').textContent=it.n;document.getElementById('v-dl').style.display=(it.t==='pdf'||it.t==='slides'||it.t==='board')?'':'none';
   const body=document.getElementById('v-body');body.innerHTML=html;trDom(body);v.classList.add('open');v.setAttribute('aria-hidden','false');vFoot();vSub();}
-function closeViewer(){vpStop();const v=document.getElementById('viewer');v.classList.remove('open');v.setAttribute('aria-hidden','true');refreshCourse();}
+function closeViewer(){vpStop();const v=document.getElementById('viewer');v.classList.remove('open');v.setAttribute('aria-hidden','true');refreshMaterials(true);}
 function vSub(){const f=findItem(vw.id);if(!f)return;const it=f.item;let pos='';
   if(vw.type==='pdf')pos=` · ${hx(t('Page'))} <span dir="ltr">${vw.page} / ${vw.n}</span>`;else if(vw.type==='slides')pos=` · ${hx(t('Slide'))} <span dir="ltr">${vw.slide+1} / ${vw.n}</span>`;else if(vw.type==='video')pos=` · <span dir="ltr">${it.dur}</span>`;
   document.getElementById('v-sub').innerHTML=hx(t(MAT_TYPES[it.t].l))+pos;}
-function nextItem(){const nx=nextAfter(vw.id);if(!nx){closeViewer();return;}if(nx.t==='pdf'||nx.t==='slides'||nx.t==='video'){openItem(nx.id);return;}closeViewer();setTimeout(()=>openItem(nx.id),340);}
+function nextItem(){const nx=nextAfter(vw.id);if(!nx){closeViewer();return;}if(nx.t!=='link'){openItem(nx.id);return;}closeViewer();setTimeout(()=>openItem(nx.id),340);}
 
 /* PDF reader */
 function openPdf(it){const d=buildDoc(it);
@@ -2157,8 +2101,7 @@ function pdfLayout(keep){const sc=document.getElementById('pdf-scroll');if(!sc)r
 function pdfZoom(d){vw.zoom=d===0?1:Math.max(.6,Math.min(2.5,Math.round((vw.zoom+d*.25)*100)/100));pdfLayout(true);}
 function pdfScroll(){const sc=document.getElementById('pdf-scroll');if(!sc||vw.type!=='pdf')return;const pages=[...sc.querySelectorAll('.pdf-page')],y=sc.scrollTop+sc.clientHeight*.35;let n=1;pages.forEach((p,i)=>{if(p.offsetTop<=y)n=i+1;});
   if(sc.scrollTop+sc.clientHeight>=sc.scrollHeight-24)n=pages.length;
-  if(n!==vw.page){vw.page=n;vSub();const pg=document.getElementById('pdf-pg');if(pg)pg.textContent=`${n} / ${vw.n}`;const tb=document.getElementById('pdf-thumbs');if(tb){[...tb.children].forEach((b,i)=>b.classList.toggle('on',i===n-1));const el=tb.children[n-1];if(el)tb.scrollLeft=el.offsetLeft-tb.clientWidth/2+el.offsetWidth/2;}}
-  if(n===pages.length)markDone(vw.id);}
+  if(n!==vw.page){vw.page=n;vSub();const pg=document.getElementById('pdf-pg');if(pg)pg.textContent=`${n} / ${vw.n}`;const tb=document.getElementById('pdf-thumbs');if(tb){[...tb.children].forEach((b,i)=>b.classList.toggle('on',i===n-1));const el=tb.children[n-1];if(el)tb.scrollLeft=el.offsetLeft-tb.clientWidth/2+el.offsetWidth/2;}}}
 function pdfGo(n){const sc=document.getElementById('pdf-scroll');if(!sc)return;const p=sc.querySelectorAll('.pdf-page')[n-1];if(p)sc.scrollTo({top:p.offsetTop-14,behavior:'smooth'});}
 
 /* Slides viewer */
@@ -2171,7 +2114,7 @@ function isRtlDoc(){return document.documentElement.dir==='rtl';}
 function slideGo(i){if(vw.type!=='slides')return;i=Math.max(0,Math.min(vw.n-1,i));vw.slide=i;const tr=document.getElementById('sl-track');if(!tr)return;tr.style.transform=`translateX(${(isRtlDoc()?1:-1)*i*100}%)`;
   const ct=document.getElementById('sl-count');if(ct)ct.innerHTML=`${hx(t('Slide'))} <span dir="ltr">${i+1} / ${vw.n}</span>`;
   const tb=document.getElementById('sl-thumbs');if(tb){[...tb.children].forEach((b,j)=>b.classList.toggle('on',j===i));const el=tb.children[i];if(el)tb.scrollTo({left:el.offsetLeft-tb.clientWidth/2+el.offsetWidth/2,behavior:'smooth'});}
-  vSub();if(i===vw.n-1)markDone(vw.id);}
+  vSub();}
 function slBind(){const st=document.getElementById('sl-stage'),tr=document.getElementById('sl-track');if(!st)return;let x0=null,dx=0;
   st.addEventListener('pointerdown',e=>{x0=e.clientX;dx=0;tr.classList.add('drag');try{st.setPointerCapture(e.pointerId);}catch(_){}});
   st.addEventListener('pointermove',e=>{if(x0==null)return;dx=e.clientX-x0;tr.style.transform=`translateX(calc(${(isRtlDoc()?1:-1)*vw.slide*100}% + ${dx}px))`;});
@@ -2232,16 +2175,16 @@ function drawGeneric(g,p,v){const T=v.T,rtl=T.lang==='ar',col=v.col;g.direction=
   vAlpha(g,vk(p,.84,.88),()=>{g.fillStyle='rgba(15,23,42,.86)';g.fillRect(0,610,1280,110);g.font='700 30px "Plus Jakarta Sans","IBM Plex Sans Arabic",sans-serif';g.fillStyle='#fff';g.textAlign=al;g.fillText('✓ '+(DOC_L[T.lang]||DOC_L.en).sum+' — '+T.title,sx,675);});
   g.direction='ltr';}
 function vpEl(){return document.getElementById('vp');}
-function openVideo(it){const f=findItem(it.id),c=CRS()[f.ci],T=topicOf(it),D=parseDur(it.dur),S=VSCRIPTS[it.video],nx=nextAfter(it.id),NT=nx?MAT_TYPES[nx.t]:null;
+function openVideo(it){const c=ctxOf(it),T=topicOf(it),D=parseDur(it.dur),S=VSCRIPTS[it.video],nx=nextAfter(it.id),NT=nx?MAT_TYPES[nx.t]:null;
   const SKB='<svg viewBox="0 0 24 24"><path d="M4.5 12a7.5 7.5 0 1 0 2.2-5.3"/><path d="M4.5 4.5v4h4"/><text x="12.6" y="15.2" text-anchor="middle" font-size="7" font-weight="800" fill="#fff" stroke="none">10</text></svg>',SKF='<svg viewBox="0 0 24 24"><path d="M19.5 12a7.5 7.5 0 1 1-2.2-5.3"/><path d="M19.5 4.5v4h-4"/><text x="11.4" y="15.2" text-anchor="middle" font-size="7" font-weight="800" fill="#fff" stroke="none">10</text></svg>';
   openViewer(it,`<div class="vp-wrap"><div class="vp" id="vp" onclick="vpTap()"><canvas id="vp-c"></canvas><div class="vp-cap" id="vp-cap" dir="auto" data-noi18n></div>
     <button class="vp-big" id="vp-big" onclick="event.stopPropagation();vpToggle()" aria-label="Play">${VP_PLAY}</button>
-    <div class="vp-end" onclick="event.stopPropagation()"><div><div class="vp-end-ic">✓</div><div class="vp-end-t">End of lesson</div><div class="row" style="gap:8px;justify-content:center;margin-top:14px"><button class="btn secondary sm" onclick="vpReplay()">Replay</button>${nx?`<button class="btn sm" onclick="nextItem()">Next item</button>`:''}</div></div></div>
+    <div class="vp-end" onclick="event.stopPropagation()"><div><div class="vp-end-ic">✓</div><div class="vp-end-t">End of lesson</div><div class="row" style="gap:8px;justify-content:center;margin-top:14px"><button class="btn secondary sm" onclick="vpReplay()">Replay</button>${nx?`<button class="btn sm" onclick="nextItem()">Next attachment</button>`:''}</div></div></div>
     <div class="vp-ctl ltr" dir="ltr" data-noi18n onclick="event.stopPropagation()"><div class="vp-seek" id="vp-seek"><div class="vp-buf" id="vp-buf"></div><div class="vp-played" id="vp-played"></div><div class="vp-thumb" id="vp-thumb"></div></div>
       <div class="vp-row"><button class="vp-b" id="vp-pp" onclick="vpToggle()" aria-label="Play">${VP_PLAY}</button><button class="vp-b" onclick="vpSkip(-10)" aria-label="Back 10 seconds">${SKB}</button><button class="vp-b" onclick="vpSkip(10)" aria-label="Forward 10 seconds">${SKF}</button><span class="vp-time" id="vp-time">00:00 / ${fmtT(D)}</span><span class="grow"></span><button class="vp-b vp-txt" id="vp-spd" onclick="vpSpeed()" aria-label="Speed">1×</button><button class="vp-b vp-txt on" id="vp-cc" onclick="vpCC()" aria-label="Captions">CC</button></div></div></div>
     <div class="card vp-info"><div class="row" style="align-items:flex-start;gap:10px"><div class="grow" style="min-width:0"><div style="font-weight:800;font-size:15px;line-height:1.35" data-noi18n dir="auto">${hx(it.n)}</div><div class="sub mt6">${hx(c.tch)} · ${hx(c.n)}</div></div><span class="tag" style="background:var(--surface-3);color:var(--muted);flex:0 0 auto">Condensed demo lesson</span></div>
-      <div class="sub mt12" style="line-height:1.55;color:var(--text)" data-noi18n dir="auto">${hx(T.intro)}</div></div>
-    ${nx?`<div class="set-label" style="margin:16px 18px 8px">Up next</div><div class="card" style="margin:0 14px 18px;padding:2px 14px"><div class="citem" onclick="nextItem()"><div class="set-ic" style="background:${NT.col}1f;color:${NT.col}">${matIco(nx.t)}</div><div class="grow" style="min-width:0"><div class="citem-t" data-noi18n dir="auto">${hx(nx.n)}</div><div class="sub mt6">${itemMeta(nx)}</div></div></div></div>`:''}</div>`);
+      <div class="sub mt12" style="line-height:1.55;color:var(--text)" data-noi18n dir="auto">${hx(T.intro)}</div>${matOff.has(it.id)?`<div class="moff">${SVG_OFF}<span>Saved offline</span></div>`:`<div class="mhint">${SVG_WIFI}<span><bdi dir="ltr">~${it.mb} MB</bdi> · best on Wi-Fi</span></div>`}</div>
+    ${nx?`<div class="set-label" style="margin:16px 18px 8px">Up next</div><div class="card" style="margin:0 14px 18px;padding:2px 14px"><div class="mrow" onclick="nextItem()"><div class="set-ic" style="background:${NT.col}1f;color:${NT.col}">${matIco(nx.t)}</div><div class="grow" style="min-width:0"><div class="mrow-t" data-noi18n dir="auto">${hx(nx.n)}</div><div class="sub mt6">${itemMeta(nx)}</div></div></div></div>`:''}</div>`);
   vid={id:it.id,t:0,D,K:D/VID_LEN,speed:1,playing:false,cc:true,raf:0,last:0,hide:0,caps:S?S.caps:genericCaps(T),draw:S?S.draw:drawGeneric,T,col:c.col,img:null};
   if(!S){const im=new Image(),vref=vid;im.onload=()=>{vref.img=im;if(vid===vref)vpDraw();};im.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(FIG(T.fig,c.col));}
   vpBindSeek();vpDraw();vpIcons();}
@@ -2257,7 +2200,7 @@ function vpPause(){if(!vid)return;vid.playing=false;cancelAnimationFrame(vid.raf
 function vpToggle(){if(vid&&vid.playing)vpPause();else vpPlay();}
 function vpTap(){if(!vid)return;const e=vpEl();if(e.classList.contains('ended'))return;if(vid.playing&&e.classList.contains('hide-ctl')){vpShowCtl();return;}vpToggle();}
 function vpShowCtl(){if(!vid)return;const e=vpEl();if(!e)return;e.classList.remove('hide-ctl');clearTimeout(vid.hide);if(vid.playing)vid.hide=setTimeout(()=>{if(vid&&vid.playing&&vpEl())vpEl().classList.add('hide-ctl');},2600);}
-function vpEnd(){if(!vid)return;vid.playing=false;vid.t=vid.D;cancelAnimationFrame(vid.raf);clearTimeout(vid.hide);const e=vpEl();e.classList.remove('playing','hide-ctl');e.classList.add('ended');vpIcons();vpDraw();markDone(vid.id,true);}
+function vpEnd(){if(!vid)return;vid.playing=false;vid.t=vid.D;cancelAnimationFrame(vid.raf);clearTimeout(vid.hide);const e=vpEl();e.classList.remove('playing','hide-ctl');e.classList.add('ended');vpIcons();vpDraw();}
 function vpReplay(){if(!vid)return;vid.t=0;vpEl().classList.remove('ended');vpPlay();}
 function vpSkip(s){if(!vid)return;vid.t=Math.max(0,Math.min(vid.D,vid.t+s));vpEl().classList.remove('ended');vpDraw();vpShowCtl();if(vid.t>=vid.D)vpEnd();}
 function vpSpeed(){if(!vid)return;const S=[.75,1,1.25,1.5,2];vid.speed=S[(S.indexOf(vid.speed)+1)%S.length];document.getElementById('vp-spd').textContent=vid.speed+'×';vpShowCtl();}
@@ -2268,9 +2211,142 @@ function vpBindSeek(){const s=document.getElementById('vp-seek');if(!s)return;le
   const up=()=>{if(!drag)return;drag=false;if(vid&&vid.t>=vid.D)vpEnd();};s.addEventListener('pointerup',up);s.addEventListener('pointercancel',up);}
 function vpStop(){if(vid){vid.playing=false;cancelAnimationFrame(vid.raf);clearTimeout(vid.hide);}vid=null;}
 
+/* ---- board photo: the teacher's board after class (SVG "photo", zoom + pan, PNG download) ---- */
+const BOARDS={
+  thalesConv:{kind:'chalk',date:'Mon 16/11',title:'Converse of Thales’ theorem',body:(c,y)=>`
+    <path d="M300 205 L140 560 L560 560 Z" ${c.l}/>
+    <path d="M220 382 L430 382" ${c.ly} stroke-dasharray="14 10"/>
+    <path d="M318 372l12 10-12 10M332 372l12 10-12 10M338 550l12 10-12 10M352 550l12 10-12 10" ${c.ly}/>
+    ${c.t(300,188,'A',40)}${c.t(116,592,'B',40)}${c.t(584,592,'C',40)}${c.t(194,382,'M',38,y)}${c.t(456,382,'N',38,y)}
+    ${c.t(640,215,'If  AM/AB = AN/AC',46,null,'start')}
+    ${c.t(640,275,'and A, M, B / A, N, C',40,null,'start')}
+    ${c.t(640,325,'in the same order',40,null,'start')}
+    ${c.t(640,392,'⇒  (MN) // (BC)',52,y,'start')}
+    <path d="M628 410 H960" ${c.ly}/>
+    ${c.t(640,470,'Ex: AM=4  AB=10  AN=6  AC=15',36,null,'start')}
+    ${c.t(640,522,'4/10 = 0.4     6/15 = 0.4',38,null,'start')}
+    ${c.t(640,580,'equal ⇒ (MN) // (BC) ✓',40,c.g,'start')}
+    ${c.t(640,660,'HW: ex. 1 → 6 p.112',38,c.p,'start')}`},
+  density:{kind:'chalk',date:'Thu 12/11',title:'Measuring density   ρ = m / V',body:(c,y)=>`
+    <path d="M200 250 V600 Q200 630 230 630 H330 Q360 630 360 600 V250" ${c.l}/>
+    <path d="M190 250 H370" ${c.l}/>
+    ${[300,350,400,450,500,550].map(v=>`<path d="M200 ${v} h26" ${c.l}/>`).join('')}
+    <path d="M204 420 H356" ${c.lb}/><path d="M204 360 H356" ${c.ly} stroke-dasharray="10 8"/>
+    <rect x="248" y="470" width="64" height="64" rx="6" ${c.l}/>
+    ${c.t(390,428,'50 mL',32,c.b,'start')}${c.t(390,368,'60 mL',32,y,'start')}
+    ${c.t(560,240,'m = 27 g',46,null,'start')}
+    ${c.t(560,310,'V = 60 − 50 = 10 cm³',46,null,'start')}
+    ${c.t(560,390,'ρ = 27 / 10 = 2.7 g/cm³',50,y,'start')}
+    ${c.t(560,450,'→ aluminium',44,c.g,'start')}
+    <path d="M560 500 H1040 M560 500 V660 M760 500 V660" ${c.l.replace('stroke-width="5"','stroke-width="3"')}/>
+    ${c.t(580,545,'water',34,null,'start')}${c.t(790,545,'1 g/cm³',34,null,'start')}
+    ${c.t(580,595,'aluminium',34,null,'start')}${c.t(790,595,'2.7 g/cm³',34,null,'start')}
+    ${c.t(580,645,'iron',34,null,'start')}${c.t(790,645,'7.9 g/cm³',34,null,'start')}`},
+  radicalsRat:{kind:'chalk',date:'Tue 10/11',title:'Rationalising denominators',body:(c,y)=>`
+    ${c.t(130,250,'1/√2 = √2 / (√2 × √2) = √2/2',50,null,'start')}
+    ${c.t(130,340,'6/√3 = 6√3 / 3 = 2√3',50,null,'start')}
+    ${c.t(130,430,'5/(√7 − 2)',50,null,'start')}
+    ${c.t(380,430,'× (√7 + 2)/(√7 + 2)',46,c.b,'start')}
+    ${c.t(130,510,'= 5(√7 + 2) / (7 − 4) = 5(√7 + 2)/3',48,null,'start')}
+    <rect x="660" y="560" width="400" height="92" rx="10" ${c.ly}/>
+    ${c.t(860,620,'(a − b)(a + b) = a² − b²',40,y)}
+    ${c.t(130,630,'HW: p.84 ex. 3, 5, 7',40,c.p,'start')}`},
+  radicalsSimp:{kind:'chalk',date:'Fri 6/11',title:'Simplifying radicals',body:(c,y)=>`
+    ${c.t(130,240,'√50 = √(25 × 2) = 5√2',50,null,'start')}
+    ${c.t(130,320,'√72 = √(36 × 2) = 6√2',50,null,'start')}
+    ${c.t(130,410,'√48 − 2√27 + √75',50,null,'start')}
+    ${c.t(170,480,'= 4√3 − 6√3 + 5√3',48,null,'start')}
+    ${c.t(170,550,'= 3√3',54,y,'start')}
+    <path d="M160 566 H300" ${c.ly}/>
+    <rect x="700" y="210" width="360" height="300" rx="10" ${c.l} stroke-dasharray="12 9"/>
+    ${c.t(880,262,'perfect squares',38,c.b)}
+    ${c.t(880,330,'4   9   16   25',42)}
+    ${c.t(880,395,'36   49   64',42)}
+    ${c.t(880,460,'81   100',42)}
+    ${c.t(700,620,'√(a × b) = √a × √b',44,y,'start')}`},
+  plants:{kind:'white',date:'13/11',title:'Parts of a plant',body:(c,y)=>`
+    <path d="M430 640 V330" stroke="#15803d" stroke-width="9" fill="none" stroke-linecap="round"/>
+    <path d="M430 520 C350 500 300 440 290 370 C370 380 420 440 430 520Z" fill="#86efac" stroke="#15803d" stroke-width="5"/>
+    <path d="M430 450 C510 430 560 370 570 300 C490 310 440 370 430 450Z" fill="#86efac" stroke="#15803d" stroke-width="5"/>
+    ${[0,60,120,180,240,300].map(a=>`<ellipse cx="430" cy="235" rx="24" ry="42" fill="#f9a8d4" stroke="#db2777" stroke-width="4" transform="rotate(${a} 430 290)"/>`).join('')}
+    <circle cx="430" cy="290" r="34" fill="#fde047" stroke="#ca8a04" stroke-width="5"/>
+    <path d="M250 640 H610" stroke="#92400e" stroke-width="7"/>
+    <path d="M430 640 c-20 20-60 30-90 26 M430 640 c18 24 58 34 86 30 M430 640 v40" stroke="#92400e" stroke-width="5" fill="none"/>
+    <path d="M470 290 H700 M560 330 H700 M436 560 H700 M380 670 H700" stroke="#1d4ed8" stroke-width="4" fill="none"/>
+    ${c.t(715,300,'flower → seeds',46,'#1d4ed8','start')}${c.t(715,342,'leaf → makes food',46,'#15803d','start')}
+    ${c.t(715,572,'stem → carries water',46,'#1d4ed8','start')}${c.t(715,682,'roots → take in water',46,'#b91c1c','start')}`},
+  fractions:{kind:'white',date:'12/11',title:'Comparing fractions',body:(c,y)=>`
+    <circle cx="230" cy="330" r="100" fill="none" stroke="#1d4ed8" stroke-width="5"/>
+    <path d="M230 230 V430" stroke="#1d4ed8" stroke-width="5"/><path d="M230 230 A100 100 0 0 1 230 430 Z" fill="#93c5fd"/>
+    <circle cx="520" cy="330" r="100" fill="none" stroke="#b91c1c" stroke-width="5"/>
+    <path d="M520 230 V430 M420 330 H620" stroke="#b91c1c" stroke-width="5"/>
+    <path d="M520 330 L520 230 A100 100 0 1 1 420 330 Z" fill="#fca5a5"/>
+    ${c.t(230,490,'1/2',54,'#1d4ed8')}${c.t(520,490,'3/4',54,'#b91c1c')}
+    ${c.t(375,590,'3/4  >  1/2',62,'#15803d')}
+    ${c.t(720,280,'same denominator:',40,'#111827','start')}${c.t(740,340,'2/5 < 4/5',50,'#1d4ed8','start')}
+    ${c.t(720,440,'same numerator:',40,'#111827','start')}${c.t(740,500,'1/3 > 1/4',50,'#b91c1c','start')}
+    ${c.t(720,620,'Homework: worksheet p.2',38,'#6b21a8','start')}`},
+};
+function boardSVG(key){const B=BOARDS[key]||BOARDS.thalesConv,chalk=B.kind!=='white';
+  const ink=chalk?'#f4f1e8':'#111827',Y=chalk?'#fde68a':'#b45309';
+  const c={
+    l:`fill="none" stroke="${ink}" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"`,
+    ly:`fill="none" stroke="${Y}" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"`,
+    lb:`fill="none" stroke="${chalk?'#93c5fd':'#1d4ed8'}" stroke-width="5" stroke-linecap="round"`,
+    g:chalk?'#bbf7d0':'#15803d',b:chalk?'#bfdbfe':'#1d4ed8',p:chalk?'#fbcfe8':'#6b21a8',
+    t:(x,yy,str,size,fill,anchor)=>`<text x="${x}" y="${yy}" font-size="${size||40}" fill="${fill||ink}" text-anchor="${anchor||'middle'}">${hx(str)}</text>`};
+  const surface=chalk
+    ?`<rect x="62" y="62" width="1056" height="656" fill="#23493b"/><rect x="62" y="62" width="1056" height="656" fill="url(#bd-smear)" opacity=".55"/>`
+    :`<rect x="62" y="62" width="1056" height="656" fill="#f6f7f4"/><rect x="62" y="62" width="1056" height="656" fill="url(#bd-smear)" opacity=".18"/>`;
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="1200" height="800" direction="ltr" style="direction:ltr">
+  <defs>
+    <filter id="bd-chalk" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="2" seed="7" result="n"/><feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -1.05 1.25" result="m"/><feComposite in="SourceGraphic" in2="m" operator="in"/></filter>
+    <radialGradient id="bd-smear" cx="38%" cy="42%" r="70%"><stop offset="0" stop-color="#fff" stop-opacity=".16"/><stop offset=".6" stop-color="#fff" stop-opacity=".04"/><stop offset="1" stop-color="#000" stop-opacity=".2"/></radialGradient>
+    <radialGradient id="bd-vig" cx="50%" cy="46%" r="72%"><stop offset=".55" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".5"/></radialGradient>
+    <linearGradient id="bd-glare" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".16"/><stop offset=".32" stop-color="#fff" stop-opacity="0"/></linearGradient>
+    <linearGradient id="bd-wall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e7e0d2"/><stop offset="1" stop-color="#cfc6b5"/></linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#bd-wall)"/>
+  <g transform="matrix(1 .014 -.022 1 26 4)">
+    <rect x="46" y="52" width="1100" height="700" rx="8" fill="#000" opacity=".22"/>
+    <rect x="40" y="40" width="1100" height="700" rx="8" fill="${chalk?'#7a4b24':'#b8bec6'}"/>
+    ${surface}
+    <g font-family="Caveat, 'Segoe Print', 'Comic Sans MS', cursive" font-weight="700" ${chalk?'filter="url(#bd-chalk)"':''}>
+      ${c.t(1080,118,B.date,34,chalk?'#e5e7eb':'#6b7280','end')}
+      ${c.t(110,140,B.title,58,Y,'start')}
+      <path d="M104 160 H${Math.min(1040,130+B.title.length*24)}" ${c.ly.replace('stroke-width="5"','stroke-width="4"')}/>
+      ${B.body(c,Y)}
+    </g>
+    <rect x="40" y="712" width="1100" height="30" rx="4" fill="${chalk?'#5e3a1c':'#9aa1aa'}"/>
+    ${chalk?'<rect x="690" y="704" width="64" height="13" rx="6" fill="#f8fafc"/><rect x="780" y="706" width="44" height="11" rx="5" fill="#fde68a"/><rect x="930" y="700" width="96" height="22" rx="4" fill="#44403c"/><rect x="930" y="700" width="96" height="9" rx="3" fill="#a8a29e"/>'
+      :'<rect x="690" y="702" width="84" height="16" rx="7" fill="#1d4ed8"/><rect x="800" y="702" width="84" height="16" rx="7" fill="#b91c1c"/><rect x="930" y="700" width="96" height="22" rx="4" fill="#475569"/>'}
+    <rect x="62" y="62" width="1056" height="656" fill="url(#bd-glare)"/>
+  </g>
+  <rect width="1200" height="800" fill="url(#bd-vig)"/>
+</svg>`;}
+function openBoard(it){const f=findItem(it.id),S=SUBJECTS[f.s],L=f.lesson;
+  openViewer(it,`<div class="bd-wrap"><div class="pdf-tools"><button class="pt-btn" onclick="bdZoom(-1)" aria-label="Zoom out">−</button><span class="pt-z tnum" id="bd-z" dir="ltr">100%</span><button class="pt-btn" onclick="bdZoom(1)" aria-label="Zoom in">+</button><button class="pt-btn pt-fit" onclick="bdZoom(0)">Fit</button><span class="grow"></span><span class="pt-page">Drag to move</span></div>
+  <div class="bd-scroll" id="bd-scroll"><div class="bd-canvas" id="bd-canvas" dir="ltr" data-noi18n>${boardSVG(it.board)}</div></div>
+  <div class="bd-cap"><svg viewBox="0 0 24 24"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg><span class="grow">The teacher's board, photographed after class</span>${L?`<span>${teacherShort(S.tch)} · ${L.d}</span>`:''}</div></div>`);
+  vw.zoom=1;bdBind();bdLayout(false);}
+function bdLayout(keep){const sc=document.getElementById('bd-scroll'),cv=document.getElementById('bd-canvas');if(!sc||!cv)return;
+  const rx=keep&&sc.scrollWidth>sc.clientWidth?(Math.abs(sc.scrollLeft)+sc.clientWidth/2)/sc.scrollWidth:.5,ry=keep&&sc.scrollHeight>sc.clientHeight?(sc.scrollTop+sc.clientHeight/2)/sc.scrollHeight:.5;
+  cv.style.width=Math.round((sc.clientWidth||360)*vw.zoom)+'px';
+  const z=document.getElementById('bd-z');if(z)z.textContent=Math.round(vw.zoom*100)+'%';
+  const x=Math.max(0,rx*sc.scrollWidth-sc.clientWidth/2);sc.scrollLeft=isRtlDoc()?-x:x;sc.scrollTop=Math.max(0,ry*sc.scrollHeight-sc.clientHeight/2);}
+function bdZoom(d){vw.zoom=d===0?1:Math.max(1,Math.min(3,Math.round((vw.zoom+d*.5)*100)/100));bdLayout(true);}
+function bdBind(){const sc=document.getElementById('bd-scroll');if(!sc)return;let p=null;
+  sc.addEventListener('pointerdown',e=>{p={x:e.clientX,y:e.clientY,l:sc.scrollLeft,t:sc.scrollTop};sc.classList.add('drag');try{sc.setPointerCapture(e.pointerId);}catch(_){}});
+  sc.addEventListener('pointermove',e=>{if(!p)return;sc.scrollLeft=p.l-(e.clientX-p.x);sc.scrollTop=p.t-(e.clientY-p.y);});
+  const up=()=>{p=null;sc.classList.remove('drag');};sc.addEventListener('pointerup',up);sc.addEventListener('pointercancel',up);
+  sc.addEventListener('wheel',e=>{if(!e.ctrlKey)return;e.preventDefault();bdZoom(e.deltaY<0?1:-1);},{passive:false});}
+/* board photo → PNG (fonts may fall back to a system cursive inside the image) */
+function boardPng(it){const img=new Image(),name=fileName(it.n)+'.png';
+  img.onload=()=>{try{const cv=document.createElement('canvas');cv.width=1200;cv.height=800;cv.getContext('2d').drawImage(img,0,0);cv.toBlob(b=>{if(b)saveBlob(b,name);},'image/png');}catch(e){}};
+  img.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(boardSVG(it.board));}
 
 ['touchstart','mousedown'].forEach(ev=>document.getElementById('viewer').addEventListener(ev,e=>e.stopPropagation(),{passive:true}));
-window.addEventListener('resize',()=>{if(vw.type==='pdf'&&viewerOpen())pdfLayout(true);if(vid)vpDraw();});
+window.addEventListener('resize',()=>{if(vw.type==='pdf'&&viewerOpen())pdfLayout(true);if(vw.type==='board'&&viewerOpen())bdLayout(true);if(vid)vpDraw();});
 
 const SCREENS={
 login:()=>`
@@ -2303,7 +2379,7 @@ home:()=>{const k=K();return `
       ["show('reportcards')",'report','Report cards',0],
       ["show('homework')",'homework','Homework',homework[kid].filter(h=>h.status==='missing').length],
       ["show('examtt')",'exam','Exams',0],
-      ["show('courses')",'courses','Courses',0],
+      ["openMaterials('lesson')",'courses','Class materials',matNewCount()],
       ["show('chat')",'msg','Messages',unreadMsgs(kid)],
       ["show('meetings')",'meet','Meetings',0],
       ["show('slips')",'slip','Slips',pendingSlips(kid)],
@@ -2327,25 +2403,12 @@ home:()=>{const k=K();return `
   ${feesTotal()>0?`<div class="card mt16" style="background:var(--warn-bg);border-color:color-mix(in srgb,var(--warn) 35%,transparent);cursor:pointer" onclick="show('fees')"><div class="row"><div class="icon-btn" style="background:var(--surface);border:none;color:var(--warn)"><svg viewBox="0 0 24 24"><path d="M12 4 21 20H3z"/><path d="M12 10v4M12 17.5v.5"/></svg></div><div class="grow"><div style="font-weight:700">$${feesTotal().toLocaleString()} in fees due</div><div class="sub mt6">Next due 30 Nov · tap to pay</div></div><span style="color:var(--warn)">›</span></div></div>`:''}
   <div style="height:10px"></div>`;},
 
-courses:()=>{const k=K(),cs=CRS(),A=allProg();return `
-  <div class="apphead"><span class="lead"></span><h2 class="screen-title">Courses</h2></div>
-  <p class="sub">${k.n} · ${k.grp} · ${cs.length} subjects</p>
-  <div class="card mt16"><div class="row" style="gap:14px"><div class="cring" style="--p:${A.pct}"><b class="tnum">${A.pct}%</b></div><div class="grow" style="min-width:0"><div style="font-weight:800">${first()}'s progress</div><div class="sub mt6">${A.done} of ${A.total} items completed</div><div class="progress mt8"><i style="width:${A.pct}%"></i></div></div></div>
-    <div class="sub mt12" style="line-height:1.5">Progress comes from the student app. Viewing materials here doesn't change it.</div></div>
-  <div class="mt8">${cs.map((c,i)=>{const P=courseProg(i);return `<div class="card mt12" style="cursor:pointer" onclick="openCourse(${i})"><div class="row"><div class="subj" style="background:${c.col}">${c.b||c.c}</div><div class="grow" style="min-width:0"><div style="font-weight:800">${c.n}</div><div class="sub mt6">${c.tch} · Room ${c.room}</div><div class="row mt8" style="gap:8px"><div class="progress grow" style="height:5px"><i style="width:${P.pct}%"></i></div><span class="sub tnum" style="font-size:11px;font-weight:700">${P.pct}%</span></div><div class="sub mt6" style="font-size:11.5px">${P.done} of ${P.total} items</div></div></div></div>`;}).join('')}</div>
-  <div style="height:10px"></div>`;},
-
-course:()=>{const cs=CRS();if(curCourse>=cs.length)curCourse=0;const c=cs[curCourse];if(!c)return '<div class="apphead"><span class="lead"></span></div>';const P=courseProg(curCourse),nx=nextUnfinished(curCourse),secs=secsOf(curCourse),open=openSecs(curCourse),la=lastActivity(curCourse);return `
-  <div class="apphead"><span class="lead"></span><div><h2 style="font-size:20px;font-weight:800">${c.n}</h2><div class="sub">${K().grp} · Room ${c.room}</div></div></div>
-  <div class="card mt16"><div class="row"><div class="avatar" style="width:44px;height:44px;font-size:14px;background:${c.col}">${tchInitials(c.tch)}</div><div class="grow"><div style="font-weight:800">${c.tch}</div><div class="sub mt6">Course teacher</div></div><div class="icon-btn" onclick="msgCourseTeacher()" aria-label="Message teacher"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M4 5.5h16v11H9l-4 3.5v-3.5H4z"/></svg></div></div></div>
-  <div class="card mt12"><div class="row" style="gap:14px"><div class="cring" style="--p:${P.pct}"><b class="tnum">${P.pct}%</b></div><div class="grow" style="min-width:0"><div style="font-weight:800">${first()}'s progress</div><div class="sub mt6">${P.done} of ${P.total} items completed</div><div class="progress mt8"><i style="width:${P.pct}%"></i></div></div></div>
-    <div class="divider"></div>
-    <div class="row" style="gap:10px;align-items:flex-start"><div class="set-ic" style="width:32px;height:32px;flex:0 0 auto"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg></div><div class="grow" style="min-width:0"><div class="sub" style="font-size:11.5px;font-weight:700">Last activity</div>${la?`<div style="font-weight:700;font-size:13.5px;margin-top:3px"><span>${la.d}</span> · <span data-noi18n dir="auto">${hx(la.it.n)}</span></div>`:`<div style="font-weight:700;font-size:13.5px;margin-top:3px">No activity yet</div>`}</div></div>
-    ${nx?`<div class="row mt12" style="gap:10px;align-items:flex-start;cursor:pointer" onclick="openItem('${nx.id}')"><div class="set-ic" style="width:32px;height:32px;flex:0 0 auto;background:${MAT_TYPES[nx.t].col}1f;color:${MAT_TYPES[nx.t].col}">${matIco(nx.t)}</div><div class="grow" style="min-width:0"><div class="sub" style="font-size:11.5px;font-weight:700">Up next</div><div style="font-weight:700;font-size:13.5px;margin-top:3px" data-noi18n dir="auto">${hx(nx.n)}</div></div><span style="color:var(--faint);align-self:center">›</span></div>`:`<div class="tag ok mt12">All items completed</div>`}</div>
-  <div class="set-label">About this course</div>
-  <div class="card"><div class="sub" style="line-height:1.6;color:var(--text)" data-noi18n dir="auto">${c.desc}</div></div>
-  <div class="row between" style="margin:18px 4px 0"><div class="set-label" style="margin:0">Course content</div><span class="sub" style="font-size:11.5px"><bdi>${secs.length} sections</bdi> · <bdi>${P.total} items</bdi></span></div>
-  ${secs.map((sec,si)=>{const d=sec.items.filter(x=>isDone(x.id)).length,o=open.has(si);return `<div class="csec${o?' open':''}" data-sec="${si}"><button class="csec-h" onclick="toggleSec(${si})" aria-expanded="${o}"><div class="grow" style="min-width:0"><div class="csec-t" data-noi18n dir="auto">${hx(sec.n)}</div><div class="sub mt6">${secMeta(sec)}</div></div><span class="csec-n tnum${d===sec.items.length?' full':''}">${d}/${sec.items.length}</span><svg class="chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button><div class="csec-b" style="${o?'':'height:0px'}"><div class="csec-in">${sec.items.map(it=>courseItemRow(it,nx&&nx.id)).join('')}</div></div></div>`;}).join('')}
+materials:()=>{const subs=matSubjects();return `
+  <div class="apphead"><span class="lead"></span><h2 class="screen-title">Class materials</h2></div>
+  <p class="sub" style="line-height:1.5">What ${first()} covered in class, with the teacher's notes and files</p>
+  <div class="chip-scroll mt12">${[{c:'all',n:'All'}].concat(subs).map(x=>`<div class="chip${matSubj===x.c?' active':''}" onclick="matSetSubj('${x.c}')">${x.n}</div>`).join('')}</div>
+  <div class="seg mt12">${[['lesson','By lesson'],['revision','Revision'],['textbooks','Textbooks']].map(([k,l])=>`<button class="${matTab===k?'active':''}" onclick="matSetTab('${k}')">${l}</button>`).join('')}</div>
+  <div>${matBody()}</div>
   <div style="height:14px"></div>`;},
 
 attendance:()=>{const k=K();return `
@@ -2697,7 +2760,7 @@ function renderDrawer(){
     `<div class="drawer-sec">Academics</div>`+
     item("go('attendance')",'att','Attendance')+
     item("go('grades')",'grades','Grades')+
-    item("go('courses')",'courses','Courses')+
+    item("go('materials')",'courses','Class materials',matNewCount())+
     item("go('reportcards')",'report','Report cards',reportCards[kid].filter(r=>!r.locked&&!r.ack).length)+
     item("go('homework')",'homework','Homework',homework[kid].filter(h=>h.status==='missing').length)+
     item("go('examtt')",'exam','Exam timetable')+
@@ -2730,7 +2793,7 @@ function forYou(){
   const E=EXAMS[kid],nx=E.list.find(e=>daysTo(e.d)>=0),ps=pendingSlips(kid),b=bookings.filter(x=>x.kid===kid),miss=homework[kid].filter(h=>h.status==='missing').length,un=unreadNotifs();
   let h='';
   h+=row("show('examtt')",'exam','var(--danger-bg)','var(--danger)',`Next exam: ${nx.s}`,`${nx.day} ${nx.d} · ${nx.time} · ${inDays(daysTo(nx.d))}`);
-  {const A=allProg();h+=row("show('courses')",'courses','var(--accent-soft)','var(--accent)',`Courses · ${A.pct}% complete`,A.next?`<span>Next</span>: <span data-noi18n dir="auto">${hx(A.next.n)}</span>`:'All items completed');}
+  {const nw=matNewCount(),n=MATS[kid].lessons.length;h+=row("openMaterials('lesson')",'courses','var(--accent-soft)','var(--accent)','Class materials',`This week: ${n} lessons · ${nw} new material${nw===1?'':'s'}`,nw?`<span class="mnew">${nw}</span>`:'');}
   if(miss)h+=row("show('homework')",'homework','var(--danger-bg)','var(--danger)',`${miss} missing homework`,'Tap to see what to hand in');
   if(ps)h+=row("show('slips')",'slip','var(--warn-bg)','var(--warn)',`${ps} permission slip${ps>1?'s':''} to sign`,slips.find(s=>s.kid===kid&&s.status==='pending').title,`<span class="tag warn">Sign</span>`);
   h+=b.length?row("show('meetings')",'meet','var(--ok-bg)','var(--ok)',`Meeting booked · ${b.map(x=>`<bdi>${x.t}</bdi> <bdi dir="ltr">${SLOT_TIMES[x.slot]}</bdi>`).join(', ')}`,'Wed 18 Nov · parent–teacher meetings',`<span class="tag ok">${b.length}</span>`)
@@ -2829,7 +2892,7 @@ function doLogin(){const u=document.getElementById('li-user').value.trim(),p=doc
 function logout(){hist=[];show('login',true);toast('Logged out');}
 function switchChild(){openSheet(`<h2 style="font-size:20px;font-weight:800">Switch child</h2><p class="sub mt8">You're linked to ${children.length} ${children.length===1?'child':'children'}</p>
   <div class="mt16">${children.map(c=>`<div class="card mt12" style="cursor:pointer;${c.id===kid?'border:1.5px solid var(--accent);background:var(--accent-soft)':''}" onclick="pickChild(${c.id})"><div class="row"><div class="avatar" style="width:44px;height:44px;font-size:14px;background:${c.c}">${initials(c.n)}</div><div class="grow"><div style="font-weight:800">${c.n}</div><div class="sub mt6">${c.grp} · #${c.num}</div><div class="row mt8" style="gap:6px"><span class="tag ${c.present?'ok':'bad'}">${c.present?'Present today':'Absent'}</span><span class="tag a">${overallPct(subjectsByChild[c.id]).toFixed(1)}/20 avg</span></div></div>${c.id===kid?'<span class="tag a">Selected</span>':'<span style="color:var(--faint)">›</span>'}</div></div>`).join('')}</div>`);}
-function pickChild(i){if(typeof viewerOpen==='function'&&viewerOpen())closeViewer();kid=i;closeSheet();rebuildAll();const c=current==='thread'?'chat':current==='bulletin'?'reportcards':current==='course'?'courses':current;hist=[];show(c,true);toast('Now viewing '+children[i].n.split(' ')[0]);}
+function pickChild(i){if(typeof viewerOpen==='function'&&viewerOpen())closeViewer();kid=i;matSubj='all';closeSheet();rebuildAll();const c=current==='thread'?'chat':current==='bulletin'?'reportcards':current;hist=[];show(c,true);toast('Now viewing '+children[i].n.split(' ')[0]);}
 function addReason(){openSheet(`<h2 style="font-size:20px;font-weight:800">Reason for late arrival</h2><p class="sub mt8">12 November · sent to the school office</p>
   <div class="mt16" style="display:flex;flex-direction:column;gap:8px">
     <div class="chip" style="justify-content:flex-start" onclick="submitReason('Traffic / transport delay')">🚗 Traffic / road closure</div>

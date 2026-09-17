@@ -228,14 +228,6 @@
   .tt.now{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent-soft)}
   .brk{display:flex;align-items:center;gap:10px;margin:12px 4px 0;font-size:11.5px;font-weight:700;color:var(--faint)}
   .brk::before,.brk::after{content:"";flex:1;height:1px;background:var(--line)}
-  /* bus */
-  .pulse{width:10px;height:10px;border-radius:50%;background:#4ade80;box-shadow:0 0 0 0 rgba(74,222,128,.6);animation:pulse 1.8s infinite;flex:none}
-  @keyframes pulse{70%{box-shadow:0 0 0 10px rgba(74,222,128,0)}100%{box-shadow:0 0 0 0 rgba(74,222,128,0)}}
-  .stops{position:relative;padding-inline-start:22px}
-  .stops::before{content:"";position:absolute;inset-inline-start:6px;top:8px;bottom:8px;width:2px;background:var(--line)}
-  .stop{position:relative;display:flex;justify-content:space-between;padding:9px 0;font-size:13.5px}
-  .stop::before{content:"";position:absolute;inset-inline-start:-20px;top:13px;width:10px;height:10px;border-radius:50%;background:var(--surface);border:2px solid var(--faint)}
-  .stop.mine::before{border-color:var(--accent);background:var(--accent)}
   /* forms */
   .check{display:flex;gap:10px;align-items:flex-start;font-size:13.5px;line-height:1.45;color:var(--text);cursor:pointer}
   .check input{accent-color:var(--accent);width:18px;height:18px;margin-top:1px;flex:none}
@@ -1777,9 +1769,6 @@ let notifs=[
 const NOTIF_IC={grades:['grades','var(--accent)'],slip:['slip','#8b5cf6'],meet:['meet','#4f46e5'],conduct:['conduct','#16a34a'],concern:['conduct','#c07807'],att:['att','#c07807'],homework:['homework','#dc2626'],fees:['fees','#0ea5e9'],news:['news','var(--cedar)']};
 const unreadNotifs=()=>notifs.filter(n=>!n.read).length;
 
-/* ---- 10. bus ---- */
-const BUS={0:{no:7,route:'Achrafieh – Sassine – Badaro',driver:'Mr. Joseph Karam',phone:'+961 3 227 614',am:'07:05',pm:'14:50',stop:'Sassine Square'},1:null};
-let busSkip={0:false,1:false};
 
 /* ---- 11. documents ---- */
 const DOC_TYPES=[
@@ -2615,7 +2604,6 @@ home:()=>{const k=K();return `
       ["show('slips')",'slip','Slips',pendingSlips(kid)],
       ["show('timetable')",'timetable','Timetable',0],
       ["show('conduct')",'conduct','Conduct',0],
-      ["show('bus')",'bus','Bus',0],
       ["show('fees')",'fees','Fees',0],
       ["show('documents')",'doc','Documents',0],
       ["show('calendar')",'calendar','Calendar',0],
@@ -2845,25 +2833,6 @@ notifs:()=>`
     ${notifs.map(n=>{const [ic,col]=NOTIF_IC[n.type];return `<div class="list-item" style="cursor:pointer;align-items:flex-start" onclick="openNotif(${n.id})"><div class="icon-btn" style="width:40px;height:40px;background:color-mix(in srgb,${col} 14%,transparent);border:none;color:${col}">${svg(ic,19)}</div><div class="grow"><div class="row between" style="gap:8px"><span style="font-weight:${n.read?600:800}">${n.title}</span>${n.read?'':'<span class="unread-dot"></span>'}</div><div class="sub mt6" style="line-height:1.4">${n.sub}</div><div class="row mt6" style="gap:6px"><span class="sub" style="font-size:11.5px">${n.time}</span>${n.kid!=null?`<span class="tag" style="background:var(--surface-3);color:var(--muted);padding:2px 8px;font-size:10.5px">${children[n.kid].n.split(' ')[0]}</span>`:''}</div></div></div>`;}).join('')}
   </div>
   <div style="height:10px"></div>`,
-
-bus:()=>{const b=BUS[kid];if(!b)return `
-  <div class="apphead"><span class="lead"></span><h2 class="screen-title">School bus</h2></div>
-  <div class="card mt16" style="text-align:center;padding:26px 18px"><div class="icon-btn" style="margin:0 auto;width:56px;height:56px;border-radius:18px;background:var(--accent-soft);border:none;color:var(--accent)">${svg('bus',28)}</div><div style="font-weight:800;margin-top:12px">${first()} isn't registered for the school bus</div><div class="sub mt8" style="line-height:1.5">Bus places for the 2nd term open on 1 December. Routes cover Achrafieh, Sassine, Badaro, Sin el Fil and Hazmieh.</div><button class="btn mt16" onclick="toast('Request sent to the Transport Office ✓')">Request a bus place</button></div>`;
-  return `
-  <div class="apphead"><span class="lead"></span><h2 class="screen-title">School bus</h2></div>
-  <div class="card mt12" style="background:linear-gradient(160deg,var(--accent),var(--accent-2));color:#fff;border:none">
-    <div class="row between"><div class="row" style="gap:8px"><span class="pulse"></span><span style="font-weight:800">On route · ETA 14:48</span></div><span style="font-size:11px;opacity:.85;font-weight:700">AFTERNOON RUN</span></div>
-    <div style="font-size:24px;font-weight:800;margin-top:10px">Bus ${b.no}</div><div style="opacity:.9;font-size:13px">${b.route}</div>
-    <div class="row mt12" style="gap:8px"><div class="tile" style="flex:1"><div class="n tnum" style="font-size:19px">${b.am}</div><div class="l">Morning pickup</div></div><div class="tile" style="flex:1"><div class="n tnum" style="font-size:19px">${b.pm}</div><div class="l">Afternoon drop-off</div></div></div>
-  </div>
-  <div class="card mt12"><div class="row"><div class="avatar" style="width:44px;height:44px;font-size:14px;background:#334155">JK</div><div class="grow"><div style="font-weight:700">${b.driver}</div><div class="sub mt6 tnum">Driver · ${b.phone}</div></div><div class="icon-btn" style="background:var(--ok-bg);border:none;color:var(--ok)" onclick="toast('Calling ${b.phone}…')" aria-label="Call driver">${svg('phone',19)}</div></div></div>
-  <div class="card mt12"><div class="row"><div class="grow"><div style="font-weight:700">${first()} won't take the bus today</div><div class="sub mt6" style="font-size:12px">Tells the driver and the school · resets tomorrow</div></div><div class="switch ${busSkip[kid]?'on':''}" onclick="toggleBus(this)"></div></div></div>
-  <div class="set-label">Morning stops</div>
-  <div class="card"><div class="stops">
-    ${[['Sassine Square',b.am,true],['Sodeco','07:15'],['Badaro','07:25'],['Al-Arz School','07:40']].map(([s,t,m])=>`<div class="stop ${m?'mine':''}"><span style="font-weight:${m?800:600}">${s}${m?` <span class="tag a" style="margin-inline-start:4px;padding:2px 8px">${first()}'s stop</span>`:''}</span><span class="tnum sub">${t}</span></div>`).join('')}
-  </div></div>
-  <div style="height:10px"></div>`;},
-
 documents:()=>`
   <div class="apphead"><span class="lead"></span><h2 class="screen-title">Document requests</h2></div>
   <p class="sub">Official documents from the Registrar's office</p>
@@ -3038,7 +3007,6 @@ function renderDrawer(){
     `<div class="drawer-sec">School life</div>`+
     item("go('calendar')",'calendar','Calendar')+
     item("go('slips')",'slip','Permission slips',pendingSlips(kid))+
-    item("go('bus')",'bus','School bus')+
     item("go('fees')",'fees','Fees &amp; payments')+
     item("go('documents')",'doc','Document requests')+
     `<div class="drawer-sec">Account</div>`+
@@ -3125,8 +3093,6 @@ function ttPick(d){ttDay=d;refresh('timetable');}
 function readAll(){notifs.forEach(n=>n.read=true);refresh('notifs','home');toast('All caught up ✓');}
 function openNotif(id){const n=notifs.find(x=>x.id===id);n.read=true;if(n.kid!=null&&n.kid!==kid){kid=n.kid;rebuildAll();toast('Now viewing '+children[kid].n.split(' ')[0]);}else refresh('notifs','home');show(n.go);}
 
-/* bus */
-function toggleBus(el){busSkip[kid]=el.classList.toggle('on');toast(busSkip[kid]?`Bus ${BUS[kid].no} driver & school notified ✓`:'Bus plan restored for today');}
 
 /* documents */
 function newDocReq(){docForm={kid,type:'cert',lang:'Arabic'};renderDocForm();}

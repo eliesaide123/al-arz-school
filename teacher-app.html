@@ -1004,7 +1004,8 @@ function boardSVG(a){const u='bd'+(++bdSeq),f=a.id&&a.id!=='__post'?findAtt(a.id
   const W='#f4f1e6',Y='#fde68a',P='#fbcfe8',Bl='#bae6fd',fig=!!B.fig,sz=fig?40:46,dn=dayName(d,'Nov');
   const tx=(x,y,s,o)=>`<text x="${x}" y="${y}" font-size="${(o&&o.fs)||sz}" fill="${(o&&o.c)||W}" ${o&&o.a?`text-anchor="${o.a}"`:''} ${o&&o.r?`transform="rotate(${o.r} ${x} ${y})"`:''} ${o&&o.w?`font-weight="${o.w}"`:''}>${hx(s)}</text>`;
   const ln=(x1,y1,x2,y2,c,w)=>`<path d="M${x1} ${y1} L${x2} ${y2}" stroke="${c||W}" stroke-width="${w||4}" stroke-linecap="round" fill="none"/>`;
-  let body=tx(1100,122,`${DAY_FULL[dn]||dn} ${d} November`,{fs:32,a:'end',c:'#e2e8e0'})+tx(1100,160,cls2(cls).grp,{fs:28,a:'end',c:'#cbd5c9'});
+  /* date + class sit bottom-right, clear of the title and the figure */
+  let body=tx(1100,632,`${DAY_FULL[dn]||dn} ${d} November`,{fs:32,a:'end',c:'#e2e8e0'})+tx(1100,668,cls2(cls).grp,{fs:28,a:'end',c:'#cbd5c9'});
   body+=tx(118,150,B.title,{fs:58,w:700,r:-1})+`<path d="M120 172 C 300 162, 520 176, ${Math.min(700,140+B.title.length*24)} 166" stroke="${Y}" stroke-width="4" fill="none" stroke-linecap="round"/>`;
   let y=250;B.lines.forEach(([s,hl])=>{body+=tx(128,y,s,{c:hl?Y:W});y+=sz+22;});
   if(B.ex.length){y+=8;B.ex.forEach(s=>{body+=tx(128,y,s,{fs:fig?34:38,c:Bl});y+=fig?46:52;});}

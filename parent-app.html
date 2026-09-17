@@ -428,6 +428,62 @@
   .bd-cap{display:flex;align-items:center;gap:8px;padding:9px 14px;background:#2a2e34;color:#cbd5e1;font-size:12px;font-weight:600;flex:0 0 auto;line-height:1.35}
   .bd-cap svg{width:15px;height:15px;flex:0 0 auto;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
   .viewer .btn,.viewer .icon-btn{transition-property:transform,background-color,color,box-shadow,opacity}
+  /* agenda */
+  .ag-intro{line-height:1.5}
+  .ag-week{display:flex;align-items:center;gap:6px}
+  .ag-nav{width:34px;height:34px;flex:0 0 auto}
+  .ag-nav.off{opacity:.35;pointer-events:none}
+  .ag-days{flex:1;display:grid;grid-template-columns:repeat(5,1fr);gap:6px;min-width:0}
+  .ag-day{display:flex;flex-direction:column;align-items:center;gap:2px;padding:8px 2px 7px;border-radius:14px;background:var(--surface);border:1px solid var(--line);cursor:pointer;transition:background .15s,border-color .15s;min-width:0}
+  .ag-day .dn{font-size:10.5px;font-weight:700;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+  .ag-day .dd{font-size:17px;font-weight:800;line-height:1.15}
+  .ag-day.today .dd{color:var(--accent)}
+  .ag-day.on{background:var(--accent);border-color:var(--accent)}
+  .ag-day.on .dn,.ag-day.on .dd{color:#fff}
+  .ag-dot{width:7px;height:7px;border-radius:50%;background:var(--line);margin-top:2px}
+  .ag-dot.signed{background:var(--ok)}.ag-dot.unsigned{background:var(--warn)}.ag-dot.future{background:var(--faint);opacity:.45}
+  .ag-day.on .ag-dot{box-shadow:0 0 0 2px #fff}
+  .ag-legend{display:flex;justify-content:center;gap:14px;margin-top:10px;font-size:11px;color:var(--muted);font-weight:600}
+  .ag-legend span{display:inline-flex;align-items:center;gap:5px}
+  .ag-legend .ag-dot{margin:0}
+  .ag-dtitle{font-size:17px;font-weight:800}
+  .ag-sec{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);margin:16px 2px 6px;display:flex;align-items:center;gap:6px}
+  .ag-sec svg{width:15px;height:15px}
+  .ag-row{display:flex;align-items:flex-start;gap:11px;padding:10px 0;border-bottom:1px solid var(--line)}
+  .ag-row:last-child{border-bottom:none}
+  .ag-row.link{cursor:pointer}
+  .ag-row.later{opacity:.55}
+  .ag-row .subj{width:30px;height:30px;font-size:11px;border-radius:9px;flex:0 0 auto}
+  .ag-topic{font-weight:700;font-size:14px;margin-top:2px;line-height:1.35}
+  .ag-clip{display:inline-flex;align-items:center;gap:3px;font-size:11px;font-weight:800;color:var(--accent);background:var(--accent-soft);padding:3px 8px;border-radius:999px;flex:0 0 auto;margin-top:4px}
+  .ag-clip svg{width:12px;height:12px}
+  .ag-remark{border-inline-start:3px solid var(--ok);padding:8px 12px;border-radius:10px;background:var(--ok-bg);margin-top:8px}
+  .ag-remark.concern{border-color:var(--warn);background:var(--warn-bg)}
+  .ag-remark .by{font-size:11.5px;font-weight:800;color:var(--muted)}
+  .ag-remark .tx{font-size:13.5px;margin-top:3px;line-height:1.4}
+  .ag-note{display:flex;gap:10px;align-items:flex-start;padding:9px 0;border-bottom:1px solid var(--line);font-size:13.5px;line-height:1.4}
+  .ag-note:last-child{border-bottom:none}
+  .ag-note svg{flex:0 0 auto;color:var(--accent);margin-top:1px}
+  .ag-sigbox{margin-top:16px;border-radius:16px;padding:14px;border:1px solid var(--line);background:var(--surface-2)}
+  .ag-sigbox.unsigned{border-color:color-mix(in srgb,var(--warn) 45%,transparent);background:var(--warn-bg)}
+  .ag-sigbox.signed{border-color:color-mix(in srgb,var(--ok) 35%,transparent)}
+  .ag-sigimg{width:118px;height:52px;border-radius:10px;background:#fff;border:1px solid #e2e8f0;display:grid;place-items:center;overflow:hidden;flex:0 0 auto}
+  .ag-sigimg img,.ag-sigimg svg{width:100%;height:100%;object-fit:contain}
+  .ag-sigbig{background:#fff;border:1px solid #e2e8f0;border-radius:16px;height:170px;display:grid;place-items:center;overflow:hidden;margin-top:14px}
+  .ag-sigbig img,.ag-sigbig svg{width:100%;height:100%;object-fit:contain}
+  .ag-pnote{font-size:13px;color:var(--muted);margin-top:6px;line-height:1.4;font-style:italic}
+  .ag-empty{text-align:center;padding:30px 16px}
+  .ag-banner{display:flex;align-items:center;gap:12px;background:var(--warn-bg);border:1px solid color-mix(in srgb,var(--warn) 40%,transparent);border-radius:16px;padding:12px 12px 12px 14px}
+  .sigpad{position:relative;background:#fff;border:1.5px dashed #cbd5e1;border-radius:16px;height:170px;overflow:hidden;touch-action:none}
+  .sigpad canvas{position:absolute;inset:0;display:block;touch-action:none;cursor:crosshair}
+  .sigpad .hint{position:absolute;inset:0;display:grid;place-items:center;color:#94a3b8;font-size:14px;font-weight:600;pointer-events:none;transition:opacity .2s}
+  .sigpad .base{position:absolute;left:18px;right:18px;bottom:38px;border-bottom:1.5px solid #cbd5e1;pointer-events:none}
+  .sigpad .x{position:absolute;left:20px;bottom:42px;color:#94a3b8;font-weight:800;pointer-events:none}
+  .sigpad.inked .hint{opacity:0}
+  #ag-sign:disabled{opacity:.45;box-shadow:none;cursor:default}
+  .ag-days-list{font-size:13px;line-height:1.5}
+  .ml-card.flash{animation:agflash 1.6s ease}
+  @keyframes agflash{0%,40%{box-shadow:0 0 0 3px var(--accent)}100%{box-shadow:0 0 0 0 transparent}}
 </style>
 </head>
 <body>
@@ -480,6 +536,42 @@ const isRTL=()=>uiLang==='ar';
 
 /* 'English source': ['Français', 'العربية'] */
 const D={
+/* agenda */
+"Agenda":["Agenda","المفكرة اليومية"],
+"Parent signature":["Signature des parents","توقيع الأهل"],
+"Sign today":["Signer aujourd'hui","وقّع اليوم"],
+"Not signed yet":["Pas encore signé","لم يُوقَّع بعد"],
+"Not signed":["Non signé","غير موقَّع"],
+"Clear":["Effacer","مسح"],
+"Note to the teacher":["Mot à l'enseignant","ملاحظة للمعلم"],
+"Covered in class":["Vu en classe","ما تمّ شرحه"],
+"Notes for parents":["Informations aux parents","ملاحظات للأهل"],
+"Teacher remark":["Remarque de l'enseignant","ملاحظة المعلم"],
+"Week":["Semaine","الأسبوع"],
+"Nothing yet":["Rien pour l'instant","لا شيء بعد"],
+"Later today":["Plus tard aujourd'hui","لاحقاً اليوم"],
+"Homework given":["Devoirs donnés","الفروض المعطاة"],
+"Homework due":["Devoirs à rendre","الفروض المطلوب تسليمها"],
+"No homework":["Pas de devoirs","لا فروض"],
+"Submitted late":["Rendu en retard","سُلِّم متأخراً"],
+"View signature":["Voir la signature","عرض التوقيع"],
+"Sign the agenda":["Signer l'agenda","توقيع المفكرة"],
+"Draw your signature":["Dessinez votre signature","ارسم توقيعك"],
+"Sign with your finger or a stylus":["Signez avec le doigt ou un stylet","وقّع بإصبعك أو بالقلم"],
+"Your name":["Votre nom","اسمك"],
+"I have read today's agenda":["J'ai lu l'agenda du jour","اطّلعتُ على مفكرة اليوم"],
+"I have read these agenda pages":["J'ai lu ces pages d'agenda","اطّلعتُ على صفحات المفكرة هذه"],
+"Optional":["Facultatif","اختياري"],
+"Agenda signed":["Agenda signé","تم توقيع المفكرة"],
+"All days signed":["Tous les jours sont signés","كل الأيام موقَّعة"],
+"Please sign this evening after checking the homework":["Merci de signer ce soir après avoir vérifié les devoirs","يُرجى التوقيع مساءً بعد التحقق من الفروض"],
+"This page is waiting for your signature":["Cette page attend votre signature","هذه الصفحة بانتظار توقيعك"],
+"Parents sign this page on the day":["Les parents signent cette page le jour même","يوقّع الأهل هذه الصفحة في يومها"],
+"Previous week":["Semaine précédente","الأسبوع السابق"],
+"Next week":["Semaine suivante","الأسبوع التالي"],
+"Parent note":["Mot des parents","ملاحظة الأهل"],
+"Pages to sign":["Pages à signer","صفحات بانتظار التوقيع"],
+"No notes":["Aucune information","لا ملاحظات"],
 /* class materials & viewers */
 "Class materials":["Supports de cours","المواد التعليمية"],
 "By lesson":["Par séance","حسب الحصة"],
@@ -1013,6 +1105,14 @@ const D={
 /* sentence patterns: [RegExp, fr, ar] — {n} placeholders are translated recursively */
 const arDays=n=>n==1?'يوم واحد':n==2?'يومان':n<=10?n+' أيام':n+' يوماً';
 const P=[
+  [/^Week of (.+)$/,"Semaine du {1}","أسبوع {1}"],
+  [/^Signed by (.+)$/,"Signé par {1}","وقّعه {1}"],
+  [/^(\w{3} \d{1,2} \w{3}), (\d{1,2}:\d{2})$/,"{1}, {2}","{1}، {2}"],
+  [/^Sign all \((\d+)\)$/,"Tout signer ({1})","وقّع الكل · {1}"],
+  [/^(\d+) days? to sign$/,m=>m[1]+(+m[1]>1?' jours à signer':' jour à signer'),"أيام بانتظار التوقيع: {1}"],
+  [/^(\d+) days signed$/,"{1} jours signés","تم توقيع {1} أيام"],
+  [/^Daily diary for (\w+) — sign it each evening$/,"Agenda de {1} — à signer chaque soir","مفكرة {1} اليومية — وقّعها كل مساء"],
+  [/^(\d+) periods$/,"{1} séances","حصص: {1}"],
   /* class materials & viewers */
   [/^(\d+) pages$/,"{1} pages","{1} صفحات"],
   [/^(\d+) slides$/,"{1} diapos","{1} شرائح"],
@@ -1375,6 +1475,10 @@ const first=()=>K().n.split(' ')[0];
 
 /* ---- shared helpers for new features ---- */
 const IC={
+  agenda:'<rect x="5.5" y="3.5" width="13.5" height="17" rx="2.2"/><path d="M9 3.5v17"/><path d="M12 8.5h4.2M12 12h4.2M12 15.5h2.6"/><path d="M3.8 7.5h3.2M3.8 12h3.2M3.8 16.5h3.2"/>',
+  pen:'<path d="M4 20h4L19 9a2.8 2.8 0 0 0-4-4L4 16z"/><path d="m13.5 6.5 4 4"/>',
+  megaphone:'<path d="M4 10v4h3l7 4V6L7 10z"/><path d="M17.5 9a4 4 0 0 1 0 6"/>',
+  clip:'<path d="M20.5 11.5 12 20a5 5 0 0 1-7-7l8.5-8.5a3.3 3.3 0 0 1 4.7 4.7l-8.5 8.5a1.7 1.7 0 0 1-2.4-2.4L15 7.5"/>',
   courses:'<path d="M4 5.5A1.5 1.5 0 0 1 5.5 4H19v13H5.5A1.5 1.5 0 0 0 4 18.5z"/><path d="M4 18.5A1.5 1.5 0 0 0 5.5 20H19v-3"/><path d="M10 7.8v5.4l4.3-2.7z"/>',
   report:'<path d="M7 3h8l4 4v14H7z"/><path d="M14 3v5h5"/><path d="M10 13h6M10 17h4"/>',
   homework:'<path d="M5 4h9a3 3 0 0 1 3 3v13H8a3 3 0 0 0-3 3z"/><path d="M17 4h2v16"/>',
@@ -1533,9 +1637,129 @@ const TT_SUBJ={
 };
 const WEEK={
   0:{Mon:['Ar','M','En','Bi','Fr','Hi','PE'],Tue:['Ph','M','Fr','Ar','En','Hi','Bi'],Wed:['Fr','Ph','En','Bi','M','Hi','Ar'],Thu:['Ar','En','M','Fr','Ph','Bi','PE'],Fri:['Fr','M','Ar','Hi','En','Ph','Bi']},
-  1:{Mon:['Fr','M','Ar','En','Bi','PE'],Tue:['Ar','Fr','M','Art','En','Bi'],Wed:['M','Ar','Fr','En','PE','Art'],Thu:['Fr','En','M','Ar','Bi','Fr'],Fri:['Ar','M','Fr','Bi','En','PE']},
+  1:{Mon:['Ar','M','Fr','En','Bi','PE'],Tue:['Ar','Fr','M','Art','En','Bi'],Wed:['M','Ar','En','Fr','PE','Art'],Thu:['Fr','M','En','Ar','Bi','Fr'],Fri:['Ar','M','Bi','Fr','En','PE']},
 };
 let ttDay='Mon';
+
+/* ---- agenda (daily school diary, signed by parents) ---- */
+const AG_WEEKS=[
+  ['Mon 9 Nov','Tue 10 Nov','Wed 11 Nov','Thu 12 Nov','Fri 13 Nov'],
+  ['Mon 16 Nov','Tue 17 Nov','Wed 18 Nov','Thu 19 Nov','Fri 20 Nov'],
+  ['Mon 23 Nov','Tue 24 Nov','Wed 25 Nov','Thu 26 Nov','Fri 27 Nov'],
+];
+const AG_TODAY='Mon 16 Nov',AG_NOW='09:41';
+const AG_DAYFULL={Mon:'Monday',Tue:'Tuesday',Wed:'Wednesday',Thu:'Thursday',Fri:'Friday'};
+/* per child, per day: topics[period-1], homework ids given, notes for parents, teacher remarks, seeded signature */
+const AGENDA={
+  0:{
+    'Mon 9 Nov':{topics:['القواعد: المفعول المطلق','Ch.3 Radicals — quiz corrections','Unit 3 — Reading: “My Lebanon” (intro)','Ch.2 The nervous system — neurons','Le Petit Prince, ch.1–5 — discussion','Lebanon’s regions','Volleyball — serves'],
+      hw:['h4','h5','h6'],notes:['Photo & media consent form — please sign in the app'],remarks:[],sig:{time:'Mon 9 Nov, 20:15',seed:1}},
+    'Tue 10 Nov':{topics:['Density — mass and volume','Ch.3 Radicals — rationalising denominators','Grammaire : les accords du participe passé','نص «الأرز» — شرح المفردات','Grammar — the passive voice','Civics — Lebanon’s institutions','Reflexes — lab preparation'],
+      hw:['h1'],notes:['Bring the geometry set on Thursday'],
+      remarks:[{by:'Ms. Salameh',tone:'concern',text:'Map exercise not handed in.'},{by:'Ms. Khoury',tone:'positive',text:'Excellent explanation of rationalising denominators to the class.'}],
+      sig:{time:'Tue 10 Nov, 19:50',seed:2,note:'Omar will hand in the map tomorrow. Sorry.'}},
+    'Wed 11 Nov':{topics:['Le Petit Prince, ch.6 — lecture','Density of liquids','Writing — a descriptive paragraph','Ch.2 The reflex arc','Ch.3 Radicals — practice exercises','Geography — Lebanon’s rivers','التعبير الكتابي: وصف مكان'],
+      hw:[],notes:['Parent–teacher meetings Wed 18 Nov, 15:00–18:00 — book a slot'],remarks:[],sig:{time:'Wed 11 Nov, 21:05',seed:3}},
+    'Thu 12 Nov':{topics:['القواعد: الحال','Vocabulary — Unit 3','Ch.4 Thales’ theorem','Dictée préparée','Measuring density (lab)','Reflex arc — exercises','Volleyball — match'],
+      hw:['h2'],notes:['Omar arrived late to P1 (08:05)'],remarks:[],
+      sig:{time:'Thu 12 Nov, 20:30',seed:4,note:'Late this morning because of traffic on the Ring.'}},
+    'Fri 13 Nov':{topics:['Le Petit Prince, ch.6–8','Ch.4 Thales’ theorem — exercises','نص «الأرز» — أسئلة الفهم','History — independence of 1943','Reading — “My Lebanon”, part 2','Density — exercises','Revision — the nervous system'],
+      hw:[],notes:['Independence Day ceremony Fri 20 Nov — full school uniform'],
+      remarks:[{by:'Mr. Nehme',tone:'positive',text:'Helped organise the Independence Day rehearsal.'}],sig:null},
+    'Mon 16 Nov':{topics:['القواعد: التمييز','Ch.4 Thales’ theorem — converse',null,null,null,null,null],
+      hw:['h3'],notes:['1st term exams start Thu 26 Nov — timetable in the app'],remarks:[],sig:null},
+    'Wed 18 Nov':{notes:['Parent–teacher meetings today, 15:00–18:00']},
+    'Fri 20 Nov':{notes:['Independence Day ceremony — full school uniform']},
+    'Thu 26 Nov':{notes:['1st term exams begin — French, 08:00–10:00, Hall A']},
+  },
+  1:{
+    'Mon 9 Nov':{topics:['قراءة: عيد الاستقلال','Fractions — equivalent fractions','Lecture — Le loup et l’agneau','Unit 3 — spelling words','Plants — what plants need','Relay races'],
+      hw:['m1'],notes:['Bring coloured pencils for Art'],remarks:[],sig:{time:'Mon 9 Nov, 19:40',seed:5}},
+    'Tue 10 Nov':{topics:['إملاء: التاء المربوطة','Conjugaison — le présent','Fractions — simplifying','Drawing a cedar tree','Reading — The Little Red Hen','Plants — roots and stems'],
+      hw:[],notes:[],remarks:[],sig:{time:'Tue 10 Nov, 20:05',seed:6}},
+    'Wed 11 Nov':{topics:['Fractions — on a number line','قواعد: الفعل الماضي','Unit 3 — sentences','Dictée préparée n°4','Ball games','Colouring the cedar'],
+      hw:[],notes:[],remarks:[{by:'Ms. Abi Nader',tone:'positive',text:'Kind to classmates — helped a new pupil settle in.'}],sig:{time:'Wed 11 Nov, 19:55',seed:7}},
+    'Thu 12 Nov':{topics:['Vocabulaire — l’hiver','Fractions — comparing','Spelling practice','تعبير: وصف فصل الشتاء','Plants — leaves','Lecture à voix haute'],
+      hw:['m2'],notes:[],remarks:[],sig:{time:'Thu 12 Nov, 20:40',seed:8}},
+    'Fri 13 Nov':{topics:['محفوظات: نشيد «موطني»','Fractions — word problems','Plants — parts and functions','Dictée n°4','Unit 3 — spelling test','Independence Day rehearsal'],
+      hw:[],notes:[],remarks:[],sig:null},
+    'Mon 16 Nov':{topics:['قراءة: الشتاء في الجبل','Fractions — adding (same denominator)',null,null,null,null],
+      hw:[],notes:[],remarks:[],sig:null},
+    'Fri 20 Nov':{notes:['Independence Day ceremony — full school uniform']},
+  },
+};
+const AG_GIVEN={h4:'Mon 9 Nov',h5:'Mon 9 Nov',h6:'Mon 9 Nov',h1:'Tue 10 Nov',h2:'Thu 12 Nov',h3:'Mon 16 Nov',m1:'Mon 9 Nov',m2:'Thu 12 Nov'};
+let agWeek=1,agSel=AG_TODAY,agTargets=[];
+let agSigned={};try{agSigned=JSON.parse(localStorage.getItem('skl-agenda-sign-p')||'{}')||{};}catch(e){agSigned={};}
+function agSave(){try{localStorage.setItem('skl-agenda-sign-p',JSON.stringify(agSigned));}catch(e){}}
+function agIdx(d){for(let w=0;w<AG_WEEKS.length;w++){const i=AG_WEEKS[w].indexOf(d);if(i>=0)return w*5+i;}return -1;}
+function agWhen(d){const a=agIdx(d),b=agIdx(AG_TODAY);return a<b?'past':a===b?'today':'future';}
+function agSig(k,d){const st=agSigned[k+'|'+d];if(st&&st.img)return Object.assign({name:'Fadi Haddad'},st,{time:st.at||st.time});const e=AGENDA[k][d];return e&&e.sig?Object.assign({name:'Fadi Haddad'},e.sig):null;}
+function agSignable(k,d){const e=AGENDA[k][d];return !!(e&&e.topics)&&agWhen(d)!=='future';}
+function agStatus(k,d){if(agWhen(d)==='future'||!AGENDA[k][d]||!AGENDA[k][d].topics)return 'future';return agSig(k,d)?'signed':'unsigned';}
+function agUnsigned(k=kid){return AG_WEEKS.flat().filter(d=>agSignable(k,d)&&!agSig(k,d));}
+function agDue(k,d){return homework[k].filter(h=>h.dueDay+' '+h.due===d);}
+function agGiven(k,d){const e=AGENDA[k][d];return (e&&e.hw||[]).map(id=>homework[k].find(h=>h.id===id)).filter(Boolean);}
+function agHwTag(h){return h.status==='missing'?['Missing','bad']:h.status==='todo'?['To do','a']:h.late?['Submitted late','warn']:['Submitted','ok'];}
+function agLesson(k,d,p){return (MATS[k]&&MATS[k].lessons||[]).find(L=>L.d===d&&L.p===p)||null;}
+function agFullDay(d){const [a,n]=d.split(' ');return (AG_DAYFULL[a]||a)+' '+n+' November';}
+/* seeded parent signature (drawn as SVG, dark-blue ink) */
+function agSigSVG(seed){const r=((seed*37)%7-3)*.6,sx=1+((seed*13)%5-2)*.02;
+  return `<svg viewBox="0 0 220 80" xmlns="http://www.w3.org/2000/svg"><g transform="rotate(${r} 110 40) scale(${sx} 1)" fill="none" stroke="#1e3a8a" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+<path d="M14 54C22 30 30 14 36 20C42 26 30 50 24 60M22 38C30 36 40 35 48 36"/>
+<path d="M50 50C54 40 60 38 62 46C63 52 58 56 55 52C60 44 66 42 68 50C70 56 74 52 77 44"/>
+<path d="M84 58C92 32 100 16 104 22C107 28 96 48 92 58M92 42C104 38 116 30 118 22C118 40 112 54 110 60"/>
+<path d="M120 50C124 42 130 40 132 47C133 53 128 56 126 52C131 45 136 44 138 51C141 58 146 46 150 44C154 42 156 50 152 54C158 46 164 26 166 20C164 34 160 50 160 56C164 48 172 42 176 48C179 54 172 58 170 54C176 46 182 40 186 20C184 36 180 50 181 56C186 50 194 46 204 44"/>
+<path d="M28 68C70 64 132 66 206 60" stroke-width="1.8"/></g></svg>`;}
+function agSigHTML(sg,seed){return sg&&sg.img?`<img src="${sg.img}" alt="Parent signature"/>`:agSigSVG(seed||1);}
+function agPick(d){agSel=d;agRefresh(true);}
+function agWeekGo(dir){const w=agWeek+dir;if(w<0||w>=AG_WEEKS.length)return;agWeek=w;agSel=AG_WEEKS[w].includes(AG_TODAY)?AG_TODAY:AG_WEEKS[w][0];agRefresh(false);}
+function agRefresh(keep){const sc=document.getElementById('scr-agenda'),st=sc?sc.scrollTop:0;refresh('agenda','home');if(keep&&sc)sc.scrollTop=st;}
+function openAgenda(d){if(d){agSel=d;agWeek=Math.floor(agIdx(d)/5);}rebuild('agenda');show('agenda');}
+function agOpenLesson(d,p){matTab='lesson';matSubj='all';openMaterials('lesson');
+  setTimeout(()=>{const sc=document.getElementById('scr-materials'),el=sc&&sc.querySelector(`.ml-card[data-lk="${d}|${p}"]`);if(!el)return;sc.scrollTop=Math.max(0,el.offsetTop-90);el.classList.add('flash');setTimeout(()=>el.classList.remove('flash'),1700);},60);}
+function agView(d){const sg=agSig(kid,d),e=AGENDA[kid][d];if(!sg)return;
+  openSheet(`<h2 style="font-size:20px;font-weight:800">Parent signature</h2><p class="sub mt8">${K().n} · ${d}</p>
+  <div class="ag-sigbig">${agSigHTML(sg,e&&e.sig&&e.sig.seed)}</div>
+  <div class="card mt16" style="padding:4px 16px"><div class="kv"><span class="k">Signed by ${hx(sg.name)}</span></div><div class="kv"><span class="k"><span class="ltr">${sg.time}</span></span></div>
+  ${sg.note?`<div class="kv" style="display:block"><div class="k">Parent note</div><div class="ag-pnote" data-noi18n dir="auto">“${hx(sg.note)}”</div></div>`:''}</div>
+  <button class="btn secondary mt16" onclick="closeSheet()">Close</button>`);}
+function agSign(which){const k=K();agTargets=which==='all'?agUnsigned(kid):[which];if(!agTargets.length)return;
+  const one=agTargets.length===1,d=agTargets[0],e=AGENDA[kid][d];
+  const sum=one?`<div class="sub">${e.topics.length} periods · ${agGiven(kid,d).length+agDue(kid,d).length} · ${(e.notes||[]).length}</div>`:'';
+  openSheet(`<h2 style="font-size:20px;font-weight:800">Sign the agenda</h2><p class="sub mt8">${k.n} · ${k.grp}</p>
+  ${one?`<div class="card mt12" style="padding:12px 14px"><div style="font-weight:800">${agFullDay(d)}</div><div class="sub mt6">${e.topics.filter(x=>x!=null).length} periods</div></div>`
+       :`<div class="card mt12" style="padding:12px 14px"><div class="sub" style="font-weight:700">Pages to sign</div><div class="ag-days-list mt6">${agTargets.map(x=>`<div>${agFullDay(x)}</div>`).join('')}</div></div>`}
+  <div class="set-label">Parent signature</div>
+  <div class="sigpad" id="ag-padwrap"><canvas id="ag-pad"></canvas><div class="base"></div><div class="x">✕</div><div class="hint">Draw your signature</div></div>
+  <div class="row between mt8"><span class="sub" style="font-size:12px">Sign with your finger or a stylus</span><span class="chip" onclick="agClear()">Clear</span></div>
+  <div class="field"><label>Your name</label><input class="input" id="ag-name" dir="auto" value="Fadi Haddad" oninput="agCheck()"/></div>
+  <div class="field"><label>Note to the teacher</label><textarea class="input" id="ag-note" dir="auto" rows="2" style="resize:none" placeholder="Optional"></textarea></div>
+  <label class="check mt16"><input type="checkbox" id="ag-ok" onchange="agCheck()"/> <span>${one?"I have read today's agenda":'I have read these agenda pages'}</span></label>
+  <button class="btn mt16" id="ag-sign" disabled onclick="agConfirm()">${one?'Sign':`Sign all (${agTargets.length})`}</button>`);
+  setTimeout(agPadInit,30);}
+let agPad={strokes:0};
+function agPadInit(){const c=document.getElementById('ag-pad');if(!c)return;const wrap=c.parentElement,w=wrap.clientWidth||320,h=wrap.clientHeight||170,r=window.devicePixelRatio||1;
+  c.width=Math.round(w*r);c.height=Math.round(h*r);c.style.width=w+'px';c.style.height=h+'px';
+  const x=c.getContext('2d');x.setTransform(r,0,0,r,0,0);x.lineCap='round';x.lineJoin='round';x.strokeStyle='#1e3a8a';x.fillStyle='#1e3a8a';x.lineWidth=2.6;
+  agPad={c,x,w,h,pts:[],strokes:0,down:false};
+  const pos=e=>{const b=c.getBoundingClientRect();return [(e.clientX-b.left)*(w/b.width),(e.clientY-b.top)*(h/b.height)];};
+  ['touchstart','mousedown'].forEach(ev=>c.addEventListener(ev,e=>e.stopPropagation(),{passive:true}));
+  c.addEventListener('pointerdown',e=>{e.preventDefault();try{c.setPointerCapture(e.pointerId);}catch(_){}agPad.down=true;const p=pos(e);agPad.pts=[p];x.beginPath();x.arc(p[0],p[1],1.3,0,Math.PI*2);x.fill();wrap.classList.add('inked');});
+  c.addEventListener('pointermove',e=>{if(!agPad.down)return;e.preventDefault();const p=pos(e),P=agPad.pts;P.push(p);const n=P.length;
+    if(n<3){x.beginPath();x.moveTo(P[0][0],P[0][1]);x.lineTo(p[0],p[1]);x.stroke();return;}
+    const a=P[n-3],b=P[n-2];x.beginPath();x.moveTo((a[0]+b[0])/2,(a[1]+b[1])/2);x.quadraticCurveTo(b[0],b[1],(b[0]+p[0])/2,(b[1]+p[1])/2);x.stroke();});
+  const up=()=>{if(!agPad.down)return;agPad.down=false;if(agPad.pts.length>1)agPad.strokes++;agPad.pts=[];agCheck();};
+  c.addEventListener('pointerup',up);c.addEventListener('pointercancel',up);}
+function agClear(){if(!agPad.x)return;agPad.x.clearRect(0,0,agPad.w,agPad.h);agPad.strokes=0;const wr=document.getElementById('ag-padwrap');if(wr)wr.classList.remove('inked');agCheck();}
+function agCheck(){const b=document.getElementById('ag-sign'),ok=document.getElementById('ag-ok'),nm=document.getElementById('ag-name');if(!b)return;b.disabled=!(agPad.strokes>0&&ok&&ok.checked&&nm&&nm.value.trim());}
+function agConfirm(){if(!agPad.c||!agPad.strokes)return;
+  /* export on white so the signature reads in dark mode too */
+  const o=document.createElement('canvas');o.width=agPad.c.width;o.height=agPad.c.height;const ox=o.getContext('2d');ox.fillStyle='#fff';ox.fillRect(0,0,o.width,o.height);ox.drawImage(agPad.c,0,0);
+  const img=o.toDataURL('image/png'),now=new Date(),tm=AG_TODAY+', '+String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0');
+  const name=(document.getElementById('ag-name').value||'Fadi Haddad').trim(),note=(document.getElementById('ag-note').value||'').trim(),n=agTargets.length;
+  agTargets.forEach(d=>{agSigned[kid+'|'+d]={img,at:tm,note,name};});agSave();closeSheet();agRefresh(true);
+  toast(n>1?`${n} days signed ✓`:'Agenda signed ✓');}
 
 /* ---- 9. notifications ---- */
 let notifs=[
@@ -1935,7 +2159,7 @@ function matRow(it){const T=MAT_TYPES[it.t],off=matOff.has(it.id),nw=isNewMat(it
     ${it.t==='video'&&!off?`<div class="mhint">${SVG_WIFI}<span><bdi dir="ltr">~${it.mb} MB</bdi> · best on Wi-Fi</span></div>`:''}
     ${off?`<div class="moff">${SVG_OFF}<span>Saved offline</span></div>`:''}
   </div>${right}</div>`;}
-function matLessonCard(L){const S=SUBJECTS[L.s];return `<div class="card ml-card mt8${L.absent?' ml-miss':''}">
+function matLessonCard(L){const S=SUBJECTS[L.s];return `<div class="card ml-card mt8${L.absent?' ml-miss':''}" data-lk="${L.d}|${L.p}">
   <div class="row" style="gap:12px;align-items:flex-start"><div class="subj" style="width:38px;height:38px;font-size:13px;background:${S.col}">${S.b||S.c}</div>
     <div class="grow" style="min-width:0"><div class="row" style="gap:6px;flex-wrap:wrap"><span class="sub" style="font-weight:700;font-size:12px">${S.n} · Period ${L.p}</span>${L.absent?'<span class="tag bad" style="padding:2px 8px;font-size:10.5px">Absent</span>':''}</div>
       <div class="ml-topic" data-noi18n dir="auto">${hx(L.topic)}</div><div class="sub mt6">${teacherShort(S.tch)}</div></div></div>
@@ -2376,6 +2600,7 @@ home:()=>{const k=K();return `
   <div class="qpager" id="qpager">
     ${[
       ['switchChild()','kids','Children',0],
+      ["show('agenda')",'agenda','Agenda',agUnsigned(kid).length],
       ["show('reportcards')",'report','Report cards',0],
       ["show('homework')",'homework','Homework',homework[kid].filter(h=>h.status==='missing').length],
       ["show('examtt')",'exam','Exams',0],
@@ -2409,6 +2634,39 @@ materials:()=>{const subs=matSubjects();return `
   <div class="chip-scroll mt12">${[{c:'all',n:'All'}].concat(subs).map(x=>`<div class="chip${matSubj===x.c?' active':''}" onclick="matSetSubj('${x.c}')">${x.n}</div>`).join('')}</div>
   <div class="seg mt12">${[['lesson','By lesson'],['revision','Revision'],['textbooks','Textbooks']].map(([k,l])=>`<button class="${matTab===k?'active':''}" onclick="matSetTab('${k}')">${l}</button>`).join('')}</div>
   <div>${matBody()}</div>
+  <div style="height:14px"></div>`;},
+
+agenda:()=>{const k=K(),days=AG_WEEKS[agWeek],sel=agSel,e=AGENDA[kid][sel],un=agUnsigned(kid),when=agWhen(sel);
+  const chevL='<svg class="flip-rtl" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7"/></svg>',chevR='<svg class="flip-rtl" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg>';
+  const weekStrip=`<div class="ag-week mt16"><div class="icon-btn ag-nav${agWeek?'':' off'}" onclick="agWeekGo(-1)" aria-label="Previous week">${chevL}</div>
+    <div class="ag-days">${days.map(d=>{const [dn,dd]=d.split(' ');return `<div class="ag-day${d===sel?' on':''}${d===AG_TODAY?' today':''}" onclick="agPick('${d}')"><span class="dn">${dn}</span><span class="dd">${dd}</span><i class="ag-dot ${agStatus(kid,d)}"></i></div>`;}).join('')}</div>
+    <div class="icon-btn ag-nav${agWeek<AG_WEEKS.length-1?'':' off'}" onclick="agWeekGo(1)" aria-label="Next week">${chevR}</div></div>
+    <div class="ag-legend"><span><i class="ag-dot signed"></i>Signed</span><span><i class="ag-dot unsigned"></i>Not signed</span><span><i class="ag-dot future"></i>Upcoming</span></div>`;
+  const banner=un.length?`<div class="ag-banner mt16"><div class="set-ic" style="background:var(--surface);color:var(--warn)">${svg('pen',19)}</div><div class="grow" style="min-width:0"><div style="font-weight:800">${un.length} day${un.length>1?'s':''} to sign</div><div class="sub mt6">${un.join(' · ')}</div></div><button class="btn" style="width:auto;padding:10px 14px;font-size:13px" onclick="agSign(${un.length>1?"'all'":`'${un[0]}'`})">${un.length>1?`Sign all (${un.length})`:'Sign'}</button></div>`:'';
+  let day='';
+  if(!e){day=`<div class="card ag-empty mt16"><div style="font-weight:800">${agFullDay(sel)}</div><div class="sub mt8">Nothing yet</div></div>`;}
+  else{
+    const st=agStatus(kid,sel),tag=st==='signed'?'<span class="tag ok">Signed</span>':st==='unsigned'?'<span class="tag warn">Not signed yet</span>':'<span class="tag" style="background:var(--surface-3);color:var(--muted)">Upcoming</span>';
+    let h=`<div class="row between" style="align-items:flex-start;gap:10px"><div class="ag-dtitle">${agFullDay(sel)}</div>${tag}</div>`;
+    if(e.topics){const map=TT_SUBJ[kid],codes=WEEK[kid][sel.split(' ')[0]]||[];
+      h+=`<div class="ag-sec">${svg('courses',15)}Covered in class</div>`+e.topics.map((tp,i)=>{const code=codes[i],S=map[code]||['',''],L=agLesson(kid,sel,i+1),later=tp==null,n=L&&!later?L.att.length:0;
+        return `<div class="ag-row${L&&!later?' link':''}${later?' later':''}"${L&&!later?` onclick="agOpenLesson('${sel}',${i+1})"`:''}><div class="subj" style="background:${SUBJ[code]||'#8b5cf6'}">${code||''}</div><div class="grow" style="min-width:0"><div class="sub" style="font-size:11.5px;font-weight:700">Period ${i+1} · ${S[0]} · ${S[1]}</div>${later?'<div class="sub mt6" style="font-size:12.5px;font-weight:700">Later today</div>':`<div class="ag-topic" data-noi18n dir="auto">${hx(tp)}</div>`}</div>${n?`<span class="ag-clip" aria-label="Class materials">${svg('clip',12)}${n}</span>`:''}</div>`;}).join('');}
+    const given=agGiven(kid,sel),due=agDue(kid,sel);
+    if(e.topics||given.length||due.length)h+=`<div class="ag-sec">${svg('homework',15)}Homework</div>`;
+    if(e.topics&&!given.length&&!due.length)h+='<div class="sub" style="padding:4px 2px 2px">No homework</div>';
+    if(given.length)h+=`<div class="sub" style="font-weight:700;font-size:12px;margin:4px 2px 0">Homework given</div>`+given.map(x=>`<div class="ag-row" style="cursor:pointer" onclick="show('homework')"><div class="subj" style="background:${SUBJ[x.c]||'#64748b'}">${x.c}</div><div class="grow" style="min-width:0"><div class="ag-topic" data-noi18n dir="auto">${hx(x.title)}</div><div class="sub mt6">${x.s} · Due ${x.dueDay} ${x.due}</div></div></div>`).join('');
+    if(due.length)h+=`<div class="sub" style="font-weight:700;font-size:12px;margin:8px 2px 0">Homework due</div>`+due.map(x=>{const [l,c]=agHwTag(x);return `<div class="ag-row" style="cursor:pointer" onclick="show('homework')"><div class="subj" style="background:${SUBJ[x.c]||'#64748b'}">${x.c}</div><div class="grow" style="min-width:0"><div class="ag-topic" data-noi18n dir="auto">${hx(x.title)}</div><div class="sub mt6">${x.s}</div></div><span class="tag ${c}" style="margin-top:2px">${l}</span></div>`;}).join('');
+    if((e.notes||[]).length)h+=`<div class="ag-sec">${svg('megaphone',15)}Notes for parents</div>`+e.notes.map(n=>`<div class="ag-note">${svg('megaphone',16)}<span data-noi18n dir="auto">${hx(n)}</span></div>`).join('');
+    if((e.remarks||[]).length)h+=`<div class="ag-sec">${svg('conduct',15)}Teacher remark</div>`+e.remarks.map(r=>`<div class="ag-remark${r.tone==='concern'?' concern':''}"><div class="by">${r.by} · ${r.tone==='concern'?'Concern':'Positive'}</div><div class="tx" data-noi18n dir="auto">${hx(r.text)}</div></div>`).join('');
+    if(e.topics){const sg=agSig(kid,sel);
+      if(st==='signed')h+=`<div class="ag-sigbox signed"><div class="ag-sec" style="margin-top:0">${svg('pen',15)}Parent signature</div><div class="row" style="gap:12px;align-items:center"><div class="ag-sigimg">${agSigHTML(sg,e.sig&&e.sig.seed)}</div><div class="grow" style="min-width:0"><div style="font-weight:700;font-size:13.5px">Signed by ${hx(sg.name)} · ${sg.time}</div>${sg.note?`<div class="ag-pnote" data-noi18n dir="auto">“${hx(sg.note)}”</div>`:''}</div></div><button class="btn ghost mt12" style="padding:11px;font-size:13.5px" onclick="agView('${sel}')">View signature</button></div>`;
+      else if(st==='unsigned')h+=`<div class="ag-sigbox unsigned"><div class="row" style="gap:12px"><div class="set-ic" style="background:var(--surface);color:var(--warn)">${svg('pen',19)}</div><div class="grow"><div style="font-weight:800">Not signed yet</div><div class="sub mt6">${when==='today'?'Please sign this evening after checking the homework':'This page is waiting for your signature'}</div></div></div><button class="btn mt12" onclick="agSign('${sel}')">${when==='today'?'Sign today':'Sign'}</button></div>`;
+      else h+='<div class="ag-sigbox"><div class="sub">Parents sign this page on the day</div></div>';}
+    day=`<div class="card mt16">${h}</div>`;}
+  return `
+  <div class="apphead"><span class="lead"></span><div class="grow" style="min-width:0"><h2 class="screen-title">Agenda</h2><div class="sub">${k.grp} · Week of ${days[0].replace(/^\w+ /,'')}</div></div></div>
+  <p class="sub ag-intro">Daily diary for ${first()} — sign it each evening</p>
+  ${banner}${weekStrip}${day}
   <div style="height:14px"></div>`;},
 
 attendance:()=>{const k=K();return `
@@ -2758,6 +3016,7 @@ function renderDrawer(){
   document.getElementById('drawer-items').innerHTML=
     item("go('home')",'home','Home')+
     `<div class="drawer-sec">Academics</div>`+
+    item("go('agenda')",'agenda','Agenda',agUnsigned(kid).length)+
     item("go('attendance')",'att','Attendance')+
     item("go('grades')",'grades','Grades')+
     item("go('materials')",'courses','Class materials',matNewCount())+
@@ -2793,6 +3052,7 @@ function forYou(){
   const E=EXAMS[kid],nx=E.list.find(e=>daysTo(e.d)>=0),ps=pendingSlips(kid),b=bookings.filter(x=>x.kid===kid),miss=homework[kid].filter(h=>h.status==='missing').length,un=unreadNotifs();
   let h='';
   h+=row("show('examtt')",'exam','var(--danger-bg)','var(--danger)',`Next exam: ${nx.s}`,`${nx.day} ${nx.d} · ${nx.time} · ${inDays(daysTo(nx.d))}`);
+  {const ua=agUnsigned(kid).length;h+=row("openAgenda()",'agenda',ua?'var(--warn-bg)':'var(--ok-bg)',ua?'var(--warn)':'var(--ok)','Agenda',ua?`${ua} day${ua>1?'s':''} to sign`:'All days signed',ua?'<span class="tag warn">Sign</span>':'');}
   {const nw=matNewCount(),n=MATS[kid].lessons.length;h+=row("openMaterials('lesson')",'courses','var(--accent-soft)','var(--accent)','Class materials',`This week: ${n} lessons · ${nw} new material${nw===1?'':'s'}`,nw?`<span class="mnew">${nw}</span>`:'');}
   if(miss)h+=row("show('homework')",'homework','var(--danger-bg)','var(--danger)',`${miss} missing homework`,'Tap to see what to hand in');
   if(ps)h+=row("show('slips')",'slip','var(--warn-bg)','var(--warn)',`${ps} permission slip${ps>1?'s':''} to sign`,slips.find(s=>s.kid===kid&&s.status==='pending').title,`<span class="tag warn">Sign</span>`);

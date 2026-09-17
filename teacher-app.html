@@ -23,7 +23,7 @@
   }
   input,button,textarea{font-family:inherit}
   /* dark: lighter indigo for accent-coloured text/icons on dark surfaces */
-  :root[data-theme="dark"] .accent,:root[data-theme="dark"] .qtile .qi,:root[data-theme="dark"] .drawer-item.active,:root[data-theme="dark"] .tag.a,
+  :root[data-theme="dark"] .accent,:root[data-theme="dark"] .ag-topic,:root[data-theme="dark"] .qtile .qi,:root[data-theme="dark"] .drawer-item.active,:root[data-theme="dark"] .tag.a,
   :root[data-theme="dark"] .set-ic,:root[data-theme="dark"] .seg button.active,:root[data-theme="dark"] .cal-d.today,:root[data-theme="dark"] .btn.ghost{color:#a5b4fc}
   :root[data-theme="dark"] .toast{background:#e8ecf5;color:#12172a}
   *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
@@ -324,6 +324,37 @@
   .btn.cm-log-btn svg{width:15px;height:15px}
   .tag.cm-clip{gap:3px}
   .tag.cm-clip svg{width:12px;height:12px}
+  /* agenda (daily school diary) */
+  .ag-nav{display:flex;align-items:center;gap:10px}
+  .ag-nav .icon-btn{width:36px;height:36px;border-radius:11px}
+  .ag-nav .icon-btn.dis{opacity:.35;pointer-events:none}
+  .ag-week{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+  .ag-day{display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 2px 9px;border-radius:14px;background:var(--surface);border:1px solid var(--line);cursor:pointer;transition:.15s;min-width:0}
+  .ag-day .ag-dn{font-size:10.5px;font-weight:700;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+  .ag-day b{font-size:17px;font-weight:800;line-height:1.1}
+  .ag-day.today{border-color:color-mix(in srgb,var(--accent) 45%,transparent)}
+  .ag-day.on{background:var(--accent);border-color:var(--accent);color:#fff}
+  .ag-day.on .ag-dn{color:rgba(255,255,255,.85)}
+  .ag-dot{width:7px;height:7px;border-radius:50%;background:var(--surface-3)}
+  .ag-dot.ok{background:var(--ok)}.ag-dot.warn{background:var(--warn)}.ag-dot.fut{background:var(--faint);opacity:.45}.ag-dot.none{background:transparent;box-shadow:inset 0 0 0 1.5px var(--line)}
+  .ag-day.on .ag-dot{box-shadow:0 0 0 2px #fff}
+  .ag-legend{display:flex;justify-content:center;flex-wrap:wrap;gap:12px;margin-top:10px;font-size:11px;color:var(--muted)}
+  .ag-legend span{display:inline-flex;align-items:center;gap:5px}
+  .ag-per.tap,.list-item.tap{cursor:pointer}
+  .ag-topic{font-size:13px;font-weight:600;color:var(--accent);margin-top:4px;line-height:1.35}
+  .ag-sq{width:10px;height:10px;border-radius:3px;flex:0 0 auto;margin-top:5px}
+  .ag-sub{font-size:10.5px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--faint);padding:10px 0 2px}
+  .ag-note{display:flex;gap:10px;align-items:flex-start;padding:11px 0;border-bottom:1px solid var(--line)}
+  .ag-note:last-child{border-bottom:none}
+  .ag-note svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.9;flex:0 0 auto;margin-top:1px}
+  .ag-rem{border-inline-start:3px solid var(--ok);padding:10px 12px;border-radius:10px;background:var(--surface-2);margin:8px 0}
+  .ag-rem.concern{border-inline-start-color:var(--warn)}
+  .ag-sigbox{background:#fff;border:1px solid var(--line);border-radius:10px;display:flex;align-items:center;justify-content:center;overflow:hidden;flex:0 0 auto}
+  .ag-sigbox svg{width:100%;height:100%;display:block}
+  .ag-sigbox.sm{width:74px;height:30px;padding:2px 4px}
+  .ag-sigbox.lg{width:100%;height:120px;padding:10px 18px;background-image:linear-gradient(transparent 92px,#cbd5e1 92px,#cbd5e1 93px,transparent 93px)}
+  :root[data-theme="dark"] .ag-sigbox{border-color:transparent}
+  .ag-empty{text-align:center;padding:22px}
   .bd-stage{flex:1;min-height:0;position:relative;overflow:hidden;background:#0f1113;touch-action:none;cursor:grab}
   .bd-stage.drag{cursor:grabbing}
   .bd-img{position:absolute;left:50%;top:50%;width:100%;transform:translate(-50%,-50%);transform-origin:center center;transition:transform .2s ease}
@@ -501,6 +532,7 @@
                 <div class="drawer-item" data-goto="grades" onclick="go('grades')"><svg viewBox="0 0 24 24"><path d="M4 20h16"/><path d="M7 20v-6M12 20V8M17 20v-9"/></svg><span class="lbl">Gradebook</span></div>
                 <div class="drawer-item" data-goto="reportcards" onclick="go('reportcards')"><svg viewBox="0 0 24 24"><path d="M7 3h8l4 4v14H7z"/><path d="M14 3v5h5"/><path d="M10 13h6M10 17h4"/></svg><span class="lbl">Report cards</span></div>
                 <div class="drawer-item" data-goto="homework" onclick="go('homework')"><svg viewBox="0 0 24 24"><path d="M5 4h9a3 3 0 0 1 3 3v13H8a3 3 0 0 0-3 3z"/><path d="M17 4h2v16"/></svg><span class="lbl">Homework review</span></div>
+                <div class="drawer-item" data-goto="agenda" onclick="go('agenda')"><svg viewBox="0 0 24 24"><path d="M5 4h11a2 2 0 0 1 2 2v14H7a2 2 0 0 1-2-2z"/><path d="M9 8h6M9 11.5h4"/><path d="M9 16.5c1.2-1.8 2.2-1.8 2.7 0s1.6 1.6 3.3-.6"/></svg><span class="lbl">Agenda</span></div>
                 <div class="drawer-item" data-goto="lessonlog" onclick="go('lessonlog')"><svg viewBox="0 0 24 24"><path d="M6 3h11a2 2 0 0 1 2 2v16H8a2 2 0 0 1-2-2z"/><path d="M6 17a2 2 0 0 1 2-2h11"/><path d="M10 7h6M10 10h4"/></svg><span class="lbl">Lesson log</span></div>
                 <div class="drawer-item" data-goto="conduct" onclick="go('conduct')"><svg viewBox="0 0 24 24"><path d="M12 3 5 6v5c0 4 3 7 7 8 4-1 7-4 7-8V6z"/><path d="M9 11.5l2 2 4-4"/></svg><span class="lbl">Conduct notes</span></div>
                 <div class="drawer-item" data-goto="examtt" onclick="go('examtt')"><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="16" rx="3"/><path d="M3.5 9.5h17M8 3v4M16 3v4"/><path d="M8 14h3M8 17h6"/></svg><span class="lbl">Exam timetable</span></div>
@@ -625,7 +657,7 @@ function closeSheet(){document.getElementById('sheet').classList.remove('open');
 document.querySelector('[data-close-sheet]').addEventListener('click',closeSheet);
 function openDrawer(){document.getElementById('drawer').classList.add('open');}
 function closeDrawer(){document.getElementById('drawer').classList.remove('open');}
-const DYN=['reportcards','reportcard','homework','hwreview','conduct','lessonlog','examtt','home'];
+const DYN=['reportcards','reportcard','homework','hwreview','conduct','lessonlog','examtt','home','agenda'];
 function go(id){closeDrawer();hist=[];if(DYN.includes(id))rebuild(id);show(id,true);}
 function soon(t){closeDrawer();toast(t+' — coming soon');}
 const svgBack='<svg class="flip-rtl" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7"/></svg>';
@@ -1345,6 +1377,34 @@ const P=[['{n} slides','{n} diapos','{n} شرائح'],['{n} pages','{n} pages','
  ['Mathematics {c}','Mathématiques {c}','الرياضيات {c}']];
 P.forEach(([en,fr,ar])=>{I18N_P.fr=I18N_P.fr.filter(x=>x[0]!==en);I18N_P.ar=I18N_P.ar.filter(x=>x[0]!==en);I18N_P.fr.push([en,fr]);I18N_P.ar.push([en,ar]);});
 Object.keys(_patCache).forEach(k=>delete _patCache[k]);})();
+/* agenda strings */
+(function(){const add=(en,fr,ar)=>{if(!(en in I18N.fr))I18N.fr[en]=fr;if(!(en in I18N.ar))I18N.ar[en]=ar;};
+[['Agenda','Agenda','المفكرة اليومية'],['parents sign every evening','les parents signent chaque soir','يوقّعها الأهل كل مساء'],['Your Maths entries','Vos entrées de maths','مدخلاتكِ في الرياضيات'],
+ ['Signed','Signé','موقَّع'],['Signatures missing','Signatures manquantes','تواقيع ناقصة'],['Logged','Renseigné','مُدوَّن'],['Not logged','Non renseigné','غير مُدوَّن'],['Upcoming','À venir','قادم'],
+ ['Covered in class','Vu en classe','ما تمّ شرحه'],['Only your subject is shown for this class','Seule votre matière est affichée pour cette classe','تظهر مادتكِ فقط لهذا الصف'],['Nothing yet','Rien pour l’instant','لا شيء بعد'],
+ ['Given today','Donnés aujourd’hui','أُعطيت اليوم'],['Given','Donnés','أُعطيت'],['Due today','À rendre aujourd’hui','التسليم اليوم'],['Due','À rendre','موعد التسليم'],
+ ['Notes for parents','Informations aux parents','ملاحظات للأهل'],['Teacher remarks','Remarques des enseignants','ملاحظات المعلمين'],['Parent signatures','Signatures des parents','تواقيع الأهل'],['Parent signature','Signature des parents','توقيع الأهل'],
+ ["Parents sign this day's agenda in the evening.",'Les parents signent l’agenda de ce jour le soir.','يوقّع الأهل مفكرة هذا اليوم مساءً.'],['Parents usually sign in the evening','Les parents signent généralement le soir','يوقّع الأهل عادةً في المساء'],
+ ['All parents signed','Tous les parents ont signé','وقّع جميع الأهل'],['Remind unsigned parents','Relancer les parents','تذكير الأهل غير الموقّعين'],['Reminder sent','Relance envoyée','تم إرسال التذكير'],
+ ['Note','Mot','ملاحظة'],['Not signed','Non signé','غير موقَّع'],['Not signed yet','Pas encore signé','لم يُوقَّع بعد'],['Note to the teacher','Mot à l’enseignant','ملاحظة للمعلم'],['Remind this parent','Relancer ce parent','تذكير ولي الأمر'],
+ ['Later today','Plus tard aujourd’hui','لاحقاً اليوم'],['You','Vous','أنتِ'],['Log now','Renseigner','دوّني الآن'],['Add entry','Ajouter une entrée','إضافة مدخل'],['parents see it in the agenda','les parents le voient dans l’agenda','يراه الأهل في المفكرة'],
+ ['Period','Heure','الحصة'],['Topic covered','Sujet traité','الموضوع الذي تمّ شرحه'],['What was covered (optional)','Contenu de la séance (facultatif)','ما تمّ شرحه (اختياري)'],['Examples, exercises solved in class…','Exemples, exercices corrigés en classe…','أمثلة وتمارين محلولة في الصف…'],
+ ["You don't teach this class on this day — you can still add homework, a note or a remark.",'Vous n’avez pas cette classe ce jour-là — vous pouvez quand même ajouter un devoir, un mot ou une remarque.','لا تدرّسين هذا الصف في هذا اليوم — يمكنكِ مع ذلك إضافة فرض أو ملاحظة للأهل أو ملاحظة عن تلميذ.'],
+ ['Lessons are added once they happen — you can already add homework, a note or a remark.','Les séances s’ajoutent une fois faites — vous pouvez déjà ajouter un devoir, un mot ou une remarque.','تُضاف الحصص بعد حدوثها — يمكنكِ الآن إضافة فرض أو ملاحظة للأهل أو ملاحظة عن تلميذ.'],
+ ['Due date','Date de remise','موعد التسليم'],['e.g. CRDP book p.104, ex. 1 – 5','ex. manuel CRDP p.104, ex. 1 – 5','مثال: كتاب CRDP ص.104، تمارين 1 – 5'],['Note for parents (optional)','Mot aux parents (facultatif)','ملاحظة للأهل (اختياري)'],
+ ['e.g. Bring the geometry set on Thursday','ex. Apporter le kit de géométrie jeudi','مثال: إحضار عدّة الهندسة يوم الخميس'],['Remark (optional)','Remarque (facultatif)','ملاحظة عن تلميذ (اختياري)'],['No remark','Aucune remarque','بدون ملاحظة'],
+ ['Remark about the student…','Remarque sur l’élève…','ملاحظة عن التلميذ…'],['Notify parents','Prévenir les parents','إشعار الأهل'],['Push notification with a link to the agenda','Notification avec un lien vers l’agenda','إشعار مع رابط إلى المفكرة'],
+ ['Save to agenda','Enregistrer dans l’agenda','حفظ في المفكرة'],['Add a topic, homework, a note or a remark','Ajoutez un sujet, un devoir, un mot ou une remarque','أضيفي موضوعاً أو فرضاً أو ملاحظة'],['Write the remark about the student','Rédigez la remarque sur l’élève','اكتبي الملاحظة عن التلميذ'],
+ ['Agenda updated','Agenda mis à jour','تم تحديث المفكرة'],['parents notified','parents prévenus','تم إشعار الأهل'],['homeroom','classe principale','صف الإشراف'],
+ ['Logged lessons appear in the class agenda that parents sign','Les séances renseignées apparaissent dans l’agenda signé par les parents','تظهر الحصص المدوّنة في مفكرة الصف التي يوقّعها الأهل'],
+ ['History & Geography','Histoire-Géographie','التاريخ والجغرافيا'],['Physical Education','EPS','التربية البدنية']
+].forEach(r=>add(...r));
+const P=[['Week of {x}','Semaine du {x}','أسبوع {x}'],['Signed {n}','Signé {n}','موقَّع {n}'],['{n} not signed yet','{n} pas encore signés','{n} لم يوقّعوا بعد'],['Signed by {x}','Signé par {x}','وقّعه {x}'],
+ ['Given {x}','Donné le {x}','أُعطي {x}'],['Reminder sent to {n} parents','Relance envoyée à {n} parents','تم إرسال تذكير إلى {n} من الأهل'],['Reminder sent to {x}','Relance envoyée à {x}','تم إرسال تذكير إلى {x}'],
+ ['No {c} lesson with you this day','Pas de séance avec les {c} ce jour-là','لا حصة لكِ مع {c} في هذا اليوم'],['Parent signatures for {c} are followed by the homeroom teacher','Les signatures des parents de {c} sont suivies par le professeur principal','يتابع مربّي الصف تواقيع أهل {c}'],
+ ["{n} parents haven't signed {x}",'{n} parents n’ont pas signé le {x}','{n} من الأهل لم يوقّعوا {x}']];
+P.forEach(([en,fr,ar])=>{I18N_P.fr=I18N_P.fr.filter(x=>x[0]!==en);I18N_P.ar=I18N_P.ar.filter(x=>x[0]!==en);I18N_P.fr.push([en,fr]);I18N_P.ar.push([en,ar]);});
+Object.keys(_patCache).forEach(k=>delete _patCache[k]);})();
 
 const CEDAR='<svg viewBox="0 0 24 24"><path d="M12 2.5 7.5 8h2.2L6 12.5h2.8L4.5 17.5H11v4h2v-4h6.5l-4.3-5h2.8L14.3 8h2.2z" fill="currentColor"/></svg>';
 /* student IDs (Omar Haddad = ARZ-S-1041) and guardians */
@@ -1445,13 +1505,110 @@ const CHAPTERS={m9b:['Ch.3 Radicals — rationalising denominators','Ch.4 Thales
 let lessons=[
   {id:1,cls:'m9b',d:16,p:'P2',ch:'Ch.4 Thales\' theorem — converse',content:'',hw:'',status:'missing'},
   {id:2,cls:'m10',d:13,p:'P4',ch:'Ch.2 Second-degree equations — discriminant',content:'Discriminant Δ and number of roots; worked examples 1 – 4.',hw:'Series 2, ex. 1 – 6 (due 17 Nov)',status:'logged',rev:false},
-  {id:3,cls:'m9b',d:12,p:'P3',ch:'Ch.4 Thales\' theorem — direct',content:'Statement, configurations, ex. 1 – 3 p.102 solved in class.',hw:'Thales\' theorem worksheet (due 18 Nov)',status:'logged',rev:true},
+  {id:3,cls:'m9b',d:12,p:'P3',ch:'Ch.4 Thales\' theorem',content:'Statement, configurations, ex. 1 – 3 p.102 solved in class.',hw:'Thales\' theorem worksheet (due 18 Nov)',status:'logged',rev:true},
   {id:4,cls:'m9a',d:12,p:'P7',ch:'Ch.3 Radicals — rationalising denominators',content:'Conjugate expressions; simplifying 1/(√a + √b).',hw:'p.86 ex. 12 – 15',status:'logged',rev:true},
   {id:5,cls:'m9b',d:10,p:'P2',ch:'Ch.3 Radicals — rationalising denominators',content:'Quiz correction; rationalising with conjugates.',hw:'Exercises p.84 — Radicals',status:'logged',rev:true},
   {id:6,cls:'m9a',d:11,p:'P2',ch:'Ch.3 Radicals — operations',content:'Product and quotient of radicals, simplification drills.',hw:'—',status:'logged',rev:true},
+  {id:8,cls:'m9b',d:13,p:'P2',ch:'Ch.4 Thales\' theorem — exercises',content:'Configurations and ratios: ex. 4 – 9 p.103 solved in pairs.',hw:'Thales\' theorem worksheet (due 18 Nov)',status:'logged',rev:false},
+  {id:9,cls:'m9b',d:11,p:'P5',ch:'Ch.3 Radicals — practice exercises',content:'Mixed practice on simplifying and rationalising; board corrections.',hw:'Exercises p.84 — Radicals (due 12 Nov)',status:'logged',rev:true},
+  {id:10,cls:'m9b',d:9,p:'P2',ch:'Ch.3 Radicals — quiz corrections',content:'Radicals quiz returned and corrected; common mistakes reviewed.',hw:'—',status:'logged',rev:true},
+  {id:11,cls:'m9a',d:9,p:'P4',ch:'Ch.3 Radicals — simplifying',content:'Perfect squares, simplifying √50, √72 and sums of radicals.',hw:'p.76 ex. 1 – 8 (due 13 Nov)',status:'logged',rev:true},
+  {id:12,cls:'m10',d:9,p:'P6',ch:'Ch.2 Second-degree equations',content:'Factorised and developed forms; solving by factorising.',hw:'—',status:'logged',rev:true},
   {id:7,cls:'m9b',d:6,p:'P2',ch:'Ch.3 Radicals — simplifying',content:'Extracting perfect squares: √50, √72 and sums of radicals solved in class.',hw:'p.81 ex. 7 – 12',status:'logged',rev:true},
 ];
 let llAddHw=false;
+
+/* ---- 6. agenda (daily school diary) — parents sign it every evening ---- */
+const AG_ICON='<path d="M5 4h11a2 2 0 0 1 2 2v14H7a2 2 0 0 1-2-2z"/><path d="M9 8h6M9 11.5h4"/><path d="M9 16.5c1.2-1.8 2.2-1.8 2.7 0s1.6 1.6 3.3-.6"/>';
+const AG_WEEKS=[9,16,23],AG_NOW={d:16,min:9*60+41};
+const AG_TIME=['07:50','08:40','09:30','10:40','11:30','12:40','13:30'],AG_END=['08:40','09:30','10:20','11:30','12:20','13:30','14:20'];
+/* EB9 B weekly timetable (same as the student & parent apps) */
+const AG_TT={Mon:['Ar','M','En','Bi','Fr','Hi','PE'],Tue:['Ph','M','Fr','Ar','En','Hi','Bi'],Wed:['Fr','Ph','En','Bi','M','Hi','Ar'],Thu:['Ar','En','M','Fr','Ph','Bi','PE'],Fri:['Fr','M','Ar','Hi','En','Ph','Bi']};
+const AG_SUBJ={Ar:'Arabic',M:'Mathematics',En:'English',Bi:'Life & Earth Sciences',Fr:'French',Hi:'History & Geography',Ph:'Physics & Chemistry',PE:'Physical Education'};
+const AG_TCH={Ar:'Mr. Itani',M:'Ms. Khoury',En:'Ms. Zein',Bi:'Dr. Rahal',Fr:'Mr. Daccache',Hi:'Ms. Salameh',Ph:'Mr. Aoun',PE:'Mr. Nehme'};
+/* topics written by the other EB9 B teachers (the Maths slot comes from the lesson log) */
+const AG_TOPIC={
+  9:['القواعد: المفعول المطلق','','Unit 3 — Reading: “My Lebanon” (intro)','Ch.2 The nervous system — neurons','Le Petit Prince, ch.1–5 — discussion','Lebanon’s regions','Volleyball — serves'],
+  10:['Density — mass and volume','','Grammaire : les accords du participe passé','نص «الأرز» — شرح المفردات','Grammar — the passive voice','Civics — Lebanon’s institutions','Reflexes — lab preparation'],
+  11:['Le Petit Prince, ch.6 — lecture','Density of liquids','Writing — a descriptive paragraph','Ch.2 The reflex arc','','Geography — Lebanon’s rivers','التعبير الكتابي: وصف مكان'],
+  12:['القواعد: الحال','Vocabulary — Unit 3','','Dictée préparée','Measuring density (lab)','Reflex arc — exercises','Volleyball — match'],
+  13:['Le Petit Prince, ch.6–8','','نص «الأرز» — أسئلة الفهم','History — independence of 1943','Reading — “My Lebanon”, part 2','Density — exercises','Revision — the nervous system'],
+  16:['القواعد: التمييز','','','','','','']};
+/* attachments posted by other teachers (shown as a count; files live in their Class materials) */
+const AG_CLIP={'13|P1':1,'12|P5':2,'11|P4':2,'9|P6':2};
+let agHw=[
+  {cls:'m9b',t:'Exercises p.84 — Radicals',s:'M',given:10,due:12,hw:'h1'},
+  {cls:'m9b',t:'Thales\' theorem worksheet',s:'M',given:12,due:18,hw:'h2'},
+  {cls:'m9b',t:'Factorisation problems',s:'M',given:16,due:23,hw:'h3'},
+  {cls:'m9b',t:'Résumé — Le Petit Prince ch.1–5',s:'Fr',given:9,due:13},
+  {cls:'m9b',t:'Lab report — Density',s:'Ph',given:9,due:12},
+  {cls:'m9b',t:'Map exercise — Lebanon\'s regions',s:'Hi',given:9,due:10},
+  {cls:'m9a',t:'Exercises p.76 — Real numbers',s:'M',given:9,due:13,hw:'h4'},
+  {cls:'m9a',t:'Thales\' theorem worksheet',s:'M',given:12,due:19,hw:'h5'},
+  {cls:'m10',t:'Second-degree equations — series 2',s:'M',given:13,due:17,hw:'h6'}];
+let agNotes={
+  'm9b|9':['Photo & media consent form — please sign in the app'],
+  'm9b|10':['Bring the geometry set on Thursday'],
+  'm9b|11':['Parent–teacher meetings Wed 18 Nov, 15:00–18:00 — book a slot'],
+  'm9b|13':['Independence Day ceremony Fri 20 Nov — full school uniform'],
+  'm9b|16':['1st term exams start Thu 26 Nov — timetable in the app'],
+  'm9b|18':['Parent–teacher meetings today, 15:00–18:00'],
+  'm9b|20':['Independence Day ceremony — full school uniform'],
+  'm9b|26':['1st term exams begin — French, 08:00–10:00, Hall A']};
+/* remarks written in the EB9 B agenda (about Omar Haddad, roster index 4); new remarks are added here too */
+let agRemarks=[
+  {id:1,cls:'m9b',d:10,si:4,by:'Ms. Salameh',type:'Concern',text:'Map exercise not handed in.'},
+  {id:2,cls:'m9b',d:10,si:4,by:'Ms. Khoury',type:'Positive',text:'Excellent explanation of rationalising denominators to the class.'},
+  {id:3,cls:'m9b',d:12,si:4,by:'Administration',type:'Concern',text:'Arrived late to P1 (08:05).'},
+  {id:4,cls:'m9b',d:13,si:4,by:'Mr. Nehme',type:'Positive',text:'Helped organise the Independence Day rehearsal.'}];
+/* EB9 B parent signatures (class of 28) */
+const AG_SIGNED={9:26,10:27,11:25,12:27,13:21,16:9};
+const AG_OMAR={9:{at:'20:15'},10:{at:'19:50',note:'Omar will hand in the map tomorrow. Sorry.'},11:{at:'21:05'},12:{at:'20:30',note:'Late this morning because of traffic on the Ring.'}};
+const AG_PNOTE={'2|11':'Lina had a fever last night — she will finish the exercises tomorrow.','6|13':'Sami will bring the signed consent form on Monday.'};
+let agCls='m9b',agWeek=16,agDay=16,agTone='Positive';
+const agReminded=new Set();
+const agMin=s=>{const [h,m]=s.split(':').map(Number);return h*60+m;};
+const agDays=w=>[0,1,2,3,4].map(i=>w+i);
+const agFuture=d=>d>AG_NOW.d;
+const agNoTitle=n=>n.replace(/^(Mr|Mrs|Ms|Miss|Dr)\.\s*/,'');
+function agRow(cls,d,p,s,i){
+  const r={cls,d,p,s,i,tch:AG_TCH[s],clip:0,mine:s==='M',when:'done',topic:''};
+  if(d===AG_NOW.d){const st=agMin(AG_TIME[i]),en=agMin(AG_END[i]);r.when=AG_NOW.min<en?'later':'done';}
+  if(r.mine){r.lesson=lessons.find(l=>l.cls===cls&&l.d===d&&l.p===p)||null;r.topic=r.lesson?r.lesson.ch:'';r.cl=cmLessonFor({cls,d,p});r.clip=r.cl?r.cl.att.length:0;}
+  else{r.topic=r.when==='later'?'':(AG_TOPIC[d]||[])[i]||'';r.clip=AG_CLIP[d+'|'+p]||0;}
+  return r;}
+/* "Covered in class": all periods for her homeroom, only her Maths periods elsewhere */
+function agRows(cls,d){if(agFuture(d)||d<9)return [];const dn=dayName(d,'Nov');
+  if(cls==='m9b')return (AG_TT[dn]||[]).map((s,i)=>agRow(cls,d,'P'+(i+1),s,i));
+  const g=cls2(cls).grp;return (teachWeek[dn]||[]).filter(x=>x.c.endsWith(g)).map(x=>{const i=AG_TIME.indexOf(x.t);return i<0?null:agRow(cls,d,'P'+(i+1),'M',i);}).filter(Boolean);}
+const agLogMissing=r=>r.mine&&r.when==='done'&&(!r.lesson||r.lesson.status==='missing');
+/* parent signature of roster student i (homeroom only) */
+function agSig(d,i){if(agFuture(d))return null;const s=rosters.m9b[i];
+  if(s.n==='Omar Haddad'){const o=AG_OMAR[d];return o?{signed:true,at:o.at,note:o.note||''}:{signed:false};}
+  const note=AG_PNOTE[i+'|'+d],h=hash01(s.n+'|agenda|'+d),ratio=(AG_SIGNED[d]||0)/cls2('m9b').students;
+  if(!note&&h>=ratio)return {signed:false};
+  const m=d===AG_NOW.d?7*60+Math.floor(h*40):19*60+Math.floor(h*170);
+  return {signed:true,at:String(Math.floor(m/60)).padStart(2,'0')+':'+String(m%60).padStart(2,'0'),note:note||''};}
+function agDot(cls,d){if(agFuture(d))return 'fut';
+  if(cls==='m9b')return (AG_SIGNED[d]||0)/cls2(cls).students>=.9?'ok':'warn';
+  const rows=agRows(cls,d);if(!rows.length)return 'none';if(rows.some(agLogMissing))return 'warn';return rows.every(r=>r.when==='later')?'fut':'ok';}
+/* a parent's signature, drawn as ink (seeded by the name so it never changes) */
+function sigSVG(name){let seed=7;for(const ch of name)seed=(Math.imul(seed,31)+ch.charCodeAt(0))>>>0;
+  const rnd=()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/4294967296;};
+  const f=v=>v.toFixed(1),nm=agNoTitle(name),parts=nm.split(' '),style=Math.floor(rnd()*3),slant=-(6+rnd()*22),amp=.8+rnd()*.5;let x=14,y=48,d='';
+  parts.forEach((w,pi)=>{const top=y-(26+rnd()*16)*amp;
+    /* capital: a tall loop */
+    d+=`M${f(x)} ${y} C ${f(x+2)} ${f(top)}, ${f(x+24)} ${f(top-4)}, ${f(x+16)} ${y-8} C ${f(x+10)} ${y+8}, ${f(x-2)} ${y+2}, ${f(x+12)} ${y-6} `;x+=18;
+    const n=Math.min(pi?8:4,w.length);
+    for(let k=0;k<n;k++){const tall=k%3===1&&rnd()>.4,a=(tall?16+rnd()*12:5+rnd()*7)*amp,wd=5+rnd()*5;
+      if(style===0)d+=`c ${f(wd*.25)} ${f(-a)}, ${f(wd*.85)} ${f(-a)}, ${f(wd)} 0 s ${f(wd*.4)} ${f(a*.35)}, ${f(wd*.9)} ${f(rnd()*4-2)} `;
+      else if(style===1)d+=`c ${f(wd*1.2)} ${f(-a)}, ${f(-wd*.5)} ${f(-a)}, ${f(wd*.7)} 0 c ${f(wd*.3)} ${f(a*.2)}, ${f(wd*.8)} ${f(a*.1)}, ${f(wd)} ${f(-1)} `;
+      else d+=`q ${f(wd*.5)} ${f(-a*1.2)}, ${f(wd)} 0 q ${f(wd*.4)} ${f(a*.3)}, ${f(wd*.9)} ${f(-a*.1)} `;
+      x+=style===1?wd*1.7:wd*1.9;}
+    x+=12+rnd()*6;});
+  const fl=Math.floor(rnd()*3);
+  d+=fl===0?`M${f(18+rnd()*10)} ${y+12} q ${f((x-40)*.5)} ${f(6+rnd()*6)}, ${f(x-30)} ${f(-6-rnd()*4)}`:fl===1?`M${f(x-24)} ${y-2} c 10 -4, 16 6, 4 12 s -${f(x*.5)} 2, -${f(x*.62)} -2`:`M${f(x-20)} ${y-10} l 8 -4`;
+  return `<svg viewBox="0 0 ${Math.max(210,Math.ceil(x+24))} 72" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><g transform="translate(${f(-slant*.9)} 0) skewX(${f(slant)})"><path d="${d}" fill="none" stroke="#1e3a8a" stroke-width="${f(2+rnd()*.8)}" stroke-linecap="round" stroke-linejoin="round"/></g></svg>`;}
 
 /* ---- 5. exam timetable & invigilation ---- */
 let ettTab='sched';
@@ -1513,6 +1670,7 @@ home:()=>`
     <div class="qtile" onclick="show('classes')"><div class="qi"><svg viewBox="0 0 24 24"><path d="M4 12.5 9 17.5 20 6.5"/></svg></div><div class="ql">Attendance</div></div>
     <div class="qtile" onclick="openHomework()"><div class="qi"><svg viewBox="0 0 24 24"><path d="M5 4h9a3 3 0 0 1 3 3v13H8a3 3 0 0 0-3 3z"/><path d="M17 4h2v16"/></svg></div><div class="ql">Homework</div></div>
     <div class="qtile" onclick="openReportCards()"><div class="qi"><svg viewBox="0 0 24 24"><path d="M7 3h8l4 4v14H7z"/><path d="M14 3v5h5"/><path d="M10 13h6M10 17h4"/></svg>${rcPending('m9b')?`<span class="qb">${rcPending('m9b')}</span>`:''}</div><div class="ql">Report cards</div></div>
+    <div class="qtile" onclick="openAgenda()"><div class="qi"><svg viewBox="0 0 24 24"><path d="M5 4h11a2 2 0 0 1 2 2v14H7a2 2 0 0 1-2-2z"/><path d="M9 8h6M9 11.5h4"/><path d="M9 16.5c1.2-1.8 2.2-1.8 2.7 0s1.6 1.6 3.3-.6"/></svg>${AG_SIGNED[13]<cls2('m9b').students&&!agReminded.has('m9b|13')?`<span class="qb">${cls2('m9b').students-AG_SIGNED[13]}</span>`:''}</div><div class="ql">Agenda</div></div>
     <div class="qtile" onclick="openLessonLog()"><div class="qi"><svg viewBox="0 0 24 24"><path d="M6 3h11a2 2 0 0 1 2 2v16H8a2 2 0 0 1-2-2z"/><path d="M6 17a2 2 0 0 1 2-2h11"/><path d="M10 7h6M10 10h4"/></svg>${lessons.some(l=>l.status==='missing')?'<span class="qb">!</span>':''}</div><div class="ql">Lesson log</div></div>
     <div class="qtile" onclick="openConduct()"><div class="qi"><svg viewBox="0 0 24 24"><path d="M12 3 5 6v5c0 4 3 7 7 8 4-1 7-4 7-8V6z"/><path d="M9 11.5l2 2 4-4"/></svg></div><div class="ql">Conduct</div></div>
     <div class="qtile" onclick="openExamTT()"><div class="qi"><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="16" rx="3"/><path d="M3.5 9.5h17M8 3v4M16 3v4"/><path d="M8 14h3M8 17h6"/></svg></div><div class="ql">Exam dates</div></div>
@@ -1894,6 +2052,7 @@ conduct:()=>{const list=[...conductNotes].sort((a,b)=>b.d-a.d).filter(n=>cdFilte
 
 lessonlog:()=>{const days=[...new Set(lessons.map(l=>l.d))].sort((a,b)=>b-a),miss=lessons.filter(l=>l.status==='missing').length;return `
   <div class="apphead"><span class="lead"></span><div class="grow"><h2 class="screen-title">Lesson log</h2><div class="sub">Cahier de textes · 1st term</div></div><div class="icon-btn" onclick="logLesson()"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></div></div>
+  <div class="card mt8 tap" style="cursor:pointer" onclick="openAgenda()"><div class="row"><div class="set-ic"><svg viewBox="0 0 24 24">${AG_ICON}</svg></div><div class="grow" style="min-width:0"><div style="font-weight:700">Agenda</div><div class="sub mt6" style="font-size:12.5px">Logged lessons appear in the class agenda that parents sign</div></div><span style="color:var(--faint)">›</span></div></div>
   ${miss?`<div class="card mt8" style="background:var(--danger-bg);border-color:color-mix(in srgb,var(--danger) 30%,transparent)"><div class="row"><div class="icon-btn" style="background:var(--surface);border:none;color:var(--danger)"><svg viewBox="0 0 24 24"><path d="M12 4 21 20H3z"/><path d="M12 10v4M12 17.5v.5"/></svg></div><div class="grow"><div style="font-weight:700">${miss} lesson${miss>1?'s':''} not logged</div><div class="sub mt6">Mrs. Nada Frem (coordinator) reviews the log every Friday</div></div></div></div>`:''}
   ${days.map(d=>`<div class="day-head"><span>${d===16?'Today · ':''}${fmtD(d)}</span><span>${inDays(d-16)==='today'?'':inDays(d-16)}</span></div>
     ${lessons.filter(l=>l.d===d).sort((a,b)=>a.p.localeCompare(b.p)).map(l=>{const c=cls2(l.cls),CL=cmLessonFor(l),nAtt=CL?CL.att.length:0;return `
@@ -1908,6 +2067,30 @@ lessonlog:()=>{const days=[...new Set(lessons.map(l=>l.d))].sort((a,b)=>b-a),mis
         ${cmLogAtt(l)}
       </div></div></div>`;}).join('')}`).join('')}
   <div style="height:10px"></div>`;},
+
+agenda:()=>{const c=cls2(agCls),home=agCls==='m9b',days=agDays(agWeek),d=agDay,fut=agFuture(d),rows=agRows(agCls,d);
+  const given=agHw.filter(h=>h.cls===agCls&&h.given===d),due=agHw.filter(h=>h.cls===agCls&&h.due===d),notes=agNotes[agCls+'|'+d]||[];
+  const rems=agRemarks.filter(n=>n.cls===agCls&&n.d===d&&(home||n.by==='Ms. Khoury'));
+  const wi=AG_WEEKS.indexOf(agWeek);
+  return `
+  <div class="apphead"><span class="lead"></span><div class="grow" style="min-width:0"><h2 class="screen-title">Agenda</h2><div class="sub">${home?'Homeroom · parents sign every evening':'Your Maths entries'}</div></div><div class="icon-btn" onclick="agAdd()" aria-label="Add entry"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></div></div>
+  <div class="chip-scroll mt8">${classes.map(x=>`<div class="chip ${x.id===agCls?'active':''}" onclick="agPick('${x.id}')">${x.grp}${x.id==='m9b'?' · Homeroom':''}</div>`).join('')}</div>
+  <div class="ag-nav mt12"><div class="icon-btn ${wi<=0?'dis':''}" onclick="agGoWeek(-1)" aria-label="Previous week"><svg class="flip-rtl" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7"/></svg></div>
+    <div class="grow" style="text-align:center;min-width:0"><div style="font-weight:800">Week of ${agWeek} Nov</div><div class="sub" style="font-size:12px;margin-top:2px">${fmtD(days[0])} – ${fmtD(days[4])}</div></div>
+    <div class="icon-btn ${wi>=AG_WEEKS.length-1?'dis':''}" onclick="agGoWeek(1)" aria-label="Next week"><svg class="flip-rtl" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></div></div>
+  <div class="ag-week mt12">${days.map(x=>`<div class="ag-day ${x===d?'on':''} ${x===AG_NOW.d?'today':''}" onclick="agSel(${x})"><span class="ag-dn">${dayName(x,'Nov')}</span><b class="tnum">${x}</b><i class="ag-dot ${agDot(agCls,x)}"></i></div>`).join('')}</div>
+  <div class="ag-legend">${home?`<span><i class="ag-dot ok"></i>Signed</span><span><i class="ag-dot warn"></i>Signatures missing</span>`:`<span><i class="ag-dot ok"></i>Logged</span><span><i class="ag-dot warn"></i>Not logged</span>`}<span><i class="ag-dot fut"></i>Upcoming</span></div>
+    <div class="day-head"><span>${d===AG_NOW.d?'Today · ':''}${fmtD(d)}</span><span>${d===AG_NOW.d?'':inDays(d-AG_NOW.d)}</span></div>
+  <div class="set-label" style="margin-top:8px">Covered in class</div>
+  ${!home?`<p class="sub" style="font-size:12px;margin:-4px 4px 8px">Only your subject is shown for this class</p>`:''}
+  ${rows.length?`<div class="card" style="padding:2px 14px">${rows.map(agRowHtml).join('')}</div>`:`<div class="card ag-empty"><div class="sub">${fut?'Nothing yet':'No '+c.grp+' lesson with you this day'}</div></div>`}
+  ${given.length||due.length?`<div class="set-label">Homework</div><div class="card" style="padding:2px 14px">
+    ${given.length?`<div class="ag-sub">${d===AG_NOW.d?'Given today':'Given'}</div>${given.map(h=>agHwHtml(h,'given')).join('')}`:''}
+    ${due.length?`<div class="ag-sub">${d===AG_NOW.d?'Due today':'Due'}</div>${due.map(h=>agHwHtml(h,'due')).join('')}`:''}</div>`:''}
+  ${notes.length?`<div class="set-label">Notes for parents</div><div class="card" style="padding:2px 14px">${notes.map(n=>`<div class="ag-note"><span style="color:var(--accent);display:inline-flex"><svg viewBox="0 0 24 24"><path d="M4 9v6h4l6 4V5L8 9z"/><path d="M17 8a5 5 0 0 1 0 8"/></svg></span><div class="grow auto-dir" style="font-size:14px;font-weight:600;line-height:1.4" data-noi18n dir="auto">${esc(n)}</div></div>`).join('')}</div>`:''}
+  ${rems.length?`<div class="set-label">Teacher remarks</div>${rems.map(n=>{const s=rosters[n.cls][n.si];return `<div class="ag-rem ${n.type==='Positive'?'':'concern'}"><div class="row between" style="gap:8px"><div style="font-weight:700;font-size:13.5px;min-width:0" class="ell">${s?s.n:''} · ${n.by}</div>${tagHtml(n.type==='Positive'?'ok':n.type==='Warning'?'warn':'bad',n.type)}</div><div class="auto-dir mt6" style="font-size:13.5px;line-height:1.4" data-noi18n dir="auto">${esc(n.text)}</div></div>`;}).join('')}`:''}
+  ${home?agSigPanel(d):`<div class="card mt16" style="background:var(--surface-2)"><div class="row"><div class="set-ic">${`<svg viewBox="0 0 24 24">${AG_ICON}</svg>`}</div><div class="grow sub" style="font-size:12.5px">Parent signatures for ${c.grp} are followed by the homeroom teacher.</div></div></div>`}
+  <div style="height:14px"></div>`;},
 
 examtt:()=>`
   <div class="apphead"><span class="lead"></span><div class="grow"><h2 class="screen-title">Exam timetable</h2><div class="sub">1st term exams · 26 Nov – 4 Dec</div></div></div>
@@ -2120,12 +2303,96 @@ function naRow(onclick,tone,icon,title,sub){const bg=tone==='bad'?'var(--danger-
   return `<div class="list-item" style="cursor:pointer" onclick="${onclick}"><div class="icon-btn" style="background:${bg};border:none;color:${fg}"><svg viewBox="0 0 24 24">${icon}</svg></div><div class="grow"><div style="font-weight:700">${title}</div><div class="sub mt6">${sub}</div></div><span style="color:var(--faint)">›</span></div>`;}
 function needsAttention(){let h='';const miss=lessons.filter(l=>l.status==='missing');
   if(miss.length){const l=miss[0];h+=naRow(`openLessonLog()`,'bad','<path d="M6 3h11a2 2 0 0 1 2 2v16H8a2 2 0 0 1-2-2z"/><path d="M10 7h6M10 10h4"/>',`Lesson log missing · ${cls2(l.cls).grp} ${l.p}`,`${l.d===16?'Today':fmtD(l.d)} · ${esc(l.ch)}`);}
+  const agU=cls2('m9b').students-AG_SIGNED[13];if(agU)h+=naRow(`openAgenda('m9b',13)`,'warn',AG_ICON,`Agenda · EB9 B · ${agU} parents haven't signed Fri 13 Nov`,agReminded.has('m9b|13')?'Reminder sent ✓':'Parent signatures · homeroom');
   const rp=rcPending('m9b');if(rp)h+=naRow(`openReportCards('m9b')`,'warn','<path d="M7 3h8l4 4v14H7z"/><path d="M14 3v5h5"/>',`${rp} report card comment${rp>1?'s':''} pending`,'EB9 B homeroom · due Fri 4 Dec');
   const h1=hwOf('m9b','h1'),s1=h1&&hwStats(h1);if(s1&&s1.toReview)h+=naRow(`openHwReview('m9b','h1')`,'a','<path d="M5 4h9a3 3 0 0 1 3 3v13H8a3 3 0 0 0-3 3z"/><path d="M17 4h2v16"/>',`Review homework · ${s1.toReview} to mark`,`EB9 B · ${esc(h1.title)}`);
   const nd=duties[0];h+=naRow(`openExamTT('my')`,'a','<rect x="3.5" y="5" width="17" height="16" rx="3"/><path d="M3.5 9.5h17M8 3v4M16 3v4"/>',`Next invigilation · ${fmtD(nd.d,nd.m)}`,`${nd.room} · ${nd.t.split(' – ')[0]} · ${nd.exam} · ${inDays(daysAway(nd.d,nd.m))}`);
   if(paperStatus==='pending')h+=naRow(`openExamTT('my')`,'warn','<path d="M7 3h8l4 4v14H7z"/><path d="M14 3v5h5"/>','Upload Maths EB9 exam paper','Due to Mrs. Nada Frem (coordinator) by Mon 23 Nov');
   return h;}
 function refreshHome(){rebuild('home');}
+
+/* ---- 6. agenda ---- */
+function agRowHtml(r){
+  const miss=agLogMissing(r),on=r.mine&&r.cl?`openAgLesson('${r.cl.id}')`:miss?(r.lesson?`logLesson(${r.lesson.id})`:`agAdd('${r.p}')`):'';
+  const tag=r.when==='later'?mutedTag('Later today'):miss?tagHtml('bad','Not logged'):'';
+  const clip=r.clip?`<span class="tag a cm-clip">${CM_CLIP}${r.clip}</span>`:'';
+  return `<div class="list-item ag-per${on?' tap':''}" style="align-items:flex-start" ${on?`onclick="${on}"`:''}>
+    <div class="subj" style="width:38px;height:38px;font-size:12px;background:${SUBJ[r.s]};${r.when==='later'?'opacity:.55':''}">${r.p}</div>
+    <div class="grow" style="min-width:0"><div class="row between" style="gap:8px;align-items:flex-start"><div style="font-weight:800;font-size:14px;min-width:0">${AG_SUBJ[r.s]}</div><div class="row" style="gap:5px;flex:0 0 auto">${clip}${tag}</div></div>
+      <div class="sub" style="font-size:12px;margin-top:2px"><span dir="ltr">${AG_TIME[r.i]}</span> · ${r.tch}${r.mine?' · You':''}</div>
+      ${r.topic?`<div class="ag-topic auto-dir" data-noi18n dir="auto">${esc(r.topic)}</div>`:''}
+      ${miss?`<button class="btn secondary mt8" style="padding:8px 12px;font-size:13px;width:auto" onclick="event.stopPropagation();${r.lesson?`logLesson(${r.lesson.id})`:`agAdd('${r.p}')`}">Log now</button>`:''}
+    </div></div>`;}
+function agHwHtml(h,kind){const H=h.hw?hwOf(h.cls,h.hw):null,on=H?`openHwReview('${h.cls}','${h.hw}')`:'';
+  const right=H&&kind==='due'?hwTag(H):kind==='given'?mutedTag(`Due ${fmtD(h.due)}`):'';
+  return `<div class="list-item${on?' tap':''}" style="align-items:flex-start;gap:10px" ${on?`onclick="${on}"`:''}><span class="ag-sq" style="background:${SUBJ[h.s]}"></span>
+    <div class="grow" style="min-width:0"><div class="auto-dir" style="font-weight:700;font-size:14px;line-height:1.35" data-noi18n dir="auto">${esc(h.t)}</div><div class="sub" style="font-size:12px;margin-top:3px">${AG_SUBJ[h.s]} · ${kind==='due'?`Given ${fmtD(h.given)}`:AG_TCH[h.s]}</div></div>${right}</div>`;}
+function agSigPanel(d){if(agFuture(d))return `<div class="set-label">Parent signatures</div><div class="card ag-empty"><div class="sub">Parents sign this day's agenda in the evening.</div></div>`;
+  const size=cls2('m9b').students,tot=AG_SIGNED[d]||0,un=size-tot,rem=agReminded.has('m9b|'+d),ros=rosters.m9b,rest=Math.max(0,size-ros.length);
+  return `<div class="set-label">Parent signatures</div>
+  <div class="card"><div class="row between" style="gap:10px"><div><div class="tnum" style="font-weight:800;font-size:18px">Signed ${tot}/${size}</div><div class="sub mt6">${un?(d===AG_NOW.d?'Parents usually sign in the evening':`${un} not signed yet`):'All parents signed ✓'}</div></div>
+    <div class="set-ic" style="width:44px;height:44px;border-radius:13px;background:${un?'var(--warn-bg)':'var(--ok-bg)'};color:${un?'var(--warn)':'var(--ok)'}"><svg viewBox="0 0 24 24">${AG_ICON}</svg></div></div>
+    <div class="cm-bar lg mt12"><i style="width:${Math.round(tot/size*100)}%;background:${un?'var(--warn)':'var(--ok)'}"></i></div>
+    ${un&&d<AG_NOW.d?`<button class="btn ${rem?'secondary':''} mt12" style="padding:12px;font-size:14px" ${rem?'disabled':''} onclick="agRemind(${d})">${rem?'Reminder sent ✓':'Remind unsigned parents'}</button>`:''}</div>
+  <div class="card mt8" style="padding:2px 14px">${ros.map((s,i)=>{const g=agSig(d,i),gu=guardianOf('m9b',i);return `<div class="list-item tap" onclick="agSigSheet(${i})">
+    <div class="avatar" style="width:36px;height:36px;font-size:12px;background:${s.c}">${initials(s.n)}</div>
+    <div class="grow" style="min-width:0"><div style="font-weight:700" class="ell">${s.n}</div><div class="sub ell" style="font-size:12px;margin-top:2px">${gu.name}${g.signed&&g.note?' · Note':''}</div></div>
+    ${g.signed?`<div class="ag-sigbox sm">${sigSVG(gu.name)}</div><span class="sub tnum" dir="ltr" style="font-size:11px;min-width:34px;text-align:end">${g.at}</span>`:tagHtml('warn','Not signed')}</div>`;}).join('')}</div>
+  ${rest?`<p class="sub mt8" style="text-align:center;font-size:12px">${rest} more students</p>`:''}`;}
+function openAgenda(cls,d){if(cls)agCls=cls;if(d){agDay=d;agWeek=[...AG_WEEKS].reverse().find(w=>w<=d)||9;}rebuild('agenda');show('agenda');}
+function agRedraw(){const sc=document.getElementById('scr-agenda');if(!sc)return;const st=sc.scrollTop;rebuild('agenda');sc.scrollTop=st;if(current==='agenda')setLead(sc);}
+function agPick(id){agCls=id;agRedraw();}
+function agSel(d){agDay=d;agRedraw();}
+function agGoWeek(k){const i=AG_WEEKS.indexOf(agWeek)+k;if(i<0||i>=AG_WEEKS.length)return;agWeek=AG_WEEKS[i];agDay=agWeek===16?16:agWeek;agRedraw();}
+function openAgLesson(id){const L=cmLessons.find(x=>x.id===id);if(!L)return;matCls=L.cls;cmTab='lesson';rebuild('materials');show('materials');}
+function agRemind(d){const un=cls2('m9b').students-(AG_SIGNED[d]||0);agReminded.add('m9b|'+d);agRedraw();refreshHome();toast(t('Reminder sent to {n} parents',{n:un}));}
+function agSigSheet(i){const d=agDay,s=rosters.m9b[i],g=agSig(d,i),gu=guardianOf('m9b',i);if(!g)return;
+  openSheet(`<div class="row"><div class="avatar" style="width:46px;height:46px;font-size:15px;background:${s.c}">${initials(s.n)}</div><div class="grow" style="min-width:0"><h2 style="font-size:19px;font-weight:800">${s.n}</h2><div class="sub mt6">EB9 B · ${fmtD(d)}</div></div></div>
+  <div class="set-label">Parent signature</div>
+  ${g.signed?`<div class="ag-sigbox lg">${sigSVG(gu.name)}</div><div class="sub mt8" style="text-align:center;font-size:12.5px">Signed by ${agNoTitle(gu.name)} · ${fmtD(d)}, ${g.at}</div>
+    ${g.note?`<div class="card mt12" style="background:var(--surface-2)"><div class="sub" style="font-weight:700;font-size:12px">Note to the teacher</div><div class="auto-dir mt6" style="font-size:14px;line-height:1.45" data-noi18n dir="auto">${esc(g.note)}</div></div>`:''}`:
+  `<div class="card" style="background:var(--warn-bg);border-color:color-mix(in srgb,var(--warn) 35%,transparent)"><div class="row"><div class="icon-btn" style="background:var(--surface);border:none;color:var(--warn)"><svg viewBox="0 0 24 24"><path d="M12 8v4.5l3 2"/><circle cx="12" cy="12" r="9"/></svg></div><div class="grow"><div style="font-weight:700">Not signed yet</div><div class="sub mt6">${gu.name}</div></div></div></div>
+    ${d<AG_NOW.d?`<button class="btn mt12" onclick="agRemindOne(${i})">Remind this parent</button>`:''}`}
+  <button class="btn secondary mt12" onclick="closeSheet();show('inbox')">Message parent</button>
+  <button class="btn ghost mt8" onclick="closeSheet()">Close</button>`);}
+function agRemindOne(i){const gu=guardianOf('m9b',i);closeSheet();toast(t('Reminder sent to {x}',{x:gu.name}));}
+/* + Add entry: lesson covered (→ lesson log), homework (→ homework list), note for parents, remark (→ conduct notes) */
+function agAdd(preP){const cls=agCls,c=cls2(cls),d=agDay>27?AG_NOW.d:agDay,past=!agFuture(d);agTone='Positive';
+  const mine=agRows(cls,d).filter(r=>r.mine&&r.when!=='later'),p0=preP||(mine.find(agLogMissing)||mine[0]||{}).p;
+  const dueDays=[17,18,19,20,23,24,25,26,27,30].filter(x=>x>d);
+  openSheet(`<h2 style="font-size:20px;font-weight:800">Add entry</h2><p class="sub mt8">${c.grp} · ${fmtD(d)} · parents see it in the agenda</p><input type="hidden" id="ag-d" value="${d}"/>
+  ${past&&mine.length?`<div class="field"><label>Period</label><select class="input" id="ag-p" onchange="agPrefill()">${mine.map(r=>`<option value="${r.p}" ${r.p===p0?'selected':''}>${r.p} · ${AG_TIME[r.i]}</option>`).join('')}</select></div>
+  <div class="field"><label>Topic covered</label><input class="input" id="ag-topic" placeholder="e.g. Ch.4 Thales' theorem — converse"/></div>
+  <div class="row mt8" style="gap:6px;flex-wrap:wrap">${CHAPTERS[cls].map((ch,k)=>`<span class="chip sm" onclick="document.getElementById('ag-topic').value=CHAPTERS['${cls}'][${k}]" data-noi18n>${esc(ch)}</span>`).join('')}</div>
+  <div class="field"><label>What was covered (optional)</label><textarea class="input" id="ag-cov" rows="2" style="resize:none" placeholder="Examples, exercises solved in class…"></textarea></div>`:
+  `<div class="card mt12" style="background:var(--surface-2)"><div class="sub" style="font-size:12.5px">${past?'You don\'t teach this class on this day — you can still add homework, a note or a remark.':'Lessons are added once they happen — you can already add homework, a note or a remark.'}</div></div>`}
+  <div class="set-label">Homework</div>
+  <div class="row" style="gap:10px;align-items:flex-end"><div class="grow"><label style="font-size:12.5px;color:var(--muted);font-weight:600">Title</label><input class="input" id="ag-hw" style="margin-top:7px" placeholder="e.g. CRDP book p.104, ex. 1 – 5"/></div>
+    <div style="width:130px"><label style="font-size:12.5px;color:var(--muted);font-weight:600">Due date</label><select class="input" id="ag-due" style="margin-top:7px">${dueDays.map((x,k)=>`<option value="${x}" ${k===1?'selected':''}>${fmtD(x)}</option>`).join('')}</select></div></div>
+  <div class="field"><label>Note for parents (optional)</label><textarea class="input" id="ag-note" rows="2" style="resize:none" placeholder="e.g. Bring the geometry set on Thursday"></textarea></div>
+  <div class="set-label">Remark (optional)</div>
+  <select class="input" id="ag-stu"><option value="">No remark</option>${rosters[cls].map((s,i)=>`<option value="${i}">${s.n}</option>`).join('')}</select>
+  <div class="seg mt8" id="ag-tone">${['Positive','Concern'].map(x=>`<button class="${x===agTone?'active':''}" onclick="agPickTone(this,'${x}')">${x}</button>`).join('')}</div>
+  <textarea class="input mt8" id="ag-rem" rows="2" style="resize:none" placeholder="Remark about the student…"></textarea>
+  <div class="set-row mt8" style="border:none"><div class="grow"><div style="font-weight:600">Notify parents</div><div class="sub" style="font-size:12px">Push notification with a link to the agenda</div></div><div class="switch on" id="ag-notify" onclick="this.classList.toggle('on')"></div></div>
+  <button class="btn mt12" onclick="agSave()">Save to agenda</button>`);agPrefill();}
+function agPrefill(){const sel=document.getElementById('ag-p'),inp=document.getElementById('ag-topic');if(!sel||!inp)return;const d=+document.getElementById('ag-d').value;
+  const L=lessons.find(l=>l.cls===agCls&&l.d===d&&l.p===sel.value);inp.value=L?L.ch:'';const cv=document.getElementById('ag-cov');if(cv)cv.value=L&&L.status!=='missing'?L.content:'';}
+function agPickTone(btn,x){agTone=x;btn.parentElement.querySelectorAll('button').forEach(b=>b.classList.toggle('active',b===btn));}
+function agSave(){const v=k=>{const e=document.getElementById(k);return e?e.value.trim():'';};
+  const cls=agCls,d=+v('ag-d'),p=v('ag-p'),topic=v('ag-topic'),cov=v('ag-cov'),hw=v('ag-hw'),due=+v('ag-due'),note=v('ag-note'),stu=v('ag-stu'),rem=v('ag-rem'),notify=document.getElementById('ag-notify').classList.contains('on');
+  if(!topic&&!hw&&!note&&!(stu!==''&&rem)){toast('Add a topic, homework, a note or a remark');return;}
+  if(stu!==''&&!rem){toast('Write the remark about the student');return;}
+  if(p&&topic){let L=lessons.find(l=>l.cls===cls&&l.d===d&&l.p===p);const hwTxt=hw?`${hw} (due ${due} Nov)`:(L?L.hw:'');
+    if(L)Object.assign(L,{ch:topic,content:cov||(L.status==='missing'||!L.content?topic:L.content),hw:hwTxt||L.hw||'—',status:'logged',rev:false});
+    else lessons.push({id:Date.now(),cls,d,p,ch:topic,content:cov||topic,hw:hwTxt||'—',status:'logged',rev:false});}
+  if(hw){const id='h'+Date.now();hwList[cls].push({id,title:hw,due,max:10,file:'hw',info:'From the agenda'+(topic?' · '+topic:''),subs:rosters[cls].map(()=>({st:null,mark:null,fb:'',ret:false}))});agHw.push({cls,t:hw,s:'M',given:d,due,hw:id});}
+  if(note)(agNotes[cls+'|'+d]=agNotes[cls+'|'+d]||[]).push(note);
+  if(stu!==''&&rem)agRemarks.push({id:Date.now(),cls,d,si:+stu,by:'Ms. Khoury',type:agTone,text:rem});
+  if(stu!==''&&rem)conductNotes.push({id:Date.now()+1,cls,si:+stu,type:agTone,cat:agTone==='Positive'?'Participation':'Behaviour',text:rem,d,notify:notify||agTone!=='Positive',by:'Ms. Khoury'});
+  agDay=d;agWeek=[...AG_WEEKS].reverse().find(w=>w<=d)||9;closeSheet();
+  ['lessonlog','homework','conduct','materials'].forEach(id=>{try{rebuild(id);}catch(e){}});refreshHome();agRedraw();
+  toast(notify?'Agenda updated · parents notified ✓':'Agenda updated ✓');}
 
 /* openers */
 function openReportCards(cls){if(cls)rcCls=cls;rebuild('reportcards');show('reportcards');}
@@ -2202,7 +2469,7 @@ function saveLesson(id){const g=k=>document.getElementById(k).value.trim();const
   if(l)Object.assign(l,{cls,d,p,ch,content,hw,status:'logged',rev:false});else lessons.push({id:Date.now(),cls,d,p,ch,content,hw,status:'logged',rev:false});
   const addHw=document.getElementById('ll-addhw').classList.contains('on')&&hw;
   if(addHw)hwList[cls].push({id:'h'+Date.now(),title:hw,due:Math.min(30,d+3===21||d+3===22?23:d+3),max:10,file:'hw',info:'From lesson log · '+ch,subs:rosters[cls].map(()=>({st:null,mark:null,fb:'',ret:false}))});
-  closeSheet();rebuild('lessonlog');rebuild('homework');refreshHome();show('lessonlog');toast(addHw?'Lesson logged · homework added ✓':'Lesson logged ✓');}
+  closeSheet();rebuild('lessonlog');rebuild('homework');try{rebuild('agenda');}catch(e){}refreshHome();show(current==='agenda'?'agenda':'lessonlog',true);toast(addHw?'Lesson logged · homework added ✓':'Lesson logged ✓');}
 
 /* 5. exam timetable & invigilation */
 function uploadPaper(){paperStatus='uploaded';rebuild('examtt');refreshHome();show('examtt');toast('Exam paper sent to Mrs. Nada Frem ✓');}

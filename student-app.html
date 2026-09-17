@@ -263,6 +263,60 @@
   .mles-k{font-size:11.5px;font-weight:700;color:var(--muted);display:flex;align-items:center;flex-wrap:wrap;gap:4px}
   .mles-t{font-weight:800;font-size:14.5px;line-height:1.3;margin-top:3px}
   .mles .tag.sm{padding:2px 8px;font-size:10.5px}
+  /* agenda (daily diary) */
+  .ag-week{display:flex;align-items:center;gap:6px;margin-top:14px}
+  .ag-arrow{width:30px;height:52px;border-radius:12px;border:1px solid var(--line);background:var(--surface);display:grid;place-items:center;color:var(--muted);cursor:pointer;flex:0 0 auto;padding:0}
+  .ag-arrow svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+  .ag-arrow:disabled{opacity:.35;cursor:default}
+  .ag-days{flex:1;display:grid;grid-template-columns:repeat(5,1fr);gap:5px;min-width:0}
+  .ag-pill{position:relative;border:1px solid var(--line);background:var(--surface);border-radius:14px;padding:7px 2px 15px;text-align:center;cursor:pointer;color:var(--text);min-width:0;transition:background .15s,border-color .15s}
+  .ag-pill .d{display:block;font-size:10.5px;font-weight:700;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .ag-pill .n{display:block;font-size:17px;font-weight:800;line-height:1.2;margin-top:1px}
+  .ag-pill .dot{position:absolute;left:50%;bottom:6px;width:6px;height:6px;border-radius:50%;transform:translateX(-50%)}
+  .ag-pill.today{border-color:var(--accent)}
+  .ag-pill.on{background:var(--accent);border-color:var(--accent);color:#fff}
+  .ag-pill.on .d{color:rgba(255,255,255,.85)}
+  .dot.ok{background:var(--ok)}.dot.warn{background:var(--warn)}.dot.fut{background:var(--line)}
+  .ag-pill.on .dot{box-shadow:0 0 0 2px #fff}
+  .ag-legend{display:flex;flex-wrap:wrap;gap:4px 12px;margin:10px 2px 0;font-size:11px;color:var(--muted);font-weight:600}
+  .ag-legend span{display:inline-flex;align-items:center;gap:5px}.ag-legend .dot{width:7px;height:7px;border-radius:50%;display:inline-block}
+  .ag-dayh{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:18px 2px 0}
+  .ag-dayh h3{font-size:17px;font-weight:800}
+  .ag-card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:12px 14px;margin-top:10px;box-shadow:0 1px 2px rgba(16,24,40,.04),0 8px 24px -18px rgba(16,24,40,.25)}
+  :root[data-theme="dark"] .ag-card{box-shadow:none}
+  .ag-h{display:flex;align-items:center;gap:8px;font-size:11.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);margin-bottom:4px}
+  .ag-h svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:0 0 auto}
+  .ag-h .grow{min-width:0}
+  .ag-row{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--line)}
+  .ag-row:last-child{border-bottom:none}
+  .ag-row.tap{cursor:pointer}
+  .ag-p{flex:0 0 auto;width:30px;text-align:center;font-size:11px;font-weight:800;color:var(--muted)}
+  .ag-row .subj{width:30px;height:30px;font-size:11px;border-radius:9px}
+  .ag-topic{font-weight:700;font-size:13.5px;line-height:1.35}
+  .ag-clip{display:inline-flex;align-items:center;gap:3px;font-size:11px;font-weight:800;color:var(--accent);background:var(--accent-soft);border-radius:999px;padding:3px 8px;flex:0 0 auto}
+  .ag-clip svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+  .ag-later{display:flex;flex-wrap:wrap;align-items:center;gap:6px;padding:10px 0 4px;font-size:12px;color:var(--muted)}
+  .ag-later i{width:8px;height:8px;border-radius:3px;display:inline-block;margin-inline-end:4px}
+  .ag-later span.s{display:inline-flex;align-items:center;background:var(--surface-2);border-radius:999px;padding:3px 9px;font-weight:600}
+  .ag-sub{font-size:11px;font-weight:800;color:var(--muted);margin:8px 0 0}
+  .ag-note{display:flex;gap:10px;padding:8px 0;font-size:13.5px;line-height:1.45;border-bottom:1px solid var(--line)}
+  .ag-note:last-child{border-bottom:none}
+  .ag-note b{flex:0 0 auto;width:7px;height:7px;border-radius:50%;background:var(--accent);margin-top:7px}
+  .ag-remark{border-inline-start:3px solid var(--accent);background:var(--surface-2);border-radius:12px;padding:9px 12px;margin-top:8px;font-size:13px;line-height:1.5}
+  .ag-remark.pos{border-inline-start-color:var(--ok)}.ag-remark.con{border-inline-start-color:var(--warn)}
+  .ag-remark .who{display:flex;align-items:center;gap:6px;font-size:11.5px;font-weight:700;color:var(--muted);margin-bottom:3px}
+  .ag-sig{border-radius:18px;padding:12px 14px;margin-top:10px;border:1px solid var(--line);background:var(--surface)}
+  .ag-sig.signed{border-color:color-mix(in srgb,var(--ok) 35%,transparent)}
+  .ag-sig.unsigned{background:var(--warn-bg);border-color:color-mix(in srgb,var(--warn) 35%,transparent)}
+  .ag-sig.future{background:var(--surface-2);border-style:dashed}
+  .sig-img{background:#fff;border:1px solid #e5e7eb;border-radius:12px;height:92px;display:flex;align-items:center;justify-content:center;margin-top:10px;overflow:hidden;direction:ltr}
+  .sig-img svg,.sig-img img{max-width:100%;max-height:100%;display:block}
+  .sig-line{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--muted);margin-top:8px;flex-wrap:wrap}
+  .sig-line .tag{flex:0 0 auto}
+  .sig-note{margin-top:8px;padding:8px 11px;border-radius:10px;background:var(--surface-2);font-size:12.5px;line-height:1.45}
+  .ag-badge{min-width:20px;height:20px;padding:0 6px;border-radius:10px;background:var(--warn);color:#fff;font-size:11px;font-weight:800;display:grid;place-items:center;flex:0 0 auto}
+  .ag-empty{text-align:center;padding:26px 14px;color:var(--muted)}
+  .ag-empty svg{width:30px;height:30px;stroke:var(--faint);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;margin-bottom:6px}
   .msubj-h{display:flex;align-items:center;gap:10px;padding-bottom:10px;border-bottom:1px solid var(--line)}
   .matt{display:flex;align-items:center;gap:11px;padding:11px 0;border-bottom:1px solid var(--line);cursor:pointer}
   .matt:last-child{border-bottom:none}
@@ -438,6 +492,7 @@
             </div>
             <div class="drawer-list">
               <div class="drawer-item" data-goto="home" onclick="go('home')"><svg viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/></svg><span class="lbl" data-i18n="Home">Home</span></div>
+              <div class="drawer-item" data-goto="agenda" onclick="goAgenda()"><svg viewBox="0 0 24 24"><path d="M6 3h11a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6z"/><path d="M6 3v18M4 7h4M4 12h4M4 17h4"/><path d="M11 8h5M11 12h5"/></svg><span class="lbl" data-i18n="Agenda">Agenda</span><span class="ag-badge" id="drawer-ag-badge"></span></div>
               <div class="drawer-item" data-goto="materials" onclick="goMaterials()"><svg viewBox="0 0 24 24"><path d="M4 5h10a3 3 0 0 1 3 3v11H7a3 3 0 0 0-3 3z"/><path d="M17 5h3v14"/></svg><span class="lbl" data-i18n="Class materials">Class materials</span></div>
               <div class="drawer-item" data-goto="timetable" onclick="go('timetable')"><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="16" rx="3"/><path d="M3.5 9.5h17M8 3v4M16 3v4"/></svg><span class="lbl" data-i18n="Timetable">Timetable</span></div>
               <div class="drawer-item" data-goto="homework" onclick="go('homework')"><svg viewBox="0 0 24 24"><path d="M5 4h9a3 3 0 0 1 3 3v13H8a3 3 0 0 0-3 3z"/><path d="M17 4h2v16"/></svg><span class="lbl" data-i18n="Homework">Homework</span></div>
@@ -624,6 +679,17 @@ const I18N_SRC=[
 ['Drag to move','Glisser pour déplacer','اسحب للتحريك'],['New materials','Nouveaux supports','مواد جديدة'],
 ['Your progress','Ta progression','تقدّمك'],['Continue','Continuer','متابعة'],['Course content','Contenu du cours','محتوى المقرر'],['Mark as complete','Marquer comme terminé','وضع علامة مكتمل'],['Complete','Terminé','مكتمل'],['Next item','Élément suivant','العنصر التالي'],['Back to course','Retour au cours','العودة إلى المقرر'],['Download','Télécharger','تنزيل'],['Downloaded ✓','Téléchargé ✓','تم التنزيل ✓'],['Page','Page','صفحة'],['Slide','Diapo','الشريحة'],['Slides','Diaporama','شرائح'],['Link','Lien','رابط'],['Fit','Ajuster','ملاءمة'],['Lecture completed','Leçon terminée','اكتمل الدرس'],['Replay','Revoir','إعادة التشغيل'],['Up next','À suivre','التالي'],['Condensed demo lesson','Leçon démo condensée','درس تجريبي مختصر'],['All items completed','Tous les éléments sont terminés','اكتملت جميع العناصر'],['Marked as complete ✓','Marqué comme terminé ✓','تم وضع علامة مكتمل ✓'],['Marked as not complete','Marqué comme non terminé','أُزيلت علامة الإكمال'],['External link','Lien externe','رابط خارجي'],['URL','URL','الرابط'],['Links open in your browser. The school checks every link before sharing it.','Les liens s’ouvrent dans ton navigateur. L’école vérifie chaque lien avant de le partager.','تُفتح الروابط في متصفحك. تتحقّق المدرسة من كل رابط قبل مشاركته.'],['Open link','Ouvrir le lien','فتح الرابط'],['Opening in browser…','Ouverture dans le navigateur…','جارٍ الفتح في المتصفح…'],['Submit answers','Valider les réponses','إرسال الإجابات'],['Choose an answer for each question','Choisis une réponse pour chaque question','اختر إجابة لكل سؤال'],['Perfect score 🎉','Sans faute 🎉','علامة كاملة 🎉'],['Review the lesson and try again','Revois la leçon et réessaie','راجع الدرس وحاول مجدداً'],
 ];
+I18N_SRC.push(
+['Agenda','Agenda','المفكرة اليومية'],['Parent signature','Signature des parents','توقيع الأهل'],['Not signed yet','Pas encore signé','لم يُوقَّع بعد'],['Signed','Signé','موقَّع'],
+['Covered in class','Vu en classe','ما تمّ شرحه'],['Notes for parents','Informations aux parents','ملاحظات للأهل'],['Teacher remark','Remarque de l’enseignant','ملاحظة المعلم'],['Teacher remarks','Remarques des enseignants','ملاحظات المعلمين'],
+['Given today','Donnés aujourd’hui','أُعطيت اليوم'],['Due today','Pour aujourd’hui','مطلوبة اليوم'],['Later today','Plus tard aujourd’hui','لاحقاً اليوم'],['Nothing yet','Rien pour l’instant','لا شيء بعد'],
+['Teachers fill in the agenda during the day.','Les enseignants remplissent l’agenda pendant la journée.','يملأ المعلمون المفكرة خلال اليوم.'],
+['Ask your parent to sign today’s agenda in the parent app.','Demande à ton parent de signer l’agenda dans l’application parents.','اطلب من أهلك توقيع المفكرة في تطبيق الأهل.'],
+['Signature opens on the day.','La signature s’ouvre le jour même.','يُتاح التوقيع في اليوم نفسه.'],['Note from parent','Mot du parent','ملاحظة من الأهل'],
+['Submitted late','Rendu en retard','مُسلَّم متأخراً'],['All signed ✓','Tout est signé ✓','كل الأيام موقَّعة ✓'],
+['Daily diary','Cahier de liaison','المفكرة اليومية'],['signed by your parent each evening','signé chaque soir par ton parent','يوقّعها أهلك كل مساء'],
+['Previous week','Semaine précédente','الأسبوع السابق'],['Next week','Semaine suivante','الأسبوع التالي'],['Signature','Signature','التوقيع'],['Signed by','Signé par','وقّعه']
+);
 const I18N={fr:{},ar:{}};I18N_SRC.forEach(([en,fr,ar])=>{I18N.fr[en]=fr;I18N.ar[en]=ar;});
 /* patterns: $n = translated capture, %n = raw capture (names, authored titles) */
 const I18P=[
@@ -702,6 +768,14 @@ const I18P=[
 [/^(Push notifications|Email notifications|Grade alerts|Homework reminders|Announcement alerts|Message alerts|Face ID) on$/,'$1 : activé','$1: مفعّل'],
 [/^(Push notifications|Email notifications|Grade alerts|Homework reminders|Announcement alerts|Message alerts|Face ID) off$/,'$1 : désactivé','$1: معطّل'],
 ];
+I18P.unshift(
+[/^Week of (.+)$/,'Semaine du $1','أسبوع $1'],
+[/^Signed (\d+)\/(\d+)$/,'Signé %1/%2','موقَّع %1/%2'],
+[/^Signed by (.+)$/,'Signé par %1','وقّعه %1'],
+[/^(.+) not signed by parent$/,'$1 non signé par le parent','$1 غير موقَّع من الأهل'],
+[/^Homework: (\d+) to do$/,'Devoirs : %1 à faire','الفروض: %1 للإنجاز']
+);
+
 /* dates: data uses English tokens (Mon 16 Nov, 26 Nov, November 2026) */
 const EN_DF=['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'],EN_D3=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
 const EN_MF=['January','February','March','April','May','June','July','August','September','October','November','December'],EN_M3=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
@@ -892,6 +966,98 @@ const conductNotes=[
   {d:'Tue 10 Nov',type:'pos',cat:'Participation',by:'Ms. Khoury',t:'Excellent explanation of rationalising denominators to the class.',notified:false},
 ];
 let conductFilter='all';
+
+/* ---- Agenda (daily school diary) · EB9 B · parent signs each evening ----
+   Periods follow Omar's weekly timetable (same as the parent app). Topics, notes, remarks
+   and parent notes are authored content (not translated). Student view is read-only. */
+const AG_TT={Mon:['Ar','M','En','Bi','Fr','Hi','PE'],Tue:['Ph','M','Fr','Ar','En','Hi','Bi'],Wed:['Fr','Ph','En','Bi','M','Hi','Ar'],Thu:['Ar','En','M','Fr','Ph','Bi','PE'],Fri:['Fr','M','Ar','Hi','En','Ph','Bi']};
+const AG_TCH={Ar:'Mr. Itani',M:'Ms. Khoury',En:'Ms. Zein',Bi:'Dr. Rahal',Fr:'Mr. Daccache',Hi:'Ms. Salameh',PE:'Mr. Nehme',Ph:'Mr. Aoun'};
+const AG_PERIOD_END=['08:40','09:30','10:20','11:30','12:20','13:30','14:20'];
+const AG_NOW='09:41';
+const AG_WEEKS=[
+  ['Mon 9 Nov','Tue 10 Nov','Wed 11 Nov','Thu 12 Nov','Fri 13 Nov'],
+  ['Mon 16 Nov','Tue 17 Nov','Wed 18 Nov','Thu 19 Nov','Fri 20 Nov'],
+  ['Mon 23 Nov','Tue 24 Nov','Wed 25 Nov','Thu 26 Nov','Fri 27 Nov'],
+];
+const AG_TODAY='Mon 16 Nov';
+/* per day: topics[] by period (null = not yet), hw given (homework ids), notes, remarks */
+const AGENDA={
+  'Mon 9 Nov':{topics:['القواعد: المفعول المطلق','Ch.3 Radicals — quiz corrections','Unit 3 — Reading: “My Lebanon” (intro)','Ch.2 The nervous system — neurons','Le Petit Prince, ch.1–5 — discussion','Lebanon’s regions','Volleyball — serves'],
+    given:[4,5,2],notes:['Photo & media consent form — please sign in the app'],remarks:[]},
+  'Tue 10 Nov':{topics:['Density — mass and volume','Ch.3 Radicals — rationalising denominators','Grammaire : les accords du participe passé','نص «الأرز» — شرح المفردات','Grammar — the passive voice','Civics — Lebanon’s institutions','Reflexes — lab preparation'],
+    given:[3],notes:['Bring the geometry set on Thursday'],
+    remarks:[{by:'Ms. Salameh',tone:'con',t:'Map exercise not handed in.'},{by:'Ms. Khoury',tone:'pos',t:'Excellent explanation of rationalising denominators to the class.'}]},
+  'Wed 11 Nov':{topics:['Le Petit Prince, ch.6 — lecture','Density of liquids','Writing — a descriptive paragraph','Ch.2 The reflex arc','Ch.3 Radicals — practice exercises','Geography — Lebanon’s rivers','التعبير الكتابي: وصف مكان'],
+    given:[],notes:['Parent–teacher meetings Wed 18 Nov, 15:00–18:00 — book a slot'],remarks:[]},
+  'Thu 12 Nov':{topics:['القواعد: الحال','Vocabulary — Unit 3','Ch.4 Thales’ theorem','Dictée préparée','Measuring density (lab)','Reflex arc — exercises','Volleyball — match'],
+    given:[0],notes:['Omar arrived late to P1 (08:05)'],remarks:[]},
+  'Fri 13 Nov':{topics:['Le Petit Prince, ch.6–8','Ch.4 Thales’ theorem — exercises','نص «الأرز» — أسئلة الفهم','History — independence of 1943','Reading — “My Lebanon”, part 2','Density — exercises','Revision — the nervous system'],
+    given:[],notes:['Independence Day ceremony Fri 20 Nov — full school uniform'],
+    remarks:[{by:'Mr. Nehme',tone:'pos',t:'Helped organise the Independence Day rehearsal.'}]},
+  'Mon 16 Nov':{topics:['القواعد: التمييز','Ch.4 Thales’ theorem — converse',null,null,null,null,null],
+    given:[1],notes:['1st term exams start Thu 26 Nov — timetable in the app'],remarks:[]},
+  'Wed 18 Nov':{topics:[],given:[],notes:['Parent–teacher meetings today, 15:00–18:00'],remarks:[]},
+  'Fri 20 Nov':{topics:[],given:[],notes:['Independence Day ceremony — full school uniform'],remarks:[]},
+  'Thu 26 Nov':{topics:[],given:[],notes:['1st term exams begin — French, 08:00–10:00, Hall A'],remarks:[]},
+};
+/* Fadi Haddad's signatures (Fri 13 and today not signed yet) */
+const AG_SIGS={
+  'Mon 9 Nov':{name:'Fadi Haddad',time:'20:15',v:1},
+  'Tue 10 Nov':{name:'Fadi Haddad',time:'19:50',v:2,note:'Omar will hand in the map tomorrow. Sorry.'},
+  'Wed 11 Nov':{name:'Fadi Haddad',time:'21:05',v:3},
+  'Thu 12 Nov':{name:'Fadi Haddad',time:'20:30',v:4,note:'Late this morning because of traffic on the Ring.'},
+};
+/* signatures made in the parent app on this device, if any (read-only, best effort) */
+function agParentSigs(){try{const raw=localStorage.getItem('skl-agenda-sign-p');if(!raw)return {};const o=JSON.parse(raw),out={};
+  const pick=v=>v&&typeof v==='object'?{img:v.img||v.png||v.data||v.sig||v.dataUrl||null,time:v.time||v.at||v.ts||'',note:v.note||'',name:v.name||'Fadi Haddad'}:null;
+  const put=(k,v)=>{const p=pick(v);if(!p)return;const key=AG_WEEKS.flat().find(d=>d===k||d.split(' ')[1]===String(k).replace(/^\D*(\d+).*$/,'$1'));if(key)out[key]=p;};
+  if(Array.isArray(o))o.forEach(v=>v&&put(v.day||v.date||v.d,v));else if(o&&typeof o==='object'){const src=o.omar||o[0]||o.kid0||o;Object.keys(src).forEach(k=>put(k,src[k]));}
+  return out;}catch(e){return {};}}
+function agSig(d){const p=agParentSigs()[d];if(p&&(p.img||p.time)){let tm=String(p.time||'');const m=tm.match(/(\d{1,2}):(\d{2})/);if(m)tm=m[1].padStart(2,'0')+':'+m[2];else{const n=+tm;if(n>1e11){const dt=new Date(n);tm=String(dt.getHours()).padStart(2,'0')+':'+String(dt.getMinutes()).padStart(2,'0');}else tm='';}return {name:p.name,time:tm,note:p.note,img:p.img};}return AG_SIGS[d]||null;}
+let agWeek=1,agDay=AG_TODAY;
+function agIdx(d){for(let w=0;w<AG_WEEKS.length;w++){const i=AG_WEEKS[w].indexOf(d);if(i>-1)return w*5+i;}return -1;}
+function agState(d){const i=agIdx(d),t=agIdx(AG_TODAY);if(i>t)return 'fut';return agSig(d)?'ok':'warn';}
+function agUnsignedPast(){return AG_WEEKS.flat().filter(d=>agIdx(d)<agIdx(AG_TODAY)&&agState(d)==='warn');}
+function agHw(id){return homework.find(h=>h.id===id);}
+function agDueOn(d){return homework.filter(h=>h.due===d);}
+function agLesson(d,p){return MAT_LESSONS.find(l=>l.date===d&&l.p===p);}
+function agPeriodDone(d,i){const di=agIdx(d),t=agIdx(AG_TODAY);if(di<t)return true;if(di>t)return false;return AG_PERIOD_END[i]<=AG_NOW;}
+function agHwTag(h){if(h.status==='missing')return '<span class="tag bad">Missing</span>';if(h.status==='todo')return '<span class="tag a">To do</span>';return h.late?'<span class="tag warn">Submitted late</span>':'<span class="tag ok">Submitted</span>';}
+function agSubjShort(c){return subjName(c).replace(', Geography & Civics',' & Geography');}
+/* hand-made looking "F. Haddad" signature (vector, ink on paper) */
+function agSigSVG(v){const r=((v||1)*37%11)/10,rot=-4+r*2.2,sk=-10-r*4;
+  return `<svg viewBox="0 0 300 110" width="260" height="95" aria-label="Signature"><g transform="rotate(${rot.toFixed(1)} 150 55)" fill="none" stroke="#1e3a8a" stroke-linecap="round" stroke-linejoin="round">
+<path d="M34 78 C 40 58, 46 34, 58 18 C 62 13, 70 12, 76 16" stroke-width="3.2"/><path d="M40 46 C 50 42, 60 41, 70 43" stroke-width="2.6"/><circle cx="80" cy="78" r="1.9" fill="#1e3a8a" stroke="none"/>
+<text x="92" y="76" font-family="Caveat, 'Segoe Print', 'Bradley Hand', cursive" font-size="46" font-weight="700" fill="#1e3a8a" stroke="none" transform="skewX(${sk.toFixed(1)}) translate(${(14+r*6).toFixed(1)} 0)">Haddad</text>
+<path d="M60 90 C 120 ${(82+r*6).toFixed(0)}, 190 96, 276 ${(70-r*8).toFixed(0)}" stroke-width="2.2" opacity=".85"/><path d="M252 ${(79-r*6).toFixed(0)} l 22 -10" stroke-width="2" opacity=".7"/></g></svg>`;}
+function agSigImg(sig,v){return sig.img&&/^data:image\//.test(sig.img)?`<img src="${hx(sig.img)}" alt="Signature">`:agSigSVG(v);}
+function goAgenda(){agWeek=1;agDay=AG_TODAY;rebuild('agenda');go('agenda');}
+function openAgenda(d){if(d){agDay=d;agWeek=Math.floor(agIdx(d)/5);}else{agWeek=1;agDay=AG_TODAY;}rebuild('agenda');show('agenda');}
+function agPick(d){agDay=d;const sc=document.getElementById('scr-agenda');rebuild('agenda');show('agenda',true);if(sc)sc.scrollTop=0;}
+function agShift(n){const w=Math.max(0,Math.min(AG_WEEKS.length-1,agWeek+n));if(w===agWeek)return;agWeek=w;agDay=w===1?AG_TODAY:AG_WEEKS[w][0];rebuild('agenda');show('agenda',true);}
+function agOpenLesson(id){matTab='lesson';matSubj='all';rebuild('materials');show('materials');setTimeout(()=>jumpLesson(id),60);}
+function agHomeCard(){const todo=homework.filter(h=>h.status==='todo').length,un=agUnsignedPast();
+  return `<div class="card mt16" style="cursor:pointer;padding:6px 16px" onclick="openAgenda()"><div class="list-item"><div class="set-ic" style="background:var(--accent-soft);color:var(--accent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h11a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6z"/><path d="M6 3v18M4 7h4M4 12h4M4 17h4"/><path d="M11 8h5M11 12h5"/></svg></div><div class="grow" style="min-width:0"><div style="font-weight:700"><span>Agenda</span> · <span>Homework: ${todo} to do</span></div><div class="sub mt6">${un.length?`<span style="color:var(--warn);font-weight:700">${un[un.length-1]} not signed by parent</span>`:'<span>All signed ✓</span>'}</div></div><span style="color:var(--faint)">›</span></div></div>`;}
+function agDayHTML(d){const i=agIdx(d),today=agIdx(AG_TODAY),st=agState(d),A=AGENDA[d]||{topics:[],given:[],notes:[],remarks:[]},day=d.split(' ')[0],tt=AG_TT[day]||[];
+  const covered=[],later=[];tt.forEach((c,k)=>{const top=A.topics[k];if(i<=today&&agPeriodDone(d,k)&&top)covered.push({c,k,top});else if(i===today)later.push(c);});
+  const given=(A.given||[]).map(agHw).filter(Boolean),due=agDueOn(d),notes=A.notes||[],remarks=A.remarks||[];
+  const empty=!covered.length&&!given.length&&!due.length&&!notes.length&&!remarks.length;
+  let h=`<div class="ag-dayh"><h3>${d===AG_TODAY?'Today · '+d:d}</h3>${st==='ok'?'<span class="tag ok">Signed</span>':st==='warn'?'<span class="tag warn">Not signed yet</span>':'<span class="tag" style="background:var(--surface-3);color:var(--muted)">Upcoming</span>'}</div>`;
+  if(empty)return h+`<div class="ag-card ag-empty"><svg viewBox="0 0 24 24"><path d="M6 3h11a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6z"/><path d="M6 3v18M11 8h5M11 12h5"/></svg><div style="font-weight:700">Nothing yet</div><div class="sub mt6">Teachers fill in the agenda during the day.</div></div>`;
+  const IC={cov:'<svg viewBox="0 0 24 24"><path d="M4 5h10a3 3 0 0 1 3 3v11H7a3 3 0 0 0-3 3z"/><path d="M17 5h3v14"/></svg>',hw:'<svg viewBox="0 0 24 24"><path d="M5 4h9a3 3 0 0 1 3 3v13H8a3 3 0 0 0-3 3z"/><path d="M17 4h2v16"/></svg>',note:'<svg viewBox="0 0 24 24"><path d="M4 9v6h4l6 4V5L8 9z"/><path d="M17 8a5 5 0 0 1 0 8"/></svg>',rem:'<svg viewBox="0 0 24 24"><path d="M4 5.5h16v11H9l-4 3.5v-3.5H4z"/></svg>',sig:'<svg viewBox="0 0 24 24"><path d="M3 17c3-4 5-9 7-9s-1 9 1 9 3-5 5-5-1 5 1 5 3-2 4-3"/><path d="M3 21h18"/></svg>'};
+  if(covered.length||later.length){h+=`<div class="ag-card"><div class="ag-h">${IC.cov}<span class="grow">Covered in class</span></div>${covered.map(x=>{const L=agLesson(d,'P'+(x.k+1)),n=L?L.items.length:0;return `<div class="ag-row${L?' tap':''}"${L?` onclick="agOpenLesson('${L.id}')"`:''}><span class="ag-p" data-noi18n>P${x.k+1}</span><div class="subj" style="background:${SUBJ[x.c]}">${x.c}</div><div class="grow" style="min-width:0"><div class="ag-topic" data-noi18n dir="auto">${hx(x.top)}</div><div class="sub" style="margin-top:3px"><span>${agSubjShort(x.c)}</span> · <span>${AG_TCH[x.c]}</span></div></div>${L?`<span class="ag-clip"><svg viewBox="0 0 24 24"><path d="M20.5 11.5 12 20a5 5 0 0 1-7-7l9-9a3.3 3.3 0 0 1 4.7 4.7l-9 9a1.7 1.7 0 0 1-2.4-2.4L15.5 7"/></svg><span class="tnum">${n}</span></span>`:''}</div>`;}).join('')}${later.length?`<div class="ag-later"><span style="font-weight:700">Later today</span>${later.map(c=>`<span class="s"><i style="background:${SUBJ[c]}"></i><span>${agSubjShort(c)}</span></span>`).join('')}</div>`:''}</div>`;}
+  if(given.length||due.length){h+=`<div class="ag-card"><div class="ag-h">${IC.hw}<span class="grow">Homework</span></div>`;
+    if(given.length)h+=`<div class="ag-sub">Given today</div>`+given.map(x=>`<div class="ag-row tap" onclick="openHw(${x.id})"><div class="subj" style="background:${SUBJ[x.c]}">${x.c}</div><div class="grow" style="min-width:0"><div class="ag-topic" data-noi18n dir="auto">${hx(x.n)}</div><div class="sub" style="margin-top:3px"><span>${agSubjShort(x.c)}</span> · <span>Due ${x.due}</span></div></div>${agHwTag(x)}</div>`).join('');
+    if(due.length)h+=`<div class="ag-sub">Due today</div>`+due.map(x=>`<div class="ag-row tap" onclick="openHw(${x.id})"><div class="subj" style="background:${SUBJ[x.c]}">${x.c}</div><div class="grow" style="min-width:0"><div class="ag-topic" data-noi18n dir="auto">${hx(x.n)}</div><div class="sub" style="margin-top:3px"><span>${agSubjShort(x.c)}</span> · <span>${x.tch}</span>${x.status==='marked'?` · <span class="tnum">${x.mark}/${x.max}</span>`:''}</div></div>${agHwTag(x)}</div>`).join('');
+    h+='</div>';}
+  if(notes.length)h+=`<div class="ag-card"><div class="ag-h">${IC.note}<span class="grow">Notes for parents</span></div>${notes.map(n=>`<div class="ag-note"><b></b><span data-noi18n dir="auto">${hx(n)}</span></div>`).join('')}</div>`;
+  if(remarks.length)h+=`<div class="ag-card"><div class="ag-h">${IC.rem}<span class="grow">${remarks.length>1?'Teacher remarks':'Teacher remark'}</span></div>${remarks.map(r=>`<div class="ag-remark ${r.tone}"><div class="who"><span>${r.by}</span> · <span class="tag ${r.tone==='pos'?'ok':'warn'}" style="padding:2px 8px;font-size:10.5px">${r.tone==='pos'?'Positive':'Concern'}</span></div><div data-noi18n dir="auto">${hx(r.t)}</div></div>`).join('')}</div>`;
+  const sig=agSig(d);
+  if(st==='ok')h+=`<div class="ag-sig signed"><div class="ag-h" style="margin-bottom:0">${IC.sig}<span class="grow">Parent signature</span><span class="tag ok">Signed</span></div><div class="sig-img">${agSigImg(sig,(AG_SIGS[d]||{}).v)}</div><div class="sig-line"><span>Signed by <bdi data-noi18n>${hx(sig.name)}</bdi></span>${sig.time?` · <span>${d}, ${hx(sig.time)}</span>`:''}</div>${sig.note?`<div class="sig-note"><div class="sub" style="font-size:11px;font-weight:700;margin-bottom:2px">Note from parent</div><span data-noi18n dir="auto">${hx(sig.note)}</span></div>`:''}</div>`;
+  else if(st==='warn')h+=`<div class="ag-sig unsigned"><div class="ag-h" style="margin-bottom:0;color:var(--warn)">${IC.sig}<span class="grow">Parent signature</span><span class="tag warn">Not signed yet</span></div><div class="sub" style="margin-top:8px;line-height:1.5">Ask your parent to sign today’s agenda in the parent app.</div></div>`;
+  else h+=`<div class="ag-sig future"><div class="ag-h" style="margin-bottom:0">${IC.sig}<span class="grow">Parent signature</span></div><div class="sub" style="margin-top:6px">Signature opens on the day.</div></div>`;
+  return h;}
+function agBadge(){const el=document.getElementById('drawer-ag-badge');if(!el)return;const n=agUnsignedPast().length;el.textContent=n?String(n):'';el.style.display=n?'':'none';}
 
 /* ---- extra feature data ---- */
 let curChat='khoury';
@@ -1549,6 +1715,7 @@ home:()=>`
   <div class="row between mt20"><h2 style="font-size:17px;font-weight:800">Quick access</h2></div>
   <div class="qpager" id="qpager">
     <div class="qtile" onclick="openMatLesson()"><div class="qi"><svg viewBox="0 0 24 24"><path d="M4 5h10a3 3 0 0 1 3 3v11H7a3 3 0 0 0-3 3z"/><path d="M17 5h3v14"/></svg></div><div class="ql">Class materials</div></div>
+    <div class="qtile" onclick="openAgenda()"><div class="qi"><svg viewBox="0 0 24 24"><path d="M6 3h11a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6z"/><path d="M6 3v18M4 7h4M4 12h4M4 17h4"/><path d="M11 8h5M11 12h5"/></svg>${agUnsignedPast().length?`<span class="qb">${agUnsignedPast().length}</span>`:''}</div><div class="ql">Agenda</div></div>
     <div class="qtile" onclick="show('timetable')"><div class="qi"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 8v4.5l3 2"/></svg></div><div class="ql">Timetable</div></div>
     <div class="qtile" onclick="show('homework')"><div class="qi"><svg viewBox="0 0 24 24"><path d="M5 4h9a3 3 0 0 1 3 3v13H8a3 3 0 0 0-3 3z"/><path d="M17 4h2v16"/></svg></div><div class="ql">Homework</div></div>
     <div class="qtile" onclick="show('exams')"><div class="qi"><svg viewBox="0 0 24 24"><rect x="6" y="4" width="12" height="17" rx="2.5"/><path d="M9 4h6v3H9z"/><path d="M9 12h6M9 16h4"/></svg></div><div class="ql">Exams</div></div>
@@ -1568,6 +1735,7 @@ home:()=>`
     <div class="row mt12"><div class="subj" style="background:${SUBJ.M}">M</div><div class="grow"><div style="font-weight:800;font-size:17px">Mathematics</div><div class="sub mt6">Room 204 · Ms. Khoury</div></div></div>
   </div>
   ${(()=>{const nw=matNewItems();if(!nw.length)return '';const top=nw[0],what=top.it.t==='board'?'posted a board photo':'posted a file',when=top.l.date==='Mon 16 Nov'?'today':top.l.date;return `<div class="card mt16" style="cursor:pointer;padding:6px 16px" onclick="openMatLesson()"><div class="list-item"><div class="set-ic" style="background:var(--accent-soft);color:var(--accent)">${matIco('board')}</div><div class="grow" style="min-width:0"><div style="font-weight:700"><span>New materials</span> · <span class="tnum">${nw.length}</span></div><div class="sub mt6"><span>${hx(top.l.tch)} ${what}</span> · <span>${when}</span></div></div><span style="color:var(--faint)">›</span></div></div>`;})()}
+  ${agHomeCard()}
   <div class="card mt16" style="cursor:pointer;padding:6px 16px" onclick="show('attendance')"><div class="list-item"><div class="set-ic" style="background:var(--accent-soft);color:var(--accent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5 9 17.5 20 6.5"/></svg></div><div class="grow"><div style="font-weight:700">Attendance · 97% this term</div><div class="sub mt6">1 late · 1 excused · tap for detail</div></div><span style="color:var(--faint)">›</span></div></div>
   <div class="card mt16" style="cursor:pointer;background:var(--accent-soft);border-color:transparent" onclick="show('exams')"><div class="row"><div class="icon-btn" style="background:var(--surface);border:none;color:var(--accent)"><svg viewBox="0 0 24 24"><rect x="6" y="4" width="12" height="17" rx="2.5"/><path d="M9 4h6v3H9z"/><path d="M9 12h6M9 16h4"/></svg></div><div class="grow">${(()=>{const nx=exams.find(e=>e.status==='upcoming');return nx?`<div style="font-weight:700">Next exam: ${nx.n} · ${nx.date}</div><div class="sub mt6">${nx.time}–${nx.end} · ${nx.room} · ${daysUntil(nx.date)} days to go · exam timetable</div>`:'<div style="font-weight:700">Exams</div>';})()}</div><span style="color:var(--accent)">›</span></div></div>
   ${homework.filter(h=>h.status==='missing').map(h=>`<div class="card mt12 hw-missing" style="cursor:pointer" onclick="openHw(${h.id})"><div class="row"><div class="icon-btn" style="background:var(--surface);border:none;color:var(--danger)"><svg viewBox="0 0 24 24"><path d="M12 4 21 20H3z"/><path d="M12 10v4M12 17.5v.5"/></svg></div><div class="grow"><div style="font-weight:700">Missing: ${h.n}</div><div class="sub mt6">${h.subj.replace(', Geography & Civics',' & Geography')} · was due ${h.due} · submit now</div></div><span style="color:var(--danger)">›</span></div></div>`).join('')}
@@ -1757,6 +1925,16 @@ materials:()=>{const tabs=[['lesson','By lesson'],['rev','Revision'],['book','Te
   ${matTab==='lesson'?matLessonsHTML():matTab==='rev'?matRevisionHTML():matBooksHTML()}
   <div style="height:14px"></div>`;},
 
+agenda:()=>{const W=AG_WEEKS[agWeek],past=W.filter(d=>agIdx(d)<=agIdx(AG_TODAY)),signed=past.filter(d=>agState(d)==='ok').length;return `
+  <div class="apphead"><span class="lead"></span><div class="grow" style="min-width:0"><h2 class="screen-title">Agenda</h2><div class="sub"><span>EB9 B</span> · <span>Week of ${W[0].replace(/^\w+ /,'')}</span></div></div></div>
+  <p class="sub">Daily diary · signed by your parent each evening</p>
+  <div class="ag-week"><button class="ag-arrow" onclick="agShift(-1)" ${agWeek===0?'disabled':''} aria-label="Previous week"><svg class="flip-rtl" viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></button>
+    <div class="ag-days">${W.map(d=>{const [dn,dd]=d.split(' '),st=agState(d);return `<div class="ag-pill${d===agDay?' on':''}${d===AG_TODAY?' today':''}" onclick="agPick('${d}')"><span class="d">${dn}</span><span class="n tnum">${dd}</span><span class="dot ${st}"></span></div>`;}).join('')}</div>
+    <button class="ag-arrow" onclick="agShift(1)" ${agWeek===AG_WEEKS.length-1?'disabled':''} aria-label="Next week"><svg class="flip-rtl" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button></div>
+  <div class="ag-legend"><span><i class="dot ok"></i><span>Signed</span></span><span><i class="dot warn"></i><span>Not signed yet</span></span><span><i class="dot fut"></i><span>Upcoming</span></span>${past.length?`<span style="margin-inline-start:auto;font-weight:800;color:var(--text)">Signed ${signed}/${past.length}</span>`:''}</div>
+  ${agDayHTML(agDay)}
+  <div style="height:14px"></div>`;},
+
 attendance:()=>{const p=attRows.filter(r=>r.s==='present').length,l=attRows.filter(r=>r.s==='late').length,a=attRows.filter(r=>r.s==='absent').length,e=attRows.filter(r=>r.s==='excused').length;const pct=Math.round(TERM_ATT.attended/TERM_ATT.days*100);const label={present:'Present',late:'Late',absent:'Absent',excused:'Excused'},tg={present:'ok',late:'warn',absent:'bad',excused:'a'};return `
   <div class="apphead"><span class="lead"></span><h2 class="screen-title">Attendance</h2></div>
   <p class="sub">1st term · recent record</p>
@@ -1821,8 +1999,8 @@ fees:()=>{const out=sfees.filter(f=>f.status!=='paid').reduce((a,b)=>a+b.amount,
 };
 
 /* build */
-Object.keys(SCREENS).forEach(id=>{const d=document.createElement('div');d.className='screen';d.id='scr-'+id;d.innerHTML=SCREENS[id]();trEl(d);screensEl.appendChild(d);});
-function rebuild(id){const el=document.getElementById('scr-'+id);el.innerHTML=SCREENS[id]();trEl(el);if(id==='home')initQuick();}
+Object.keys(SCREENS).forEach(id=>{const d=document.createElement('div');d.className='screen';d.id='scr-'+id;d.innerHTML=SCREENS[id]();trEl(d);screensEl.appendChild(d);});agBadge();
+function rebuild(id){const el=document.getElementById('scr-'+id);el.innerHTML=SCREENS[id]();trEl(el);if(id==='home')initQuick();if(id==='agenda'||id==='home')agBadge();}
 /* home: compact sticky header once the hero scrolls away */
 (function(){const el=document.getElementById('scr-home');if(!el)return;el.addEventListener('scroll',()=>{const m=document.getElementById('home-mini'),h=el.querySelector('.hero');if(!m||!h)return;m.classList.toggle('show',el.scrollTop>h.offsetHeight-70);},{passive:true});})();
 /* quick access: pages of 8 tiles, swipe / drag left-right, dots (RTL-safe) */

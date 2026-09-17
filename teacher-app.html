@@ -2129,7 +2129,7 @@ Object.keys(SCREENS).forEach(id=>{const d=document.createElement('div');d.classN
 (function(){const el=document.getElementById("scr-home");if(!el)return;el.addEventListener("scroll",()=>{const m=document.getElementById("home-mini"),h=el.querySelector(".hero");if(!m||!h)return;m.classList.toggle("show",el.scrollTop>h.offsetHeight-70);},{passive:true});})();
 ['touchstart','mousedown'].forEach(ev=>document.getElementById('viewer').addEventListener(ev,e=>e.stopPropagation(),{passive:true}));
 window.addEventListener('resize',()=>{if(vw.type==='pdf'&&viewerOpen())pdfLayout(true);if(vid)vpDraw();});
-function rebuild(id){const el=document.getElementById('scr-'+id);el.innerHTML=SCREENS[id]();translateEl(el);if(id==='home')initQuick();}
+function rebuild(id){const el=document.getElementById('scr-'+id);el.innerHTML=SCREENS[id]();translateEl(el);if(id===current)setLead(el);if(id==='home')initQuick();}
 /* quick access: pages of 8 tiles, swipe / drag left-right, dots */
 let qPage=0;
 function initQuick(){

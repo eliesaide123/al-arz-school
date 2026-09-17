@@ -2977,7 +2977,7 @@ calendar:()=>{const EV=allEvents();const list=selDay?EV.filter(e=>{const p=e.d.s
 
 /* build */
 Object.keys(SCREENS).forEach(id=>{const d=document.createElement('div');d.className='screen';d.id='scr-'+id;d.innerHTML=SCREENS[id]();trDom(d);screensEl.appendChild(d);});
-function rebuild(id){const el=document.getElementById('scr-'+id);el.innerHTML=SCREENS[id]();trDom(el);if(id==='home')initQuick();}
+function rebuild(id){const el=document.getElementById('scr-'+id);el.innerHTML=SCREENS[id]();trDom(el);if(id===current)setLead(el);if(id==='home')initQuick();}
 /* quick access: pages of 8 tiles, swipe / drag left-right, dots (RTL-safe) */
 let qPage=0;
 function initQuick(){

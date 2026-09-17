@@ -2014,7 +2014,7 @@ fees:()=>{const out=sfees.filter(f=>f.status!=='paid').reduce((a,b)=>a+b.amount,
 
 /* build */
 Object.keys(SCREENS).forEach(id=>{const d=document.createElement('div');d.className='screen';d.id='scr-'+id;d.innerHTML=SCREENS[id]();trEl(d);screensEl.appendChild(d);});agBadge();
-function rebuild(id){const el=document.getElementById('scr-'+id);el.innerHTML=SCREENS[id]();trEl(el);if(id==='home')initQuick();if(id==='agenda'||id==='home')agBadge();}
+function rebuild(id){const el=document.getElementById('scr-'+id);el.innerHTML=SCREENS[id]();trEl(el);if(id===current)setLead(el);if(id==='home')initQuick();if(id==='agenda'||id==='home')agBadge();}
 /* home: compact sticky header once the hero scrolls away */
 (function(){const el=document.getElementById('scr-home');if(!el)return;el.addEventListener('scroll',()=>{const m=document.getElementById('home-mini'),h=el.querySelector('.hero');if(!m||!h)return;m.classList.toggle('show',el.scrollTop>h.offsetHeight-70);},{passive:true});})();
 /* quick access: pages of 8 tiles, swipe / drag left-right, dots (RTL-safe) */

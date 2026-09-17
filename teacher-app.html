@@ -1379,7 +1379,7 @@ P.forEach(([en,fr,ar])=>{I18N_P.fr=I18N_P.fr.filter(x=>x[0]!==en);I18N_P.ar=I18N
 Object.keys(_patCache).forEach(k=>delete _patCache[k]);})();
 /* agenda strings */
 (function(){const add=(en,fr,ar)=>{if(!(en in I18N.fr))I18N.fr[en]=fr;if(!(en in I18N.ar))I18N.ar[en]=ar;};
-[['Agenda','Agenda','المفكرة اليومية'],['parents sign every evening','les parents signent chaque soir','يوقّعها الأهل كل مساء'],['Your Maths entries','Vos entrées de maths','مدخلاتكِ في الرياضيات'],
+[['Agenda','Agenda','المفكرة اليومية'],['parents sign every evening','signée chaque soir','يوقّعها الأهل كل مساء'],['Your Maths entries','Vos entrées de maths','مدخلاتكِ في الرياضيات'],
  ['Signed','Signé','موقَّع'],['Signatures missing','Signatures manquantes','تواقيع ناقصة'],['Logged','Renseigné','مُدوَّن'],['Not logged','Non renseigné','غير مُدوَّن'],['Upcoming','À venir','قادم'],
  ['Covered in class','Vu en classe','ما تمّ شرحه'],['Only your subject is shown for this class','Seule votre matière est affichée pour cette classe','تظهر مادتكِ فقط لهذا الصف'],['Nothing yet','Rien pour l’instant','لا شيء بعد'],
  ['Given today','Donnés aujourd’hui','أُعطيت اليوم'],['Given','Donnés','أُعطيت'],['Due today','À rendre aujourd’hui','التسليم اليوم'],['Due','À rendre','موعد التسليم'],
@@ -2073,7 +2073,7 @@ agenda:()=>{const c=cls2(agCls),home=agCls==='m9b',days=agDays(agWeek),d=agDay,f
   const rems=agRemarks.filter(n=>n.cls===agCls&&n.d===d&&(home||n.by==='Ms. Khoury'));
   const wi=AG_WEEKS.indexOf(agWeek);
   return `
-  <div class="apphead"><span class="lead"></span><div class="grow" style="min-width:0"><h2 class="screen-title">Agenda</h2><div class="sub">${home?'Homeroom · parents sign every evening':'Your Maths entries'}</div></div><div class="icon-btn" onclick="agAdd()" aria-label="Add entry"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></div></div>
+  <div class="apphead"><span class="lead"></span><div class="grow" style="min-width:0"><h2 class="screen-title">Agenda</h2><div class="sub ell">${home?'Homeroom · parents sign every evening':'Your Maths entries'}</div></div><div class="icon-btn" onclick="agAdd()" aria-label="Add entry"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></div></div>
   <div class="chip-scroll mt8">${classes.map(x=>`<div class="chip ${x.id===agCls?'active':''}" onclick="agPick('${x.id}')">${x.grp}${x.id==='m9b'?' · Homeroom':''}</div>`).join('')}</div>
   <div class="ag-nav mt12"><div class="icon-btn ${wi<=0?'dis':''}" onclick="agGoWeek(-1)" aria-label="Previous week"><svg class="flip-rtl" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7"/></svg></div>
     <div class="grow" style="text-align:center;min-width:0"><div style="font-weight:800">Week of ${agWeek} Nov</div><div class="sub" style="font-size:12px;margin-top:2px">${fmtD(days[0])} – ${fmtD(days[4])}</div></div>

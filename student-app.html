@@ -1,0 +1,1295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>Al-Arz School · Student — SKL prototype</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Sans+Arabic:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --accent:#0f9d8f; --accent-2:#14b8a6; --accent-soft:#e2f5f2;
+    --bg:#f3f8f7; --surface:#ffffff; --surface-2:#f1f6f5; --surface-3:#e8efee;
+    --text:#0f2320; --muted:#5d726e; --faint:#93a7a3; --line:#e2ebe9;
+    --ok:#16a34a; --ok-bg:#e7f6ec; --warn:#c07807; --warn-bg:#fdf0dc; --danger:#dc2626; --danger-bg:#fdeaea;
+    --cedar:#0e8a4f;
+    --radius:20px;
+  }
+  :root[data-theme="dark"]{
+    --bg:#0b0f17; --surface:#141a26; --surface-2:#10151f; --surface-3:#1f2636;
+    --text:#e8ecf5; --muted:#9aa3b8; --faint:#6b7489; --line:#252d3d;
+    --ok:#34d399; --ok-bg:rgba(52,211,153,.14); --warn:#fbbf24; --warn-bg:rgba(251,191,36,.14); --danger:#f87171; --danger-bg:rgba(248,113,113,.14);
+    --accent-soft:rgba(15,157,143,.18);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  html,body{height:100%}
+  input,button,textarea,select{font-family:inherit}
+  [lang="ar"]{font-family:"IBM Plex Sans Arabic","Plus Jakarta Sans",sans-serif}
+  body{font-family:"Plus Jakarta Sans","IBM Plex Sans Arabic",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:radial-gradient(1200px 600px at 15% -10%,#d6f2ec 0%,transparent 55%),radial-gradient(1000px 700px at 110% 20%,#d9f0ff 0%,transparent 50%),#0b1413;min-height:100dvh;display:flex;align-items:center;justify-content:center;padding:34px 16px;color:var(--text)}
+  .stage{display:flex;flex-direction:column;align-items:center;gap:20px}
+  .stage-title{text-align:center;color:#e7f5f2}
+  .stage-title h1{font-size:20px;font-weight:800;letter-spacing:-.2px}
+  .stage-title p{color:#8fb0aa;font-size:13px;margin-top:4px}
+  .stage-title .pill{display:inline-block;margin-top:10px;font-size:11px;color:#fff;background:var(--accent);padding:4px 12px;border-radius:999px;font-weight:700}
+  .device{position:relative;width:440px;height:952px;border-radius:66px;background:linear-gradient(150deg,#3a3f42,#0d0f10 45%,#2a2f31 100%);padding:5px;box-shadow:0 0 0 2px #05070a,0 40px 90px -20px rgba(0,0,0,.85),inset 0 0 3px rgba(255,255,255,.25)}
+  .device::before{content:"";position:absolute;inset:2px;border-radius:63px;padding:1px;background:linear-gradient(160deg,rgba(255,255,255,.35),transparent 30%,transparent 70%,rgba(255,255,255,.18));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+  .btn-side{position:absolute;background:linear-gradient(#2a2f31,#15181a);border-radius:3px}
+  .btn-side.action{left:-3px;top:150px;width:4px;height:34px}.btn-side.vol-up{left:-3px;top:210px;width:4px;height:60px}.btn-side.vol-dn{left:-3px;top:288px;width:4px;height:60px}.btn-side.power{right:-3px;top:230px;width:4px;height:96px}
+  .bezel{position:relative;width:100%;height:100%;border-radius:61px;background:#000;overflow:hidden}
+  .viewport{position:absolute;inset:0;border-radius:61px;overflow:hidden;background:var(--bg);display:flex;flex-direction:column}
+  .island{position:absolute;top:11px;left:50%;transform:translateX(-50%);width:126px;height:35px;background:#000;border-radius:20px;z-index:60;display:flex;align-items:center;justify-content:flex-end;gap:8px;padding-right:12px;direction:ltr}
+  .island .cam{width:11px;height:11px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#243b52,#000 70%);box-shadow:inset 0 0 2px #4a6b8a}
+  .statusbar{direction:ltr;height:54px;flex:0 0 54px;display:flex;align-items:flex-end;justify-content:space-between;padding:0 30px 8px;font-size:15px;font-weight:700;z-index:40;position:relative;color:var(--text)}
+  .statusbar.onhead{color:#fff}
+  .statusbar .icons{display:flex;align-items:center;gap:7px}
+  .app{flex:1;position:relative;overflow:hidden;display:flex;flex-direction:column}
+  .screens{flex:1;position:relative;overflow:hidden}
+  .screen{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;padding:6px 20px 40px;opacity:0;visibility:hidden;transform:translateX(14px);transition:opacity .28s ease,transform .28s ease;-webkit-overflow-scrolling:touch}
+  .screen::-webkit-scrollbar{width:0}.screen.active{opacity:1;visibility:visible;transform:none}
+  .home-indicator{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);width:135px;height:5px;border-radius:3px;background:color-mix(in srgb,var(--text) 30%,transparent);z-index:55}
+  h2.screen-title{font-size:26px;font-weight:800;letter-spacing:-.4px}
+  .sub{color:var(--muted);font-size:13px}
+  .row{display:flex;align-items:center;gap:12px}.between{justify-content:space-between}
+  .mt6{margin-top:6px}.mt8{margin-top:8px}.mt12{margin-top:12px}.mt16{margin-top:16px}.mt20{margin-top:20px}.mt24{margin-top:24px}
+  .grow{flex:1;min-width:0}.muted{color:var(--muted)}.accent{color:var(--accent)}.tnum{font-variant-numeric:tabular-nums}.ell{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:16px;box-shadow:0 1px 2px rgba(16,24,40,.04),0 8px 24px -16px rgba(16,24,40,.25)}
+  :root[data-theme="dark"] .card{box-shadow:none}
+  .chip{display:inline-flex;align-items:center;gap:6px;padding:8px 13px;border-radius:999px;background:var(--surface);border:1px solid var(--line);font-size:13px;color:var(--text);cursor:pointer;white-space:nowrap;transition:.15s;font-weight:600}
+  .chip.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .chip-scroll{display:flex;gap:9px;overflow-x:auto;padding:2px 0 4px;margin:0 -20px;padding-left:20px;padding-right:20px}.chip-scroll::-webkit-scrollbar{display:none}
+  .tag{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:999px;font-size:11.5px;font-weight:700}
+  .tag.a{background:var(--accent-soft);color:var(--accent)}.tag.ok{background:var(--ok-bg);color:var(--ok)}.tag.warn{background:var(--warn-bg);color:var(--warn)}.tag.bad{background:var(--danger-bg);color:var(--danger)}
+  .btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:16px;border-radius:15px;border:none;background:var(--accent);color:#fff;font-size:16px;font-weight:700;cursor:pointer;transition:.15s;box-shadow:0 12px 22px -10px var(--accent)}
+  .btn:active{transform:scale(.98)}.btn.secondary{background:var(--surface-3);color:var(--text);box-shadow:none}.btn.ghost{background:transparent;color:var(--accent);border:1px solid var(--line);box-shadow:none}.btn.danger{background:transparent;color:var(--danger);border:1px solid rgba(220,38,38,.35);box-shadow:none}
+  .field{margin-top:14px}.field label{display:block;font-size:12.5px;color:var(--muted);margin-bottom:7px;font-weight:600}
+  .input{width:100%;padding:15px 14px;border-radius:13px;background:var(--surface);border:1px solid var(--line);color:var(--text);font-size:15px;outline:none;transition:.15s}
+  .input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}.input.err{border-color:var(--danger)}
+  .err-msg{color:var(--danger);font-size:12px;margin-top:6px;display:none}.err-msg.show{display:block}
+  .avatar{border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;flex:0 0 auto}
+  .list-item{display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid var(--line)}.list-item:last-child{border-bottom:none}
+  .seg{display:flex;background:var(--surface-3);border-radius:12px;padding:4px;gap:4px}
+  .seg button{flex:1;padding:10px;border:none;background:transparent;color:var(--muted);font-size:13px;font-weight:700;border-radius:9px;cursor:pointer}
+  .seg button.active{background:var(--surface);color:var(--accent);box-shadow:0 2px 6px -2px rgba(0,0,0,.2)}
+  .stat{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px;flex:1}.stat .n{font-size:22px;font-weight:800}.stat .l{font-size:11px;color:var(--muted);margin-top:2px}
+  .divider{height:1px;background:var(--line);margin:16px 0}
+  .kv{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--line);font-size:14px}.kv:last-child{border-bottom:none}.kv .k{color:var(--muted)}
+  .icon-btn{width:42px;height:42px;border-radius:12px;background:var(--surface);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--text);flex:0 0 auto}
+  .icon-btn svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.9}
+  .apphead{position:sticky;top:-6px;z-index:25;display:flex;align-items:center;gap:10px;margin:-6px -20px 14px;padding:15px 14px;min-height:60px;background:linear-gradient(155deg,var(--accent),var(--accent-2));color:#fff;border-radius:0 0 24px 24px;box-shadow:0 12px 26px -18px var(--accent)}
+  .apphead .icon-btn{background:rgba(255,255,255,.18);border:none;color:#fff}
+  .apphead .icon-btn:active{background:rgba(255,255,255,.30)}
+  .apphead .screen-title{color:#fff;font-size:19px;font-weight:800;letter-spacing:-.01em}
+  .apphead h2{color:#fff}
+  .apphead .sub{color:rgba(255,255,255,.82)}
+  .subj{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:14px;flex:0 0 auto}
+  .checkbox{width:26px;height:26px;border-radius:8px;border:2px solid var(--line);flex:0 0 auto;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:.15s;color:transparent}
+  .checkbox.done{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:800}
+  .toast{position:absolute;bottom:44px;left:50%;transform:translateX(-50%) translateY(20px);background:#0f2320;color:#fff;padding:12px 18px;border-radius:14px;font-size:13.5px;font-weight:600;opacity:0;transition:.3s;z-index:80;box-shadow:0 10px 30px rgba(0,0,0,.4);white-space:nowrap;pointer-events:none}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+  .sheet-wrap{position:absolute;inset:0;z-index:70;display:none}.sheet-wrap.open{display:block}
+  .sheet-back{position:absolute;inset:0;background:rgba(0,0,0,.45)}
+  .sheet{position:absolute;left:0;right:0;bottom:0;background:var(--surface);border-radius:26px 26px 0 0;padding:10px 20px 30px;transform:translateY(100%);transition:.32s cubic-bezier(.2,.8,.2,1);max-height:84%;overflow-y:auto}.sheet-wrap.open .sheet{transform:none}
+  .grab{width:44px;height:5px;border-radius:3px;background:var(--line);margin:6px auto 14px}
+  .hero{background:linear-gradient(160deg,var(--accent),var(--accent-2));margin:-6px -20px 0;padding:16px 20px 26px;color:#fff;border-radius:0 0 26px 26px;position:relative;overflow:hidden}
+  .hero::after,.drawer-head::after{content:"";position:absolute;width:170px;height:170px;inset-inline-end:-24px;bottom:-30px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2.5 7.5 8h2.2L6 12.5h2.8L4.5 17.5H11v4h2v-4h6.5l-4.3-5h2.8L14.3 8h2.2z' fill='white'/%3E%3C/svg%3E") no-repeat center/contain;opacity:.12;pointer-events:none;z-index:0}
+  .hero>*,.drawer-head>*{position:relative;z-index:1}
+  .minihead{position:sticky;top:-6px;height:0;margin:-6px -20px 6px;z-index:25}
+  .minihead .bar{display:flex;align-items:center;gap:10px;padding:10px 14px;min-height:60px;background:linear-gradient(155deg,var(--accent),var(--accent-2));color:#fff;border-radius:0 0 24px 24px;box-shadow:0 12px 26px -18px var(--accent);opacity:0;transform:translateY(-100%);pointer-events:none;transition:opacity .2s ease,transform .25s cubic-bezier(.2,.8,.2,1)}
+  .minihead.show .bar{opacity:1;transform:none;pointer-events:auto}
+  .minihead .icon-btn{background:rgba(255,255,255,.18);border:none;color:#fff}
+  .lang-btn{width:auto;min-width:42px;padding:0 11px;gap:5px;font-weight:800;font-size:13px;letter-spacing:.04em!important;font-family:"Plus Jakarta Sans",sans-serif}
+  .lang-btn svg{width:16px;height:16px}
+  .qpager{display:flex;margin:12px -20px 0;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior-x:contain;cursor:grab}
+  .qpager::-webkit-scrollbar{display:none}
+  .qpager.dragging{scroll-snap-type:none;cursor:grabbing}
+  .qpage{flex:0 0 100%;scroll-snap-align:start;scroll-snap-stop:always;display:grid;grid-template-columns:repeat(4,1fr);gap:16px 6px;padding:2px 20px 6px;align-content:start}
+  .qpage .qtile .ql{white-space:normal;max-width:84px}
+  .qdots{display:flex;justify-content:center;gap:6px;margin-top:10px}
+  .qdots i{width:6px;height:6px;border-radius:3px;background:var(--line);cursor:pointer;transition:width .25s,background .25s}
+  .qdots i.on{width:18px;background:var(--accent)}
+  .act-wrap{position:absolute;inset:0;z-index:72;display:none}
+  .act-wrap.open{display:block}
+  .act-back{position:absolute;inset:0;background:rgba(0,0,0,.45)}
+  .act{position:absolute;left:10px;right:10px;bottom:22px;transform:translateY(calc(100% + 30px));transition:transform .3s cubic-bezier(.2,.8,.2,1)}
+  .act-wrap.open .act{transform:none}
+  .act-group{background:var(--surface);border-radius:18px;overflow:hidden;box-shadow:0 10px 40px rgba(0,0,0,.25)}
+  .act-title{text-align:center;font-size:12.5px;font-weight:600;color:var(--muted);padding:13px 16px;border-bottom:1px solid var(--line)}
+  .act-opt{display:flex;align-items:center;gap:12px;padding:15px 18px;border-bottom:1px solid var(--line);cursor:pointer;font-size:16px;font-weight:600;color:var(--text)}
+  .act-opt:last-child{border-bottom:none}
+  .act-opt:active{background:var(--surface-2)}
+  .act-opt .code{min-width:34px;text-align:center;font-size:11.5px;font-weight:800;padding:4px 0;border-radius:8px;background:var(--surface-3);color:var(--muted);font-family:"Plus Jakarta Sans",sans-serif;letter-spacing:.04em!important}
+  .act-opt.on{color:var(--accent)}
+  .act-opt.on .code{background:var(--accent-soft);color:var(--accent)}
+  .act-opt .ck{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+  .act-cancel{margin-top:8px;background:var(--surface);border-radius:18px;padding:16px;text-align:center;font-size:16px;font-weight:800;color:var(--accent);cursor:pointer;box-shadow:0 10px 40px rgba(0,0,0,.25)}
+  .act-cancel:active{background:var(--surface-2)}
+  .logo-tile{width:52px;height:52px;border-radius:16px;background:var(--surface);border:1px solid var(--line);color:var(--cedar);display:grid;place-items:center;flex:0 0 auto;box-shadow:0 8px 20px -14px rgba(14,138,79,.6)}
+  .logo-tile svg{width:30px;height:30px}
+  :root[data-theme="dark"] .toast{background:#e8ecf5;color:#0b0f17}
+  .cedar-av{background:var(--cedar)!important;color:#fff}
+  .cedar-av svg{width:58%;height:58%}
+  .tiles{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .tile{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.22);border-radius:14px;padding:12px 13px}.tile .n{font-size:22px;font-weight:800;line-height:1}.tile .l{font-size:11px;opacity:.9;margin-top:5px;font-weight:600}
+  .switcher{display:flex;align-items:center;gap:12px;margin-top:16px;padding:11px 12px;border-radius:16px;background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.25);color:#fff;cursor:pointer;transition:.15s}
+  .switcher:active{transform:scale(.98);background:rgba(255,255,255,.22)}
+  .switch-pill{display:flex;align-items:center;gap:6px;background:#fff;color:var(--accent);padding:8px 13px;border-radius:12px;font-weight:800;font-size:12.5px;flex:0 0 auto}
+  .qgrid{display:grid;grid-auto-flow:column;grid-template-rows:repeat(2,auto);grid-auto-columns:66px;gap:16px 18px;overflow-x:auto;margin:12px 0 0;margin-inline-end:-20px;padding:2px 0 6px 0;scroll-snap-type:x proximity}
+  .qgrid::-webkit-scrollbar{display:none}
+  .qtile{display:flex;flex-direction:column;align-items:center;gap:7px;cursor:pointer;scroll-snap-align:start}
+  .qtile .qi{width:66px;height:66px;border-radius:19px;background:var(--accent-soft);display:grid;place-items:center;color:var(--accent);transition:.15s;position:relative}
+  .qtile:active .qi{transform:scale(.93)}
+  .qtile .qi svg{width:27px;height:27px;stroke:currentColor;fill:none;stroke-width:1.9}
+  .qtile .qb{position:absolute;top:-3px;inset-inline-end:-3px;min-width:15px;height:15px;padding:0 4px;border-radius:8px;background:var(--danger);color:#fff;font-size:9px;font-weight:800;display:grid;place-items:center}
+  .qtile .ql{font-size:10px;font-weight:600;color:var(--muted);text-align:center;line-height:1.12;white-space:nowrap}
+  .cal{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:14px}
+  .cal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+  .cal-head .m{font-weight:800;font-size:16px}
+  .cal-wd{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:6px}
+  .cal-wd span{text-align:center;font-size:10px;font-weight:700;color:var(--faint)}
+  .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+  .cal-d{aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;border-radius:10px;cursor:pointer;position:relative;color:var(--text)}
+  .cal-d.empty{cursor:default}
+  .cal-d.today{background:var(--accent-soft);color:var(--accent);font-weight:800}
+  .cal-d.sel{background:var(--accent);color:#fff}
+  .cal-dot{width:5px;height:5px;border-radius:50%;position:absolute;bottom:5px}
+  .bub{max-width:80%;padding:10px 13px;border-radius:16px;font-size:13.5px;line-height:1.45;margin-bottom:9px}
+  .bub.them{background:var(--surface);border:1px solid var(--line);border-end-start-radius:5px}
+  .bub.me{background:var(--accent);color:#fff;border-end-end-radius:5px;margin-inline-start:auto}
+  .bub .t{font-size:9.5px;opacity:.65;margin-top:3px}
+  .chatbar{display:flex;align-items:center;gap:10px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding-block:6px;padding-inline:14px 6px;margin-top:8px}
+  .chatbar input{flex:1;border:none;outline:none;background:transparent;font-size:14px;color:var(--text);padding:8px 0}
+  .send{width:40px;height:40px;border-radius:11px;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;flex:0 0 auto}
+  .progress{height:7px;border-radius:99px;background:var(--surface-3);overflow:hidden}.progress i{display:block;height:100%;border-radius:99px;background:var(--accent)}
+  .donut{width:96px;height:96px;flex:none;border-radius:50%;background:conic-gradient(var(--accent) var(--p,80%),var(--surface-3) 0);position:relative;display:grid;place-items:center}
+  .donut::before{content:"";position:absolute;inset:11px;background:var(--surface);border-radius:50%}
+  .donut>div{position:relative;z-index:1;text-align:center;line-height:1}
+  .donut b{display:block;font-size:24px;font-weight:800;font-variant-numeric:tabular-nums}
+  .donut small{display:block;font-size:11px;font-weight:700;color:var(--muted);margin-top:3px}
+  .badge-time{width:50px;flex:none;text-align:center}.badge-time b{display:block;font-size:14px;font-weight:800}.badge-time span{font-size:10px;color:var(--faint)}
+  .drawer-wrap{position:absolute;inset:0;z-index:75;display:none}
+  .drawer-wrap.open{display:block}
+  .drawer-back{position:absolute;inset:0;background:rgba(0,0,0,.45);opacity:0;transition:.3s}
+  .drawer-wrap.open .drawer-back{opacity:1}
+  .drawer{position:absolute;top:0;bottom:0;inset-inline-start:0;width:82%;max-width:300px;background:var(--surface);transform:translateX(-100%);transition:.32s cubic-bezier(.2,.8,.2,1);display:flex;flex-direction:column;overflow-y:auto;box-shadow:8px 0 40px rgba(0,0,0,.25)}
+  .drawer::-webkit-scrollbar{width:0}
+  .drawer>*{flex-shrink:0}
+  /* side menu: header stays fixed, items + log out scroll underneath */
+  .drawer{overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+  .drawer .drawer-head{position:sticky;top:0;z-index:3}
+  .drawer-wrap.open .drawer{transform:none}
+  .drawer-head{background:linear-gradient(160deg,var(--accent),var(--accent-2));color:#fff;padding:24px 20px 18px;position:relative;overflow:hidden;flex:0 0 auto}
+  .drawer-list{padding:10px 12px;flex:1}
+  .drawer-item{display:flex;align-items:center;gap:14px;padding:13px 12px;border-radius:12px;cursor:pointer;font-weight:600;font-size:14.5px;color:var(--text)}
+  .drawer-item:active{background:var(--surface-2)}
+  .drawer-item.active{background:var(--accent-soft);color:var(--accent)}
+  .drawer-item svg{width:21px;height:21px;stroke:currentColor;fill:none;stroke-width:1.9;flex:0 0 auto}
+  .drawer-item .lbl{flex:1}
+  .drawer-sep{height:1px;background:var(--line);margin:8px 14px}
+  .drawer-foot{padding:4px 12px 22px}
+  .switch{width:44px;height:26px;border-radius:99px;background:var(--surface-3);position:relative;cursor:pointer;transition:.2s;flex:0 0 auto}
+  .switch.on{background:var(--accent)}
+  .switch::after{content:"";position:absolute;top:3px;inset-inline-start:3px;width:20px;height:20px;border-radius:50%;background:#fff;transition:.2s;box-shadow:0 1px 3px rgba(0,0,0,.3)}
+  .switch.on::after{inset-inline-start:21px}
+  .set-row{display:flex;align-items:center;gap:13px;padding:13px 0;border-bottom:1px solid var(--line)}
+  .set-row:last-child{border-bottom:none}
+  .set-ic{width:34px;height:34px;border-radius:10px;background:var(--accent-soft);color:var(--accent);display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+  .set-ic svg{width:19px;height:19px;stroke:currentColor;fill:none;stroke-width:1.9}
+  .set-label{font-size:11px;font-weight:700;letter-spacing:.06em;color:var(--faint);margin:18px 4px 8px;text-transform:uppercase}
+  .hidden{display:none!important}
+  /* homework review */
+  .hw-missing{border:1.5px solid color-mix(in srgb,var(--danger) 45%,transparent);background:color-mix(in srgb,var(--danger-bg) 70%,var(--surface))}
+  .fb{margin-top:10px;padding:10px 12px;border-radius:12px;background:var(--surface-2);border-inline-start:3px solid var(--accent);font-size:12.5px;line-height:1.5;color:var(--text)}
+  .dropzone{margin-top:16px;border:1.5px dashed var(--line);border-radius:16px;padding:18px;text-align:center;background:var(--surface-2);cursor:pointer}
+  .dropzone.on{border-style:solid;border-color:var(--accent);background:var(--accent-soft)}
+  .sec-h{display:flex;align-items:center;justify-content:space-between;margin:22px 2px 2px}
+  .sec-h h3{font-size:15px;font-weight:800}
+  /* report cards */
+  .rc-head{display:flex;align-items:center;gap:12px}
+  .rc-head .logo-tile{width:44px;height:44px;border-radius:13px}.rc-head .logo-tile svg{width:26px;height:26px}
+  .rc-banner{margin-top:12px;padding:9px 12px;border-radius:12px;background:var(--warn-bg);color:var(--warn);font-size:12px;font-weight:700;display:flex;gap:8px;align-items:center}
+  .rc-row{display:grid;grid-template-columns:1fr 54px 54px;gap:8px;align-items:center;padding:11px 0;border-bottom:1px solid var(--line)}
+  .rc-row:last-child{border-bottom:none}
+  .rc-row.th{padding:4px 0 8px;font-size:10.5px;font-weight:800;letter-spacing:.05em;color:var(--faint);text-transform:uppercase}
+  .rc-row .num{text-align:end;font-weight:800;font-variant-numeric:tabular-nums}
+  .rc-row .cmt{grid-column:1/-1;font-size:11.5px;color:var(--muted);line-height:1.45;margin-top:-2px}
+  .sig{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:18px}
+  .sig div{border-top:1.5px dashed var(--line);padding-top:6px;font-size:11px;color:var(--muted)}
+  .sig b{display:block;color:var(--text);font-size:12px}
+  .lockbox{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:var(--surface-3);color:var(--muted);flex:0 0 auto}
+  .lockbox svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.9}
+  /* conduct */
+  .note{position:relative;padding-inline-start:20px;overflow:hidden}
+  .note::before{content:"";position:absolute;inset-inline-start:0;top:0;bottom:0;width:5px;background:var(--nc,var(--ok))}
+  .note.pos{--nc:var(--ok)}.note.con{--nc:var(--warn)}.note.warnx{--nc:var(--danger)}
+  /* exam timetable */
+  .dblock{width:50px;flex:0 0 auto;text-align:center;border-radius:12px;background:var(--surface-2);border:1px solid var(--line);padding:6px 0}
+  .dblock span{display:block;font-size:10px;font-weight:700;color:var(--faint);text-transform:uppercase;letter-spacing:.04em}
+  .dblock b{display:block;font-size:19px;font-weight:800;line-height:1.15}
+  .dblock.next{background:var(--accent);border-color:var(--accent);color:#fff}.dblock.next span{color:rgba(255,255,255,.85)}
+  .rules li{list-style:none;display:flex;gap:10px;align-items:flex-start;font-size:13px;line-height:1.45;padding:6px 0}
+  .rules li::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--accent);margin-top:7px;flex:0 0 auto}
+  /* RTL (Arabic) */
+  html[dir="rtl"] body{font-family:"IBM Plex Sans Arabic","Plus Jakarta Sans",-apple-system,"Segoe UI",sans-serif}
+  [dir="rtl"] *{letter-spacing:0!important}
+  [dir="rtl"] .bub,[dir="rtl"] .rules li,[dir="rtl"] .fb{line-height:1.65}
+  [dir="rtl"] .flip-rtl{transform:scaleX(-1)}
+  [dir="rtl"] [data-noi18n]{unicode-bidi:plaintext}
+  [dir="rtl"] .screen:not(.active){transform:translateX(-14px)}
+  [dir="rtl"] .drawer{transform:translateX(100%);box-shadow:-8px 0 40px rgba(0,0,0,.25)}
+  [dir="rtl"] .drawer-wrap.open .drawer{transform:none}
+  :root:not([lang="en"]) .qtile .ql{white-space:normal;max-width:84px}
+  [dir="rtl"] .donut small{direction:ltr;unicode-bidi:isolate}
+  [dir="rtl"] .dblock span{text-transform:none;font-size:9px;line-height:1.25;padding:0 2px}
+  .lang-chip{padding:6px 11px;font-size:12.5px}
+  .lang-chip svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:1.9}
+  @media (max-width:500px){body{padding:0;display:block;background:#000;min-height:100dvh}.stage{gap:0;width:100%}.stage-title{display:none}.device{width:100%;height:100vh;height:100dvh;border-radius:0;padding:0;box-shadow:none}.device::before,.btn-side,.home-indicator{display:none}.bezel,.viewport{border-radius:0}}
+  @media (max-width:500px) and (min-height:980px){.device{width:min(100vw,440px);height:952px;margin:0 auto;border-radius:66px;padding:5px}.device::before{display:block}.bezel,.viewport{border-radius:61px}.home-indicator{display:block}}
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="stage-title"><h1 data-i18n="Al-Arz School — Student app">Al-Arz School — Student app</h1><p data-i18n="SKL · Lebanese curriculum · iPhone prototype">SKL · Lebanese curriculum · iPhone prototype</p><span class="pill" data-i18n="Demo login: any email + 6+ char password">Demo login: any email + 6+ char password</span></div>
+  <div class="device">
+    <div class="btn-side action"></div><div class="btn-side vol-up"></div><div class="btn-side vol-dn"></div><div class="btn-side power"></div>
+    <div class="bezel"><div class="viewport">
+      <div class="island"><div class="cam"></div></div>
+      <div class="statusbar" id="statusbar"><span id="clock">9:41</span><span class="icons">
+        <svg width="18" height="12" viewBox="0 0 18 12"><rect x="0" y="7" width="3" height="5" rx="1" fill="currentColor"/><rect x="4.5" y="5" width="3" height="7" rx="1" fill="currentColor"/><rect x="9" y="3" width="3" height="9" rx="1" fill="currentColor"/><rect x="13.5" y="0" width="3" height="12" rx="1" fill="currentColor"/></svg>
+        <svg width="17" height="12" viewBox="0 0 17 12"><path d="M8.5 2.5c2.3 0 4.4.9 6 2.4l1.3-1.4C13.9 1.6 11.3.5 8.5.5S3.1 1.6 1.2 3.5L2.5 4.9C4.1 3.4 6.2 2.5 8.5 2.5z" fill="currentColor"/><circle cx="8.5" cy="10" r="1.6" fill="currentColor"/></svg>
+        <svg width="26" height="13" viewBox="0 0 26 13"><rect x="0.5" y="0.5" width="21" height="12" rx="3.5" fill="none" stroke="currentColor" opacity=".5"/><rect x="2" y="2" width="16" height="9" rx="2" fill="currentColor"/><rect x="23" y="4" width="2" height="5" rx="1" fill="currentColor" opacity=".5"/></svg>
+      </span></div>
+      <div class="app">
+        <div class="screens" id="screens"></div>
+        <div class="toast" id="toast"></div>
+        <div class="act-wrap" id="actsheet" data-noi18n><div class="act-back" onclick="closeLangActions()"></div><div class="act" id="act-body"></div></div>
+        <div class="sheet-wrap" id="sheet"><div class="sheet-back" data-close-sheet></div><div class="sheet"><div class="grab"></div><div id="sheet-body"></div></div></div>
+        <div class="drawer-wrap" id="drawer">
+          <div class="drawer-back" onclick="closeDrawer()"></div>
+          <div class="drawer">
+            <div class="drawer-head">
+              <div class="row"><div class="avatar" style="width:48px;height:48px;font-size:16px;background:#fff;color:var(--accent)">OH</div><div><div style="font-weight:800;font-size:16px">Omar Haddad</div><div style="opacity:.85;font-size:12px" data-i18n="EB9 B · Al-Arz School">EB9 B · Al-Arz School</div></div></div>
+            </div>
+            <div class="drawer-list">
+              <div class="drawer-item" data-goto="home" onclick="go('home')"><svg viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/></svg><span class="lbl" data-i18n="Home">Home</span></div>
+              <div class="drawer-item" data-goto="courses" onclick="go('courses')"><svg viewBox="0 0 24 24"><path d="M4 5h10a3 3 0 0 1 3 3v11H7a3 3 0 0 0-3 3z"/><path d="M17 5h3v14"/></svg><span class="lbl" data-i18n="Courses">Courses</span></div>
+              <div class="drawer-item" data-goto="timetable" onclick="go('timetable')"><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="16" rx="3"/><path d="M3.5 9.5h17M8 3v4M16 3v4"/></svg><span class="lbl" data-i18n="Timetable">Timetable</span></div>
+              <div class="drawer-item" data-goto="homework" onclick="go('homework')"><svg viewBox="0 0 24 24"><path d="M5 4h9a3 3 0 0 1 3 3v13H8a3 3 0 0 0-3 3z"/><path d="M17 4h2v16"/></svg><span class="lbl" data-i18n="Homework">Homework</span></div>
+              <div class="drawer-item" data-goto="exams" onclick="go('exams')"><svg viewBox="0 0 24 24"><rect x="6" y="4" width="12" height="17" rx="2.5"/><path d="M9 4h6v3H9z"/><path d="M9 12h6M9 16h4"/></svg><span class="lbl" data-i18n="Exam timetable">Exam timetable</span></div>
+              <div class="drawer-item" data-goto="grades" onclick="go('grades')"><svg viewBox="0 0 24 24"><path d="M4 20h16"/><path d="M7 20v-6M12 20V8M17 20v-9"/></svg><span class="lbl" data-i18n="Grades">Grades</span></div>
+              <div class="drawer-item" data-goto="reportcards" onclick="go('reportcards')"><svg viewBox="0 0 24 24"><path d="M7 3h8l4 4v14H7z"/><path d="M14 3v5h5"/><path d="M10 13h6M10 17h4"/></svg><span class="lbl" data-i18n="Report cards">Report cards</span></div>
+              <div class="drawer-item" data-goto="conduct" onclick="go('conduct')"><svg viewBox="0 0 24 24"><path d="M12 3.5l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9l-5.3 2.7 1-5.8-4.2-4.1 5.9-.9z"/></svg><span class="lbl" data-i18n="Conduct notes">Conduct notes</span></div>
+              <div class="drawer-item" data-goto="attendance" onclick="go('attendance')"><svg viewBox="0 0 24 24"><path d="M4 12.5 9 17.5 20 6.5"/></svg><span class="lbl" data-i18n="Attendance">Attendance</span></div>
+              <div class="drawer-sep"></div>
+              <div class="drawer-item" data-goto="resources" onclick="go('resources')"><svg viewBox="0 0 24 24"><path d="M4 5.5h6a2 2 0 0 1 2 2v11a2 2 0 0 0-2-2H4z"/><path d="M20 5.5h-6a2 2 0 0 0-2 2v11a2 2 0 0 1 2-2h6z"/></svg><span class="lbl" data-i18n="Learning resources">Learning resources</span></div>
+              <div class="drawer-item" data-goto="library" onclick="go('library')"><svg viewBox="0 0 24 24"><path d="M5 4h9a3 3 0 0 1 3 3v13H8a3 3 0 0 0-3 3z"/><path d="M17 4h2v16"/></svg><span class="lbl" data-i18n="Library">Library</span></div>
+              <div class="drawer-item" data-goto="calendar" onclick="go('calendar')"><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="16" rx="3"/><path d="M3.5 9.5h17M8 3v4M16 3v4"/></svg><span class="lbl" data-i18n="Calendar">Calendar</span></div>
+              <div class="drawer-item" data-goto="chats" onclick="go('chats')"><svg viewBox="0 0 24 24"><path d="M4 5.5h16v11H9l-4 3.5v-3.5H4z"/></svg><span class="lbl" data-i18n="Messages">Messages</span></div>
+              <div class="drawer-item" data-goto="notifs" onclick="go('notifs')"><svg viewBox="0 0 24 24"><path d="M6 9a6 6 0 0 1 12 0c0 5 2 6 2 6H4s2-1 2-6"/><path d="M10 20a2 2 0 0 0 4 0"/></svg><span class="lbl" data-i18n="Notifications">Notifications</span></div>
+              <div class="drawer-item" data-goto="news" onclick="go('news')"><svg viewBox="0 0 24 24"><path d="M4 5h16v10H8l-4 3z"/><path d="M7 9h10M7 12h6"/></svg><span class="lbl" data-i18n="School news">School news</span></div>
+              <div class="drawer-item" data-goto="fees" onclick="go('fees')"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2.5"/><path d="M3 10h18"/></svg><span class="lbl" data-i18n="Fees">Fees</span></div>
+              <div class="drawer-sep"></div>
+              <div class="drawer-item" data-goto="settings" onclick="go('settings')"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/></svg><span class="lbl" data-i18n="Settings">Settings</span></div>
+              <div class="drawer-item" onclick="soon('Help & support')"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.6 2.2c-.9.5-1.1.9-1.1 1.8"/><circle cx="12" cy="17" r=".6" fill="currentColor" stroke="none"/></svg><span class="lbl" data-i18n="Help &amp; support">Help &amp; support</span></div>
+            </div>
+            <div class="drawer-sep"></div>
+            <div class="drawer-foot">
+              <div class="drawer-item" style="color:var(--danger)" onclick="closeDrawer();logout()"><svg class="flip-rtl" viewBox="0 0 24 24"><path d="M9 21H5V3h4"/><path d="M16 17l5-5-5-5M21 12H9"/></svg><span class="lbl" data-i18n="Log out">Log out</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="home-indicator"></div>
+    </div></div>
+  </div>
+</div>
+<script>
+/* ---------------- i18n · العربية / Français / English + RTL ----------------
+   Screens are rendered from English templates, then trEl() translates every text node
+   (keys = English source strings; " · " separated parts are translated one by one).
+   Authored content (messages, feedback, notes, descriptions…) is marked data-noi18n. */
+const LANGS=[{code:'ar',native:'العربية',sub:'Arabic'},{code:'fr',native:'Français',sub:'French'},{code:'en',native:'English',sub:'English'}];
+let uiLang='en';try{const l=localStorage.getItem('skl-lang');if(l==='ar'||l==='fr'||l==='en')uiLang=l;}catch(e){}
+const I18N_SRC=[
+/* navigation & glossary */
+['Home','Accueil','الرئيسية'],['Courses','Cours','المواد'],['Timetable','Emploi du temps','البرنامج الأسبوعي'],['Homework','Devoirs','الفروض المنزلية'],
+['Exam timetable','Calendrier des examens','جدول الامتحانات'],['Exams','Examens','الامتحانات'],['Grades','Notes','العلامات'],['Report cards','Bulletins','الشهادات المدرسية'],
+['Report card','Bulletin','الشهادة المدرسية'],['Conduct notes','Suivi du comportement','ملاحظات السلوك'],['Conduct','Conduite','السلوك'],['Attendance','Présences','الحضور'],
+['Learning resources','Ressources pédagogiques','الموارد التعليمية'],['Resources','Ressources','الموارد'],['Library','Bibliothèque','المكتبة'],['Calendar','Calendrier','الروزنامة'],
+['Messages','Messages','الرسائل'],['Notifications','Notifications','الإشعارات'],['School news','Actualités de l’école','أخبار المدرسة'],['Fees','Frais scolaires','الأقساط'],
+['Settings','Paramètres','الإعدادات'],['Help & support','Aide et assistance','المساعدة والدعم'],['Log out','Se déconnecter','تسجيل الخروج'],['Profile','Profil','الملف الشخصي'],
+['Alerts','Notifications','الإشعارات'],['Quick access','Accès rapide','وصول سريع'],['Language','Langue','اللغة'],['Appearance','Apparence','المظهر'],
+['Light','Clair','فاتح'],['Dark','Sombre','داكن'],['System','Système','النظام'],['Language updated','Langue mise à jour','تم تحديث اللغة'],
+['Arabic','Arabe','اللغة العربية'],['French','Français','اللغة الفرنسية'],['English','Anglais','اللغة الإنجليزية'],
+['Mathematics','Mathématiques','الرياضيات'],['Physics & Chemistry','Physique-Chimie','الفيزياء والكيمياء'],['Life & Earth Sciences','SVT','علوم الحياة والأرض'],
+['History, Geography & Civics','Histoire-Géo & Éducation civique','التاريخ والجغرافيا والتربية المدنية'],['History & Geography','Histoire-Géo','التاريخ والجغرافيا'],
+['Physical Education','EPS','التربية البدنية'],['Physical education','EPS','التربية البدنية'],
+['Al-Arz School','École Al-Arz','مدرسة الأرز'],['Achrafieh, Beirut','Achrafieh, Beyrouth','الأشرفية، بيروت'],['Al-Arz Administration','Administration Al-Arz','إدارة مدرسة الأرز'],
+['Administration','Administration','الإدارة'],['Academic coordinator','Coordinatrice pédagogique','المنسّقة الأكاديمية'],['Homeroom teacher','Professeur principal','مربّية الصف'],
+/* stage */
+['Al-Arz School — Student app','École Al-Arz — Application élève','مدرسة الأرز — تطبيق التلميذ'],['SKL','SKL','SKL'],['Lebanese curriculum','Programme libanais','المنهج اللبناني'],
+['iPhone prototype','Prototype iPhone','نموذج أولي على iPhone'],['Demo login: any email + 6+ char password','Démo : n’importe quel e-mail + mot de passe de 6 caractères min.','دخول تجريبي: أي بريد إلكتروني + كلمة مرور من 6 أحرف أو أكثر'],
+/* login */
+['Student portal','Espace élève','بوابة التلميذ'],['Hi again 👋','Re-bonjour 👋','أهلاً بعودتك 👋'],['Sign in to see your day','Connecte-toi pour voir ta journée','سجّل الدخول لترى يومك'],
+['Student email','E-mail élève','البريد الإلكتروني للتلميذ'],['Enter a valid email','Saisis un e-mail valide','أدخل بريداً إلكترونياً صالحاً'],['Password','Mot de passe','كلمة المرور'],
+['Min. 6 characters','6 caractères minimum','6 أحرف على الأقل'],['Remember me','Se souvenir de moi','تذكّرني'],['Forgot?','Oublié ?','نسيت؟'],['Sign in','Se connecter','تسجيل الدخول'],
+['Al-Arz School, Achrafieh — Beirut','École Al-Arz, Achrafieh — Beyrouth','مدرسة الأرز، الأشرفية — بيروت'],['Signed in ✓','Connecté ✓','تم تسجيل الدخول ✓'],['Logged out','Déconnecté','تم تسجيل الخروج'],
+/* home */
+['Brevet class','Classe du Brevet','صف الشهادة المتوسطة'],['1st term average','Moyenne du 1er trimestre','معدل الفصل الأول'],['Homework due','Devoirs à rendre','فروض مطلوبة'],
+['NOW','EN COURS','الآن'],['Now','En cours','الآن'],['tap for detail','touche pour le détail','اضغط للتفاصيل'],['exam timetable','calendrier des examens','جدول الامتحانات'],
+['submit now','rends-le maintenant','سلّمه الآن'],['Due soon','À rendre bientôt','مواعيد التسليم القريبة'],['All','Tout','الكل'],['Nothing due — nice work 🎉','Rien à rendre — bravo 🎉','لا شيء مطلوب — أحسنت 🎉'],
+['1st term report card','Bulletin du 1er trimestre','الشهادة المدرسية – الفصل الأول'],['Rest of today','Suite de la journée','بقية اليوم'],['Recent announcements','Annonces récentes','آخر الإعلانات'],
+['today','aujourd’hui','اليوم'],['tomorrow','demain','غداً'],['Yesterday','Hier','أمس'],['yesterday','hier','أمس'],
+['Lab 1','Labo 1','المختبر 1'],['Lab 2','Labo 2','المختبر 2'],['Gym','Gymnase','الملعب الرياضي'],['Hall A','Salle A','القاعة A'],
+/* timetable */
+['Online class','Cours en ligne','حصة عن بُعد'],['Join','Rejoindre','انضمام'],['Joining online class…','Connexion au cours en ligne…','جارٍ الانضمام إلى الحصة عن بُعد…'],
+/* homework */
+['To do','À faire','للإنجاز'],['Missing','Non rendu','غير مُسلَّم'],['Submitted','Soumis','مُرسل'],['submitted','soumis','مُرسل'],['Marked','Corrigé','مُصحَّح'],['Returned','Corrigés','المُصحَّحة'],
+['Late','En retard','متأخر'],['late','en retard','متأخر'],['on time','à l’heure','في الموعد'],
+['Overdue — hand it in as soon as possible','En retard — rends-le au plus vite','متأخر — سلّمه في أقرب وقت'],['Sorted by due date','Trié par date limite','مرتّبة حسب موعد التسليم'],
+['Waiting to be marked','En attente de correction','بانتظار التصحيح'],['waiting to be marked','en attente de correction','بانتظار التصحيح'],['Marked by your teachers','Corrigés par tes professeurs','صحّحها أساتذتك'],
+['Nothing here','Rien ici','لا شيء هنا'],['Reminder sent to your parent','Rappel envoyé à ton parent','أُرسل تذكير إلى وليّ أمرك'],['Feedback','Appréciation','ملاحظات الأستاذ'],
+['Due','À rendre','موعد التسليم'],['Status','Statut','الحالة'],['Handed in','Rendu le','تاريخ التسليم'],['Reminder','Rappel','تذكير'],['Sent to parent','Envoyé au parent','أُرسل إلى الأهل'],
+['Instructions','Consignes','التعليمات'],['Teacher feedback','Appréciation du professeur','ملاحظات الأستاذ'],['Close','Fermer','إغلاق'],['Cancel','Annuler','إلغاء'],
+['Tap to replace','Touche pour remplacer','اضغط للاستبدال'],['Attach your work','Joins ton travail','أرفق عملك'],['photo or PDF','photo ou PDF','صورة أو PDF'],
+['This work is overdue — it will be marked as late.','Ce travail est en retard — il sera noté comme rendu en retard.','هذا العمل متأخر — سيُسجَّل كتسليم متأخر.'],
+['Submit late','Rendre en retard','تسليم متأخر'],['Submit work','Rendre le travail','تسليم العمل'],['Attach your work first 📎','Joins d’abord ton travail 📎','أرفق عملك أولاً 📎'],
+['Submitted late ✓','Rendu en retard ✓','تم التسليم متأخراً ✓'],['Homework submitted ✓','Devoir rendu ✓','تم تسليم الفرض ✓'],
+/* grades */
+['My grades','Mes notes','علاماتي'],['marks out of 20','notes sur 20','العلامات على 20'],['out of 20','sur 20','على 20'],['General average','Moyenne générale','المعدل العام'],
+['▲ improved','▲ en progrès','▲ تحسّن'],['PROGRESS','PROGRESSION','التقدّم'],['By subject','Par matière','حسب المادة'],['Pass mark 10/20','Seuil de réussite 10/20','علامة النجاح 10/20'],
+['View report cards','Voir les bulletins','عرض الشهادات المدرسية'],
+['Excellent','Très bien','ممتاز'],['Very good','Bien','جيد جداً'],['Good','Assez bien','جيد'],['Pass','Passable','مقبول'],['Below pass','Insuffisant','دون المعدل'],
+['Quiz','Interrogation','اختبار قصير'],['Test','Contrôle','فرض'],['Project','Projet','مشروع'],['Exam','Examen','امتحان'],
+['1st term','1er trimestre','الفصل الأول'],['2nd term','2e trimestre','الفصل الثاني'],['3rd term','3e trimestre','الفصل الثالث'],
+['Subject average = weighted average of published assessments, out of 20. Pass mark 10/20. Work still being marked isn’t shown yet.','Moyenne de la matière = moyenne pondérée des évaluations publiées, sur 20. Seuil de réussite 10/20. Les travaux en cours de correction ne sont pas encore affichés.','معدل المادة = المعدل المرجّح للتقييمات المنشورة، على 20. علامة النجاح 10/20. الأعمال التي لا تزال قيد التصحيح لا تظهر بعد.'],
+/* news */
+['School','École','المدرسة'],['Weather','Météo','الطقس'],
+/* profile */
+['Personal information','Informations personnelles','المعلومات الشخصية'],['Class','Classe','الصف'],['Official exam','Examen officiel','الامتحان الرسمي'],
+['Brevet','Brevet','الشهادة المتوسطة (البريفيه)'],['Email','E-mail','البريد الإلكتروني'],['Emergency contacts','Contacts d’urgence','جهات الاتصال للطوارئ'],
+['Parent / guardian','Parent / tuteur','وليّ الأمر'],['Phone','Téléphone','الهاتف'],['Alternate','Autre numéro','رقم بديل'],['Address','Adresse','العنوان'],
+['Change password','Changer le mot de passe','تغيير كلمة المرور'],['Preferences','Préférences','التفضيلات'],
+/* exams */
+['1st term exams','Examens du 1er trimestre','امتحانات الفصل الأول'],['NEXT EXAM','PROCHAIN EXAMEN','الامتحان التالي'],['day away','jour restant','يوم متبقٍ'],['days away','jours restants','أيام متبقية'],
+['Add all exams to calendar','Ajouter tous les examens au calendrier','إضافة كل الامتحانات إلى الروزنامة'],['Day by day','Jour par jour','يوماً بيوم'],['Completed','Terminés','المُنجزة'],
+['Exam rules','Règlement des examens','قواعد الامتحانات'],['EB9 official exams','examens officiels EB9','الامتحانات الرسمية EB9'],
+['Arrive by 07:40 and wait outside Hall A','Arrive avant 07:40 et attends devant la salle A','احضر قبل 07:40 وانتظر خارج القاعة A'],['Bring your student ID card','Apporte ta carte d’élève','أحضر بطاقة التلميذ'],
+['No phones — hand them in at the door','Pas de téléphone — à déposer à l’entrée','ممنوع الهواتف — تُسلَّم عند الباب'],['Write in blue pen only','Écris uniquement au stylo bleu','الكتابة بقلم أزرق فقط'],
+['Calculators only for Maths and Physics (non-programmable)','Calculatrice uniquement en maths et en physique (non programmable)','الآلة الحاسبة للرياضيات والفيزياء فقط (غير قابلة للبرمجة)'],
+['Exam days end at 12:00','Les jours d’examen finissent à 12:00','تنتهي أيام الامتحانات عند 12:00'],
+['Brevet mock exam (blanc)','Brevet blanc','امتحان البريفيه التجريبي'],['Full Brevet simulation at school, all subjects','Simulation complète du Brevet à l’école, toutes matières','محاكاة كاملة للبريفيه في المدرسة، جميع المواد'],
+['Official Brevet exams (MEHE)','Examens officiels du Brevet (MEHE)','امتحانات البريفيه الرسمية (وزارة التربية)'],['Lebanese official exams for EB9 students','Examens officiels libanais pour les élèves d’EB9','الامتحانات الرسمية اللبنانية لتلامذة EB9'],
+['Mathematics — Test 1','Mathématiques — Contrôle 1','الرياضيات — الفرض 1'],['French — Production écrite','Français — Production écrite','اللغة الفرنسية — Production écrite'],
+['No past exams yet','Pas encore d’examens passés','لا امتحانات سابقة بعد'],['No exams scheduled','Aucun examen prévu','لا امتحانات مقرّرة'],['Online','En ligne','عن بُعد'],['Next','Suivant','التالي'],
+['Date','Date','التاريخ'],['Time','Heure','الوقت'],['Countdown','Compte à rebours','العد التنازلي'],['Format','Format','الصيغة'],['Online exam','Examen en ligne','امتحان عن بُعد'],
+['Room','Salle','القاعة'],['Seat','Place','المقعد'],['TOPICS COVERED','NOTIONS ÉVALUÉES','المواضيع المشمولة'],['SYLLABUS','PROGRAMME','المنهج'],
+['Add to calendar','Ajouter au calendrier','إضافة إلى الروزنامة'],['Remind me','Me le rappeler','ذكّرني'],['Added to calendar 📅','Ajouté au calendrier 📅','أُضيف إلى الروزنامة 📅'],
+['Revision reminder set 🔔','Rappel de révision activé 🔔','تم ضبط تذكير المراجعة 🔔'],
+/* report cards */
+['after the 1st term exams','après les examens du 1er trimestre','بعد امتحانات الفصل الأول'],['days','jours','يوماً'],['Preview (demo)','Aperçu (démo)','معاينة (تجريبية)'],
+['Notify me','Me prévenir','أعلِمني'],['Report cards are approved by the academic coordinator','Les bulletins sont validés par la coordinatrice pédagogique','تعتمد المنسّقة الأكاديمية الشهادات المدرسية'],
+['and shared with your parents at the same time.','et partagés avec tes parents au même moment.','وتُرسَل إلى أهلك في الوقت نفسه.'],
+['Student','Élève','التلميذ'],['ID','Matricule','الرقم'],['term','trimestre','الفصل'],['PROVISIONAL','PROVISOIRE','مؤقتة'],
+['marks so far, before the 1st term exams','notes actuelles, avant les examens du 1er trimestre','العلامات حتى الآن، قبل امتحانات الفصل الأول'],
+['Subject','Matière','المادة'],['Mark','Note','العلامة'],['Effort','Travail','الاجتهاد'],['Homeroom teacher’s comment','Appréciation du professeur principal','ملاحظة مربّية الصف'],
+['Pending','En attente','قيد الانتظار'],['Download PDF','Télécharger le PDF','تنزيل PDF'],['Report card downloaded (PDF) 📄','Bulletin téléchargé (PDF) 📄','تم تنزيل الشهادة المدرسية (PDF) 📄'],
+/* conduct */
+['CONDUCT GRADE','NOTE DE CONDUITE','علامة السلوك'],['Positive','Positif','إيجابي'],['Concern','Préoccupation','ملاحظة'],['Concerns','Préoccupations','ملاحظات'],
+['Warning','Avertissement','إنذار'],['Warnings','Avertissements','إنذارات'],['Behaviour','Comportement','السلوك'],['Punctuality','Ponctualité','الالتزام بالمواعيد'],
+['Participation','Participation','المشاركة'],['Parent notified','Parent informé','تم إبلاغ الأهل'],['No notes here','Aucune note ici','لا ملاحظات هنا'],
+['Concerns and warnings are shared with your parents.','Les préoccupations et avertissements sont partagés avec tes parents.','تُشارَك الملاحظات والإنذارات مع أهلك.'],
+['Talk to your homeroom teacher, Ms. Khoury, if you have questions.','Parle à ta professeure principale, Mme Khoury, si tu as des questions.','تحدّث إلى مربّية صفك، السيدة Khoury، إذا كانت لديك أسئلة.'],
+/* settings */
+['Push notifications','Notifications push','الإشعارات الفورية'],['Email notifications','Notifications par e-mail','إشعارات البريد الإلكتروني'],['Grades posted','Notes publiées','نشر العلامات'],
+['Homework reminders','Rappels de devoirs','تذكير بالفروض'],['Announcements','Annonces','الإعلانات'],['Security','Sécurité','الأمان'],['Face ID login','Connexion Face ID','الدخول عبر Face ID'],
+['About','À propos','حول التطبيق'],['Privacy policy','Politique de confidentialité','سياسة الخصوصية'],['Version','Version','الإصدار'],
+['Opening help centre…','Ouverture du centre d’aide…','جارٍ فتح مركز المساعدة…'],['Grade alerts','Alertes de notes','تنبيهات العلامات'],['Announcement alerts','Alertes d’annonces','تنبيهات الإعلانات'],
+['Message alerts','Alertes de messages','تنبيهات الرسائل'],['Face ID','Face ID','Face ID'],['Selected','Sélectionné','محدَّد'],
+['Current password','Mot de passe actuel','كلمة المرور الحالية'],['New password','Nouveau mot de passe','كلمة المرور الجديدة'],['Confirm new password','Confirmer le nouveau mot de passe','تأكيد كلمة المرور الجديدة'],
+['Repeat new password','Répète le nouveau mot de passe','أعد إدخال كلمة المرور الجديدة'],['Update password','Mettre à jour le mot de passe','تحديث كلمة المرور'],['Password updated ✓','Mot de passe mis à jour ✓','تم تحديث كلمة المرور ✓'],
+['Edit profile','Modifier le profil','تعديل الملف الشخصي'],['Full name','Nom complet','الاسم الكامل'],['Save changes','Enregistrer','حفظ التغييرات'],['Profile updated ✓','Profil mis à jour ✓','تم تحديث الملف الشخصي ✓'],
+/* courses */
+['Course teacher','Enseignant du cours','أستاذ المادة'],['About this course','À propos du cours','عن المادة'],['Materials','Supports de cours','المواد التعليمية'],
+['pdf','pdf','pdf'],['slides','diapos','شرائح'],['video','vidéo','فيديو'],['Opening file…','Ouverture du fichier…','جارٍ فتح الملف…'],
+/* attendance */
+['recent record','historique récent','السجل الأخير'],['ATTENDANCE RATE','TAUX DE PRÉSENCE','نسبة الحضور'],['Recent days','Derniers jours','الأيام الأخيرة'],
+['Present','Présent','حاضر'],['Absent','Absent','غائب'],['Excused','Excusé','غياب مبرر'],
+/* resources */
+['Notes','Fiches','ملخصات'],['PDFs','PDF','ملفات PDF'],['Videos','Vidéos','فيديوهات'],['Lectures','Cours enregistrés','محاضرات مسجّلة'],['PDF','PDF','PDF'],['Video','Vidéo','فيديو'],
+['Recording','Enregistrement','تسجيل'],['CRDP digital resources','Ressources numériques du CRDP','الموارد الرقمية للمركز التربوي'],['Official exams','Examens officiels','الامتحانات الرسمية'],
+['Nothing here yet','Rien pour l’instant','لا شيء بعد'],['Opening resource…','Ouverture de la ressource…','جارٍ فتح المورد…'],
+/* calendar */
+['Upcoming','À venir','القادم'],['Show all','Tout afficher','عرض الكل'],
+["Maths — Thales' theorem worksheet due",'Maths — fiche sur le théorème de Thalès à rendre','الرياضيات — تسليم ورقة عمل مبرهنة تالس'],
+['Parent–teacher meetings (EB9)','Réunions parents-professeurs (EB9)','اجتماعات الأهل والمعلمين (EB9)'],['3:00pm','15:00','15:00'],
+['Independence Day ceremony 🇱🇧','Cérémonie de la fête de l’Indépendance 🇱🇧','احتفال عيد الاستقلال 🇱🇧'],['Independence Day 🇱🇧','Fête de l’Indépendance 🇱🇧','عيد الاستقلال 🇱🇧'],
+['Maths — Factorisation problems due','Maths — problèmes de factorisation à rendre','الرياضيات — تسليم مسائل التحليل إلى عوامل'],
+['1st term exams begin','Début des examens du 1er trimestre','بدء امتحانات الفصل الأول'],['1st term exams end','Fin des examens du 1er trimestre','انتهاء امتحانات الفصل الأول'],
+['1st term report cards','Bulletins du 1er trimestre','الشهادات المدرسية للفصل الأول'],['Christmas & New Year break begins','Début des vacances de Noël et du Nouvel An','بدء عطلة الميلاد ورأس السنة'],
+['deadline','échéance','موعد تسليم'],['meeting','réunion','اجتماع'],['event','événement','نشاط'],['holiday','congé','عطلة'],['exam','examen','امتحان'],
+/* notifications */
+['New grade posted','Nouvelle note publiée','علامة جديدة'],['Homework missing','Devoir non rendu','فرض غير مُسلَّم'],
+['Revision sheet posted for the 1st term exams','Fiche de révision publiée pour les examens du 1er trimestre','نُشرت ورقة المراجعة لامتحانات الفصل الأول'],
+['Independence Day ceremony — Friday 20 November 🇱🇧','Cérémonie de la fête de l’Indépendance — vendredi 20 novembre 🇱🇧','احتفال عيد الاستقلال — الجمعة 20 تشرين الثاني 🇱🇧'],
+['All marked as read','Tout est marqué comme lu','تم تعليم الكل كمقروء'],
+/* messages */
+['New message (demo)','Nouveau message (démo)','رسالة جديدة (تجريبي)'],['Mathematics teacher','Professeure de mathématiques','أستاذة الرياضيات'],['French teacher','Professeur de français','أستاذ اللغة الفرنسية'],
+['Class group','Groupe de classe','مجموعة الصف'],['Classmate','Camarade de classe','زميل في الصف'],['Message…','Message…','اكتب رسالة…'],
+/* library */
+['Borrowed','Empruntés','المُستعارة'],['Digital books','Livres numériques','الكتب الرقمية'],['Renew','Renouveler','تجديد'],['Renewal requested','Renouvellement demandé','تم طلب التجديد'],
+['official textbook','manuel officiel','الكتاب الرسمي'],['e-book','livre numérique','كتاب إلكتروني'],['Read','Lire','قراءة'],['Opening reader…','Ouverture de la liseuse…','جارٍ فتح القارئ…'],
+/* fees */
+['OUTSTANDING BALANCE','SOLDE À PAYER','الرصيد المستحق'],['Pay now','Payer maintenant','ادفع الآن'],['All paid 🎉','Tout est payé 🎉','تم دفع كل المستحقات 🎉'],['Invoices','Factures','الفواتير'],
+['Tuition — 2nd instalment','Frais de scolarité — 2e versement','القسط المدرسي — الدفعة الثانية'],['Tuition — 1st instalment','Frais de scolarité — 1er versement','القسط المدرسي — الدفعة الأولى'],
+['School bus — 1st term','Bus scolaire — 1er trimestre','الباص المدرسي — الفصل الأول'],['Books & uniform','Livres et uniforme','الكتب والزي المدرسي'],['EB9 book list','Liste des livres EB9','لائحة كتب EB9'],
+['Paid just now','Payé à l’instant','دُفع للتو'],['Paid','Payé','مدفوع'],['Unpaid','Impayé','غير مدفوع'],['Amounts in USD','Montants en USD','المبالغ بالدولار الأميركي'],
+['receipts issued by the Finance Office','reçus émis par le service financier','الإيصالات صادرة عن الدائرة المالية'],['Fees are usually managed by a parent account','Les frais sont généralement gérés par le compte parent','تُدار الأقساط عادةً من حساب الأهل'],
+['Pay fees','Payer les frais','دفع الأقساط'],['Amount (USD)','Montant (USD)','المبلغ (دولار أميركي)'],['Payment method','Moyen de paiement','طريقة الدفع'],['Card','Carte','بطاقة'],
+['Bank transfer','Virement bancaire','تحويل مصرفي'],['OMT','OMT','OMT'],['Whish Money','Whish Money','Whish Money'],['Cash at the Finance Office','Espèces au service financier','نقداً في الدائرة المالية'],
+['Get payment slip','Obtenir le bordereau','الحصول على إيصال الدفع'],['Payment slip ready','Bordereau prêt','إيصال الدفع جاهز'],['bring it to the Finance Office','apporte-le au service financier','أحضره إلى الدائرة المالية'],
+];
+const I18N={fr:{},ar:{}};I18N_SRC.forEach(([en,fr,ar])=>{I18N.fr[en]=fr;I18N.ar[en]=ar;});
+/* patterns: $n = translated capture, %n = raw capture (names, authored titles) */
+const I18P=[
+[/^Hi, (.+) 👋$/,'Salut %1 👋','مرحباً %1 👋'],
+[/^PERIOD (\d+)$/,'HEURE %1','الحصة %1'],
+[/^ends (.+)$/,'fin à %1','تنتهي عند %1'],
+[/^Room (.+)$/,'Salle $1','القاعة $1'],
+[/^(\d+)% this term$/,'%1 % ce trimestre','%1% هذا الفصل'],
+[/^(\d+) late$/,'%1 retard(s)','%1 تأخير'],
+[/^(\d+) excused$/,'%1 excusée(s)','%1 غياب مبرر'],
+[/^(\d+) absent$/,'%1 absence(s)','%1 غياب'],
+[/^(\d+) excused absence$/,'%1 absence excusée','%1 غياب مبرر'],
+[/^(\d+) excused absences$/,'%1 absences excusées','%1 غياب مبرر'],
+[/^(\d+) absences$/,'%1 absence(s)','%1 غياب'],
+[/^Next exam: (.+)$/,'Prochain examen : $1','الامتحان التالي: $1'],
+[/^(\d+) days to go$/,'encore %1 jours','بعد %1 يوماً'],
+[/^Missing: (.+)$/,'Non rendu : %1','غير مُسلَّم: %1'],
+[/^was due (.+)$/,'à rendre le $1','كان مطلوباً في $1'],
+[/^Due (.+)$/,'À rendre $1','التسليم $1'],
+[/^Available (.+)$/,'Disponible le $1','متاحة في $1'],
+[/^in 1 days?$/,'dans 1 jour','بعد يوم واحد'],
+[/^in (\d+) days?$/,'dans %1 jours','بعد %1 يوماً'],
+[/^in (\d+) d$/,'J-%1','%1 أيام'],
+[/^Positive note from (.+)$/,'Note positive de $1','ملاحظة إيجابية من $1'],
+[/^(\d+) min ago$/,'il y a %1 min','منذ %1 دقيقة'],
+[/^(\d+) h ago$/,'il y a %1 h','منذ %1 ساعة'],
+[/^(\d+) days ago$/,'il y a %1 jours','منذ %1 أيام'],
+[/^Overdue since (.+)$/,'En retard depuis le $1','متأخر منذ $1'],
+[/^Handed in (.+)$/,'Rendu le $1','سُلِّم في $1'],
+[/^(.+) notified$/,'$1 informé(e)','تم إبلاغ $1'],
+[/^Rank (.+) of (.+)$/,'Rang %1 sur %2','الترتيب %1 من %2'],
+[/^Rank (.+)$/,'Rang %1','الترتيب %1'],
+[/^(\d+) subjects$/,'%1 matières','%1 مواد'],
+[/^▲ \+([\d.]+) since (.+)$/,'▲ +%1 depuis %2','▲ +%1 منذ %2'],
+[/^(\d+) marks?$/,'%1 note(s)','%1 علامات'],
+[/^(Excellent|Very good|Good) ≥(\d+)$/,'$1 ≥%2','$1 ≥%2'],
+[/^(\d+) graded assessments?$/,'%1 évaluation(s) notée(s)','%1 تقييمات مصحَّحة'],
+[/^(\d+)% of average$/,'%1 % de la moyenne','%1% من المعدل'],
+[/^Maths (.+)$/,'Maths %1','الرياضيات %1'],
+[/^Student (ARZ-.+)$/,'Élève %1','التلميذ %1'],
+[/^regular classes resume (.+)$/,'reprise des cours $1','تُستأنف الحصص العادية $1'],
+[/^(\d+) exams added to your calendar 📅$/,'%1 examens ajoutés à ton calendrier 📅','أُضيف %1 امتحانات إلى روزنامتك 📅'],
+[/^(.+) added to calendar 📅$/,'$1 ajouté au calendrier 📅','أُضيف $1 إلى الروزنامة 📅'],
+[/^(\d+) min$/,'%1 min','%1 دقيقة'],
+[/^Released (.+)$/,'Publié le $1','يصدر في $1'],
+[/^We’ll notify you on (.+) 🔔$/,'On te préviendra le $1 🔔','سنُعلمك في $1 🔔'],
+[/^conduct (.+)$/,'conduite $1','السلوك $1'],
+[/^(.+ term) report card$/,'Bulletin du $1','الشهادة المدرسية – $1'],
+[/^(\d+) \/ (\d+) days$/,'%1 / %2 jours','%1 / %2 يوم'],
+[/^(\d+) of (\d+) days$/,'%1 jours sur %2','%1 من %2 يوم'],
+[/^— (.+)$/,'— $1','— $1'],
+[/^PDF available on (.+)$/,'PDF disponible le $1','ملف PDF متاح في $1'],
+[/^Available after release on (.+)$/,'Disponible après publication, $1','متاح بعد الإصدار في $1'],
+[/^All (\d+)$/,'Tout %1','الكل %1'],
+[/^(Present|Late|Absent|Excused) (\d+)$/,'$1 %2','$1 %2'],
+[/^(\d+) files$/,'%1 fichiers','%1 ملفات'],
+[/^(\d+) pages$/,'%1 pages','%1 صفحات'],
+[/^No events on (.+)$/,'Aucun événement le $1','لا أحداث في $1'],
+[/^(\d+) members$/,'%1 membres','%1 عضواً'],
+[/^Bus (\d+)$/,'Bus %1','الباص %1'],
+[/^Paid via (.+) ✓$/,'Payé par $1 ✓','تم الدفع عبر $1 ✓'],
+[/^Paid (.+)$/,'Payé le $1','دُفع في $1'],
+[/^Pay (\$[\d,]+)$/,'Payer $1','ادفع %1'],
+[/^Appearance: (.+)$/,'Apparence : $1','المظهر: $1'],
+[/^(.+) — coming soon$/,'$1 — bientôt disponible','$1 — قريباً'],
+[/^(Push notifications|Email notifications|Grade alerts|Homework reminders|Announcement alerts|Message alerts|Face ID) on$/,'$1 : activé','$1: مفعّل'],
+[/^(Push notifications|Email notifications|Grade alerts|Homework reminders|Announcement alerts|Message alerts|Face ID) off$/,'$1 : désactivé','$1: معطّل'],
+];
+/* dates: data uses English tokens (Mon 16 Nov, 26 Nov, November 2026) */
+const EN_DF=['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'],EN_D3=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+const EN_MF=['January','February','March','April','May','June','July','August','September','October','November','December'],EN_M3=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const AR_D=['الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت','الأحد'],AR_M=['كانون الثاني','شباط','آذار','نيسان','أيار','حزيران','تموز','آب','أيلول','تشرين الأول','تشرين الثاني','كانون الأول'];
+const DLOC={
+  fr:{df:['lundi','mardi','mercredi','jeudi','vendredi','samedi','dimanche'],d3:['lun.','mar.','mer.','jeu.','ven.','sam.','dim.'],dc:['Lun','Mar','Mer','Jeu','Ven','Sam','Dim'],
+      mf:['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'],m3:['janv.','févr.','mars','avr.','mai','juin','juil.','août','sept.','oct.','nov.','déc.']},
+  ar:{df:AR_D,d3:AR_D,dc:AR_D,mf:AR_M,m3:AR_M}};
+EN_D3.forEach((d,i)=>{I18N.fr[d]=DLOC.fr.dc[i];I18N.ar[d]=AR_D[i];});
+EN_M3.forEach((m,i)=>{if(m==='May')return;I18N.fr[m]=DLOC.fr.m3[i];I18N.ar[m]=AR_M[i];});
+const RX=(s,f)=>new RegExp(s,f||'g');
+const R_DFULL=RX(`\\b(${EN_DF.join('|')}),? (\\d{1,2}) (${EN_MF.join('|')})(?: (\\d{4}))?\\b`),R_D3=RX(`\\b(${EN_D3.join('|')}) (\\d{1,2}) (${EN_M3.join('|')})\\b`),
+      R_NMF=RX(`\\b(\\d{1,2}) (${EN_MF.join('|')})(?: (\\d{4}))?\\b`),R_NM3=RX(`\\b(\\d{1,2}) (${EN_M3.join('|')})\\b`),R_MFY=RX(`\\b(${EN_MF.join('|')}) (\\d{4})\\b`),R_DM=RX(`^(${EN_D3.join('|')}) (${EN_M3.join('|')})$`,'');
+function trDates(s){if(uiLang==='en')return s;const L=DLOC[uiLang];
+  return s.replace(R_DFULL,(_,d,n,m,y)=>`${L.df[EN_DF.indexOf(d)]} ${+n} ${L.mf[EN_MF.indexOf(m)]}${y?' '+y:''}`)
+   .replace(R_D3,(_,d,n,m)=>`${L.d3[EN_D3.indexOf(d)]} ${+n} ${L.m3[EN_M3.indexOf(m)]}`)
+   .replace(R_NMF,(_,n,m,y)=>`${+n} ${L.mf[EN_MF.indexOf(m)]}${y?' '+y:''}`)
+   .replace(R_NM3,(_,n,m)=>`${+n} ${L.m3[EN_M3.indexOf(m)]}`)
+   .replace(R_MFY,(_,m,y)=>`${L.mf[EN_MF.indexOf(m)]} ${y}`)
+   .replace(R_DM,(_,d,m)=>`${L.d3[EN_D3.indexOf(d)]} ${L.m3[EN_M3.indexOf(m)]}`);}
+const TITLES={fr:{Mrs:'Mme',Ms:'Mme',Mr:'M.',Dr:'Dr'},ar:{Mrs:'السيدة',Ms:'السيدة',Mr:'السيد',Dr:'د.'}};
+function trTitles(s){return uiLang==='en'?s:s.replace(/\b(Mrs|Ms|Mr|Dr)\. (?=[A-Z])/g,(_,x)=>TITLES[uiLang][x]+' ');}
+function trMoney(s){return uiLang!=='fr'?s:s.replace(/\$([\d,]+(?:\.\d+)?)/g,(_,n)=>n.replace(/,/g,' ')+' $');}
+const I18N_MISS=new Set();
+function trCore(c){
+  if(uiLang==='en'||!c)return c;
+  const D=I18N[uiLang];
+  if(Object.prototype.hasOwnProperty.call(D,c))return D[c];
+  if(c.startsWith('· '))return '· '+trCore(c.slice(2));
+  if(c.endsWith(' ·'))return trCore(c.slice(0,-2))+' ·';
+  if(c.indexOf(' · ')>-1)return c.split(' · ').map(trPad).join(' · ');
+  for(const p of I18P){const m=c.match(p[0]);if(m){const rep=uiLang==='fr'?p[1]:p[2];return trMoney(rep.replace(/([$%])(\d)/g,(_,k,i)=>{const v=m[+i]==null?'':m[+i];return k==='$'?trCore(v):v;}));}}
+  const r=trMoney(trTitles(trDates(c)));
+  if(r===c&&/[A-Za-z]{3,}/.test(c))I18N_MISS.add(c);
+  return r;
+}
+function trPad(s){const core=s.trim();if(!core)return s;const a=s.match(/^\s*/)[0],b=s.match(/\s*$/)[0];return a+trCore(core)+b;}
+function t(s,vars){let r=trCore(s);if(vars)r=r.replace(/\{(\w+)\}/g,(_,k)=>vars[k]??'');return r;}
+/* numbers, times, phones, emails, IDs and amounts keep LTR order inside Arabic text */
+const BIDI_RE=/(\+961[\d ]*\d|[\w.+-]+@[\w-]+(?:\.[\w-]+)+|ARZ-[A-Z]+-\d+|\d{1,2}:\d{2}(?:\s?[–-]\s?\d{1,2}:\d{2})?|\$[\d,]+(?:\.\d+)?|\d+(?:\.\d+)?\s?\/\s?\d+|\d{4}[–-]\d{4}|[+−]\d+(?:\.\d+)?|\d+(?:\.\d+)?\s?%)/g;
+function trEl(root){
+  if(!root||uiLang==='en')return;
+  const nodes=[],w=document.createTreeWalker(root,NodeFilter.SHOW_ELEMENT|NodeFilter.SHOW_TEXT,{acceptNode:n=>n.nodeType===3?NodeFilter.FILTER_ACCEPT:(n.hasAttribute('data-noi18n')||n.getAttribute('dir')==='ltr'||n.tagName==='SCRIPT'||n.tagName==='STYLE'||n.namespaceURI==='http://www.w3.org/2000/svg')?NodeFilter.FILTER_REJECT:NodeFilter.FILTER_SKIP});
+  while(w.nextNode())nodes.push(w.currentNode);
+  nodes.forEach(n=>{const v=n.nodeValue;if(!/[A-Za-z0-9]/.test(v))return;const r=trPad(v);
+    if(uiLang==='ar'){const ms=[...r.matchAll(BIDI_RE)];if(ms.length){const f=document.createDocumentFragment();let last=0;ms.forEach(m=>{if(m.index>last)f.append(r.slice(last,m.index));const sp=document.createElement('span');sp.dir='ltr';sp.textContent=m[0];f.append(sp);last=m.index+m[0].length;});if(last<r.length)f.append(r.slice(last));n.replaceWith(f);return;}}
+    if(r!==v)n.nodeValue=r;});
+  /* composite numbers split across elements, e.g. 15.6<span>/20</span> */
+  if(uiLang==='ar')root.querySelectorAll('.tnum,.num').forEach(el=>{if(el.children.length&&!el.querySelector('[dir]')&&/^[\s\d.,+%\/$–:-]+$/.test(el.textContent)){const sp=document.createElement('span');sp.dir='ltr';while(el.firstChild)sp.appendChild(el.firstChild);el.appendChild(sp);}});
+  root.querySelectorAll('[placeholder]').forEach(el=>{if(!el.closest('[data-noi18n]'))el.placeholder=trCore(el.getAttribute('placeholder'));});
+}
+function translateStatic(){document.querySelectorAll('[data-i18n]').forEach(el=>{el.textContent=t(el.getAttribute('data-i18n'));});}
+function applyLang(){const h=document.documentElement;h.lang=uiLang;h.dir=uiLang==='ar'?'rtl':'ltr';translateStatic();}
+function curLang(){return LANGS.find(l=>l.code===uiLang)||LANGS[2];}
+function calWD(){return ({en:['M','T','W','T','F','S','S'],fr:['L','M','M','J','V','S','D'],ar:['ن','ث','ر','خ','ج','س','ح']}[uiLang]).map(x=>`<span data-noi18n>${x}</span>`).join('');}
+applyLang();
+
+const screensEl=document.getElementById('screens');
+let toastTimer;
+function toast(m){const el=document.getElementById('toast');el.textContent=trCore(m);el.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove('show'),1800);}
+function openSheet(h){const sb=document.getElementById('sheet-body');sb.innerHTML=h;trEl(sb);document.getElementById('sheet').classList.add('open');}
+function closeSheet(){document.getElementById('sheet').classList.remove('open');}
+document.querySelector('[data-close-sheet]').addEventListener('click',closeSheet);
+function openDrawer(){document.getElementById('drawer').classList.add('open');}
+function closeDrawer(){document.getElementById('drawer').classList.remove('open');}
+function go(id){closeDrawer();hist=[];show(id,true);}
+function soon(t){closeDrawer();toast(t+' — coming soon');}
+const svgBack='<svg class="flip-rtl" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7"/></svg>';
+const svgMenu='<svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg>';
+let current=null,hist=[];
+function setLead(el){const l=el&&el.querySelector('.lead');if(!l)return;l.innerHTML=hist.length?`<div class="icon-btn" onclick="back()">${svgBack}</div>`:`<div class="icon-btn" onclick="openDrawer()">${svgMenu}</div>`;}
+function show(id,noPush){if(!noPush&&current&&current!==id)hist.push(current);current=id;document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));const el=document.getElementById('scr-'+id);if(el){el.classList.add('active');el.scrollTop=0;setLead(el);}document.querySelectorAll('.drawer-item[data-goto]').forEach(t=>t.classList.toggle('active',t.dataset.goto===id));document.getElementById('statusbar').classList.remove('onhead');}
+function back(){show(hist.length?hist.pop():'home',true);}
+
+/* DATA — Al-Arz School (fictional), Achrafieh, Beirut · Lebanese curriculum · demo "today" = Mon 16 Nov 2026 */
+const SUBJ={M:'#0f9d8f',Ar:'#7c3aed',Fr:'#2563eb',En:'#6366f1',Ph:'#0ea5e9',Bi:'#ef4444',Hi:'#f59e0b',PE:'#10b981'};
+const CEDAR_SVG='<svg viewBox="0 0 24 24"><path d="M12 2.5 7.5 8h2.2L6 12.5h2.8L4.5 17.5H11v4h2v-4h6.5l-4.3-5h2.8L14.3 8h2.2z" fill="currentColor"/></svg>';
+const TODAY=new Date(2026,10,16);
+const THEME_KEY='skl-student-theme';
+let uiTheme=(()=>{try{return localStorage.getItem(THEME_KEY)||'Light';}catch(e){return 'Light';}})();
+function applyTheme(t){let dark=t==='Dark';if(t==='System'){try{dark=matchMedia('(prefers-color-scheme: dark)').matches;}catch(e){}}document.documentElement.dataset.theme=dark?'dark':'light';}
+applyTheme(uiTheme);
+try{matchMedia('(prefers-color-scheme: dark)').addEventListener('change',()=>{if(uiTheme==='System')applyTheme('System');});}catch(e){}
+/* Monday timetable · EB9 B */
+const timetable=[
+  {t:'07:50',p:'P1',c:'Ar',n:'Arabic',r:'105',tch:'Mr. Itani'},
+  {t:'08:40',p:'P2',c:'M',n:'Mathematics',r:'204',tch:'Ms. Khoury',now:true},
+  {t:'09:30',p:'P3',c:'En',n:'English',r:'112',tch:'Ms. Zein'},
+  {t:'10:40',p:'P4',c:'Bi',n:'Life & Earth Sciences',r:'Lab 2',tch:'Dr. Rahal',online:true},
+  {t:'11:30',p:'P5',c:'Fr',n:'French',r:'110',tch:'Mr. Daccache'},
+  {t:'12:40',p:'P6',c:'Hi',n:'History & Geography',r:'108',tch:'Ms. Salameh'},
+  {t:'13:30',p:'P7',c:'PE',n:'Physical Education',r:'Gym',tch:'Mr. Nehme'},
+];
+/* Homework · status: todo | submitted | missing | marked (late:true when handed in after the due date) */
+let homework=[
+  {id:0,c:'M',n:"Thales' theorem worksheet",subj:'Mathematics',tch:'Ms. Khoury',due:'Wed 18 Nov',status:'todo',desc:"Six problems on Thales' theorem and its converse. Draw clear, labelled figures and justify each ratio."},
+  {id:1,c:'M',n:'Factorisation problems',subj:'Mathematics',tch:'Ms. Khoury',due:'Mon 23 Nov',status:'todo',desc:'Problems 3–10 p.61 (CRDP textbook): factorise using the remarkable identities, then solve the equations.'},
+  {id:2,c:'Hi',n:"Map exercise — Lebanon's regions",subj:'History, Geography & Civics',tch:'Ms. Salameh',due:'Tue 10 Nov',status:'missing',reminder:'Reminder sent to your parent · Wed 11 Nov',desc:"On the blank map, label Lebanon's five geographic regions and its main rivers (Litani, Orontes, Nahr Ibrahim…)."},
+  {id:3,c:'M',n:'Exercises p.84 — Radicals',subj:'Mathematics',tch:'Ms. Khoury',due:'Thu 12 Nov',status:'marked',submitted:'Thu 12 Nov',mark:9,max:10,feedback:'Very clean work. Check exercise 7 — simplify the final radical.',desc:'Exercises 1–12 p.84 (CRDP textbook): simplify and rationalise the expressions. Show your working.'},
+  {id:4,c:'Fr',n:'Résumé — Le Petit Prince ch.1–5',subj:'French',tch:'Mr. Daccache',due:'Fri 13 Nov',status:'marked',late:true,submitted:'Sat 14 Nov',mark:14,max:20,feedback:'Bon travail, mais attention aux accords.',desc:'Résumé de 150 mots des chapitres 1 à 5 du Petit Prince.'},
+  {id:5,c:'Ph',n:'Lab report — Density',subj:'Physics & Chemistry',tch:'Mr. Aoun',due:'Thu 12 Nov',status:'marked',submitted:'Thu 12 Nov',mark:17,max:20,feedback:'Good method; units missing in Q3.',desc:'Measure the density of three solids and write a lab report: method, results table and conclusion.'},
+];
+let hwFilter='all',hwAttach=null;
+/* Lebanese scale: every subject average is out of 20 (pass mark 10/20). Each assessment keeps its own
+   maximum and is converted with score/max*20, weighted across PUBLISHED assessments (drafts hidden). */
+const subjects=[
+  {c:'M',n:'Mathematics',t:'Ms. Khoury',col:SUBJ.M,asmts:[
+    {name:'Quiz — Radicals & real numbers',type:'Quiz',max:20,weight:15,score:18,date:'05 Nov'},
+    {name:'Test 1 — Factorisation & identities',type:'Test',max:40,weight:30,score:35,date:'23 Oct'},
+    {name:"Homework — Thales' theorem",type:'Homework',max:10,weight:5,score:10,date:'10 Nov'},
+    {name:'1st term exam',type:'Exam',max:20,weight:40,score:null,date:'30 Nov',draft:true},
+  ]},
+  {c:'Ar',n:'Arabic',t:'Mr. Itani',col:SUBJ.Ar,asmts:[
+    {name:'Composition (تعبير كتابي)',type:'Test',max:20,weight:30,score:14,date:'06 Nov'},
+    {name:'Grammar quiz (قواعد)',type:'Quiz',max:20,weight:15,score:15,date:'28 Oct'},
+  ]},
+  {c:'Fr',n:'French',t:'Mr. Daccache',col:SUBJ.Fr,asmts:[
+    {name:'Dictée',type:'Quiz',max:20,weight:15,score:13,date:'04 Nov'},
+    {name:'Production écrite',type:'Test',max:40,weight:30,score:29,date:'22 Oct'},
+  ]},
+  {c:'En',n:'English',t:'Ms. Zein',col:SUBJ.En,asmts:[
+    {name:'Reading response',type:'Quiz',max:20,weight:15,score:16,date:'09 Nov'},
+    {name:'Essay — My Lebanon',type:'Test',max:40,weight:35,score:33,date:'27 Oct'},
+  ]},
+  {c:'Ph',n:'Physics & Chemistry',t:'Mr. Aoun',col:SUBJ.Ph,asmts:[
+    {name:'Test — Electric circuits',type:'Test',max:40,weight:30,score:31,date:'30 Oct'},
+    {name:'Lab report — Density',type:'Project',max:20,weight:15,score:17,date:'12 Nov'},
+  ]},
+  {c:'Bi',n:'Life & Earth Sciences',t:'Dr. Rahal',col:SUBJ.Bi,asmts:[
+    {name:'Test — Human immunity',type:'Test',max:40,weight:30,score:33,date:'26 Oct'},
+    {name:'Quiz — Cells',type:'Quiz',max:20,weight:10,score:17,date:'11 Nov'},
+  ]},
+  {c:'Hi',n:'History, Geography & Civics',t:'Ms. Salameh',col:SUBJ.Hi,asmts:[
+    {name:'Test — Independence of Lebanon (1943)',type:'Test',max:40,weight:30,score:28,date:'29 Oct'},
+    {name:'Civics quiz — Institutions',type:'Quiz',max:20,weight:15,score:14,date:'12 Nov'},
+  ]},
+];
+function mentionOf(v){return v>=16?'Excellent':v>=14?'Very good':v>=12?'Good':v>=10?'Pass':'Below pass';}
+function tone20(v){return v>=12?'ok':v>=10?'warn':'bad';}
+function subj20(s){const A=s.asmts.filter(a=>!a.draft&&a.score!=null);if(!A.length)return null;const w=A.reduce((t,a)=>t+a.weight,0);const sc=A.reduce((t,a)=>t+a.score/a.max*20*a.weight,0);return sc/w;}
+function overall20(list){const ps=list.map(subj20).filter(x=>x!=null);return ps.length?Math.round(ps.reduce((a,b)=>a+b,0)/ps.length*10)/10:0;}
+function subjectBreakdown(i){const s=subjects[i],v=subj20(s),shown=s.asmts.filter(a=>!a.draft&&a.score!=null);openSheet(`<div class="row"><div class="subj" style="width:44px;height:44px;background:${s.col}">${s.c}</div><div class="grow"><h2 style="font-size:20px;font-weight:800">${s.n}</h2><div class="sub mt6">1st term · ${shown.length} graded assessment${shown.length===1?'':'s'}</div></div>${v==null?'':`<div style="text-align:end"><div class="tnum" style="font-size:22px;font-weight:800">${v.toFixed(1)}<span class="muted" style="font-size:12px">/20</span></div><span class="tag ${tone20(v)}">${mentionOf(v)}</span></div>`}</div>
+  <div class="card mt16" style="padding:6px 16px">${shown.map(a=>{const s20=a.score/a.max*20;return `<div class="list-item"><div class="grow"><div style="font-weight:600" data-noi18n>${a.name}</div><div class="sub mt6">${a.type} · ${a.weight}% of average · ${a.date}</div></div><div style="text-align:end"><div class="tnum" style="font-weight:800">${a.score}/${a.max}</div><div class="sub tnum" style="font-size:10px;color:var(--${tone20(s20)==='bad'?'danger':tone20(s20)})">${s20.toFixed(1)}/20</div></div></div>`;}).join('')}</div>
+  <p class="sub" style="margin-top:12px;font-size:11px">Subject average = weighted average of published assessments, out of 20. Pass mark 10/20. Work still being marked isn’t shown yet.</p>
+  <button class="btn secondary mt12" onclick="closeSheet()">Close</button>`);}
+/* 1st term exams · EB9 B · Hall A */
+const exams=[
+  {c:'Fr',n:'French',date:'Thu 26 Nov',time:'08:00',end:'10:00',dur:'120 min',room:'Hall A',seat:'B-14',topics:'Compréhension de texte, grammaire et production écrite.',status:'upcoming'},
+  {c:'Ar',n:'Arabic',date:'Fri 27 Nov',time:'08:00',end:'10:00',dur:'120 min',room:'Hall A',seat:'B-14',topics:'Text analysis (تحليل نص), grammar (قواعد) and composition (تعبير).',status:'upcoming'},
+  {c:'M',n:'Mathematics',date:'Mon 30 Nov',time:'08:00',end:'10:00',dur:'120 min',room:'Hall A',seat:'B-14',topics:'Real numbers & radicals, factorisation and identities, Thales’ theorem. Bring your geometry set and calculator.',status:'upcoming'},
+  {c:'Bi',n:'Life & Earth Sciences',date:'Tue 1 Dec',time:'08:00',end:'09:30',dur:'90 min',room:'Hall A',seat:'B-14',topics:'The cell, human immunity and the nervous system.',status:'upcoming'},
+  {c:'Ph',n:'Physics & Chemistry',date:'Wed 2 Dec',time:'08:00',end:'09:30',dur:'90 min',room:'Hall A',seat:'B-14',topics:'Electric circuits, density and states of matter. Formula sheet provided.',status:'upcoming'},
+  {c:'En',n:'English',date:'Thu 3 Dec',time:'08:00',end:'10:00',dur:'120 min',room:'Hall A',seat:'B-14',topics:'Reading comprehension + essay. Set text: The Prophet by Khalil Gibran.',status:'upcoming'},
+  {c:'Hi',n:'History, Geography & Civics',date:'Fri 4 Dec',time:'08:00',end:'09:30',dur:'90 min',room:'Hall A',seat:'B-14',topics:'Lebanon under the Mandate and independence (1943), geography of Lebanon, state institutions.',status:'upcoming'},
+  {c:'M',n:'Mathematics — Test 1',date:'23 Oct',time:'08:40',dur:'50 min',room:'204',seat:'—',topics:'Factorisation and remarkable identities.',status:'done',result:'35/40',s20:17.5},
+  {c:'Fr',n:'French — Production écrite',date:'22 Oct',time:'11:30',dur:'50 min',room:'110',seat:'—',topics:'Texte narratif et discours rapporté.',status:'done',result:'29/40',s20:14.5},
+];
+const officialExams=[
+  {n:'Brevet mock exam (blanc)',when:'March 2027',desc:'Full Brevet simulation at school, all subjects'},
+  {n:'Official Brevet exams (MEHE)',when:'June 2027',desc:'Lebanese official exams for EB9 students'},
+];
+const EXAM_RULES=['Arrive by 07:40 and wait outside Hall A','Bring your student ID card','No phones — hand them in at the door','Write in blue pen only','Calculators only for Maths and Physics (non-programmable)','Exam days end at 12:00 · regular classes resume Mon 7 Dec'];
+
+/* Report cards · plain average of subject marks /20 (same method as the parent app) */
+const RC_SUBJ=[['M','Mathematics','Ms. Khoury'],['Ar','Arabic','Mr. Itani'],['Fr','French','Mr. Daccache'],['En','English','Ms. Zein'],['Ph','Physics & Chemistry','Mr. Aoun'],['Bi','Life & Earth Sciences','Dr. Rahal'],['Hi','History, Geography & Civics','Ms. Salameh']];
+const RC_CLASS_AVG=[13.9,13.2,12.8,14.1,13.5,14.0,13.1];
+const reportCards=[
+  {id:'t1',term:'1st term',year:'2026–2027',cls:'EB9 B',locked:true,release:'Fri 11 Dec',rank:'4 / 28',conduct:'Very good',effort:'Good',att:'32 / 33 days · 1 late · 1 excused absence',
+    homeroom:'Ms. Dana Khoury',comment:'Omar is a serious, motivated student with excellent results in the sciences. Keep this pace through the 1st term exams.',
+    cmts:['Excellent work and participation.','جهد جيد، انتبه إلى القواعد.','Bon niveau, soigner l’orthographe.','Strong reader, thoughtful essays.','Solid method in lab work.','Very good understanding of the topics.','Revise dates and maps regularly.']},
+  {id:'eb8t3',term:'3rd term',year:'2025–2026',cls:'EB8 B',marks:[16.0,13.8,13.5,15.6,15.0,15.4,13.6],avgs:[13.6,13.0,12.6,13.9,13.2,13.8,12.9],rank:'6 / 27',conduct:'Very good',effort:'Very good',att:'38 / 39 days · 0 late · 1 excused absence',
+    homeroom:'Mr. Karim Aoun',comment:'Omar made steady progress this year. Well done — ready for the Brevet class.',
+    cmts:['Great progress in geometry.','تحسّن ملحوظ في التعبير.','Des progrès réguliers.','Very good oral presentations.','Careful and precise.','Excellent project on ecosystems.','Good effort, more detail in answers.']},
+  {id:'eb8t2',term:'2nd term',year:'2025–2026',cls:'EB8 B',marks:[15.5,13.4,13.0,15.2,14.4,14.9,13.0],avgs:[13.4,12.9,12.5,13.8,13.1,13.6,12.8],rank:'7 / 27',conduct:'Good',effort:'Good',att:'41 / 43 days · 1 late · 2 excused absences',
+    homeroom:'Mr. Karim Aoun',comment:'A good term. Omar should keep working regularly, especially in languages.',
+    cmts:['Good results, keep it up.','يحتاج إلى مزيد من القراءة.','Travail correct, à approfondir.','Good vocabulary.','Good lab reports.','Very good participation.','Learn the lessons more regularly.']},
+  {id:'eb8t1',term:'1st term',year:'2025–2026',cls:'EB8 B',marks:[14.8,12.9,12.4,14.6,13.8,14.3,12.4],avgs:[13.2,12.7,12.3,13.6,12.9,13.5,12.6],rank:'9 / 27',conduct:'Good',effort:'Good',att:'35 / 37 days · 2 late · 0 absences',
+    homeroom:'Mr. Karim Aoun',comment:'A promising start to EB8. More focus in class will bring better results.',
+    cmts:['Capable — needs more practice.','مستوى مقبول.','Doit participer davantage.','Good start.','Pay attention to units.','Good curiosity in class.','Needs more revision at home.']},
+];
+let curRC='eb8t3';
+
+/* Conduct notes */
+const conductNotes=[
+  {d:'Fri 13 Nov',type:'pos',cat:'Behaviour',by:'Mr. Nehme',t:'Helped organise the Independence Day ceremony rehearsal.',notified:false},
+  {d:'Thu 12 Nov',type:'con',cat:'Punctuality',by:'Administration',t:'Arrived late to P1 (08:05).',notified:true},
+  {d:'Wed 11 Nov',type:'con',cat:'Homework',by:'Ms. Salameh',t:'Map exercise not handed in.',notified:true},
+  {d:'Tue 10 Nov',type:'pos',cat:'Participation',by:'Ms. Khoury',t:'Excellent explanation of rationalising denominators to the class.',notified:false},
+];
+let conductFilter='all';
+
+/* ---- extra feature data ---- */
+let curCourse=0,curChat='khoury';
+const courses=[
+  {c:'M',n:'Mathematics',col:SUBJ.M,tch:'Ms. Dana Khoury',room:'204',desc:'EB9 Lebanese curriculum: real numbers & radicals, algebraic calculus, Thales and Pythagoras, trigonometry, linear functions and statistics — preparing for the Brevet.',mats:[{t:'pdf',n:'Mathematics EB9 — CRDP textbook'},{t:'slides',n:'Radicals — summary notes'},{t:'video',n:'Thales’ theorem explained (14:20)'}]},
+  {c:'Ar',n:'Arabic',col:SUBJ.Ar,tch:'Mr. Bilal Itani',room:'105',desc:'Reading, grammar (قواعد) and composition (تعبير). Set text this term: الأيام by Taha Hussein.',mats:[{t:'pdf',n:'الأيام — study guide'},{t:'pdf',n:'Grammar rules summary'}]},
+  {c:'Fr',n:'French',col:SUBJ.Fr,tch:'Mr. Sami Daccache',room:'110',desc:'Compréhension, grammaire et production écrite. Œuvre étudiée : Le Petit Prince.',mats:[{t:'pdf',n:'Le Petit Prince — fiche de lecture'},{t:'slides',n:'Le discours rapporté'}]},
+  {c:'En',n:'English',col:SUBJ.En,tch:'Ms. Lara Zein',room:'112',desc:'Reading, comprehension and essay writing. Set text this term: The Prophet by Khalil Gibran.',mats:[{t:'pdf',n:'The Prophet — study guide'},{t:'pdf',n:'Essay structure handout'}]},
+  {c:'Ph',n:'Physics & Chemistry',col:SUBJ.Ph,tch:'Mr. Karim Aoun',room:'Lab 1',desc:'Electricity, mechanics and the chemistry of matter, with practical lab sessions.',mats:[{t:'pdf',n:'Formula sheet'},{t:'video',n:'Ohm’s law demo (09:41)'}]},
+  {c:'Bi',n:'Life & Earth Sciences',col:SUBJ.Bi,tch:'Dr. Hana Rahal',room:'Lab 2',desc:'SVT — the cell, the nervous system, genetics and ecology, with weekly lab sessions.',mats:[{t:'slides',n:'The neuron'},{t:'video',n:'Reflex arc explained (11:30)'},{t:'pdf',n:'Lab safety rules'}]},
+  {c:'Hi',n:'History, Geography & Civics',col:SUBJ.Hi,tch:'Ms. Rita Salameh',room:'108',desc:'Lebanon under the Mandate and independence (1943), the geography of Lebanon, and civic education.',mats:[{t:'pdf',n:'Timeline — Independence of Lebanon'},{t:'slides',n:'Lebanese state institutions'}]},
+  {c:'PE',n:'Physical Education',col:SUBJ.PE,tch:'Mr. Georges Nehme',room:'Gym',desc:'Fitness, athletics and team sports.',mats:[{t:'pdf',n:'1st term fixtures'}]},
+];
+/* 1st term so far: 33 school days, 32 attended (1 late on Thu 12 Nov), 1 excused absence (Fri 6 Nov) */
+const TERM_ATT={days:33,attended:32,late:1,absent:0,excused:1};
+const attRows=[
+  {d:'Mon 16 Nov',s:'present'},{d:'Fri 13 Nov',s:'present'},{d:'Thu 12 Nov',s:'late'},{d:'Wed 11 Nov',s:'present'},
+  {d:'Tue 10 Nov',s:'present'},{d:'Mon 9 Nov',s:'present'},{d:'Fri 6 Nov',s:'excused'},{d:'Thu 5 Nov',s:'present'},
+];
+const resources=[
+  {t:'note',n:'Radicals summary notes',subj:'Mathematics',meta:'PDF · 4 pages'},
+  {t:'pdf',n:'Mathematics EB9 — CRDP textbook',subj:'Mathematics',meta:'CRDP digital resources · PDF'},
+  {t:'pdf',n:'Brevet past papers — Mathematics',subj:'Mathematics',meta:'Official exams · PDF'},
+  {t:'pdf',n:'The Prophet — study guide',subj:'English',meta:'PDF · 12 pages'},
+  {t:'video',n:'Reflex arc explained',subj:'Life & Earth Sciences',meta:'Video · 11:30'},
+  {t:'lecture',n:'Independence of Lebanon (1943) — recorded class',subj:'History & Geography',meta:'Recording · 41:12'},
+  {t:'video',n:'Ohm’s law demo',subj:'Physics & Chemistry',meta:'Video · 09:41'},
+  {t:'note',n:'Le discours rapporté — fiche',subj:'French',meta:'PDF · 2 pages'},
+];
+const calEvents=[
+  {d:'18 Nov',day:'Wed',title:"Maths — Thales' theorem worksheet due",type:'deadline',col:'#f59e0b'},
+  {d:'18 Nov',day:'Wed',title:'Parent–teacher meetings (EB9) · 3:00pm',type:'meeting',col:'#4f46e5'},
+  {d:'20 Nov',day:'Fri',title:'Independence Day ceremony 🇱🇧 · 8:00',type:'event',col:'#0ea5e9'},
+  {d:'22 Nov',day:'Sun',title:'Independence Day 🇱🇧',type:'holiday',col:'#10b981'},
+  {d:'23 Nov',day:'Mon',title:'Maths — Factorisation problems due',type:'deadline',col:'#f59e0b'},
+  {d:'26 Nov',day:'Thu',title:'1st term exams begin',type:'exam',col:'#ef4444'},
+  {d:'04 Dec',day:'Fri',title:'1st term exams end',type:'exam',col:'#ef4444'},
+  {d:'11 Dec',day:'Fri',title:'1st term report cards',type:'event',col:'#4f46e5'},
+  {d:'23 Dec',day:'Wed',title:'Christmas & New Year break begins',type:'holiday',col:'#10b981'},
+];
+let selDay=0;
+let notifs=[
+  {t:'grade',title:'New grade posted',desc:'Mathematics · Quiz — Radicals · 18/20',time:'20 min ago',unread:true},
+  {t:'assign',title:'Homework missing',desc:"History & Geography · Map exercise — Lebanon's regions · was due Tue 10 Nov",time:'1 h ago',unread:true},
+  {t:'teacher',title:'Ms. Khoury',desc:'Revision sheet posted for the 1st term exams',time:'3 h ago',unread:false},
+  {t:'school',title:'Al-Arz Administration',desc:'Independence Day ceremony — Friday 20 November 🇱🇧',time:'Yesterday',unread:false},
+];
+const chats=[
+  {id:'khoury',name:'Ms. Khoury',sub:'Mathematics teacher',col:SUBJ.M,type:'teacher',last:'By Monday. Keep it up!',time:'09:12',unread:1},
+  {id:'daccache',name:'Mr. Daccache',sub:'French teacher',col:SUBJ.Fr,type:'teacher',last:'N’oublie pas la rédaction pour jeudi !',time:'Yesterday',unread:0},
+  {id:'class9b',name:'EB9 B',sub:'Class group · 28 members',col:'#f59e0b',type:'group',last:'Rana: anyone has the SVT notes?',time:'08:40',unread:3},
+  {id:'karim',name:'Karim Mansour',sub:'Classmate',col:'#8b5cf6',type:'class',last:'Yalla, see you at practice 👍',time:'Mon',unread:0},
+];
+const msgs={
+  khoury:[{who:'them',t:'Hi Omar — great work on the radicals quiz, 18/20! 🎉',time:'09:10'},{who:'me',t:'Merci Miss! When are corrections due?',time:'09:12'},{who:'them',t:'By Monday. Keep it up!',time:'09:12'}],
+  daccache:[{who:'them',t:'Bonjour Omar, n’oublie pas la rédaction pour jeudi !',time:'Yesterday'}],
+  class9b:[{who:'them',t:'Rana: anyone has the SVT notes from today?',time:'08:40'},{who:'me',t:'I can share them after lunch.',time:'08:42'}],
+  karim:[{who:'them',t:'Yalla, see you at practice 👍',time:'Mon'}],
+};
+const libBorrowed=[
+  {n:'The Prophet',author:'Khalil Gibran',due:'Due 20 Nov',urg:'warn'},
+  {n:'Les Échelles du Levant',author:'Amin Maalouf',due:'Due 4 Dec',urg:'ok'},
+];
+const libDigital=[
+  {n:'Mathematics EB9',author:'CRDP',meta:'official textbook · e-book'},
+  {n:'<span lang="ar" dir="rtl">الأيام</span>',author:'Taha Hussein',meta:'e-book'},
+  {n:'Le Petit Prince',author:'Antoine de Saint-Exupéry',meta:'e-book'},
+];
+let sfees=[
+  {id:0,ic:'tuition',title:'Tuition — 2nd instalment',desc:'2026–2027',amount:1450,due:'Due 15 Dec',status:'due'},
+  {id:1,ic:'bus',title:'School bus — 1st term',desc:'Bus 7 · Achrafieh – Sassine – Badaro',amount:320,due:'Due 30 Nov',status:'due'},
+  {id:2,ic:'tuition',title:'Tuition — 1st instalment',desc:'2026–2027',amount:1450,due:'Paid 05 Oct',status:'paid'},
+  {id:3,ic:'books',title:'Books & uniform',desc:'EB9 book list',amount:380,due:'Paid 14 Sep',status:'paid'},
+];
+const PAY_METHODS=['Card','Bank transfer','OMT','Whish Money','Cash at the Finance Office'];
+let payMethod='Card';
+const FEE_IC={
+  tuition:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4 2 9l10 5 10-5z"/><path d="M6 11.5V16c0 1.4 2.7 2.5 6 2.5s6-1.1 6-2.5v-4.5"/><path d="M22 9v5"/></svg>',
+  bus:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="11" rx="2"/><path d="M4 10.5h16"/><circle cx="8" cy="18.5" r="1.3"/><circle cx="16" cy="18.5" r="1.3"/></svg>',
+  books:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h9a3 3 0 0 1 3 3v13H8a3 3 0 0 0-3 3z"/><path d="M17 4h2v16"/></svg>'
+};
+const gradeTrend=[{t:'EB8 T1',v:13.6},{t:'EB8 T2',v:14.2},{t:'EB8 T3',v:14.7}];
+
+/* SCREENS */
+const SCREENS={
+login:()=>`
+  <div class="row" style="justify-content:flex-end;margin-top:2px"><span class="chip lang-chip" data-noi18n onclick="pickLanguage()"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg>${curLang().native} ▾</span></div>
+  <div class="row" style="gap:12px;margin-top:6px"><div class="logo-tile">${CEDAR_SVG}</div><div><div style="font-weight:800;font-size:22px">Al-Arz School</div><div class="sub"><span dir="rtl" lang="ar">مدرسة الأرز</span> · Student portal</div></div></div>
+  <div class="mt24"><h2 class="screen-title">Hi again 👋</h2><p class="sub mt8">Sign in to see your day</p></div>
+  <div class="field"><label>Student email</label><input class="input" id="li-user" value="o.haddad@alarz.edu.lb"/><div class="err-msg" id="li-user-err">Enter a valid email</div></div>
+  <div class="field"><label>Password</label><input class="input" id="li-pass" type="password" value="student1"/><div class="err-msg" id="li-pass-err">Min. 6 characters</div></div>
+  <div class="row between mt12" style="font-size:13px"><label class="row" style="gap:8px;color:var(--muted)"><input type="checkbox" checked style="accent-color:var(--accent)"/> Remember me</label><span class="accent" style="font-weight:600">Forgot?</span></div>
+  <button class="btn mt20" onclick="doLogin()">Sign in</button>
+  <p class="sub" style="text-align:center;margin-top:16px;font-size:12px">EB9 B · Al-Arz School, Achrafieh — Beirut</p>`,
+
+home:()=>`
+  <div class="minihead" id="home-mini"><div class="bar"><div class="icon-btn" onclick="openDrawer()"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></div><div class="grow"><div style="font-weight:800;font-size:17px"><bdi data-noi18n>Omar</bdi></div><div style="font-size:12px;opacity:.85">Monday, 16 November</div></div><div class="icon-btn lang-btn" onclick="openLangActions()" aria-label="Language" data-noi18n><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg><span>${langCode()}</span></div><div class="icon-btn" onclick="show('notifs')"><svg viewBox="0 0 24 24"><path d="M6 9a6 6 0 0 1 12 0c0 5 2 6 2 6H4s2-1 2-6"/><path d="M10 20a2 2 0 0 0 4 0"/></svg></div></div></div>
+  <div class="hero">
+    <div class="row between"><div class="row" style="gap:10px"><div class="icon-btn" style="background:rgba(255,255,255,.16);border:none;color:#fff" onclick="openDrawer()"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></div><div><div style="opacity:.85;font-size:13px">Monday, 16 November</div><div style="font-weight:800;font-size:22px">Hi, Omar 👋</div><div style="opacity:.8;font-size:12px;margin-top:2px">EB9 B · Brevet class</div></div></div>
+      <div class="row" style="gap:8px"><div class="icon-btn lang-btn" style="background:rgba(255,255,255,.16);border:none;color:#fff" onclick="openLangActions()" aria-label="Language" data-noi18n><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg><span>${langCode()}</span></div><div class="icon-btn" style="background:rgba(255,255,255,.16);border:none;color:#fff" onclick="show('notifs')"><svg viewBox="0 0 24 24"><path d="M6 9a6 6 0 0 1 12 0c0 5 2 6 2 6H4s2-1 2-6"/><path d="M10 20a2 2 0 0 0 4 0"/></svg></div></div>
+    </div>
+    <div class="switcher" onclick="show('profile')">
+      <div class="avatar" style="width:46px;height:46px;font-size:15px;background:#fff;color:var(--accent)">OH</div>
+      <div class="grow" style="min-width:0"><div style="font-weight:800;font-size:16px">Omar Haddad</div><div style="opacity:.85;font-size:12px">EB9 B · ARZ-S-1041</div></div>
+      <div class="switch-pill">Profile</div>
+    </div>
+    <div class="tiles mt16"><div class="tile"><div class="n tnum">${overall20(subjects).toFixed(1)}<span style="font-size:13px;opacity:.8">/20</span></div><div class="l">1st term average</div></div><div class="tile"><div class="n tnum">${homework.filter(h=>h.status==='todo').length}</div><div class="l">Homework due</div></div></div>
+  </div>
+  <div class="row between mt20"><h2 style="font-size:17px;font-weight:800">Quick access</h2></div>
+  <div class="qpager" id="qpager">
+    <div class="qtile" onclick="show('courses')"><div class="qi"><svg viewBox="0 0 24 24"><path d="M4 5h10a3 3 0 0 1 3 3v11H7a3 3 0 0 0-3 3z"/><path d="M17 5h3v14"/></svg></div><div class="ql">Courses</div></div>
+    <div class="qtile" onclick="show('timetable')"><div class="qi"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 8v4.5l3 2"/></svg></div><div class="ql">Timetable</div></div>
+    <div class="qtile" onclick="show('homework')"><div class="qi"><svg viewBox="0 0 24 24"><path d="M5 4h9a3 3 0 0 1 3 3v13H8a3 3 0 0 0-3 3z"/><path d="M17 4h2v16"/></svg></div><div class="ql">Homework</div></div>
+    <div class="qtile" onclick="show('exams')"><div class="qi"><svg viewBox="0 0 24 24"><rect x="6" y="4" width="12" height="17" rx="2.5"/><path d="M9 4h6v3H9z"/><path d="M9 12h6M9 16h4"/></svg></div><div class="ql">Exams</div></div>
+    <div class="qtile" onclick="show('grades')"><div class="qi"><svg viewBox="0 0 24 24"><path d="M4 20h16"/><path d="M7 20v-6M12 20V8M17 20v-9"/></svg></div><div class="ql">Grades</div></div>
+    <div class="qtile" onclick="show('reportcards')"><div class="qi"><svg viewBox="0 0 24 24"><path d="M7 3h8l4 4v14H7z"/><path d="M14 3v5h5"/><path d="M10 13h6M10 17h4"/></svg></div><div class="ql">Report card</div></div>
+    <div class="qtile" onclick="show('conduct')"><div class="qi"><svg viewBox="0 0 24 24"><path d="M12 3.5l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9l-5.3 2.7 1-5.8-4.2-4.1 5.9-.9z"/></svg></div><div class="ql">Conduct</div></div>
+    <div class="qtile" onclick="show('attendance')"><div class="qi"><svg viewBox="0 0 24 24"><path d="M4 12.5 9 17.5 20 6.5"/></svg></div><div class="ql">Attendance</div></div>
+    <div class="qtile" onclick="show('resources')"><div class="qi"><svg viewBox="0 0 24 24"><path d="M4 5.5h6a2 2 0 0 1 2 2v11a2 2 0 0 0-2-2H4z"/><path d="M20 5.5h-6a2 2 0 0 0-2 2v11a2 2 0 0 1 2-2h6z"/></svg></div><div class="ql">Resources</div></div>
+    <div class="qtile" onclick="show('library')"><div class="qi"><svg viewBox="0 0 24 24"><path d="M6 4h11a2 2 0 0 1 2 2v14H8a2 2 0 0 0-2 2z"/><path d="M6 4v16"/></svg></div><div class="ql">Library</div></div>
+    <div class="qtile" onclick="show('calendar')"><div class="qi"><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="16" rx="3"/><path d="M3.5 9.5h17M8 3v4M16 3v4"/></svg></div><div class="ql">Calendar</div></div>
+    <div class="qtile" onclick="show('chats')"><div class="qi"><svg viewBox="0 0 24 24"><path d="M4 5.5h16v11H9l-4 3.5v-3.5H4z"/></svg></div><div class="ql">Messages</div></div>
+    <div class="qtile" onclick="show('notifs')"><div class="qi"><svg viewBox="0 0 24 24"><path d="M6 9a6 6 0 0 1 12 0c0 5 2 6 2 6H4s2-1 2-6"/><path d="M10 20a2 2 0 0 0 4 0"/></svg><span class="qb">2</span></div><div class="ql">Alerts</div></div>
+    <div class="qtile" onclick="show('fees')"><div class="qi"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2.5"/><path d="M3 10h18"/></svg></div><div class="ql">Fees</div></div>
+  </div>
+  <div class="card mt16" style="border:1.5px solid var(--accent)">
+    <div class="row between"><span class="tag a">NOW · PERIOD 2</span><span class="sub tnum">ends 09:30</span></div>
+    <div class="row mt12"><div class="subj" style="background:${SUBJ.M}">M</div><div class="grow"><div style="font-weight:800;font-size:17px">Mathematics</div><div class="sub mt6">Room 204 · Ms. Khoury</div></div></div>
+  </div>
+  <div class="card mt16" style="cursor:pointer;padding:6px 16px" onclick="show('attendance')"><div class="list-item"><div class="set-ic" style="background:var(--accent-soft);color:var(--accent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5 9 17.5 20 6.5"/></svg></div><div class="grow"><div style="font-weight:700">Attendance · 97% this term</div><div class="sub mt6">1 late · 1 excused · tap for detail</div></div><span style="color:var(--faint)">›</span></div></div>
+  <div class="card mt16" style="cursor:pointer;background:var(--accent-soft);border-color:transparent" onclick="show('exams')"><div class="row"><div class="icon-btn" style="background:var(--surface);border:none;color:var(--accent)"><svg viewBox="0 0 24 24"><rect x="6" y="4" width="12" height="17" rx="2.5"/><path d="M9 4h6v3H9z"/><path d="M9 12h6M9 16h4"/></svg></div><div class="grow">${(()=>{const nx=exams.find(e=>e.status==='upcoming');return nx?`<div style="font-weight:700">Next exam: ${nx.n} · ${nx.date}</div><div class="sub mt6">${nx.time}–${nx.end} · ${nx.room} · ${daysUntil(nx.date)} days to go · exam timetable</div>`:'<div style="font-weight:700">Exams</div>';})()}</div><span style="color:var(--accent)">›</span></div></div>
+  ${homework.filter(h=>h.status==='missing').map(h=>`<div class="card mt12 hw-missing" style="cursor:pointer" onclick="openHw(${h.id})"><div class="row"><div class="icon-btn" style="background:var(--surface);border:none;color:var(--danger)"><svg viewBox="0 0 24 24"><path d="M12 4 21 20H3z"/><path d="M12 10v4M12 17.5v.5"/></svg></div><div class="grow"><div style="font-weight:700">Missing: ${h.n}</div><div class="sub mt6">${h.subj.replace(', Geography & Civics',' & Geography')} · was due ${h.due} · submit now</div></div><span style="color:var(--danger)">›</span></div></div>`).join('')}
+  <div class="row between mt24"><h2 style="font-size:17px;font-weight:800">Due soon</h2><a class="accent" style="font-size:13px;font-weight:700" onclick="show('homework')">All</a></div>
+  <div class="card mt12" style="padding:6px 16px">
+    ${homework.filter(h=>h.status==='todo').map(h=>`<div class="list-item" style="cursor:pointer" onclick="openHw(${h.id})"><div class="subj" style="width:38px;height:38px;background:${SUBJ[h.c]}">${h.c}</div><div class="grow"><div style="font-weight:700" data-noi18n>${h.n}</div><div class="sub mt6">${h.subj}</div></div><span class="tag ${dueTone(h)}">Due ${dueShort(h)}</span></div>`).join('')||'<div class="list-item"><div class="sub">Nothing due — nice work 🎉</div></div>'}
+  </div>
+  <div class="card mt16" style="cursor:pointer;padding:6px 16px" onclick="show('reportcards')"><div class="list-item"><div class="set-ic"><svg viewBox="0 0 24 24"><path d="M7 3h8l4 4v14H7z"/><path d="M14 3v5h5"/><path d="M10 13h6M10 17h4"/></svg></div><div class="grow"><div style="font-weight:700">1st term report card</div><div class="sub mt6">Available Fri 11 Dec · in ${daysUntil('11 Dec')} days</div></div><span style="color:var(--faint)">›</span></div><div class="list-item" onclick="event.stopPropagation();show('conduct')"><div class="set-ic" style="background:var(--ok-bg);color:var(--ok)"><svg viewBox="0 0 24 24"><path d="M12 3.5l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9l-5.3 2.7 1-5.8-4.2-4.1 5.9-.9z"/></svg></div><div class="grow"><div style="font-weight:700">Positive note from ${conductNotes[0].by}</div><div class="sub mt6 ell" data-noi18n>${conductNotes[0].t}</div></div><span style="color:var(--faint)">›</span></div></div>
+  <div class="row between mt24"><h2 style="font-size:17px;font-weight:800">Rest of today</h2><a class="accent" style="font-size:13px;font-weight:700" onclick="show('timetable')">Timetable</a></div>
+  <div class="card mt12" style="padding:6px 16px">
+    ${timetable.slice(2).map(s=>`<div class="list-item"><div class="badge-time"><b class="tnum">${s.t}</b><span>${s.p}</span></div><div class="subj" style="width:34px;height:34px;background:${SUBJ[s.c]}">${s.c}</div><div class="grow"><div style="font-weight:700">${s.n}</div><div class="sub mt6">${s.r} · ${s.tch}</div></div></div>`).join('')}
+  </div>
+  <div class="row between mt24"><h2 style="font-size:17px;font-weight:800">Recent announcements</h2><a class="accent" style="font-size:13px;font-weight:700" onclick="show('news')">All</a></div>
+  <div class="card mt12" style="padding:6px 16px">
+    <div class="list-item" style="cursor:pointer" onclick="show('news')"><div class="avatar" style="width:34px;height:34px;font-size:11px;background:#0f9d8f">DK</div><div class="grow"><div style="font-weight:700" data-noi18n>Radicals quiz results 📊</div><div class="sub mt6">Ms. Khoury · 20 min ago</div></div></div>
+    <div class="list-item" style="cursor:pointer" onclick="show('news')"><div class="avatar cedar-av" style="width:34px;height:34px">${CEDAR_SVG}</div><div class="grow"><div style="font-weight:700" data-noi18n>Independence Day ceremony — Fri 20 Nov 🇱🇧</div><div class="sub mt6">Al-Arz Administration · yesterday</div></div></div>
+  </div>
+  <div style="height:10px"></div>`,
+
+timetable:()=>`
+  <div class="apphead"><span class="lead"></span><h2 class="screen-title">Timetable</h2><div class="grow"></div><div class="icon-btn"><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="16" rx="3"/><path d="M3.5 9.5h17M8 3v4M16 3v4"/></svg></div></div>
+  <div class="chip-scroll mt16"><div class="chip active">Mon</div><div class="chip">Tue</div><div class="chip">Wed</div><div class="chip">Thu</div><div class="chip">Fri</div></div>
+  <div class="mt16">
+    ${timetable.map(s=>`<div class="row mt12" style="align-items:stretch"><div class="badge-time" style="display:flex;flex-direction:column;justify-content:center"><b class="tnum">${s.t}</b><span>${s.p}</span></div>
+      <div class="card grow" style="padding:12px;${s.now?'border:1.5px solid var(--accent)':''}"><div class="row"><div class="subj" style="width:36px;height:36px;background:${SUBJ[s.c]}">${s.c}</div><div class="grow"><div style="font-weight:700">${s.n}</div><div class="sub mt6">${s.online?'Online class':'Room '+s.r} · ${s.tch}</div></div>${s.now?'<span class="tag a">Now</span>':s.online?`<span class="tag a" style="cursor:pointer" onclick="toast('Joining online class…')">Join</span>`:''}</div></div>
+    </div>`).join('')}
+  </div>
+  <div style="height:10px"></div>`,
+
+homework:()=>`
+  <div class="apphead"><span class="lead"></span><h2 class="screen-title">Homework</h2><div class="grow"></div><div class="icon-btn"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg></div></div>
+  ${(()=>{const cnt=s=>homework.filter(h=>h.status===s).length;return `<div class="row mt16" style="gap:8px">
+    <div class="stat"><div class="n tnum">${cnt('todo')}</div><div class="l">To do</div></div>
+    <div class="stat"><div class="n tnum" style="color:${cnt('missing')?'var(--danger)':'inherit'}">${cnt('missing')}</div><div class="l">Missing</div></div>
+    <div class="stat"><div class="n tnum">${cnt('submitted')}</div><div class="l">Submitted</div></div>
+    <div class="stat"><div class="n tnum">${cnt('marked')}</div><div class="l">Marked</div></div>
+  </div>`;})()}
+  <div class="chip-scroll mt16">${[['all','All'],['todo','To do'],['missing','Missing'],['submitted','Submitted'],['marked','Returned']].map(([k,l])=>`<div class="chip ${hwFilter===k?'active':''}" onclick="setHwFilter('${k}')">${l}</div>`).join('')}</div>
+  ${hwSection('missing','Missing','Overdue — hand it in as soon as possible')}
+  ${hwSection('todo','To do','Sorted by due date')}
+  ${hwSection('submitted','Submitted','Waiting to be marked')}
+  ${hwSection('marked','Returned','Marked by your teachers')}
+  <div style="height:10px"></div>`,
+
+grades:()=>{
+  const avg=overall20(subjects),trend=[...gradeTrend,{t:'EB9 T1',v:avg}],up=(avg-trend[0].v).toFixed(1);
+  return `
+  <div class="apphead"><span class="lead"></span><h2 class="screen-title">My grades</h2></div>
+  <p class="sub">1st term report card · 2026–2027 · marks out of 20</p>
+  <div class="card mt16"><div class="row"><div class="donut" style="--p:${avg/20*100}%"><div><b>${avg.toFixed(1)}</b><small>/20</small></div></div><div class="grow"><div style="font-weight:800;font-size:17px">General average</div><div class="sub mt6">${mentionOf(avg)} · Rank 4 of 28</div><div class="row mt12" style="gap:6px;flex-wrap:wrap"><span class="tag ok">▲ improved</span><span class="tag a">${subjects.length} subjects</span></div></div></div></div>
+  <div class="card mt16"><div class="row between"><div class="sub" style="font-weight:700">PROGRESS</div><span class="tag ok">▲ +${up} since EB8 T1</span></div>
+    <div class="row" style="align-items:flex-end;gap:12px;height:104px;margin-top:12px;padding:0 4px">${trend.map((g,i)=>`<div class="grow" style="text-align:center;display:flex;flex-direction:column;justify-content:flex-end;height:100%"><div style="height:${Math.max(8,(g.v-10)/10*100)}%;background:var(--accent);border-radius:8px 8px 0 0;opacity:${i===trend.length-1?1:.45}"></div><div class="sub mt6 tnum" style="font-size:10px;white-space:nowrap">${g.t} · ${g.v.toFixed(1)}</div></div>`).join('')}</div>
+  </div>
+  <div class="row between mt24"><h2 style="font-size:17px;font-weight:800">By subject</h2><span class="sub">tap for detail</span></div>
+  <div class="card mt12" style="padding:6px 16px">
+    ${subjects.map((s,i)=>{const v=subj20(s);return `<div class="list-item" style="cursor:pointer" onclick="subjectBreakdown(${i})"><div class="subj" style="width:34px;height:34px;background:${s.col}">${s.c}</div><div class="grow"><div class="row between" style="gap:8px"><span class="ell" style="font-weight:700">${s.n}</span><span class="sub" style="flex:0 0 auto">${s.asmts.filter(a=>!a.draft&&a.score!=null).length} marks</span></div><div class="progress mt8"><i style="width:${v==null?0:v/20*100}%;background:${s.col}"></i></div></div><div style="text-align:end;margin-inline-start:10px;min-width:62px"><div style="font-weight:800;font-size:16px" class="tnum">${v==null?'—':v.toFixed(1)}</div><div class="sub" style="font-size:10px;color:var(--${v==null?'muted':tone20(v)==='bad'?'danger':tone20(v)})">${v==null?'':mentionOf(v)}</div></div></div>`;}).join('')}
+  </div>
+  <p class="sub" style="text-align:center;margin-top:12px;font-size:11px">Pass mark 10/20 · Excellent ≥16 · Very good ≥14 · Good ≥12</p>
+  <button class="btn ghost mt20" onclick="show('reportcards')">View report cards</button>
+  <div style="height:10px"></div>`;
+},
+
+news:()=>`
+  <div class="apphead"><span class="lead"></span><h2 style="font-size:22px;font-weight:800">School news</h2></div>
+  <div class="mt16">
+    <div class="card mt12"><div class="row"><div class="avatar" style="width:38px;height:38px;font-size:12px;background:#0f9d8f">DK</div><div class="grow"><div style="font-weight:700">Ms. Khoury · Maths EB9 B</div><div class="sub mt6">20 min ago</div></div></div><div style="font-weight:800;margin:10px 0 4px" data-noi18n>Radicals quiz results are in 📊</div><div class="sub" data-noi18n>Class average 14.3/20. Corrections due Monday.</div></div>
+    <div class="card mt12"><div class="row"><div class="avatar cedar-av" style="width:38px;height:38px">${CEDAR_SVG}</div><div class="grow"><div style="font-weight:700">Al-Arz Administration</div><div class="sub mt6">Yesterday</div></div><span class="tag a">School</span></div><div style="font-weight:800;margin:10px 0 4px" data-noi18n>Independence Day ceremony — Friday 20 November 🇱🇧</div><div class="sub" data-noi18n>Flag raising and the national anthem at 8:00 in the playground. Full school uniform please.</div></div>
+    <div class="card mt12"><div class="row"><div class="avatar cedar-av" style="width:38px;height:38px">${CEDAR_SVG}</div><div class="grow"><div style="font-weight:700">Al-Arz Administration</div><div class="sub mt6">2 days ago</div></div><span class="tag warn">Weather</span></div><div style="font-weight:800;margin:10px 0 4px" data-noi18n>Storm alert ⛈️</div><div class="sub" data-noi18n>If the Ministry closes schools due to the storm, Thursday’s classes move online. Check the app by 6:30am.</div></div>
+    <div class="card mt12"><div class="row"><div class="avatar" style="width:38px;height:38px;font-size:12px;background:#ef4444">HR</div><div class="grow"><div style="font-weight:700">Dr. Rahal · Life &amp; Earth Sciences</div><div class="sub mt6">3 days ago</div></div></div><div style="font-weight:800;margin:10px 0 4px" data-noi18n>Lab safety reminder 🧪</div><div class="sub" data-noi18n>Bring your lab coats for Wednesday’s practical.</div></div>
+  </div>
+  <div style="height:10px"></div>`,
+
+profile:()=>`
+  <div class="apphead"><span class="lead"></span><h2 style="font-size:22px;font-weight:800">Profile</h2></div>
+  <div class="card mt12" style="text-align:center"><div class="avatar" style="width:84px;height:84px;font-size:30px;margin:0 auto">OH</div><div style="font-weight:800;font-size:20px;margin-top:12px">Omar Haddad</div><div class="sub">EB9 B · Student ARZ-S-1041</div><span class="tag a" style="margin-top:10px;display:inline-block">${overall20(subjects).toFixed(1)}/20 · 1st term average</span></div>
+  <div class="set-label">Personal information</div>
+  <div class="card" style="padding:4px 16px"><div class="kv"><span class="k">Class</span><span>EB9 B · Brevet class</span></div><div class="kv"><span class="k">Homeroom teacher</span><span>Ms. Khoury</span></div><div class="kv"><span class="k">Attendance</span><span>97%</span></div><div class="kv"><span class="k">Official exam</span><span>Brevet · June 2027</span></div><div class="kv"><span class="k">Email</span><span>o.haddad@alarz.edu.lb</span></div></div>
+  <div class="set-label">Emergency contacts</div>
+  <div class="card" style="padding:4px 16px"><div class="kv"><span class="k">Parent / guardian</span><span>Mr. Fadi Haddad</span></div><div class="kv"><span class="k">Phone</span><span>+961 3 445 908</span></div><div class="kv"><span class="k">Alternate</span><span>+961 71 220 118</span></div><div class="kv"><span class="k">Address</span><span>Achrafieh, Beirut</span></div></div>
+  <div class="set-label">Preferences</div>
+  <div class="card" style="padding:4px 16px"><div class="set-row" style="cursor:pointer" onclick="pickLanguage()"><div class="set-ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg></div><div class="grow" style="font-weight:600">Language</div><span class="sub" data-noi18n>${curLang().native}</span><span style="color:var(--faint);margin-inline-start:8px">›</span></div><div class="set-row" style="cursor:pointer" onclick="pickAppearance()"><div class="set-ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5 19 19M19 5l-1.5 1.5M6.5 17.5 5 19"/></svg></div><div class="grow" style="font-weight:600">Appearance</div><span class="sub">${uiTheme}</span><span style="color:var(--faint);margin-inline-start:8px">›</span></div></div>
+  <button class="btn ghost mt16" onclick="changePassword()">Change password</button>
+  <button class="btn danger mt8" onclick="logout()">Log out</button>
+  <div style="height:10px"></div>`,
+
+exams:()=>{const up=exams.filter(e=>e.status==='upcoming');const d=up.length?daysUntil(up[0].date):null;return `
+  <div class="apphead"><span class="lead"></span><h2 class="screen-title">Exam timetable</h2></div>
+  <p class="sub">1st term exams · 26 Nov – 4 Dec 2026 · EB9 B · Hall A</p>
+  ${up.length?`<div class="card mt16" style="background:linear-gradient(160deg,var(--accent),var(--accent-2));color:#fff;border:none">
+    <div class="row between"><div><div style="font-size:12px;font-weight:700;opacity:.85;letter-spacing:.05em">NEXT EXAM</div><div style="font-weight:800;font-size:19px;margin-top:4px">${up[0].n}</div><div style="opacity:.9;font-size:12px;margin-top:2px">${up[0].date} · ${up[0].time}–${up[0].end} · ${up[0].room}</div></div>${d!=null?`<div style="text-align:center"><div class="tnum" style="font-size:32px;font-weight:800;line-height:1">${d}</div><div style="font-size:11px;opacity:.9">day${d===1?'':'s'} away</div></div>`:''}</div>
+    <button class="btn mt16" style="background:#fff;color:var(--accent);box-shadow:none;padding:12px;font-size:14px" onclick="toast('${up.length} exams added to your calendar 📅')">Add all exams to calendar</button>
+  </div>`:''}
+  <div class="seg mt16" id="exam-seg"><button class="active" onclick="examTab(this,'upcoming')">Day by day</button><button onclick="examTab(this,'done')">Completed</button></div>
+  <div id="exam-body" class="mt16">${examList('upcoming')}</div>
+  <div class="set-label">Exam rules</div>
+  <div class="card" style="padding:8px 16px"><ul class="rules">${EXAM_RULES.map(r=>`<li>${r}</li>`).join('')}</ul></div>
+  <div class="set-label">Brevet · EB9 official exams</div>
+  <div class="card" style="padding:6px 16px">${officialExams.map(o=>`<div class="list-item"><div class="set-ic"><svg viewBox="0 0 24 24"><path d="M12 3 2 8l10 5 10-5z"/><path d="M6 10.5V16c0 1.5 3 3 6 3s6-1.5 6-3v-5.5"/></svg></div><div class="grow"><div style="font-weight:700">${o.n}</div><div class="sub mt6">${o.desc}</div></div><span class="tag a" style="flex:0 0 auto">${o.when}</span></div>`).join('')}</div>
+  <div style="height:10px"></div>`;},
+
+reportcards:()=>{const cur=reportCards[0],past=reportCards.slice(1),dd=daysUntil('11 Dec');return `
+  <div class="apphead"><span class="lead"></span><h2 class="screen-title">Report cards</h2></div>
+  <p class="sub">Omar Haddad · ARZ-S-1041 · marks out of 20</p>
+  <div class="set-label">2026–2027 · EB9 B</div>
+  <div class="card">
+    <div class="row"><div class="lockbox"><svg viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="10" rx="2.5"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/></svg></div><div class="grow"><div style="font-weight:800">${cur.term} report card</div><div class="sub mt6">Released ${cur.release} · after the 1st term exams</div></div><div style="text-align:center;flex:0 0 auto"><div class="tnum" style="font-size:24px;font-weight:800;line-height:1;color:var(--accent)">${dd}</div><div class="sub" style="font-size:10px">days</div></div></div>
+    <div class="progress mt12"><i style="width:${Math.round((1-dd/60)*100)}%"></i></div>
+    <div class="row mt12" style="gap:8px"><button class="btn secondary" style="padding:11px;font-size:13px" onclick="openRC('t1')">Preview (demo)</button><button class="btn ghost" style="padding:11px;font-size:13px" onclick="toast('We’ll notify you on 11 Dec 🔔')">Notify me</button></div>
+  </div>
+  <div class="set-label">2025–2026 · EB8 B</div>
+  <div class="card" style="padding:6px 16px">${past.map(r=>{const g=rcAvg(r);return `<div class="list-item" style="cursor:pointer" onclick="openRC('${r.id}')"><div class="set-ic"><svg viewBox="0 0 24 24"><path d="M7 3h8l4 4v14H7z"/><path d="M14 3v5h5"/><path d="M10 13h6M10 17h4"/></svg></div><div class="grow"><div style="font-weight:700">${r.term} · ${r.year}</div><div class="sub mt6">Rank ${r.rank} · conduct ${r.conduct}</div></div><div style="text-align:end"><div class="tnum" style="font-weight:800">${g.toFixed(1)}<span class="muted" style="font-size:11px">/20</span></div><span class="tag ${tone20(g)}">${mentionOf(g)}</span></div></div>`;}).join('')}</div>
+  <p class="sub" style="text-align:center;margin-top:14px;font-size:11px;line-height:1.6">Report cards are approved by the academic coordinator<br>and shared with your parents at the same time.</p>
+  <div style="height:10px"></div>`;},
+
+reportcard:()=>{const r=reportCards.find(x=>x.id===curRC),prov=!!r.locked,g=rcAvg(r);return `
+  <div class="apphead"><span class="lead"></span><div class="grow"><h2 style="font-size:20px;font-weight:800">${r.term} report card</h2><div class="sub">${r.cls} · ${r.year}</div></div></div>
+  <div class="card mt16">
+    <div class="rc-head"><div class="logo-tile">${CEDAR_SVG}</div><div class="grow"><div style="font-weight:800">Al-Arz School</div><div class="sub"><span dir="rtl" lang="ar">مدرسة الأرز</span> · Achrafieh, Beirut</div></div><span class="tag a">${r.year}</span></div>
+    <div class="divider" style="margin:12px 0"></div>
+    <div class="row between" style="font-size:13px"><div><div class="sub" style="font-size:11px">Student</div><div style="font-weight:700">Omar Haddad</div></div><div><div class="sub" style="font-size:11px">ID</div><div style="font-weight:700">ARZ-S-1041</div></div><div style="text-align:end"><div class="sub" style="font-size:11px">Class · term</div><div style="font-weight:700">${r.cls} · ${r.term}</div></div></div>
+    ${prov?`<div class="rc-banner"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 4 21 20H3z"/><path d="M12 10v4M12 17.5v.5"/></svg>PROVISIONAL · marks so far, before the 1st term exams</div>`:''}
+  </div>
+  <div class="card mt12" style="padding:10px 16px">
+    <div class="rc-row th"><span>Subject</span><span class="num" style="font-weight:800">Mark</span><span class="num" style="font-weight:800">Class</span></div>
+    ${RC_SUBJ.map((s,i)=>{const m=rcMarks(r)[i],a=r.avgs?r.avgs[i]:RC_CLASS_AVG[i];return `<div class="rc-row"><div style="min-width:0"><div class="row" style="gap:8px"><span class="subj" style="width:22px;height:22px;border-radius:7px;font-size:9px;background:${SUBJ[s[0]]}">${s[0]}</span><span class="ell" style="font-weight:700;font-size:13.5px">${s[1]}</span></div><div class="sub" style="font-size:11px;margin:3px 0 0;margin-inline-start:30px">${s[2]}</div></div><span class="num" style="color:var(--${tone20(m)==='bad'?'danger':tone20(m)})">${m.toFixed(1)}</span><span class="num muted" style="font-weight:600">${a.toFixed(1)}</span>${/[؀-ۿ]/.test(r.cmts[i])?`<div class="cmt" dir="rtl" lang="ar" data-noi18n style="padding-inline-start:30px">${r.cmts[i]}</div>`:`<div class="cmt" data-noi18n style="padding-inline-start:30px">${r.cmts[i]}</div>`}</div>`;}).join('')}
+  </div>
+  <div class="card mt12">
+    <div class="row"><div class="donut" style="--p:${g/20*100}%"><div><b>${g.toFixed(1)}</b><small>/20</small></div></div><div class="grow"><div style="font-weight:800;font-size:17px">General average</div><div class="sub mt6">${mentionOf(g)} · Rank ${r.rank}</div><span class="tag ${tone20(g)}" style="margin-top:8px">${mentionOf(g)}</span></div></div>
+    <div class="divider"></div>
+    <div class="kv"><span class="k">Attendance</span><span style="text-align:end;max-width:62%">${r.att}</span></div>
+    <div class="kv"><span class="k">Conduct</span><span>${r.conduct}</span></div>
+    <div class="kv"><span class="k">Effort</span><span>${r.effort}</span></div>
+  </div>
+  <div class="set-label">Homeroom teacher’s comment</div>
+  <div class="card"><div style="font-size:13.5px;line-height:1.6" data-noi18n>“${r.comment}”</div><div class="sub mt8" style="font-weight:600">— ${r.homeroom}</div>
+    <div class="sig"><div><b>${r.homeroom}</b>Homeroom teacher</div><div><b>${prov?'Pending':'Mrs. Nada Frem'}</b>Academic coordinator</div></div>
+  </div>
+  <button class="btn ${prov?'secondary':''} mt16" onclick="${prov?"toast('Available after release on Fri 11 Dec')":"toast('Report card downloaded (PDF) 📄')"}">${prov?'PDF available on 11 Dec':'Download PDF'}</button>
+  <div style="height:10px"></div>`;},
+
+conduct:()=>{const pos=conductNotes.filter(n=>n.type==='pos').length,con=conductNotes.filter(n=>n.type==='con').length,wr=conductNotes.filter(n=>n.type==='warnx').length;const list=conductFilter==='all'?conductNotes:conductNotes.filter(n=>n.type===conductFilter);const ic={pos:'<path d="M12 3.5l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9l-5.3 2.7 1-5.8-4.2-4.1 5.9-.9z"/>',con:'<circle cx="12" cy="12" r="9"/><path d="M12 7.5v5.5M12 16.3v.4"/>',warnx:'<path d="M12 4 21 20H3z"/><path d="M12 10v4M12 17.5v.5"/>'};const lbl={pos:'Positive',con:'Concern',warnx:'Warning'},tg={pos:'ok',con:'warn',warnx:'bad'};return `
+  <div class="apphead"><span class="lead"></span><h2 class="screen-title">Conduct notes</h2></div>
+  <p class="sub">1st term · 2026–2027 · EB9 B</p>
+  <div class="card mt16" style="background:linear-gradient(160deg,var(--accent),var(--accent-2));color:#fff;border:none">
+    <div class="row between"><div><div style="font-size:12px;font-weight:700;opacity:.85;letter-spacing:.05em">CONDUCT GRADE</div><div style="font-size:26px;font-weight:800;margin-top:2px">Very good</div></div><div style="width:52px;height:52px;border-radius:16px;background:rgba(255,255,255,.18);display:grid;place-items:center"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.9" stroke-linejoin="round">${ic.pos}</svg></div></div>
+    <div class="tiles mt16" style="grid-template-columns:1fr 1fr 1fr"><div class="tile"><div class="n tnum">${pos}</div><div class="l">Positive</div></div><div class="tile"><div class="n tnum">${con}</div><div class="l">Concerns</div></div><div class="tile"><div class="n tnum">${wr}</div><div class="l">Warnings</div></div></div>
+  </div>
+  <div class="chip-scroll mt16">${[['all','All '+conductNotes.length],['pos','Positive'],['con','Concerns']].map(([k,l])=>`<div class="chip ${conductFilter===k?'active':''}" onclick="setConductFilter('${k}')">${l}</div>`).join('')}</div>
+  <div class="mt8">${list.map(n=>`<div class="card mt12 note ${n.type}"><div class="row" style="align-items:flex-start"><div class="set-ic" style="background:var(--${tg[n.type]==='bad'?'danger':tg[n.type]}-bg);color:var(--${tg[n.type]==='bad'?'danger':tg[n.type]})"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">${ic[n.type]}</svg></div><div class="grow"><div class="row between" style="gap:8px"><span style="font-weight:800">${n.cat}</span><span class="tag ${tg[n.type]}">${lbl[n.type]}</span></div><div style="font-size:13.5px;line-height:1.5;margin-top:6px" data-noi18n>${n.t}</div><div class="row mt8" style="gap:6px;flex-wrap:wrap"><span class="sub" style="font-size:11.5px">${n.by} · ${n.d}</span>${n.notified?'<span class="tag" style="background:var(--surface-3);color:var(--muted);font-size:10.5px;padding:3px 8px">Parent notified</span>':''}</div></div></div></div>`).join('')||'<div class="card" style="text-align:center;padding:22px"><div class="sub">No notes here</div></div>'}</div>
+  <p class="sub" style="text-align:center;margin-top:14px;font-size:11px;line-height:1.6">Concerns and warnings are shared with your parents.<br>Talk to your homeroom teacher, Ms. Khoury, if you have questions.</p>
+  <div style="height:10px"></div>`;},
+settings:()=>`
+  <div class="apphead"><span class="lead"></span><h2 class="screen-title">Settings</h2></div>
+  <div class="card mt12" style="cursor:pointer" onclick="editProfile()"><div class="row"><div class="avatar" style="width:52px;height:52px;font-size:18px">OH</div><div class="grow"><div style="font-weight:800;font-size:16px">Omar Haddad</div><div class="sub mt6">EB9 B · o.haddad@alarz.edu.lb</div></div><span style="color:var(--faint)">›</span></div></div>
+  <div class="set-label">Notifications</div>
+  <div class="card" style="padding:4px 16px">
+    <div class="set-row"><div class="set-ic"><svg viewBox="0 0 24 24"><path d="M6 9a6 6 0 0 1 12 0c0 5 2 6 2 6H4s2-1 2-6"/><path d="M10 20a2 2 0 0 0 4 0"/></svg></div><div class="grow" style="font-weight:600">Push notifications</div><div class="switch on" onclick="toggleSw(this,'Push notifications')"></div></div>
+    <div class="set-row"><div class="set-ic"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m3 7 9 6 9-6"/></svg></div><div class="grow" style="font-weight:600">Email notifications</div><div class="switch" onclick="toggleSw(this,'Email notifications')"></div></div>
+    <div class="set-row"><div class="set-ic"><svg viewBox="0 0 24 24"><path d="M4 20h16"/><path d="M7 20v-6M12 20V8M17 20v-9"/></svg></div><div class="grow" style="font-weight:600">Grades posted</div><div class="switch on" onclick="toggleSw(this,'Grade alerts')"></div></div>
+    <div class="set-row"><div class="set-ic"><svg viewBox="0 0 24 24"><path d="M5 4h9a3 3 0 0 1 3 3v13H8a3 3 0 0 0-3 3z"/><path d="M17 4h2v16"/></svg></div><div class="grow" style="font-weight:600">Homework reminders</div><div class="switch on" onclick="toggleSw(this,'Homework reminders')"></div></div>
+    <div class="set-row"><div class="set-ic"><svg viewBox="0 0 24 24"><path d="M4 9v6h4l6 4V5L8 9z"/><path d="M17 8a5 5 0 0 1 0 8"/></svg></div><div class="grow" style="font-weight:600">Announcements</div><div class="switch on" onclick="toggleSw(this,'Announcement alerts')"></div></div>
+    <div class="set-row"><div class="set-ic"><svg viewBox="0 0 24 24"><path d="M4 5.5h16v11H9l-4 3.5v-3.5H4z"/></svg></div><div class="grow" style="font-weight:600">Messages</div><div class="switch on" onclick="toggleSw(this,'Message alerts')"></div></div>
+  </div>
+  <div class="set-label">Preferences</div>
+  <div class="card" style="padding:4px 16px">
+    <div class="set-row" style="cursor:pointer" onclick="pickLanguage()"><div class="set-ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg></div><div class="grow" style="font-weight:600">Language</div><span class="sub" data-noi18n>${curLang().native}</span><span style="color:var(--faint);margin-inline-start:8px">›</span></div>
+    <div class="set-row" style="cursor:pointer" onclick="pickAppearance()"><div class="set-ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5 19 19M19 5l-1.5 1.5M6.5 17.5 5 19"/></svg></div><div class="grow" style="font-weight:600">Appearance</div><span class="sub">${uiTheme}</span><span style="color:var(--faint);margin-inline-start:8px">›</span></div>
+  </div>
+  <div class="set-label">Security</div>
+  <div class="card" style="padding:4px 16px">
+    <div class="set-row"><div class="set-ic"><svg viewBox="0 0 24 24"><path d="M4 8V6a2 2 0 0 1 2-2h2M16 4h2a2 2 0 0 1 2 2v2M20 16v2a2 2 0 0 1-2 2h-2M8 20H6a2 2 0 0 1-2-2v-2"/><path d="M9 15c1.5 1 4.5 1 6 0"/></svg></div><div class="grow" style="font-weight:600">Face ID login</div><div class="switch" onclick="toggleSw(this,'Face ID')"></div></div>
+    <div class="set-row" style="cursor:pointer" onclick="changePassword()"><div class="set-ic"><svg viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="10" rx="2.5"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/></svg></div><div class="grow" style="font-weight:600">Change password</div><span style="color:var(--faint)">›</span></div>
+  </div>
+  <div class="set-label">About</div>
+  <div class="card" style="padding:4px 16px">
+    <div class="set-row" style="cursor:pointer" onclick="toast('Opening help centre…')"><div class="set-ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.6 2.2c-.9.5-1.1.9-1.1 1.8"/><circle cx="12" cy="17" r=".7" fill="currentColor" stroke="none"/></svg></div><div class="grow" style="font-weight:600">Help &amp; support</div><span style="color:var(--faint)">›</span></div>
+    <div class="set-row" style="cursor:pointer" onclick="toast('Privacy policy')"><div class="set-ic"><svg viewBox="0 0 24 24"><path d="M12 3 5 6v5c0 4 3 7 7 8 4-1 7-4 7-8V6z"/></svg></div><div class="grow" style="font-weight:600">Privacy policy</div><span style="color:var(--faint)">›</span></div>
+    <div class="set-row"><div class="set-ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5"/><circle cx="12" cy="8" r=".7" fill="currentColor" stroke="none"/></svg></div><div class="grow" style="font-weight:600">Version</div><span class="sub">1.0.0</span></div>
+  </div>
+  <button class="btn danger mt16" onclick="logout()">Log out</button>
+  <div style="height:10px"></div>`,
+courses:()=>`
+  <div class="apphead"><span class="lead"></span><h2 class="screen-title">Courses</h2></div>
+  <p class="sub">EB9 B · Lebanese curriculum · ${courses.length} subjects</p>
+  <div class="mt16">${courses.map((c,i)=>`<div class="card mt12" style="cursor:pointer" onclick="openCourse(${i})"><div class="row"><div class="subj" style="background:${c.col}">${c.c}</div><div class="grow"><div style="font-weight:800">${c.n}</div><div class="sub mt6">${c.tch} · Room ${c.room}</div></div><span class="tag" style="background:var(--surface-3);color:var(--muted)">${c.mats.length} files</span></div></div>`).join('')}</div>
+  <div style="height:10px"></div>`,
+
+course:()=>{const c=courses[curCourse];return `
+  <div class="apphead"><span class="lead"></span><div><h2 style="font-size:20px;font-weight:800">${c.n}</h2><div class="sub">Room ${c.room}</div></div></div>
+  <div class="card mt16"><div class="row"><div class="avatar" style="width:44px;height:44px;font-size:14px;background:${c.col}">${c.tch.split(' ').map(x=>x[0]).slice(0,2).join('')}</div><div class="grow"><div style="font-weight:800">${c.tch}</div><div class="sub mt6">Course teacher</div></div><div class="icon-btn" onclick="show('chats')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M4 5.5h16v11H9l-4 3.5v-3.5H4z"/></svg></div></div></div>
+  <div class="set-label">About this course</div>
+  <div class="card"><div class="sub" style="line-height:1.6;color:var(--text)" data-noi18n>${c.desc}</div></div>
+  <div class="set-label">Materials</div>
+  <div class="card" style="padding:6px 16px">${c.mats.map(m=>`<div class="list-item" style="cursor:pointer" onclick="toast('Opening file…')"><div class="set-ic" style="background:${matColor(m.t)}1f;color:${matColor(m.t)}">${matIcon(m.t)}</div><div class="grow"><div style="font-weight:600" data-noi18n>${m.n}</div><div class="sub mt6" style="text-transform:capitalize">${m.t}</div></div><span style="color:var(--faint)">↓</span></div>`).join('')}</div>
+  <div style="height:10px"></div>`;},
+
+attendance:()=>{const p=attRows.filter(r=>r.s==='present').length,l=attRows.filter(r=>r.s==='late').length,a=attRows.filter(r=>r.s==='absent').length,e=attRows.filter(r=>r.s==='excused').length;const pct=Math.round(TERM_ATT.attended/TERM_ATT.days*100);const label={present:'Present',late:'Late',absent:'Absent',excused:'Excused'},tg={present:'ok',late:'warn',absent:'bad',excused:'a'};return `
+  <div class="apphead"><span class="lead"></span><h2 class="screen-title">Attendance</h2></div>
+  <p class="sub">1st term · recent record</p>
+  <div class="card mt16" style="background:linear-gradient(160deg,var(--accent),var(--accent-2));color:#fff;border:none">
+    <div class="row between"><div><div style="font-size:12px;font-weight:700;opacity:.85">ATTENDANCE RATE</div><div class="tnum" style="font-size:30px;font-weight:800">${pct}%</div></div><div style="text-align:end;font-size:12px;opacity:.9">${TERM_ATT.attended} of ${TERM_ATT.days} days<br>${TERM_ATT.late} late · ${TERM_ATT.absent} absent · ${TERM_ATT.excused} excused</div></div>
+  </div>
+  <div class="row mt12" style="gap:8px;flex-wrap:wrap"><span class="tag ok">Present ${TERM_ATT.attended-TERM_ATT.late}</span><span class="tag warn">Late ${TERM_ATT.late}</span><span class="tag bad">Absent ${TERM_ATT.absent}</span><span class="tag a">Excused ${TERM_ATT.excused}</span></div>
+  <div class="set-label">Recent days</div>
+  <div class="card" style="padding:6px 16px">${attRows.map(r=>`<div class="list-item"><div class="grow" style="font-weight:600">${r.d}</div><span class="tag ${tg[r.s]}">${label[r.s]}</span></div>`).join('')}</div>
+  <div style="height:10px"></div>`;},
+
+resources:()=>`
+  <div class="apphead"><span class="lead"></span><h2 class="screen-title">Learning resources</h2></div>
+  <div class="chip-scroll mt16" id="res-chips"><div class="chip active" onclick="resFilter(this,'all')">All</div><div class="chip" onclick="resFilter(this,'note')">Notes</div><div class="chip" onclick="resFilter(this,'pdf')">PDFs</div><div class="chip" onclick="resFilter(this,'video')">Videos</div><div class="chip" onclick="resFilter(this,'lecture')">Lectures</div></div>
+  <div id="res-body" class="mt16">${resList('all')}</div>
+  <div style="height:10px"></div>`,
+
+calendar:()=>{const list=selDay?calEvents.filter(e=>{const p=e.d.split(' ');return p[1]==='Nov'&&+p[0]===selDay;}):calEvents;return `
+  <div class="apphead"><span class="lead"></span><h2 class="screen-title">Calendar</h2></div>
+  <div class="cal mt16">
+    <div class="cal-head"><span class="m">November 2026</span><div class="row" style="gap:8px"><div class="icon-btn" style="width:32px;height:32px" onclick="toast('October 2026')"><svg class="flip-rtl" viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></div><div class="icon-btn" style="width:32px;height:32px" onclick="toast('December 2026')"><svg class="flip-rtl" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></div></div></div>
+    <div class="cal-wd">${calWD()}</div>
+    <div class="cal-grid">${calGrid()}</div>
+  </div>
+  <div class="row between mt20"><h2 style="font-size:16px;font-weight:800">${selDay?(selDay+' November'):'Upcoming'}</h2>${selDay?`<a class="accent" style="font-size:13px;font-weight:700" onclick="pickDay(0)">Show all</a>`:''}</div>
+  <div class="mt12">${list.length?list.map(ev=>`<div class="card mt12"><div class="row"><div style="width:46px;text-align:center;flex:0 0 auto"><div class="tnum" style="font-weight:800;font-size:16px;color:${ev.col}">${ev.d.split(' ')[0]}</div><div class="sub" style="font-size:10px">${ev.day} ${ev.d.split(' ')[1]}</div></div><div style="width:3px;align-self:stretch;border-radius:3px;background:${ev.col}"></div><div class="grow"><div style="font-weight:700">${ev.title}</div><div class="sub mt6" style="text-transform:capitalize">${ev.type}</div></div></div></div>`).join(''):`<div class="card" style="text-align:center;padding:22px"><div class="sub">No events on ${selDay} November</div></div>`}</div>
+  <div style="height:10px"></div>`;},
+
+notifs:()=>{const ic={grade:'<path d="M4 20h16"/><path d="M7 20v-6M12 20V8M17 20v-9"/>',assign:'<path d="M5 4h9a3 3 0 0 1 3 3v13H8a3 3 0 0 0-3 3z"/><path d="M17 4h2v16"/>',teacher:'<path d="M4 5.5h16v11H9l-4 3.5v-3.5H4z"/>',school:'<path d="M6 9a6 6 0 0 1 12 0c0 5 2 6 2 6H4s2-1 2-6"/><path d="M10 20a2 2 0 0 0 4 0"/>'},col={grade:'#0f9d8f',assign:'#6366f1',teacher:'#0ea5e9',school:'#4f46e5'};return `
+  <div class="apphead"><span class="lead"></span><h2 class="screen-title">Notifications</h2><div class="grow"></div><div class="icon-btn" onclick="markNotifs()"><svg viewBox="0 0 24 24"><path d="M4 12.5 9 17.5 20 6.5"/></svg></div></div>
+  <div class="mt16">${notifs.map(n=>`<div class="card mt12" style="${n.unread?'border-inline-start:3px solid var(--accent)':''}"><div class="row"><div class="set-ic" style="background:${col[n.t]}1f;color:${col[n.t]}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">${ic[n.t]}</svg></div><div class="grow"><div class="row between"><span style="font-weight:700">${n.title}</span><span class="sub" style="font-size:10px">${n.time}</span></div><div class="sub mt6">${n.desc}</div></div>${n.unread?'<span style="width:8px;height:8px;border-radius:50%;background:var(--accent);flex:0 0 auto"></span>':''}</div></div>`).join('')}</div>
+  <div style="height:10px"></div>`;},
+
+chats:()=>`
+  <div class="apphead"><span class="lead"></span><h2 class="screen-title">Messages</h2><div class="grow"></div><div class="icon-btn" onclick="toast('New message (demo)')"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></div></div>
+  <div class="mt16 card" style="padding:6px 16px">${chats.map(c=>`<div class="list-item" style="cursor:pointer" onclick="openChat('${c.id}')"><div class="avatar" style="width:44px;height:44px;font-size:13px;background:${c.col}">${c.type==='group'?'#':c.name.split(' ').map(x=>x[0]).slice(0,2).join('')}</div><div class="grow"><div class="row between"><span style="font-weight:700">${c.name}</span><span class="sub" style="font-size:10px">${c.time}</span></div><div class="sub ell mt6" data-noi18n>${c.last}</div></div>${c.unread?`<span class="tag a">${c.unread}</span>`:''}</div>`).join('')}</div>
+  <div style="height:10px"></div>`,
+
+chatroom:()=>{const c=chats.find(x=>x.id===curChat),list=msgs[curChat]||[];return `
+  <div class="apphead"><span class="lead"></span><div class="avatar" style="width:40px;height:40px;font-size:13px;background:rgba(255,255,255,.9);color:var(--accent)">${c.type==='group'?'#':c.name.split(' ').map(x=>x[0]).slice(0,2).join('')}</div><div class="grow"><div style="font-weight:800">${c.name}</div><div class="sub" style="color:rgba(255,255,255,.85)">${c.sub}</div></div></div>
+  <div id="chat-log">${list.map(m=>`<div class="bub ${m.who}"><span data-noi18n>${m.t}</span><div class="t">${m.time}</div></div>`).join('')}</div>
+  <div class="chatbar"><input id="chat-in" placeholder="Message…" onkeydown="if(event.key==='Enter')sendMsg()"/><div class="send" onclick="sendMsg()"><svg class="flip-rtl" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12 20 4l-6 16-3-7z"/></svg></div></div>`;},
+
+library:()=>`
+  <div class="apphead"><span class="lead"></span><h2 class="screen-title">Library</h2></div>
+  <div class="seg mt16" id="lib-seg"><button class="active" onclick="libTab(this,'borrowed')">Borrowed</button><button onclick="libTab(this,'digital')">Digital books</button></div>
+  <div id="lib-body" class="mt16">${libList('borrowed')}</div>
+  <div style="height:10px"></div>`,
+
+fees:()=>{const out=sfees.filter(f=>f.status!=='paid').reduce((a,b)=>a+b.amount,0);return `
+  <div class="apphead"><span class="lead"></span><h2 class="screen-title">Fees</h2></div>
+  <p class="sub">Omar Haddad · EB9 B · 2026–2027</p>
+  <div class="card mt16" style="background:linear-gradient(160deg,var(--accent),var(--accent-2));color:#fff;border:none">
+    <div style="font-size:12px;font-weight:700;opacity:.85">OUTSTANDING BALANCE</div>
+    <div class="tnum" style="font-size:32px;font-weight:800">$${out.toLocaleString()}</div>
+    ${out>0?`<button class="btn mt16" style="background:#fff;color:var(--accent);box-shadow:none" onclick="payFeeS()">Pay now · $${out.toLocaleString()}</button>`:`<div style="opacity:.9;font-size:12px">All paid 🎉</div>`}
+  </div>
+  <div class="set-label">Invoices</div>
+  <div class="card" style="padding:6px 16px">${sfees.map(f=>`<div class="list-item"><div class="set-ic" style="background:${f.status==='paid'?'var(--ok-bg)':'var(--accent-soft)'};color:${f.status==='paid'?'var(--ok)':'var(--accent)'}">${FEE_IC[f.ic]}</div><div class="grow"><div style="font-weight:700">${f.title}</div><div class="sub mt6">${f.desc} · ${f.due}</div></div><div style="text-align:end"><div class="tnum" style="font-weight:800">$${f.amount.toLocaleString()}</div><span class="tag ${f.status==='paid'?'ok':'warn'}">${f.status==='paid'?'Paid':'Unpaid'}</span></div></div>`).join('')}</div>
+  <p class="sub" style="text-align:center;margin-top:14px;font-size:11px;line-height:1.6">Amounts in USD · receipts issued by the Finance Office<br>Fees are usually managed by a parent account</p>
+  <div style="height:10px"></div>`;},
+};
+
+/* build */
+Object.keys(SCREENS).forEach(id=>{const d=document.createElement('div');d.className='screen';d.id='scr-'+id;d.innerHTML=SCREENS[id]();trEl(d);screensEl.appendChild(d);});
+function rebuild(id){const el=document.getElementById('scr-'+id);el.innerHTML=SCREENS[id]();trEl(el);if(id==='home')initQuick();}
+/* home: compact sticky header once the hero scrolls away */
+(function(){const el=document.getElementById('scr-home');if(!el)return;el.addEventListener('scroll',()=>{const m=document.getElementById('home-mini'),h=el.querySelector('.hero');if(!m||!h)return;m.classList.toggle('show',el.scrollTop>h.offsetHeight-70);},{passive:true});})();
+/* quick access: pages of 8 tiles, swipe / drag left-right, dots (RTL-safe) */
+let qPage=0;
+function initQuick(){
+  const p=document.getElementById('qpager');if(!p||p.dataset.ready)return;p.dataset.ready=1;
+  const tiles=[...p.children],per=8;p.innerHTML='';
+  for(let i=0;i<tiles.length;i+=per){const pg=document.createElement('div');pg.className='qpage';tiles.slice(i,i+per).forEach(t=>pg.appendChild(t));p.appendChild(pg);}
+  const n=p.children.length;if(n<2)return;
+  const dots=document.createElement('div');dots.className='qdots';
+  for(let i=0;i<n;i++){const d=document.createElement('i');d.onclick=()=>go(i);dots.appendChild(d);}
+  p.after(dots);
+  const mark=i=>{qPage=i;[...dots.children].forEach((d,j)=>d.classList.toggle('on',i===j));};
+  /* RTL: scrollLeft is 0 at the start and negative going forward */
+  const sgn=()=>document.documentElement.dir==='rtl'?-1:1;
+  const go=i=>p.scrollTo({left:sgn()*i*p.clientWidth,behavior:'smooth'});
+  mark(Math.min(qPage,n-1));requestAnimationFrame(()=>{p.scrollLeft=sgn()*qPage*p.clientWidth;});
+  p.addEventListener('scroll',()=>mark(Math.round(Math.abs(p.scrollLeft)/p.clientWidth)),{passive:true});
+  /* keep swipes here from opening the side drawer */
+  ['touchstart','mousedown'].forEach(ev=>p.addEventListener(ev,e=>e.stopPropagation(),{passive:true}));
+  /* mouse drag (touch uses native scrolling) */
+  let sx=0,sl=0,down=false,moved=false;
+  p.addEventListener('pointerdown',e=>{if(e.pointerType!=='mouse')return;down=true;moved=false;sx=e.clientX;sl=p.scrollLeft;});
+  window.addEventListener('pointermove',e=>{if(!down)return;const dx=e.clientX-sx;if(!moved&&Math.abs(dx)>5){moved=true;p.classList.add('dragging');}if(moved)p.scrollLeft=sl-dx;});
+  window.addEventListener('pointerup',e=>{if(!down)return;down=false;if(!moved)return;p.classList.remove('dragging');const dx=e.clientX-sx,cur=Math.round(Math.abs(sl)/p.clientWidth);go(Math.max(0,Math.min(n-1,cur+sgn()*(dx<-40?1:dx>40?-1:0))));});
+  p.addEventListener('click',e=>{if(moved){e.stopPropagation();e.preventDefault();moved=false;}},true);
+}
+initQuick();
+
+/* interactions */
+const isEmail=v=>/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+function setErr(id,s){const i=document.getElementById(id),e=document.getElementById(id+'-err');if(i)i.classList.toggle('err',s);if(e)e.classList.toggle('show',s);}
+function doLogin(){const u=document.getElementById('li-user').value.trim(),p=document.getElementById('li-pass').value;let ok=true;if(!isEmail(u)){setErr('li-user',true);ok=false;}else setErr('li-user',false);if(p.length<6){setErr('li-pass',true);ok=false;}else setErr('li-pass',false);if(!ok)return;hist=[];show('home',true);toast('Signed in ✓');}
+function logout(){hist=[];show('login',true);toast('Logged out');}
+/* homework review */
+function dueShort(h){const d=daysUntil(h.due);if(d==null)return h.due;if(d===0)return 'today';if(d===1)return 'tomorrow';if(d<7){const t=new Date(TODAY);t.setDate(t.getDate()+d);return ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][t.getDay()];}return h.due;}
+function dueTone(h){const d=daysUntil(h.due);return d!=null&&d<=2?'warn':'a';}
+function hwStatusTag(h){
+  if(h.status==='missing')return '<span class="tag bad">Missing</span>';
+  if(h.status==='submitted')return `<span class="tag ${h.late?'warn':'a'}">${h.late?'Late · submitted':'Submitted'}</span>`;
+  if(h.status==='marked')return `<span class="tag ${tone20(h.mark/h.max*20)}">${h.mark}/${h.max}</span>`;
+  return `<span class="tag ${dueTone(h)}">Due ${dueShort(h)}</span>`;
+}
+function hwCard(h){const miss=h.status==='missing';return `<div class="card mt12 ${miss?'hw-missing':''}" style="cursor:pointer" onclick="openHw(${h.id})">
+  <div class="row" style="align-items:flex-start"><div class="subj" style="background:${SUBJ[h.c]}">${h.c}</div><div class="grow"><div style="font-weight:800" data-noi18n>${h.n}</div><div class="sub mt6">${h.subj.replace(', Geography & Civics',' & Geography')} · ${h.tch}</div>
+  <div class="sub mt6" style="font-size:11.5px">${miss?`<span style="color:var(--danger);font-weight:700">Overdue since ${h.due}</span> · ${h.reminder}`:h.status==='todo'?`Due ${h.due}${daysUntil(h.due)!=null?' · in '+daysUntil(h.due)+' day'+(daysUntil(h.due)===1?'':'s'):''}`:`Handed in ${h.submitted}${h.late?' · <span style="color:var(--warn);font-weight:700">late</span>':' · on time'}`}</div></div>${hwStatusTag(h)}</div>
+  ${h.status==='marked'?`<div class="fb"><b style="font-size:11px;letter-spacing:.04em;color:var(--muted);text-transform:uppercase">Feedback · ${h.tch}</b><br><span data-noi18n>${h.feedback}</span></div>`:''}
+</div>`;}
+function hwSection(status,title,hint){if(hwFilter!=='all'&&hwFilter!==status)return '';const items=homework.filter(h=>h.status===status);if(!items.length)return hwFilter===status?`<div class="card mt16" style="text-align:center;padding:24px"><div class="sub">Nothing here</div></div>`:'';
+  if(status==='todo')items.sort((a,b)=>(daysUntil(a.due)??99)-(daysUntil(b.due)??99));
+  return `<div class="sec-h"><h3 style="${status==='missing'?'color:var(--danger)':''}">${title} · ${items.length}</h3><span class="sub" style="font-size:11px">${hint}</span></div>${items.map(hwCard).join('')}`;}
+function setHwFilter(k){hwFilter=k;rebuild('homework');show('homework',true);}
+function openHw(id){const h=homework.find(x=>x.id===id);hwAttach=null;renderHwSheet(h);}
+function renderHwSheet(h){const pending=h.status==='todo'||h.status==='missing';
+  openSheet(`<div class="row"><div class="subj" style="background:${SUBJ[h.c]}">${h.c}</div><div class="grow"><h2 style="font-size:19px;font-weight:800" data-noi18n>${h.n}</h2><div class="sub mt6">${h.subj.replace(', Geography & Civics',' & Geography')} · ${h.tch}</div></div>${h.status==='marked'?`<div style="text-align:end"><div class="tnum" style="font-size:22px;font-weight:800">${h.mark}<span class="muted" style="font-size:12px">/${h.max}</span></div><span class="tag ${tone20(h.mark/h.max*20)}">${mentionOf(h.mark/h.max*20)}</span></div>`:''}</div>
+  <div class="card mt16" style="padding:4px 16px"><div class="kv"><span class="k">Due</span><span>${h.due}</span></div><div class="kv"><span class="k">Status</span><span>${hwStatusTag(h)}</span></div>${h.submitted?`<div class="kv"><span class="k">Handed in</span><span>${h.submitted}${h.late?' · late':' · on time'}</span></div>`:''}${h.status==='missing'?`<div class="kv"><span class="k">Reminder</span><span style="text-align:end;max-width:60%">${h.reminder.replace('Reminder sent to your parent · ','Sent to parent · ')}</span></div>`:''}</div>
+  <div class="set-label">Instructions</div>
+  <div class="card"><div style="line-height:1.6;font-size:13.5px" data-noi18n>${h.desc}</div></div>
+  ${h.status==='marked'?`<div class="set-label">Teacher feedback</div><div class="fb" style="margin-top:0"><span data-noi18n>${h.feedback}</span><div class="sub mt8" style="font-size:11px">— ${h.tch}</div></div><button class="btn secondary mt16" onclick="closeSheet()">Close</button>`:''}
+  ${h.status==='submitted'?`<div class="card mt16" style="text-align:center;background:var(--surface-2)"><div style="font-size:24px">📄</div><div class="sub mt8" style="font-weight:600">${h.file||'your_work.jpg'} · waiting to be marked</div></div><button class="btn secondary mt16" onclick="closeSheet()">Close</button>`:''}
+  ${pending?`<div class="dropzone ${hwAttach?'on':''}" onclick="pickHwFile(${h.id})">${hwAttach?`<div style="font-size:24px">🖼️</div><div style="font-weight:700;margin-top:6px;font-size:13.5px" data-noi18n>${hwAttach}</div><div class="sub mt6" style="font-size:11px">Tap to replace</div>`:`<div style="font-size:24px">📎</div><div class="sub mt8" style="font-weight:600">Attach your work · photo or PDF</div>`}</div>
+  ${h.status==='missing'?'<p class="sub mt12" style="font-size:11.5px;color:var(--danger)">This work is overdue — it will be marked as late.</p>':''}
+  <button class="btn mt16" onclick="submitHw(${h.id})">${h.status==='missing'?'Submit late':'Submit work'}</button><button class="btn secondary mt8" onclick="closeSheet()">Cancel</button>`:''}`);}
+function pickHwFile(id){const h=homework.find(x=>x.id===id);hwAttach='omar_haddad_'+h.n.toLowerCase().replace(/[^a-z0-9]+/g,'_').replace(/^_|_$/g,'').slice(0,22)+'.jpg';renderHwSheet(h);}
+function submitHw(id){const h=homework.find(x=>x.id===id);if(!hwAttach){toast('Attach your work first 📎');return;}const wasMissing=h.status==='missing';h.late=wasMissing;h.status='submitted';h.submitted='Mon 16 Nov';h.file=hwAttach;hwAttach=null;closeSheet();rebuild('homework');rebuild('home');show('homework',true);toast(wasMissing?'Submitted late ✓ · Ms. Salameh notified':'Homework submitted ✓');}
+
+/* report cards & conduct */
+function rcMarks(r){return r.marks||subjects.map(s=>subj20(s));}
+function rcAvg(r){return r.marks?Math.round(r.marks.reduce((a,b)=>a+b,0)/r.marks.length*10)/10:overall20(subjects);}
+function openRC(id){curRC=id;rebuild('reportcard');show('reportcard');}
+function setConductFilter(k){conductFilter=k;rebuild('conduct');show('conduct',true);}
+/* days from the demo "today" (Mon 16 Nov 2026) to a date like 'Thu 26 Nov' */
+function daysUntil(str){if(!str)return null;const m=str.match(/(\d{1,2})\s+(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)/);if(!m)return null;const mo='JanFebMarAprMayJunJulAugSepOctNovDec'.indexOf(m[2])/3;let t=new Date(TODAY.getFullYear(),mo,+m[1]);if(t<TODAY&&mo<8)t=new Date(TODAY.getFullYear()+1,mo,+m[1]);const diff=Math.round((t-TODAY)/86400000);return(diff>=0&&diff<=200)?diff:null;}
+function examList(tab){
+  const items=exams.filter(e=>tab==='done'?e.status==='done':e.status==='upcoming');
+  if(!items.length)return `<div class="card" style="text-align:center;padding:24px"><div class="sub">${tab==='done'?'No past exams yet':'No exams scheduled'}</div></div>`;
+  if(tab==='upcoming')return `<div>${items.map((e,i)=>{const idx=exams.indexOf(e),p=e.date.split(' '),dd=daysUntil(e.date);return `
+    <div class="row mt12" style="align-items:stretch;gap:10px">
+      <div class="dblock ${i===0?'next':''}"><span>${p[0]}</span><b class="tnum">${p[1]}</b><span>${p[2]}</span></div>
+      <div class="card grow" style="padding:12px 14px;cursor:pointer" onclick="examInfo(${idx})"><div class="row" style="gap:10px"><div class="subj" style="width:34px;height:34px;font-size:12px;background:${SUBJ[e.c]}">${e.c}</div><div class="grow"><div style="font-weight:800" class="ell">${e.n}</div><div class="sub mt6 tnum">${e.time}–${e.end} · ${e.room}</div></div><div style="text-align:end;flex:0 0 auto"><span class="tag ${i===0?'a':''}" style="${i===0?'':'background:var(--surface-3);color:var(--muted)'}">in ${dd} d</span><div class="icon-btn" style="width:30px;height:30px;border-radius:9px;margin:6px 0 0;margin-inline-start:auto" onclick="event.stopPropagation();toast('${e.n.replace(/'/g,'’')} · ${e.date} added to calendar 📅')"><svg viewBox="0 0 24 24" style="width:16px;height:16px"><rect x="3.5" y="5" width="17" height="16" rx="3"/><path d="M3.5 9.5h17M8 3v4M16 3v4M12 13v5M9.5 15.5h5"/></svg></div></div></div></div>
+    </div>`;}).join('')}</div>`;
+  return `<div>${items.map((e,i)=>{const idx=exams.indexOf(e);return `
+    <div class="card mt12" style="cursor:pointer" onclick="examInfo(${idx})">
+      <div class="row"><div class="subj" style="background:${SUBJ[e.c]}">${e.c}</div>
+      <div class="grow"><div style="font-weight:800">${e.n}</div><div class="sub mt6">${e.date} · ${e.time} · ${e.dur}</div></div>
+      ${e.status==='done'?`<div style="text-align:end"><div class="tnum" style="font-weight:800">${e.result}</div><span class="tag ${tone20(e.s20)}">${e.s20.toFixed(1)}/20</span></div>`:e.online?'<span class="tag a">Online</span>':i===0?'<span class="tag a">Next</span>':`<span class="sub">${e.room}</span>`}</div>
+    </div>`;}).join('')}</div>`;
+}
+function examTab(btn,tab){document.querySelectorAll('#exam-seg button').forEach(b=>b.classList.remove('active'));btn.classList.add('active');const eb=document.getElementById('exam-body');eb.innerHTML=examList(tab);trEl(eb);}
+function examInfo(idx){const e=exams[idx];openSheet(`<div class="row"><div class="subj" style="background:${SUBJ[e.c]}">${e.c}</div><div class="grow"><h2 style="font-size:20px;font-weight:800">${e.n}</h2><div class="sub mt6">${e.date} · ${e.time}</div></div>${e.status==='done'?`<div style="text-align:end"><div class="tnum" style="font-size:20px;font-weight:800">${e.result}</div><span class="tag ${tone20(e.s20)}">${e.s20.toFixed(1)}/20 · ${mentionOf(e.s20)}</span></div>`:''}</div>
+  <div class="card mt16" style="padding:6px 16px"><div class="kv"><span class="k">Date</span><span>${e.date}</span></div><div class="kv"><span class="k">Time</span><span>${e.end?e.time+'–'+e.end:e.time} · ${e.dur}</span></div>${e.status==='upcoming'?`<div class="kv"><span class="k">Countdown</span><span>in ${daysUntil(e.date)} days</span></div>`:''}<div class="kv"><span class="k">${e.online?'Format':'Room'}</span><span>${e.online?'Online exam':e.room}</span></div>${e.online?'':`<div class="kv"><span class="k">Seat</span><span>${e.seat}</span></div>`}</div>
+  <div class="sub" style="font-weight:700;letter-spacing:.05em;margin:16px 0 6px">${e.status==='done'?'TOPICS COVERED':'SYLLABUS'}</div>
+  <div class="card"><div style="line-height:1.6;font-size:13px" data-noi18n>${e.topics}</div></div>
+  ${e.status==='upcoming'?`<div class="row mt16" style="gap:8px"><button class="btn" style="padding:13px;font-size:14px" onclick="closeSheet();toast('Added to calendar 📅')">Add to calendar</button><button class="btn ghost" style="padding:13px;font-size:14px" onclick="closeSheet();toast('Revision reminder set 🔔')">Remind me</button></div>`:''}
+  <button class="btn secondary mt8" onclick="closeSheet()">Close</button>`);}
+
+/* extra features */
+function matColor(t){return t==='video'||t==='lecture'?'#ef4444':t==='slides'?'#f59e0b':t==='note'?'#0f9d8f':'#0ea5e9';}
+function matIcon(t){const m={pdf:'<path d="M7 3h8l4 4v14H7z"/><path d="M9 12h6M9 16h4"/>',slides:'<rect x="3" y="4" width="18" height="13" rx="2"/><path d="M12 17v3M8 21h8"/>',video:'<rect x="3" y="5" width="18" height="14" rx="3"/><path d="M10 9l5 3-5 3z"/>',note:'<path d="M7 3h8l4 4v14H7z"/><path d="M9 8h4M9 12h6M9 16h4"/>',lecture:'<path d="M12 3a3 3 0 0 1 3 3v5a3 3 0 0 1-6 0V6a3 3 0 0 1 3-3z"/><path d="M6 11a6 6 0 0 0 12 0M12 17v4"/>'};return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">${m[t]||m.pdf}</svg>`;}
+function openCourse(i){curCourse=i;rebuild('course');show('course');}
+function resList(type){const items=type==='all'?resources:resources.filter(r=>r.t===type);if(!items.length)return `<div class="card" style="text-align:center;padding:24px"><div class="sub">Nothing here yet</div></div>`;return `<div class="card" style="padding:6px 16px">${items.map(r=>`<div class="list-item" style="cursor:pointer" onclick="toast('Opening resource…')"><div class="set-ic" style="background:${matColor(r.t)}1f;color:${matColor(r.t)}">${matIcon(r.t)}</div><div class="grow"><div style="font-weight:600" data-noi18n>${r.n}</div><div class="sub mt6">${r.subj} · ${r.meta}</div></div><span style="color:var(--faint)">↓</span></div>`).join('')}</div>`;}
+function resFilter(btn,type){document.querySelectorAll('#res-chips .chip').forEach(c=>c.classList.remove('active'));btn.classList.add('active');const rb=document.getElementById('res-body');rb.innerHTML=resList(type);trEl(rb);}
+function markNotifs(){notifs.forEach(n=>n.unread=false);rebuild('notifs');show('notifs');toast('All marked as read');}
+function openChat(id){curChat=id;const c=chats.find(x=>x.id===id);if(c)c.unread=0;rebuild('chatroom');rebuild('chats');show('chatroom');setTimeout(()=>{const l=document.getElementById('chat-log');if(l)l.scrollIntoView(false);},40);}
+function sendMsg(){const inp=document.getElementById('chat-in'),v=inp.value.trim();if(!v)return;const now=new Date();(msgs[curChat]=msgs[curChat]||[]).push({who:'me',t:v,time:now.getHours()+':'+String(now.getMinutes()).padStart(2,'0')});rebuild('chatroom');show('chatroom');setTimeout(()=>{const l=document.getElementById('chat-log');if(l)l.scrollIntoView(false);},50);}
+function libList(tab){const bk='<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M5 4h9a3 3 0 0 1 3 3v13H8a3 3 0 0 0-3 3z"/><path d="M17 4h2v16"/></svg>';
+  if(tab==='digital'){return `<div class="mt8">${libDigital.map(b=>`<div class="card mt12"><div class="row"><div class="subj" style="width:40px;height:52px;border-radius:8px;background:var(--accent-soft);color:var(--accent)">${bk}</div><div class="grow"><div style="font-weight:800" data-noi18n>${b.n}</div><div class="sub mt6">${b.author} · ${b.meta}</div></div><span class="tag a" style="cursor:pointer" onclick="toast('Opening reader…')">Read</span></div></div>`).join('')}</div>`;}
+  return `<div class="mt8">${libBorrowed.map(b=>`<div class="card mt12"><div class="row"><div class="subj" style="width:40px;height:52px;border-radius:8px;background:${b.urg==='warn'?'var(--warn-bg)':'var(--ok-bg)'};color:${b.urg==='warn'?'var(--warn)':'var(--ok)'}">${bk}</div><div class="grow"><div style="font-weight:800" data-noi18n>${b.n}</div><div class="sub mt6">${b.author}</div><span class="tag ${b.urg}" style="margin-top:6px;display:inline-block">${b.due}</span></div><span class="tag" style="background:var(--surface-3);color:var(--muted);cursor:pointer" onclick="toast('Renewal requested')">Renew</span></div></div>`).join('')}</div>`;
+}
+function libTab(btn,tab){document.querySelectorAll('#lib-seg button').forEach(b=>b.classList.remove('active'));btn.classList.add('active');const lb=document.getElementById('lib-body');lb.innerHTML=libList(tab);trEl(lb);}
+function payFeeS(){const out=sfees.filter(f=>f.status!=='paid').reduce((a,b)=>a+b.amount,0);openSheet(`<h2 style="font-size:20px;font-weight:800">Pay fees</h2><div class="card mt16" style="background:var(--surface-2)"><div class="row between"><span class="muted">Amount (USD)</span><span class="tnum" style="font-size:20px;font-weight:800">$${out.toLocaleString()}</span></div></div>
+  <div class="set-label">Payment method</div>
+  <div class="card" style="padding:4px 16px">${PAY_METHODS.map(m=>`<div class="set-row" style="cursor:pointer" onclick="pickPayS('${m}')"><div class="grow" style="font-weight:600">${m}</div>${m===payMethod?'<span class="tag a">Selected</span>':''}</div>`).join('')}</div>
+  <button class="btn mt20" onclick="confirmPayS()">${payMethod.startsWith('Cash')?'Get payment slip':'Pay $'+out.toLocaleString()+' · '+payMethod}</button><button class="btn secondary mt8" onclick="closeSheet()">Cancel</button>`);}
+function pickPayS(m){payMethod=m;payFeeS();}
+function confirmPayS(){if(payMethod.startsWith('Cash')){closeSheet();toast('Payment slip ready · bring it to the Finance Office');return;}sfees.forEach(f=>{if(f.status!=='paid'){f.status='paid';f.due='Paid just now';}});closeSheet();rebuild('fees');show('fees');toast('Paid via '+payMethod+' ✓');}
+
+/* settings */
+function toggleSw(el,label){const on=el.classList.toggle('on');toast(label+(on?' on':' off'));}
+/* language action sheet (top bar button) */
+const LANG_ORDER=['en','ar','fr'];
+const ACT_TXT={title:{en:'Choose language',fr:'Choisir la langue',ar:'اختر اللغة'},cancel:{en:'Cancel',fr:'Annuler',ar:'إلغاء'}};
+function langCode(){return uiLang.toUpperCase();}
+function openLangActions(){
+  document.getElementById('act-body').innerHTML=`<div class="act-group"><div class="act-title">${ACT_TXT.title[uiLang]}</div>${LANG_ORDER.map(c=>{const L=LANGS.find(x=>x.code===c);return `<div class="act-opt ${c===uiLang?'on':''}" onclick="chooseLang('${c}')"><span class="code">${c.toUpperCase()}</span><span class="grow"><bdi lang="${c}">${L.native}</bdi></span>${c===uiLang?'<svg class="ck" viewBox="0 0 24 24"><path d="M5 12.5 10 17.5 19 7"/></svg>':''}</div>`;}).join('')}</div><div class="act-cancel" onclick="closeLangActions()">${ACT_TXT.cancel[uiLang]}</div>`;
+  document.getElementById('actsheet').classList.add('open');
+}
+function closeLangActions(){document.getElementById('actsheet').classList.remove('open');}
+function chooseLang(c){closeLangActions();if(c!==uiLang)setLang(c);}
+function pickLanguage(){openSheet(`<h2 style="font-size:20px;font-weight:800">Language</h2><div class="mt12">${LANGS.map(l=>`<div class="set-row" style="cursor:pointer" onclick="setLang('${l.code}')"><div class="grow"><div style="font-weight:600" data-noi18n lang="${l.code}">${l.native}</div><div class="sub" style="font-size:11.5px;margin-top:2px">${l.sub}</div></div>${l.code===uiLang?'<span class="tag a">Selected</span>':''}</div>`).join('')}</div>`);}
+function setLang(code){uiLang=code;try{localStorage.setItem('skl-lang',code);}catch(e){}closeSheet();applyLang();Object.keys(SCREENS).forEach(rebuild);const el=document.getElementById('scr-'+current);if(el)setLead(el);toast('Language updated');}
+function pickAppearance(){openSheet(`<h2 style="font-size:20px;font-weight:800">Appearance</h2><div class="mt12">${['Light','Dark','System'].map(t=>`<div class="set-row" style="cursor:pointer" onclick="setTheme('${t}')"><div class="grow" style="font-weight:600">${t}</div>${t===uiTheme?'<span class="tag a">Selected</span>':''}</div>`).join('')}</div>`);}
+function setTheme(t){uiTheme=t;applyTheme(t);try{localStorage.setItem(THEME_KEY,t);}catch(e){}closeSheet();rebuild('settings');rebuild('profile');show(current,true);toast('Appearance: '+t);}
+function changePassword(){openSheet(`<h2 style="font-size:20px;font-weight:800">Change password</h2>
+  <div class="field"><label>Current password</label><input class="input" type="password" placeholder="••••••"/></div>
+  <div class="field"><label>New password</label><input class="input" type="password" placeholder="Min. 6 characters"/></div>
+  <div class="field"><label>Confirm new password</label><input class="input" type="password" placeholder="Repeat new password"/></div>
+  <button class="btn mt20" onclick="closeSheet();toast('Password updated ✓')">Update password</button>`);}
+function editProfile(){openSheet(`<h2 style="font-size:20px;font-weight:800">Edit profile</h2>
+  <div class="field"><label>Full name</label><input class="input" value="Omar Haddad"/></div>
+  <div class="field"><label>Email</label><input class="input" value="o.haddad@alarz.edu.lb"/></div>
+  <div class="field"><label>Phone</label><input class="input" value="+961 70 204 041"/></div>
+  <button class="btn mt20" onclick="closeSheet();toast('Profile updated ✓')">Save changes</button>`);}
+
+/* calendar */
+function calGrid(){const lead=6,days=30,ev={};calEvents.forEach(e=>{const p=e.d.split(' ');if(p[1]==='Nov')ev[+p[0]]=e.col;});let c='';for(let i=0;i<lead;i++)c+='<div class="cal-d empty"></div>';for(let d=1;d<=days;d++){const co=ev[d],sel=d===selDay,today=d===16;c+=`<div class="cal-d${today?' today':''}${sel?' sel':''}" onclick="pickDay(${d})">${d}${co?`<span class="cal-dot" style="background:${sel||today?'currentColor':co}"></span>`:''}</div>`;}return c;}
+function pickDay(n){selDay=selDay===n?0:n;rebuild('calendar');show('calendar');}
+
+/* clock */
+function tick(){const d=new Date();const c=document.getElementById('clock');if(c)c.textContent=d.getHours()+':'+String(d.getMinutes()).padStart(2,'0');}
+setInterval(tick,10000);
+/* live drag-follow drawer: swipe from left edge to open, drag to close */
+(function(){
+  const vp=document.querySelector('.viewport');
+  const wrap=document.getElementById('drawer');
+  const panel=wrap.querySelector('.drawer');
+  const back=wrap.querySelector('.drawer-back');
+  let sx=0,sy=0,track=false,edge=false,drag=false,base=0,W=1,lastT=0;
+  const r=()=>vp.getBoundingClientRect();
+  const live=()=>current&&current!=='login';
+  const isOpen=()=>wrap.classList.contains('open');
+  const rtl=()=>document.documentElement.dir==='rtl';
+  function begin(){
+    drag=true;wrap.style.display='block';
+    panel.style.transition='none';back.style.transition='none';back.style.pointerEvents='none';
+    W=panel.getBoundingClientRect().width||r().width*0.82;
+    base=isOpen()?0:-W;
+  }
+  function setPos(px){lastT=Math.max(-W,Math.min(0,px));panel.style.transform='translateX('+(rtl()?-lastT:lastT)+'px)';back.style.opacity=(1+lastT/W).toFixed(3);}
+  function settle(open){
+    panel.style.transition='transform .26s cubic-bezier(.2,.8,.2,1)';back.style.transition='opacity .26s';
+    requestAnimationFrame(()=>setPos(open?0:-W));
+    setTimeout(()=>{panel.style.transition='';back.style.transition='';panel.style.transform='';back.style.opacity='';back.style.pointerEvents='';wrap.classList.toggle('open',open);wrap.style.display='';drag=false;},270);
+  }
+  function s(x,y){const b=r();sx=x;sy=y;const fx=(x-b.left)/b.width;edge=rtl()?fx>0.91:fx<0.09;track=true;}
+  function m(x,y){
+    if(!track)return;const dx=x-sx,dy=y-sy;
+    if(!drag){
+      if(Math.abs(dx)<6||Math.abs(dx)<=Math.abs(dy))return;
+      if(isOpen()||(edge&&live()))begin();else{track=false;return;}
+    }
+    if(drag)setPos(base+(x-sx)*(rtl()?-1:1));
+  }
+  function end(){if(drag)settle(lastT>-W/2);track=false;}
+  vp.addEventListener('touchstart',e=>{const t=e.touches[0];s(t.clientX,t.clientY);},{passive:true});
+  vp.addEventListener('touchmove',e=>{const t=e.touches[0];m(t.clientX,t.clientY);},{passive:true});
+  vp.addEventListener('touchend',end);
+  vp.addEventListener('mousedown',e=>s(e.clientX,e.clientY));
+  window.addEventListener('mousemove',e=>{if(track)m(e.clientX,e.clientY);});
+  window.addEventListener('mouseup',end);
+})();
+
+/* fit device to viewport height (desktop) */
+(function(){const dev=document.querySelector('.device');const title=document.querySelector('.stage-title');function fit(){if(window.innerWidth<=500){dev.style.transform='';dev.style.marginBottom='';return;}const th=title?title.offsetHeight:0;const s=Math.min(1,Math.max(.4,(window.innerHeight-th-90)/952));dev.style.transformOrigin='top center';dev.style.transform='scale('+s+')';dev.style.marginBottom=(-(952*(1-s)))+'px';}window.addEventListener('resize',fit);setTimeout(fit,60);fit();})();
+show('login');
+</script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+# deps
+node_modules/
+# env
+.env
+.env.local
+*.local
+# logs
+*.log
+npm-debug.log*
+yarn-error.log*
+# build
+dist/
+build/
+# native
+mobile/apps/*/android/app/build/
+mobile/apps/*/android/.gradle/
+mobile/apps/*/ios/Pods/
+mobile/apps/*/ios/build/
+*.keystore
+!debug.keystore
+# os / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+# prisma
+backend/prisma/*.db

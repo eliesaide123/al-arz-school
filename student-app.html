@@ -563,7 +563,7 @@ const I18N_SRC=[
 ['today','aujourd’hui','اليوم'],['tomorrow','demain','غداً'],['Yesterday','Hier','أمس'],['yesterday','hier','أمس'],
 ['Lab 1','Labo 1','المختبر 1'],['Lab 2','Labo 2','المختبر 2'],['Gym','Gymnase','الملعب الرياضي'],['Hall A','Salle A','القاعة A'],
 /* timetable */
-['Online class','Cours en ligne','حصة عن بُعد'],['Join','Rejoindre','انضمام'],['Joining online class…','Connexion au cours en ligne…','جارٍ الانضمام إلى الحصة عن بُعد…'],
+['Online class','Cours en ligne','حصة عن بُعد'],['Break','Récréation','استراحة'],['Lunch break','Pause déjeuner','استراحة الغداء'],['Join','Rejoindre','انضمام'],['Joining online class…','Connexion au cours en ligne…','جارٍ الانضمام إلى الحصة عن بُعد…'],
 /* homework */
 ['To do','À faire','للإنجاز'],['Missing','Non rendu','غير مُسلَّم'],['Submitted','Soumis','مُرسل'],['submitted','soumis','مُرسل'],['Marked','Corrigé','مُصحَّح'],['Returned','Corrigés','المُصحَّحة'],
 ['Late','En retard','متأخر'],['late','en retard','متأخر'],['on time','à l’heure','في الموعد'],
@@ -859,6 +859,19 @@ let uiTheme=(()=>{try{return localStorage.getItem(THEME_KEY)||'Light';}catch(e){
 function applyTheme(t){let dark=t==='Dark';if(t==='System'){try{dark=matchMedia('(prefers-color-scheme: dark)').matches;}catch(e){}}document.documentElement.dataset.theme=dark?'dark':'light';}
 applyTheme(uiTheme);
 try{matchMedia('(prefers-color-scheme: dark)').addEventListener('change',()=>{if(uiTheme==='System')applyTheme('System');});}catch(e){}
+/* weekly timetable · EB9 B — subjects per period come from AG_TT (same as the agenda & parent app) */
+const TT_DAYS=['Mon','Tue','Wed','Thu','Fri'];
+const TT_DATE={Mon:16,Tue:17,Wed:18,Thu:19,Fri:20};
+const TT_START=['07:50','08:40','09:30','10:40','11:30','12:40','13:30'];
+let ttDay='Mon';
+function dayTimetable(d){
+  if(d==='Mon')return timetable;
+  const by={};timetable.forEach(x=>{by[x.c]=x;});
+  const extra={Ph:{n:'Physics & Chemistry',r:'Lab 1'}};
+  return AG_TT[d].map((c,i)=>{const b=by[c]||extra[c]||{};return {t:TT_START[i],p:'P'+(i+1),c,n:b.n,r:b.r,tch:AG_TCH[c]};});
+}
+function ttBreak(t,label){return `<div class="row mt12" style="gap:10px;color:var(--faint);font-size:12px;font-weight:600"><span class="tnum" style="width:56px;text-align:center">${t}</span><div class="grow" style="height:1px;background:var(--line)"></div><span>${label}</span><div style="width:24px;height:1px;background:var(--line)"></div></div>`;}
+function ttPick(d){ttDay=d;rebuild('timetable');const el=document.getElementById('scr-timetable');if(el)el.scrollTop=0;}
 /* Monday timetable · EB9 B */
 const timetable=[
   {t:'07:50',p:'P1',c:'Ar',n:'Arabic',r:'105',tch:'Mr. Itani'},
@@ -1757,10 +1770,11 @@ home:()=>`
 
 timetable:()=>`
   <div class="apphead"><span class="lead"></span><h2 class="screen-title">Timetable</h2><div class="grow"></div><div class="icon-btn"><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="16" rx="3"/><path d="M3.5 9.5h17M8 3v4M16 3v4"/></svg></div></div>
-  <div class="chip-scroll mt16"><div class="chip active">Mon</div><div class="chip">Tue</div><div class="chip">Wed</div><div class="chip">Thu</div><div class="chip">Fri</div></div>
-  <div class="mt16">
-    ${timetable.map(s=>`<div class="row mt12" style="align-items:stretch"><div class="badge-time" style="display:flex;flex-direction:column;justify-content:center"><b class="tnum">${s.t}</b><span>${s.p}</span></div>
-      <div class="card grow" style="padding:12px;${s.now?'border:1.5px solid var(--accent)':''}"><div class="row"><div class="subj" style="width:36px;height:36px;background:${SUBJ[s.c]}">${s.c}</div><div class="grow"><div style="font-weight:700">${s.n}</div><div class="sub mt6">${s.online?'Online class':'Room '+s.r} · ${s.tch}</div></div>${s.now?'<span class="tag a">Now</span>':s.online?`<span class="tag a" style="cursor:pointer" onclick="toast('Joining online class…')">Join</span>`:''}</div></div>
+  <div class="chip-scroll mt16">${TT_DAYS.map(d=>`<div class="chip ${d===ttDay?'active':''}" onclick="ttPick('${d}')">${d}</div>`).join('')}</div>
+  <div class="row between mt12"><div class="sub" style="font-weight:600">${ttDay} ${TT_DATE[ttDay]} Nov · <span class="tnum" dir="ltr">07:50–14:20</span></div>${ttDay==='Mon'?'<span class="tag a">Today</span>':''}</div>
+  <div class="mt8">
+    ${dayTimetable(ttDay).map((s,i)=>(i===3?ttBreak('10:20','Break'):i===5?ttBreak('12:20','Lunch break'):'')+`<div class="row mt12" style="align-items:stretch"><div class="badge-time" style="display:flex;flex-direction:column;justify-content:center"><b class="tnum">${s.t}</b><span>${s.p}</span></div>
+      <div class="card grow" style="padding:12px;${s.now?'border:1.5px solid var(--accent)':''}"><div class="row"><div class="subj" style="width:36px;height:36px;background:${SUBJ[s.c]}">${s.c}</div><div class="grow"><div style="font-weight:700">${s.n}</div><div class="sub mt6">${s.online?'Online class':(/^Lab/.test(s.r)?s.r:'Room '+s.r)} · ${s.tch}</div></div>${s.now?'<span class="tag a">Now</span>':s.online?`<span class="tag a" style="cursor:pointer" onclick="toast('Joining online class…')">Join</span>`:''}</div></div>
     </div>`).join('')}
   </div>
   <div style="height:10px"></div>`,

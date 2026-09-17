@@ -1439,7 +1439,7 @@ function boardSVG(it){const T=topicOf(it),B=BOARDS[it.board]||{kind:'chalk',date
   if(chalk)s+=[[380,300,280,70],[1120,720,340,90],[900,210,220,50],[520,840,300,60],[1300,400,180,120]].map(([x,y,rx,ry])=>`<ellipse cx="${x}" cy="${y}" rx="${rx}" ry="${ry}" fill="#fff" opacity=".045"/>`).join('');
   else s+=`<path d="M300 880 q200 -30 420 10" stroke="#94a3b8" stroke-width="3" fill="none" opacity=".35"/>`;
   s+=`<g font-family="${font}">`;
-  if(B.date)s+=`<text x="1490" y="140" text-anchor="end" font-size="44" fill="${ink[0]}" opacity=".85">${hx(B.date)}</text>`;
+  if(B.date)s+=`<text x="1490" y="932" text-anchor="end" font-size="44" fill="${ink[0]}" opacity=".85">${hx(B.date)}</text>`;
   s+=`<text x="130" y="178" font-size="74" font-weight="700" fill="${ink[1]}">${hx(B.title)}</text><path d="M128 200 q ${tw/2} 12 ${tw} -2" stroke="${ink[1]}" stroke-width="5" fill="none" stroke-linecap="round" opacity=".9"/>`;
   let y=292;B.lines.forEach(([tx,c])=>{if(tx)s+=`<text x="130" y="${y}" font-size="54" fill="${ink[c]}">${hx(tx)}</text>`;y+=tx?78:34;});
   if(B.box){const by=Math.min(y+36,900);s+=`<g transform="translate(140 ${by}) rotate(-1.2)"><rect x="-22" y="-56" width="${B.box.length*25+44}" height="80" rx="10" fill="none" stroke="${ink[3]}" stroke-width="4"/><text x="0" y="0" font-size="50" fill="${ink[3]}">${hx(B.box)}</text></g>`;}

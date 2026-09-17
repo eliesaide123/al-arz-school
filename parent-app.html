@@ -2541,7 +2541,7 @@ function boardSVG(key){const B=BOARDS[key]||BOARDS.thalesConv,chalk=B.kind!=='wh
     <rect x="40" y="40" width="1100" height="700" rx="8" fill="${chalk?'#7a4b24':'#b8bec6'}"/>
     ${surface}
     <g font-family="Caveat, 'Segoe Print', 'Comic Sans MS', cursive" font-weight="700" ${chalk?'filter="url(#bd-chalk)"':''}>
-      ${c.t(1080,118,B.date,34,chalk?'#e5e7eb':'#6b7280','end')}
+      ${c.t(1080,682,B.date,34,chalk?'#e5e7eb':'#6b7280','end')}
       ${c.t(110,140,B.title,58,Y,'start')}
       <path d="M104 160 H${Math.min(1040,130+B.title.length*24)}" ${c.ly.replace('stroke-width="5"','stroke-width="4"')}/>
       ${B.body(c,Y)}

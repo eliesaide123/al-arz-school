@@ -271,6 +271,184 @@
     .device{width:min(100vw,440px);height:952px;margin:0 auto;border-radius:66px;padding:5px}
     .device::before{display:block}.bezel,.viewport{border-radius:61px}.home-indicator{display:block}
   }
+  /* ---- course content (Udemy-style) ---- */
+  .cring{--p:0;width:58px;height:58px;border-radius:50%;flex:0 0 auto;display:grid;place-items:center;background:conic-gradient(var(--accent) calc(var(--p)*1%),var(--surface-3) 0)}
+  .cring::before{content:"";grid-area:1/1;width:46px;height:46px;border-radius:50%;background:var(--surface)}
+  .cring b{grid-area:1/1;position:relative;font-size:13px;font-weight:800}
+  .btn.cont{justify-content:flex-start;padding:14px 16px;font-size:14.5px;text-align:start}
+  .btn.cont svg{flex:0 0 auto;width:20px;height:20px;fill:#fff}
+  .btn.cont .ell{min-width:0}
+  .csec{background:var(--surface);border:1px solid var(--line);border-radius:16px;margin-top:10px;overflow:hidden;box-shadow:0 1px 2px rgba(16,24,40,.04),0 8px 24px -18px rgba(16,24,40,.25)}
+  :root[data-theme="dark"] .csec{box-shadow:none}
+  .csec-h{width:100%;display:flex;align-items:center;gap:10px;padding:13px 14px;background:transparent;border:none;color:var(--text);cursor:pointer;font:inherit;text-align:start;transition:background .2s}
+  .csec.open .csec-h{background:var(--surface-2)}
+  .csec-t{font-weight:800;font-size:14.5px;line-height:1.3}
+  .csec-n{font-size:11.5px;font-weight:800;color:var(--muted);background:var(--surface-3);padding:3px 8px;border-radius:999px;flex:0 0 auto}
+  .csec-n.full{background:var(--ok-bg);color:var(--ok)}
+  .csec-h .chev{width:18px;height:18px;stroke:var(--muted);fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;transition:transform .3s;flex:0 0 auto}
+  .csec.open .chev{transform:rotate(180deg)}
+  .csec-b{overflow:hidden;transition:height .32s cubic-bezier(.2,.8,.2,1)}
+  .csec-in{padding:0 14px 4px;border-top:1px solid var(--line)}
+  .citem{display:flex;align-items:center;gap:11px;padding:11px 0;border-bottom:1px solid var(--line);cursor:pointer}
+  .citem:last-child{border-bottom:none}
+  .citem:active{opacity:.75}
+  .citem-t{font-weight:600;font-size:13.5px;line-height:1.35}
+  .citem.done .citem-t{color:var(--muted)}
+  .citem.now .citem-t{color:var(--accent);font-weight:800}
+  .citem .sub{font-size:11.5px}
+  .cchk{width:22px;height:22px;border-radius:50%;border:2px solid var(--line);flex:0 0 auto;display:grid;place-items:center;color:#fff;transition:.15s;cursor:pointer}
+  .citem.done .cchk{background:var(--ok);border-color:var(--ok)}
+  .cchk svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:3.2;stroke-linecap:round;stroke-linejoin:round}
+  .icon-btn.cdl{width:34px;height:34px;border-radius:10px}
+  .icon-btn.cdl svg{width:17px;height:17px;stroke-linecap:round;stroke-linejoin:round}
+  /* viewer */
+  .viewer{position:absolute;inset:0;z-index:74;background:var(--bg);display:flex;flex-direction:column;transform:translateY(100%);visibility:hidden;transition:transform .38s cubic-bezier(.2,.8,.2,1),visibility 0s linear .38s}
+  .viewer.open{transform:none;visibility:visible;transition:transform .38s cubic-bezier(.2,.8,.2,1)}
+  .viewer .btn,.viewer .icon-btn{transition-property:transform,background-color,color,box-shadow,opacity}
+  .vbar{display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--surface);border-bottom:1px solid var(--line);flex:0 0 auto}
+  .vbar .icon-btn svg{stroke-linecap:round;stroke-linejoin:round}
+  .vtitle{font-weight:800;font-size:15px;line-height:1.3}
+  .vbar .sub{font-size:12px;margin-top:2px}
+  .vbody{flex:1;min-height:0;position:relative;display:flex;flex-direction:column}
+  .vfoot{display:flex;gap:8px;padding:10px 14px 30px;background:var(--surface);border-top:1px solid var(--line);flex:0 0 auto}
+  .vfoot .btn{padding:13px 10px;font-size:14px;box-shadow:none}
+  .vfoot .btn.secondary.is-done{background:var(--ok-bg);color:var(--ok)}
+  /* pdf */
+  .pdf-wrap{flex:1;min-height:0;display:flex;flex-direction:column;background:#3b4048}
+  .pdf-tools,.pdf-thumbs{display:flex;align-items:center;gap:6px;padding:8px 12px;background:#2a2e34;color:#e5e7eb;flex:0 0 auto}
+  .pt-btn{min-width:34px;height:30px;border-radius:8px;border:none;background:rgba(255,255,255,.12);color:#fff;font:inherit;font-weight:800;font-size:15px;cursor:pointer;padding:0 10px}
+  .pt-btn.pt-fit{font-size:12px}
+  .pt-z,.pt-page{font-size:12.5px;font-weight:700;min-width:44px;text-align:center}
+  .pt-page{color:#cbd5e1}
+  .pdf-scroll{flex:1;min-height:0;overflow:auto;position:relative;overscroll-behavior:contain;scrollbar-width:thin}
+  .pdf-pages{display:flex;flex-direction:column;align-items:center;gap:14px;padding:14px;width:max-content;min-width:100%}
+  .pdf-page{background:#fff;color:#1b1f24;aspect-ratio:1/1.4142;box-shadow:0 6px 22px rgba(0,0,0,.4);container-type:inline-size;overflow:hidden;flex:0 0 auto;border-radius:2px}
+  .pp{font-family:Georgia,"Times New Roman",serif;font-size:2.75cqw;line-height:1.5;padding:4.5cqw 7cqw 3.5cqw;height:100%;display:flex;flex-direction:column}
+  .pdf-page[lang="ar"] .pp{font-family:"IBM Plex Sans Arabic",sans-serif}
+  .pp-hd{display:flex;justify-content:space-between;gap:3cqw;font-family:"Plus Jakarta Sans","IBM Plex Sans Arabic",sans-serif;font-size:2cqw;color:#6b7280;border-bottom:.35cqw solid var(--pc);padding-bottom:1.4cqw;margin-bottom:3cqw;font-weight:700}
+  .pp-kick{font-family:"Plus Jakarta Sans","IBM Plex Sans Arabic",sans-serif;font-size:2.3cqw;font-weight:800;color:var(--pc);text-transform:uppercase;letter-spacing:.08em}
+  .pp h1{font-family:"Plus Jakarta Sans","IBM Plex Sans Arabic",sans-serif;font-size:5.2cqw;line-height:1.15;margin:1cqw 0 2.4cqw;color:#111827}
+  .pp h2{font-family:"Plus Jakarta Sans","IBM Plex Sans Arabic",sans-serif;font-size:3.6cqw;line-height:1.25;margin:2.6cqw 0 1.6cqw;color:var(--pc)}
+  .pp p{margin:0 0 2cqw}
+  .pp ul,.pp ol{margin:0 0 2cqw;padding-inline-start:5cqw}
+  .pp li{margin-bottom:.9cqw}
+  .pp-def{border-inline-start:1cqw solid var(--pc);background:#eef0fe;padding:1.8cqw 3cqw;margin:0 0 2cqw;border-radius:1cqw}
+  .pp-def b{display:block;font-family:"Plus Jakarta Sans","IBM Plex Sans Arabic",sans-serif;font-size:2cqw;text-transform:uppercase;letter-spacing:.06em;color:var(--pc);margin-bottom:.5cqw}
+  .pp-f{font-family:"Cambria Math","Times New Roman",serif;font-size:3.8cqw;text-align:center;background:#fafaf4;border:.25cqw dashed #d6d3c4;border-radius:1cqw;padding:1.8cqw;margin:0 0 2cqw;direction:ltr;unicode-bidi:isolate}
+  .pdf-page[lang="ar"] .pp-f{direction:rtl;font-family:"IBM Plex Sans Arabic",sans-serif}
+  .pp-ex{background:#fff7e8;border-radius:1cqw;padding:2cqw 3cqw;margin:0 0 2cqw}
+  .pp-ex b{display:block;font-family:"Plus Jakarta Sans","IBM Plex Sans Arabic",sans-serif;font-size:2.7cqw;margin-bottom:.6cqw}
+  .pp-ex ol{margin:0}
+  .pp-fig{margin:.5cqw 0 1.5cqw;text-align:center}
+  .pp-fig svg{width:62%;height:auto}
+  .pp-fig.sm svg{width:48%}
+  .pp-fig figcaption{font-size:2cqw;color:#6b7280;font-style:italic}
+  .pp-ft{margin-top:auto;text-align:center;font-family:"Plus Jakarta Sans",sans-serif;font-size:2cqw;color:#9ca3af}
+  .pdf-thumbs{overflow-x:auto;scrollbar-width:none}
+  .pdf-thumbs::-webkit-scrollbar{display:none}
+  .pth{flex:0 0 auto;width:30px;height:40px;border-radius:4px;border:2px solid transparent;background:#f8fafc;color:#374151;font:inherit;font-size:11px;font-weight:800;cursor:pointer;display:flex;align-items:flex-end;justify-content:center;padding-bottom:3px}
+  .pth.on{border-color:var(--accent);box-shadow:0 0 0 2px rgba(255,255,255,.3)}
+  /* slides */
+  .sl-wrap{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center;gap:14px;background:var(--surface-3);padding:14px 0;overflow:hidden}
+  .sl-stage{overflow:hidden;touch-action:pan-y;cursor:grab;user-select:none;-webkit-user-select:none}
+  .sl-track{display:flex;transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+  .sl-track.drag{transition:none;cursor:grabbing}
+  .sl-slide{flex:0 0 100%;padding:0 14px}
+  .slc{container-type:inline-size}
+  .sl{aspect-ratio:16/9;background:#fff;color:#17212b;border-radius:1.8cqw;overflow:hidden;position:relative;box-shadow:0 10px 30px -12px rgba(0,0,0,.4);font-size:2.9cqw;line-height:1.4;padding:4.6cqw 7cqw 4.6cqw;display:flex;flex-direction:column}
+  .sl::before{content:"";position:absolute;inset-block:0;inset-inline-start:0;width:1.3cqw;background:var(--sc)}
+  .slc[lang="ar"] .sl{font-family:"IBM Plex Sans Arabic",sans-serif}
+  .sl-k{font-size:2cqw;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--sc)}
+  .sl h3{font-size:4.8cqw;line-height:1.15;margin:.8cqw 0 2.2cqw;font-weight:800}
+  .sl ul,.sl ol{padding-inline-start:4cqw;margin:0}
+  .sl li{margin-bottom:1.2cqw}
+  .sl-f{font-family:"Cambria Math","Times New Roman",serif;font-size:6cqw;text-align:center;margin:auto 0;direction:ltr;unicode-bidi:isolate;color:#0f172a}
+  .slc[lang="ar"] .sl-f{direction:rtl;font-family:"IBM Plex Sans Arabic",sans-serif}
+  .sl-note{font-size:2.5cqw;color:#5b6572;text-align:center}
+  .sl-2{display:grid;grid-template-columns:1.05fr 1fr;gap:4cqw;align-items:center;flex:1;min-height:0}
+  .sl-fig svg{width:100%;height:auto;display:block}
+  .sl-sub{font-weight:700;color:var(--sc);margin-bottom:1.6cqw}
+  .sl-steps li{margin-bottom:.9cqw}
+  .sl.q{background:#fffbeb;justify-content:center;text-align:center}
+  .sl.q::before{display:none}
+  .sl-qt{font-size:4.2cqw;font-weight:800;line-height:1.3;margin-top:2cqw}
+  .sl-check{list-style:none;padding:0!important}
+  .sl-check li{padding-inline-start:4.5cqw;position:relative}
+  .sl-check li::before{content:"✓";position:absolute;inset-inline-start:0;color:var(--sc);font-weight:800}
+  .sl.title{background:linear-gradient(150deg,var(--sc),#1e1b4b);color:#fff;justify-content:center}
+  .sl.title::before{display:none}
+  .sl.title h3{font-size:6.4cqw;margin-bottom:1.6cqw}
+  .sl.title .sl-k{color:rgba(255,255,255,.8)}
+  .sl-by{font-size:2.6cqw;opacity:.85}
+  .sl-cedar{position:absolute;inset-inline-end:-2cqw;bottom:-5cqw;width:30cqw;height:30cqw;opacity:.14;color:#fff}
+  .sl-cedar svg{width:100%;height:100%}
+  .sl-foot{position:absolute;inset-inline-end:3cqw;bottom:2.2cqw;font-size:1.8cqw;color:#98a2ae;font-weight:700}
+  .sl.title .sl-foot{color:rgba(255,255,255,.7)}
+  .sl-nav{display:flex;align-items:center;justify-content:center;gap:14px}
+  .sl-count{font-weight:800;font-size:13.5px;min-width:96px;text-align:center}
+  .sl-thumbs{display:flex;gap:8px;overflow-x:auto;padding:4px 14px;scrollbar-width:none}
+  .sl-thumbs::-webkit-scrollbar{display:none}
+  .slth{flex:0 0 auto;border:none;background:transparent;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px;color:var(--muted);font:inherit;font-size:10.5px;font-weight:700;padding:0}
+  .slth .slc{width:92px;border-radius:6px;outline:2px solid transparent;outline-offset:2px;pointer-events:none}
+  .slth .sl{box-shadow:none}
+  .slth.on .slc{outline-color:var(--accent)}
+  .slth.on{color:var(--accent)}
+  /* video */
+  .vp-wrap{flex:1;min-height:0;overflow-y:auto;background:var(--bg)}
+  .vp{position:relative;background:#000;aspect-ratio:16/9;overflow:hidden;cursor:pointer;user-select:none;-webkit-user-select:none}
+  .vp canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+  .vp-cap{position:absolute;left:50%;transform:translateX(-50%);bottom:50px;max-width:90%;width:max-content;background:rgba(0,0,0,.75);color:#fff;font-size:12px;line-height:1.35;padding:4px 9px;border-radius:6px;text-align:center;transition:bottom .25s,opacity .2s;pointer-events:none}
+  .vp.hide-ctl .vp-cap{bottom:10px}
+  .vp-cap:empty,.vp.no-cc .vp-cap{opacity:0}
+  .vp-big{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:60px;height:60px;border-radius:50%;border:none;background:rgba(0,0,0,.55);display:grid;place-items:center;cursor:pointer;transition:opacity .2s,transform .2s;padding:0}
+  .vp-big svg{width:28px;height:28px;fill:#fff;margin-left:3px}
+  .vp.playing .vp-big{opacity:0;pointer-events:none;transform:translate(-50%,-50%) scale(.8)}
+  .vp-ctl{position:absolute;left:0;right:0;bottom:0;padding:16px 8px 4px;background:linear-gradient(transparent,rgba(0,0,0,.78));color:#fff;transition:opacity .25s}
+  .vp.hide-ctl .vp-ctl{opacity:0;pointer-events:none}
+  .vp-seek{position:relative;height:16px;cursor:pointer;touch-action:none;margin:0 6px}
+  .vp-seek::before{content:"";position:absolute;left:0;right:0;top:6px;height:4px;border-radius:2px;background:rgba(255,255,255,.25)}
+  .vp-buf,.vp-played{position:absolute;left:0;top:6px;height:4px;border-radius:2px}
+  .vp-buf{background:rgba(255,255,255,.42)}
+  .vp-played{background:var(--accent)}
+  .vp-thumb{position:absolute;top:2px;width:12px;height:12px;border-radius:50%;background:#fff;transform:translateX(-50%);box-shadow:0 1px 4px rgba(0,0,0,.5)}
+  .vp-row{display:flex;align-items:center;gap:0}
+  .vp-b{height:30px;min-width:30px;border:none;background:transparent;color:#fff;display:grid;place-items:center;cursor:pointer;border-radius:6px;font:inherit;font-weight:800;font-size:11.5px;padding:0 5px;letter-spacing:0}
+  .vp-b svg{width:21px;height:21px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  #vp-pp svg{fill:#fff;stroke:none}
+  .vp-b.vp-txt{min-width:34px}
+  .vp-b.vp-txt.on{background:rgba(255,255,255,.2)}
+  #vp-cc:not(.on){color:rgba(255,255,255,.55);text-decoration:line-through}
+  .vp-time{font-size:11.5px;font-weight:700;margin-left:4px;font-variant-numeric:tabular-nums;white-space:nowrap}
+  .vp-end{position:absolute;inset:0;background:rgba(8,10,24,.86);display:none;place-items:center;color:#fff;text-align:center;cursor:default}
+  .vp.ended .vp-end{display:grid}
+  .vp.ended .vp-big,.vp.ended .vp-cap,.vp.ended .vp-ctl{display:none}
+  .vp-end-ic{width:44px;height:44px;border-radius:50%;background:var(--ok);display:grid;place-items:center;margin:0 auto 8px;font-size:22px;font-weight:800;color:#fff}
+  .vp-end-t{font-weight:800;font-size:16px}
+  .btn.sm{width:auto;padding:9px 14px;font-size:13px;box-shadow:none}
+  .vp-info{margin:12px 14px 0}
+  /* quiz */
+  .qz-o{display:block;width:100%;text-align:start;padding:11px 12px;border-radius:12px;border:1.5px solid var(--line);background:var(--surface);color:var(--text);font:inherit;font-size:13.5px;font-weight:600;margin-top:8px;cursor:pointer;transition:.15s}
+  .qz-o.sel{border-color:var(--accent);background:var(--accent-soft)}
+  .qz-o.ok{border-color:var(--ok);background:var(--ok-bg);color:var(--ok)}
+  .qz-o.bad{border-color:var(--danger);background:var(--danger-bg);color:var(--danger)}
+  /* instructor view */
+  .sheet-wrap.over{z-index:76}
+  .mstat{margin-top:6px;cursor:pointer;max-width:230px}
+  .mstat .sub{font-size:11px}
+  .mbar{position:relative;height:5px;border-radius:99px;background:var(--surface-3);overflow:hidden;margin-top:5px}
+  .mbar i,.mbar b{position:absolute;inset-block:0;inset-inline-start:0;border-radius:99px}
+  .mbar i{background:color-mix(in srgb,var(--accent) 35%,transparent)}
+  .mbar b{background:var(--ok)}
+  .mbar.lg{height:8px}
+  .mitem.off .citem-t{color:var(--muted)}
+  .mitem .icon-btn.cdl{width:32px;height:32px}
+  .madd{display:flex;align-items:center;gap:8px;width:100%;padding:12px 0;border:none;border-top:1px dashed var(--line);background:transparent;color:var(--accent);font:inherit;font-weight:700;font-size:13.5px;cursor:pointer}
+  .madd svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round}
+  :root[data-theme="dark"] .madd,:root[data-theme="dark"] .citem.now .citem-t{color:#a5b4fc}
+  .mfile{border-style:dashed;text-align:center;background:var(--surface-2);cursor:pointer}
+  .mfile.on{border-color:var(--ok);background:var(--ok-bg)}
+  select.input{appearance:auto}
+  .vfoot .btn:disabled{opacity:.5;cursor:default}
 </style>
 </head>
 <body>
@@ -296,6 +474,7 @@
         <div class="app">
           <div class="screens" id="screens"></div>
           <div class="toast" id="toast"></div>
+          <div class="viewer" id="viewer" aria-hidden="true"><div class="vbar"><div class="icon-btn" onclick="closeViewer()" aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></div><div class="grow" style="min-width:0"><div class="vtitle ell" id="v-title" data-noi18n dir="auto"></div><div class="sub" id="v-sub"></div></div><div class="icon-btn" id="v-dl" onclick="downloadItem(vw.id)" aria-label="Download"><svg viewBox="0 0 24 24"><path d="M12 4v11M7 10.5l5 5 5-5M5 20h14"/></svg></div></div><div class="vbody" id="v-body"></div><div class="vfoot"><button class="btn secondary" id="v-done" onclick="openItemStats(vw.id)"></button><button class="btn" id="v-next" onclick="nextItem()"></button></div></div>
           <div class="act-wrap" id="actsheet" data-noi18n><div class="act-back" onclick="closeLangActions()"></div><div class="act" id="act-body"></div></div>
           <div class="sheet-wrap" id="sheet"><div class="sheet-back" data-close-sheet></div><div class="sheet"><div class="grab"></div><div id="sheet-body"></div></div></div>
           <div class="drawer-wrap" id="drawer">
@@ -429,7 +608,7 @@ function applyLang(){const h=document.documentElement;h.lang=uiLang;h.dir=isRTL(
 const screensEl=document.getElementById('screens');
 let toastTimer;
 function toast(m){const t=document.getElementById('toast');t.textContent=trText(String(m));t.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('show'),1800);}
-function openSheet(h){const sb=document.getElementById('sheet-body');sb.innerHTML=h;translateEl(sb);document.getElementById('sheet').classList.add('open');}
+function openSheet(h){const sb=document.getElementById('sheet-body');sb.innerHTML=h;translateEl(sb);const w=document.getElementById('sheet');w.classList.toggle('over',viewerOpen());w.classList.add('open');}
 function closeSheet(){document.getElementById('sheet').classList.remove('open');}
 document.querySelector('[data-close-sheet]').addEventListener('click',closeSheet);
 function openDrawer(){document.getElementById('drawer').classList.add('open');}
@@ -542,6 +721,506 @@ let materials=[
   {t:'link',n:'CRDP digital resources',cls:'All'},
 ];
 let exType='MCQ',matType='pdf';
+
+/* ================= COURSE MATERIALS · instructor view ·
+   same content, PDF reader, slides viewer and canvas video player as the student app (preview mode) ================= */
+const MAT_TYPES={pdf:{l:'PDF',col:'#0ea5e9'},slides:{l:'Slides',col:'#f59e0b'},video:{l:'Video',col:'#ef4444'},link:{l:'Link',col:'#8b5cf6'},quiz:{l:'Quiz',col:'#10b981'}};
+const MAT_ICO={pdf:'<path d="M7 3h8l4 4v14H7z"/><path d="M14 3v5h5"/><path d="M9.5 13h5M9.5 16.5h3.5"/>',slides:'<rect x="3" y="4" width="18" height="12.5" rx="2"/><path d="M12 16.5V20M8 20.5h8"/><path d="M7.5 12.5l3-3 2.5 2 3.5-3.5"/>',video:'<rect x="3" y="5" width="18" height="14" rx="3"/><path d="M10 9l5 3-5 3z"/>',link:'<path d="M10 14a4.5 4.5 0 0 0 6.4 0l3-3a4.5 4.5 0 0 0-6.4-6.4l-1 1"/><path d="M14 10a4.5 4.5 0 0 0-6.4 0l-3 3a4.5 4.5 0 0 0 6.4 6.4l1-1"/>',quiz:'<circle cx="12" cy="12" r="9"/><path d="M9.6 9.4a2.5 2.5 0 1 1 3.4 2.3c-.7.3-1 .8-1 1.5v.4"/><circle cx="12" cy="16.9" r=".6" fill="currentColor" stroke="none"/>'};
+function matIco(t){return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">${MAT_ICO[t]||MAT_ICO.pdf}</svg>`;}
+function hx(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+const DOC_L={
+  en:{obj:'Objectives',def:'Definition',defs:'Key notions',prop:'Key formulas',ex:'Worked example',exs:'Exercises',rem:'Remember',sum:'Summary',q:'Quick question'},
+  fr:{obj:'Objectifs',def:'Définition',defs:'Notions clés',prop:'À retenir',ex:'Exemple commenté',exs:'Exercices',rem:'L’essentiel',sum:'Synthèse',q:'Question rapide'},
+  ar:{obj:'الأهداف',def:'تعريف',defs:'مفاهيم أساسية',prop:'قواعد أساسية',ex:'مثال محلول',exs:'تمارين',rem:'تذكّر',sum:'خلاصة',q:'سؤال سريع'}};
+const TOPICS={
+  radicals:{lang:'en',chap:'Chapter 1',title:'Real numbers & radicals',fig:'radicals',
+    intro:'Square roots let us write exact values such as √2 instead of rounded decimals. In EB9 we learn to simplify radicals and to calculate with them.',
+    points:['The square root √a (a ≥ 0) is the non-negative number whose square is a.','For a ≥ 0 and b ≥ 0: √(a × b) = √a × √b.','Simplify a radical by extracting perfect squares: √50 = √(25 × 2) = 5√2.','Rationalise a denominator: 1/√2 = √2/2.'],
+    formulas:['√a × √b = √(ab)','(√a)² = a','√(a²) = |a|','a / √b = a√b / b'],
+    examples:[{title:'Simplify A = √72 + 3√8 − √18',steps:['√72 = √(36 × 2) = 6√2','3√8 = 3 × 2√2 = 6√2','√18 = √(9 × 2) = 3√2','A = 6√2 + 6√2 − 3√2 = 9√2']}],
+    exercises:['Simplify √48 − 2√27 + √75.','Write 6/√3 with a rational denominator.','Compare 3√5 and 2√11 without a calculator.','Show that (√7 − 2)(√7 + 2) is an integer.','Solve x² = 18 and give exact values.']},
+  identities:{lang:'en',chap:'Chapter 2',title:'Algebraic calculus',fig:'identities',
+    intro:'Expanding and factorising are the two directions of the same work. The remarkable identities make both faster and are essential for the Brevet.',
+    points:['To expand, distribute every term of the first bracket over the second.','(a + b)² = a² + 2ab + b² and (a − b)² = a² − 2ab + b².','(a + b)(a − b) = a² − b² — the difference of two squares.','To factorise, look for a common factor first, then for an identity.'],
+    formulas:['(a + b)² = a² + 2ab + b²','(a − b)² = a² − 2ab + b²','(a + b)(a − b) = a² − b²'],
+    examples:[{title:'Factorise E = (2x − 3)² − 16',steps:['E = (2x − 3)² − 4²','E = (2x − 3 − 4)(2x − 3 + 4)','E = (2x − 7)(2x + 1)','Check: expand to get 4x² − 12x − 7']}],
+    exercises:['Expand (3x + 2)² and (5 − x)².','Factorise 9x² − 25.','Factorise (x + 1)² − 4(x + 1).','Solve (2x − 7)(2x + 1) = 0.']},
+  thales:{lang:'en',chap:'Chapter 3',title:'Thales’ theorem',fig:'thales',
+    intro:'Thales’ theorem links parallel lines and proportional lengths. It lets us compute unknown lengths and prove that two lines are parallel.',
+    points:['In a triangle ABC, M is a point of [AB] and N a point of [AC].','If (MN) // (BC), then AM/AB = AN/AC = MN/BC.','Converse: if AM/AB = AN/AC with the points in the same order, then (MN) // (BC).','Always check the parallel lines before using the ratios.'],
+    formulas:['AM/AB = AN/AC = MN/BC','(MN) // (BC) ⇔ AM/AB = AN/AC'],
+    examples:[{title:'AM = 3 cm, AB = 5 cm, AN = 4.2 cm and (MN) // (BC). Find AC.',steps:['(MN) // (BC), so by Thales: AM/AB = AN/AC','3/5 = 4.2/AC','AC = 4.2 × 5 ÷ 3','AC = 7 cm']}],
+    exercises:['AM = 2, AB = 6, MN = 3 and (MN) // (BC). Find BC.','Prove that (MN) // (BC) when AM = 4, AB = 10, AN = 6 and AC = 15.','Explain why the converse needs the points in the same order.','A 1.6 m student casts a 2 m shadow while a tree casts 15 m. How tall is the tree?']},
+  pythagoras:{lang:'en',chap:'Chapter 4',title:'Pythagoras’ theorem',fig:'pythagoras',
+    intro:'In a right-angled triangle the square of the hypotenuse equals the sum of the squares of the other two sides.',
+    points:['The hypotenuse is the side opposite the right angle — the longest side.','If ABC is right-angled at A, then BC² = AB² + AC².','Converse: if BC² = AB² + AC², the triangle is right-angled at A.','Use it to compute a missing side, then round only at the end.'],
+    formulas:['BC² = AB² + AC²','BC = √(AB² + AC²)'],
+    examples:[{title:'ABC right-angled at A with AB = 6 cm and AC = 8 cm. Find BC.',steps:['BC² = AB² + AC²','BC² = 6² + 8² = 36 + 64','BC² = 100','BC = √100 = 10 cm']}],
+    exercises:['A ladder of 5 m leans 3 m from a wall. How high does it reach?','Is the triangle with sides 7, 24 and 25 right-angled?','Find the diagonal of a 12 cm × 9 cm rectangle.']},
+  trig:{lang:'en',chap:'Chapter 4',title:'Trigonometric ratios',fig:'trig',
+    intro:'In a right-angled triangle, the ratios between sides depend only on the angle: cosine, sine and tangent.',
+    points:['cos B = adjacent side / hypotenuse.','sin B = opposite side / hypotenuse.','tan B = opposite side / adjacent side.','cos² x + sin² x = 1 for any acute angle x.'],
+    formulas:['cos B = AB / BC','sin B = AC / BC','tan B = AC / AB','cos² x + sin² x = 1'],
+    examples:[{title:'ABC right-angled at A, BC = 10 cm and angle B = 30°. Find AC.',steps:['sin B = AC / BC','AC = BC × sin 30°','AC = 10 × 0.5','AC = 5 cm']}],
+    exercises:['Find angle B when AB = 4 and BC = 8.','Compute tan 45° using an isosceles right triangle.','Show that (cos x + sin x)² = 1 + 2 sin x cos x.']},
+  quadratics:{lang:'en',chap:'Chapter 1',title:'Second-degree equations',fig:'parabola',
+    intro:'An equation of the form ax² + bx + c = 0 with a ≠ 0 is solved with the discriminant Δ = b² − 4ac.',
+    points:['Compute the discriminant Δ = b² − 4ac.','If Δ > 0 there are two roots x = (−b ± √Δ) / 2a.','If Δ = 0 there is one double root x = −b / 2a.','If Δ < 0 the equation has no real root.'],
+    formulas:['Δ = b² − 4ac','x = (−b ± √Δ) / 2a','S = x₁ + x₂ = −b/a','P = x₁ × x₂ = c/a'],
+    examples:[{title:'Solve 2x² − 3x − 2 = 0',steps:['a = 2, b = −3, c = −2','Δ = 9 + 16 = 25','x₁ = (3 − 5) / 4 = −1/2','x₂ = (3 + 5) / 4 = 2']}],
+    exercises:['Solve x² − 5x + 6 = 0.','Find m so that x² + mx + 9 = 0 has a double root.','Factorise 3x² − 12x + 9.','A rectangle has a perimeter of 34 cm and an area of 60 cm². Find its sides.']},
+  vectors:{lang:'en',chap:'Chapter 2',title:'Vectors in the plane',fig:'vectors',
+    intro:'A vector is defined by a direction, a sense and a length. Vectors let us translate points and prove geometric properties.',
+    points:['Vectors AB and DC are equal when ABCD is a parallelogram.','Chasles’ relation: AB + BC = AC (as vectors).','For a real k, k·AB has the same direction as AB.','Two vectors u and v are collinear when u = k·v.'],
+    formulas:['AB + BC = AC','AB (xB − xA ; yB − yA)','AB = √((xB − xA)² + (yB − yA)²)'],
+    examples:[{title:'A(1 ; 2) and B(4 ; 6). Find the vector AB and the length AB.',steps:['AB (4 − 1 ; 6 − 2) = (3 ; 4)','AB = √(3² + 4²)','AB = √25','AB = 5']}],
+    exercises:['Simplify AB + CA + BC (vectors).','Show that ABCD is a parallelogram with A(0 ; 0), B(3 ; 1), C(5 ; 4) and D(2 ; 3).','Find k so that u(2 ; k) and v(6 ; 9) are collinear.']},
+  functions:{lang:'en',chap:'Chapter 3',title:'Reference functions',fig:'functions',
+    intro:'The square, inverse and square-root functions are the building blocks used to study other functions in S1.',
+    points:['x² is decreasing on ]−∞ ; 0] and increasing on [0 ; +∞[.','1/x is decreasing on ]−∞ ; 0[ and on ]0 ; +∞[.','√x is defined and increasing on [0 ; +∞[.','A variation table summarises how a function changes.'],
+    formulas:['f(x) = x²','f(x) = 1/x','f(x) = √x'],
+    examples:[{title:'Compare 1.2² and 1.3² without a calculator',steps:['1.2 and 1.3 are both in [0 ; +∞[','The square function is increasing there','1.2 < 1.3','So 1.2² < 1.3²']}],
+    exercises:['Draw the variation table of f(x) = x² − 4.','Solve 1/x > 2.','Compare √5 and √7 without a calculator.']},
+};
+/* course content per level · EB9 ids match the student app (m1…m18) */
+const MAT_SRC={
+  EB9:[
+    {n:'Ch.1 Real numbers & radicals',items:[
+      {id:'m1',t:'pdf',n:'Mathematics EB9 — CRDP textbook',topic:'radicals',pages:12,size:'2.4 MB',textbook:1},
+      {id:'m2',t:'video',n:'Radicals — introduction',topic:'radicals',dur:'08:35'},
+      {id:'m3',t:'slides',n:'Radicals — summary notes',topic:'radicals',slides:14},
+      {id:'m4',t:'quiz',n:'Quick check — radicals',topic:'radicals'}]},
+    {n:'Ch.2 Algebraic calculus',items:[
+      {id:'m5',t:'video',n:'Remarkable identities',topic:'identities',dur:'10:12'},
+      {id:'m6',t:'pdf',n:'Factorisation — worked examples',topic:'identities',pages:6,size:'1.1 MB'},
+      {id:'m7',t:'slides',n:'Expanding & factorising',topic:'identities',slides:10},
+      {id:'m8',t:'link',n:'CRDP digital resources — algebra',url:'https://www.crdp.org'}]},
+    {n:'Ch.3 Thales’ theorem',items:[
+      {id:'m9',t:'video',n:'Thales’ theorem explained (14:20)',topic:'thales',dur:'14:20',video:'thales'},
+      {id:'m10',t:'slides',n:'Thales — converse & applications',topic:'thales',slides:12},
+      {id:'m11',t:'pdf',n:'Worksheet — Thales’ theorem',topic:'thales',pages:4,size:'640 KB'},
+      {id:'m12',t:'quiz',n:'Quick check — Thales',topic:'thales'},
+      {id:'m13',t:'link',n:'GeoGebra — Thales construction',url:'https://www.geogebra.org/geometry'}]},
+    {n:'Ch.4 Pythagoras & trigonometry',items:[
+      {id:'m14',t:'video',n:'Pythagoras’ theorem',topic:'pythagoras',dur:'09:48',video:'pythagoras'},
+      {id:'m15',t:'slides',n:'Trigonometric ratios',topic:'trig',slides:15},
+      {id:'m16',t:'pdf',n:'Trigonometry formula sheet',topic:'trig',pages:2,size:'310 KB'},
+      {id:'m17',t:'video',n:'Solving right triangles',topic:'trig',dur:'12:05'},
+      {id:'m18',t:'quiz',n:'Chapter test — trigonometry',topic:'trig'}]},
+  ],
+  S1:[
+    {n:'Ch.1 Second-degree equations',items:[
+      {id:'s1',t:'pdf',n:'Mathematics S1 — CRDP textbook',topic:'quadratics',pages:10,size:'2.2 MB',textbook:1},
+      {id:'s2',t:'video',n:'Solving ax² + bx + c = 0',topic:'quadratics',dur:'11:05'},
+      {id:'s3',t:'slides',n:'The discriminant Δ',topic:'quadratics',slides:12},
+      {id:'s4',t:'quiz',n:'Quick check — quadratics',topic:'quadratics'}]},
+    {n:'Ch.2 Vectors',items:[
+      {id:'s5',t:'slides',n:'Vectors — definitions & operations',topic:'vectors',slides:10},
+      {id:'s6',t:'pdf',n:'Worksheet — Chasles’ relation',topic:'vectors',pages:4,size:'520 KB'},
+      {id:'s7',t:'video',n:'Vectors in the plane',topic:'vectors',dur:'09:30'},
+      {id:'s8',t:'link',n:'GeoGebra — adding vectors',url:'https://www.geogebra.org/geometry'}]},
+    {n:'Ch.3 Functions',items:[
+      {id:'s9',t:'video',n:'Reference functions',topic:'functions',dur:'10:40'},
+      {id:'s10',t:'pdf',n:'Variation tables — worked examples',topic:'functions',pages:6,size:'900 KB'},
+      {id:'s11',t:'quiz',n:'Chapter test — functions',topic:'functions'}]},
+  ],
+};
+const QUIZZES={
+  m4:[{q:'√50 simplifies to…',a:['2√5','5√2','25√2','10√5'],c:1},{q:'(√7)² = …',a:['7','49','√14','14'],c:0},{q:'1/√2 with a rational denominator is…',a:['2/√2','√2','√2/2','1/2'],c:2}],
+  m12:[{q:'(MN) // (BC), AM = 2, AB = 6 and AN = 3. Then AC = …',a:['4','9','6','12'],c:1},{q:'To apply Thales’ theorem we need…',a:['(MN) ⊥ (BC)','AB = AC','(MN) // (BC)','a right angle'],c:2},{q:'The converse of Thales’ theorem is used to prove that…',a:['two lines are parallel','a triangle is right-angled','two angles are equal','a length is maximal'],c:0}],
+  m18:[{q:'In a right triangle, the hypotenuse is…',a:['the shortest side','the side opposite the right angle','any side','the height'],c:1},{q:'cos B = …',a:['opposite / hypotenuse','opposite / adjacent','adjacent / hypotenuse','hypotenuse / adjacent'],c:2},{q:'Right angle at A, AB = 6 and AC = 8. BC = …',a:['10','14','48','√14'],c:0}],
+  s4:[{q:'For x² − 5x + 6 = 0, Δ = …',a:['1','49','−1','25'],c:0},{q:'If Δ < 0, the equation has…',a:['two roots','one double root','no real root'],c:2},{q:'The roots of x² − 5x + 6 = 0 are…',a:['1 and 6','2 and 3','−2 and −3'],c:1}],
+  s11:[{q:'On [0 ; +∞[, x ↦ x² is…',a:['increasing','decreasing','constant'],c:0},{q:'1/x is not defined for…',a:['x = 1','x = 0','x < 0'],c:1},{q:'√x is defined for…',a:['all real x','x ≥ 0','x > 1'],c:1}],
+};
+const MAT_CLS={m9b:'EB9',m9a:'EB9',m10:'S1'};
+const MAT={};Object.keys(MAT_CLS).forEach(k=>{MAT[k]=JSON.parse(JSON.stringify(MAT_SRC[MAT_CLS[k]]));MAT[k].forEach(s=>s.items.forEach(it=>{it.st='published';}));});
+MAT.m9a.forEach(s=>s.items.forEach(it=>{if(it.id==='m17'||it.id==='m18')it.st='draft';}));
+MAT.m10.forEach(s=>s.items.forEach(it=>{if(it.id==='s11')it.st='draft';}));
+const MAT_UPDATED={m9b:'Fri 13 Nov',m9a:'Thu 12 Nov',m10:'Wed 11 Nov'};
+const MAT_PACE={m9b:0,m9a:2,m10:1};
+/* Omar Haddad (EB9 B) — same seed as the student app */
+const OMAR_DONE=new Set(['m1','m2','m3','m4','m5','m6','m7','m8']),OMAR_NOW='m9';
+const MAT_OPEN={};
+let matCls='m9b',vw={id:null,type:null,page:1,slide:0,n:0,zoom:1},vid=null;
+const VID_LEN=120; /* condensed demo: a whole lesson plays in about 2 minutes at 1× while the clock shows the real lecture time */
+
+/* ---- helpers ---- */
+function matCourse(cls){cls=cls||matCls;const c=classes.find(x=>x.id===cls)||classes[0];return {c:'M',n:'Mathematics',col:SUBJ.M,tch:'Ms. Dana Khoury',hdr:'Mathematics '+MAT_CLS[c.id],grp:c.grp};}
+function secsOf(cls){return MAT[cls||matCls]||[];}
+function itemsOf(cls){return secsOf(cls).flatMap((s,si)=>s.items.map(it=>Object.assign({sec:si},it)));}
+function findItem(id,cls){const secs=secsOf(cls);for(let si=0;si<secs.length;si++){const ii=secs[si].items.findIndex(x=>x.id===id);if(ii>-1)return {si,ii,item:secs[si].items[ii]};}return null;}
+function isDone(){return false;}
+function markDone(){} /* preview mode: opening or finishing an item never counts as a student completion */
+function nextAfter(id){const its=itemsOf(),i=its.findIndex(x=>x.id===id);return i>-1?its[i+1]||null:null;}
+function topicOf(it){return TOPICS[it.topic]||TOPICS[MAT_CLS[matCls]==='S1'?'quadratics':'radicals'];}
+function hostOf(u){return String(u||'').replace(/^https?:\/\//,'').replace(/^www\./,'').split('/')[0];}
+function itemMeta(it){const L=MAT_TYPES[it.t].l,parts=it.t==='pdf'?[L,`${it.pages} pages`,`<span dir="ltr">${it.size}</span>`]:it.t==='slides'?[L,`${it.slides} slides`]:it.t==='video'?[L,it.dur]:it.t==='quiz'?[L,`${(QUIZZES[it.id]||[]).length} questions`]:it.t==='link'?[L,`<span dir="ltr">${hostOf(it.url)}</span>`]:[L];return parts.map(x=>`<bdi>${x}</bdi>`).join(' · ');}
+function parseDur(s){const m=String(s||'').match(/(\d+):(\d{2})/);return m?(+m[1])*60+(+m[2]):300;}
+function fmtT(s){s=Math.max(0,Math.floor(s));return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');}
+function secMeta(s){const n=s.items.length,mins=Math.round(s.items.filter(x=>x.t==='video').reduce((a,x)=>a+parseDur(x.dur),0)/60),pages=s.items.filter(x=>x.t==='pdf').reduce((a,x)=>a+(x.pages||0),0);return [n===1?'1 item':`${n} items`].concat(mins?[`${mins} min`]:[],pages?[`${pages} pages`]:[]).map(x=>`<bdi>${x}</bdi>`).join(' · ');}
+function matOpen(){if(!MAT_OPEN[matCls])MAT_OPEN[matCls]=new Set([0]);return MAT_OPEN[matCls];}
+function toggleSec(si){const set=matOpen(),el=document.querySelector(`#scr-materials .csec[data-sec="${si}"]`);if(!el)return;const b=el.querySelector('.csec-b');
+  if(set.has(si)){set.delete(si);b.style.height=b.scrollHeight+'px';void b.offsetHeight;b.style.height='0px';el.classList.remove('open');}
+  else{set.add(si);el.classList.add('open');b.style.height=b.scrollHeight+'px';const end=e=>{if(e.target!==b)return;b.removeEventListener('transitionend',end);if(set.has(si))b.style.height='';};b.addEventListener('transitionend',end);}}
+function matPick(id){matCls=id;refreshMat(true);}
+function refreshMat(top){const sc=document.getElementById('scr-materials');if(sc){const st=sc.scrollTop;rebuild('materials');sc.scrollTop=top?0:st;if(current==='materials')setLead(sc);}if(vw.id&&viewerOpen())vFoot();}
+function openItem(id){const f=findItem(id);if(!f)return;const it=f.item;
+  if(it.t==='pdf')openPdf(it);else if(it.t==='slides')openSlides(it);else if(it.t==='video')openVideo(it);else if(it.t==='link')openLinkItem(it);else if(it.t==='quiz')openQuizItem(it);}
+
+/* ---- class analytics (roster students + the rest of the class) ---- */
+function hash01(s){let h=2166136261;for(const ch of String(s)){h^=ch.charCodeAt(0);h=Math.imul(h,16777619);}return ((h>>>0)%10000)/10000;}
+function itemStats(id,cls){cls=cls||matCls;const c=classes.find(x=>x.id===cls),f=findItem(id,cls),size=c.students,ros=rosters[cls]||[],rest=Math.max(0,size-ros.length);
+  if(!f||f.item.st!=='published')return {size,viewed:0,completed:0,rows:ros.map(s=>({s,st:'none'})),rest,live:false};
+  const pub=itemsOf(cls).filter(x=>x.st==='published'),k=Math.max(0,pub.findIndex(x=>x.id===id))+MAT_PACE[cls],cf=Math.max(.04,.95-k*.055),vf=Math.min(1,cf+.14);
+  const rows=ros.map(s=>{let st;if(cls==='m9b'&&s.n==='Omar Haddad')st=OMAR_DONE.has(id)?'done':id===OMAR_NOW?'prog':'none';else{const h=hash01(s.n+'|'+id);st=h<cf?'done':h<vf?'prog':'none';}return {s,st};});
+  const rc=Math.round(cf*rest),rv=Math.max(rc,Math.round(vf*rest));
+  return {size,viewed:rows.filter(r=>r.st!=='none').length+rv,completed:rows.filter(r=>r.st==='done').length+rc,rows,rest,live:true};}
+function avgDone(items,cls){const its=items.filter(x=>x.st==='published');if(!its.length)return null;return Math.round(its.reduce((a,x)=>{const s=itemStats(x.id,cls);return a+s.completed/s.size;},0)/its.length*100);}
+const ST_L={done:['Completed','ok'],prog:['In progress','warn'],none:['Not started','']};
+function matRow(it){const T=MAT_TYPES[it.t],dl=it.t==='pdf'||it.t==='slides',pub=it.st==='published';let an;
+  if(pub){const s=itemStats(it.id);an=`<div class="mstat" onclick="event.stopPropagation();openItemStats('${it.id}')"><div class="sub"><bdi>Viewed ${s.viewed}/${s.size}</bdi> · <bdi>Completed ${s.completed}</bdi></div><div class="mbar"><i style="width:${Math.round(s.viewed/s.size*100)}%"></i><b style="width:${Math.round(s.completed/s.size*100)}%"></b></div></div>`;}
+  else an=`<div class="row mt6" style="gap:6px;flex-wrap:wrap"><span class="tag ${it.st==='draft'?'warn':''}" style="${it.st==='hidden'?'background:var(--surface-3);color:var(--muted)':''}">${it.st==='draft'?'Draft':'Hidden'}</span><span class="sub" style="font-size:11px">Not visible to students</span></div>`;
+  return `<div class="citem mitem${pub?'':' off'}" onclick="openItem('${it.id}')"><div class="set-ic" style="background:${T.col}1f;color:${T.col}">${matIco(it.t)}</div><div class="grow" style="min-width:0"><div class="citem-t" data-noi18n dir="auto">${hx(it.n)}</div><div class="sub mt6">${itemMeta(it)}</div>${an}</div>${dl?`<div class="icon-btn cdl" onclick="event.stopPropagation();downloadItem('${it.id}')" aria-label="Download"><svg viewBox="0 0 24 24"><path d="M12 4v11M7 10.5l5 5 5-5M5 20h14"/></svg></div>`:''}<div class="icon-btn cdl" onclick="event.stopPropagation();itemMenu('${it.id}')" aria-label="More"><svg viewBox="0 0 24 24"><circle cx="5.5" cy="12" r="1.4" fill="currentColor"/><circle cx="12" cy="12" r="1.4" fill="currentColor"/><circle cx="18.5" cy="12" r="1.4" fill="currentColor"/></svg></div></div>`;}
+function openItemStats(id){const f=findItem(id);if(!f)return;const it=f.item;if(it.st!=='published'){toast('Not visible to students');return;}const s=itemStats(id),c=classes.find(x=>x.id===matCls),T=MAT_TYPES[it.t],ns=s.size-s.viewed,ord={prog:0,none:1,done:2},rows=s.rows.slice().sort((a,b)=>ord[a.st]-ord[b.st]);
+  openSheet(`<div class="row"><div class="set-ic" style="background:${T.col}1f;color:${T.col}">${matIco(it.t)}</div><div class="grow" style="min-width:0"><h2 style="font-size:18px;font-weight:800;line-height:1.3" data-noi18n dir="auto">${hx(it.n)}</h2><div class="sub mt6">${c.grp} · Student progress</div></div></div>
+  <div class="row mt16" style="gap:8px"><div class="stat"><div class="n tnum">${s.viewed}/${s.size}</div><div class="l">Viewed</div></div><div class="stat"><div class="n tnum" style="color:var(--ok)">${s.completed}</div><div class="l">Completed</div></div><div class="stat"><div class="n tnum" style="color:var(--danger)">${ns}</div><div class="l">Not started</div></div></div>
+  <div class="mbar lg mt12"><i style="width:${Math.round(s.viewed/s.size*100)}%"></i><b style="width:${Math.round(s.completed/s.size*100)}%"></b></div>
+  <div class="card mt16" style="padding:4px 16px">${rows.map(r=>`<div class="list-item"><div class="avatar" style="width:34px;height:34px;font-size:12px;background:${r.s.c}">${initials(r.s.n)}</div><div class="grow" style="font-weight:600">${r.s.n}</div><span class="tag ${ST_L[r.st][1]}" style="${r.st==='none'?'background:var(--surface-3);color:var(--muted)':''}">${ST_L[r.st][0]}</span></div>`).join('')}</div>
+  ${s.rest?`<p class="sub mt8" style="text-align:center;font-size:12px">+ ${s.rest} more students</p>`:''}
+  ${ns?`<button class="btn mt16" onclick="closeSheet();toast('Reminder sent to ${ns} students 🔔')">Remind students who haven't started</button>`:`<div class="tag ok mt16">Everyone has opened this item</div>`}
+  <button class="btn secondary mt8" onclick="closeSheet()">Close</button>`);}
+
+/* ---- manage content ---- */
+function matTouched(){MAT_UPDATED[matCls]='Today';}
+function itemMenu(id){const f=findItem(id);if(!f)return;const it=f.item,sec=secsOf()[f.si],first=f.ii===0,last=f.ii===sec.items.length-1,pub=it.st==='published',c=classes.find(x=>x.id===matCls);
+  const row=(fn,ic,label,o)=>`<div class="set-row" style="cursor:pointer;${o&&o.off?'opacity:.4;pointer-events:none;':''}" onclick="${fn}"><div class="set-ic" style="${o&&o.danger?'background:var(--danger-bg);color:var(--danger)':''}"><svg viewBox="0 0 24 24">${ic}</svg></div><div class="grow" style="font-weight:600;${o&&o.danger?'color:var(--danger)':''}">${label}</div></div>`;
+  const eye='<path d="M3 12s3.5-6.5 9-6.5 9 6.5 9 6.5-3.5 6.5-9 6.5S3 12 3 12z"/>';
+  openSheet(`<h2 style="font-size:18px;font-weight:800;line-height:1.3" data-noi18n dir="auto">${hx(it.n)}</h2><div class="sub mt6">${itemMeta(it)} · ${pub?'Published':it.st==='draft'?'Draft':'Hidden'}</div>
+  <div class="mt12">${row(`itemPublish('${id}')`,pub?eye+'<path d="M4 4l16 16"/>':eye+'<circle cx="12" cy="12" r="2.8"/>',pub?'Hide from students':'Publish to students')}
+  ${row(`itemRename('${id}')`,'<path d="M4 20h4L19 9l-4-4L4 16z"/>','Rename')}
+  ${row(`itemMove('${id}',-1)`,'<path d="M12 19V5M6 11l6-6 6 6"/>','Move up',{off:first})}
+  ${row(`itemMove('${id}',1)`,'<path d="M12 5v14M6 13l6 6 6-6"/>','Move down',{off:last})}
+  ${row(`closeSheet();toast('Shared with ${c.grp} ✓')`,'<circle cx="18" cy="5.5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="18.5" r="2.5"/><path d="M8.2 10.8l7.6-4.1M8.2 13.2l7.6 4.1"/>','Share with class',{off:!pub})}
+  ${row(`itemDelete('${id}')`,'<path d="M5 7h14M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/>','Delete',{danger:1})}</div>`);}
+function itemPublish(id){const f=findItem(id);if(!f)return;const it=f.item;it.st=it.st==='published'?'hidden':'published';matTouched();closeSheet();refreshMat();toast(it.st==='published'?'Published to students ✓':'Hidden from students');}
+function itemRename(id){const f=findItem(id);if(!f)return;openSheet(`<h2 style="font-size:20px;font-weight:800">Rename</h2><div class="field"><label>Title</label><input class="input" id="rn-in" dir="auto" value="${hx(f.item.n)}"/></div><button class="btn mt16" onclick="itemRenameSave('${id}')">Save</button><button class="btn secondary mt8" onclick="closeSheet()">Cancel</button>`);}
+function itemRenameSave(id){const f=findItem(id),v=(document.getElementById('rn-in').value||'').trim();if(!f)return;if(!v){toast('Enter a title');return;}f.item.n=v;matTouched();closeSheet();refreshMat();toast('Renamed ✓');}
+function itemMove(id,d){const f=findItem(id);if(!f)return;const a=secsOf()[f.si].items,j=f.ii+d;if(j<0||j>=a.length)return;[a[f.ii],a[j]]=[a[j],a[f.ii]];matTouched();closeSheet();refreshMat();toast(d<0?'Moved up':'Moved down');}
+function itemDelete(id){const f=findItem(id);if(!f)return;openSheet(`<h2 style="font-size:20px;font-weight:800">Delete this item?</h2><p class="mt8" style="font-weight:700" data-noi18n dir="auto">${hx(f.item.n)}</p><p class="sub mt8" style="line-height:1.5">Students will lose access to it. This cannot be undone.</p><button class="btn mt16" style="background:var(--danger);box-shadow:none" onclick="itemDeleteGo('${id}')">Delete</button><button class="btn secondary mt8" onclick="closeSheet()">Cancel</button>`);}
+function itemDeleteGo(id){const f=findItem(id);if(!f)return;secsOf()[f.si].items.splice(f.ii,1);matTouched();closeSheet();refreshMat();toast('Item deleted');}
+function addSectionSheet(){const K=matCourse();openSheet(`<h2 style="font-size:20px;font-weight:800">Add section</h2><p class="sub mt8">${K.hdr} · ${K.grp}</p><div class="field"><label>Section title</label><input class="input" id="as-in" dir="auto" placeholder="Ch.5 …"/></div><button class="btn mt16" onclick="addSectionGo()">Create section</button>`);}
+function addSectionGo(){const secs=secsOf(),v=(document.getElementById('as-in').value||'').trim()||('Ch.'+(secs.length+1));secs.push({n:v,items:[]});matOpen().add(secs.length-1);matTouched();closeSheet();refreshMat();toast('Section added ✓');}
+let addType='pdf',addFile=false,addSeq=1;
+function addFileName(t){return {pdf:'worksheet.pdf',slides:'lesson-slides.pptx',video:'lesson-recording.mp4'}[t]||'file';}
+function addExtra(t){const file=`<div class="card mt12 mfile${addFile?' on':''}" onclick="addPickFile()"><div style="font-size:24px">${addFile?'📄':'⬆️'}</div><div class="sub mt8">${addFile?`<span dir="ltr" data-noi18n>${addFileName(t)}</span>`:'Tap to choose a file (demo)'}</div></div>`;
+  if(t==='pdf')return `<div class="field"><label>Number of pages</label><input class="input" id="ai-n" inputmode="numeric" dir="ltr" value="4"/></div>${file}`;
+  if(t==='slides')return `<div class="field"><label>Number of slides</label><input class="input" id="ai-n" inputmode="numeric" dir="ltr" value="10"/></div>${file}`;
+  if(t==='video')return `<div class="field"><label>Duration (mm:ss)</label><input class="input" id="ai-n" dir="ltr" value="08:30"/></div>${file}`;
+  if(t==='link')return `<div class="field"><label>URL</label><input class="input" id="ai-n" dir="ltr" inputmode="url" value="https://www.crdp.org"/></div>`;
+  return `<div class="card mt12" style="background:var(--surface-2)"><div class="sub">A 3-question check based on this chapter is created. You can edit the questions before publishing.</div></div>`;}
+function addItemSheet(si){const secs=secsOf();if(!secs.length){addSectionSheet();return;}addType='pdf';addFile=false;const K=matCourse();
+  openSheet(`<h2 style="font-size:20px;font-weight:800">Add item</h2><p class="sub mt8">${K.hdr} · ${K.grp}</p>
+  <div class="set-label">Type</div>
+  <div class="seg" id="ai-type">${['pdf','slides','video','link','quiz'].map((x,i)=>`<button class="${i?'':'active'}" onclick="addPickType(this,'${x}')">${MAT_TYPES[x].l}</button>`).join('')}</div>
+  <div class="field"><label>Section</label><select class="input" id="ai-sec" dir="auto">${secs.map((s,i)=>`<option value="${i}" ${i===(si==null?secs.length-1:si)?'selected':''} data-noi18n>${hx(s.n)}</option>`).join('')}</select></div>
+  <div class="field"><label>Title</label><input class="input" id="ai-title" dir="auto"/></div>
+  <div id="ai-extra">${addExtra('pdf')}</div>
+  <button class="btn mt20" onclick="addItemGo()">Create as draft</button>`);}
+function addPickType(btn,t){addType=t;btn.parentElement.querySelectorAll('button').forEach(b=>b.classList.remove('active'));btn.classList.add('active');const ex=document.getElementById('ai-extra');ex.innerHTML=addExtra(t);translateEl(ex);}
+function addPickFile(){addFile=!addFile;const ex=document.getElementById('ai-extra'),n=document.getElementById('ai-n'),keep=n?n.value:null;ex.innerHTML=addExtra(addType);const n2=document.getElementById('ai-n');if(n2&&keep!=null)n2.value=keep;translateEl(ex);}
+function addItemGo(){const secs=secsOf(),si=+document.getElementById('ai-sec').value||0,sec=secs[si],title=(document.getElementById('ai-title').value||'').trim(),nEl=document.getElementById('ai-n'),v=nEl?nEl.value.trim():'';
+  if(!sec)return;if(!title){toast('Enter a title');return;}if(['pdf','slides','video'].includes(addType)&&!addFile){toast('Choose a file first');return;}
+  const base=sec.items.find(x=>x.topic)||itemsOf().find(x=>x.topic),id='new'+(addSeq++),it={id,t:addType,n:title,topic:base?base.topic:(MAT_CLS[matCls]==='S1'?'quadratics':'radicals'),st:'draft'};
+  if(addType==='pdf'){it.pages=Math.max(1,Math.min(40,parseInt(v,10)||4));it.size=(it.pages*.18).toFixed(1)+' MB';}
+  else if(addType==='slides')it.slides=Math.max(3,Math.min(30,parseInt(v,10)||10));
+  else if(addType==='video')it.dur=/^\d{1,2}:\d{2}$/.test(v)?v.padStart(5,'0'):'08:30';
+  else if(addType==='link')it.url=/^https?:\/\//.test(v)?v:'https://'+(v||'www.crdp.org');
+  else{const q=sec.items.find(x=>x.t==='quiz')||itemsOf().find(x=>x.t==='quiz');QUIZZES[id]=q&&QUIZZES[q.id]?QUIZZES[q.id]:QUIZZES.m4;}
+  sec.items.push(it);matOpen().add(si);matTouched();closeSheet();refreshMat();toast('Item added as draft ✓');}
+function uploadMaterial(){addItemSheet(null);}
+
+/* ---- figures (plain SVG, work on white paper and as <img> for the video canvas) ---- */
+function FIG(name,col){const k='#1f2937',t=(x,y,s,o)=>`<text x="${x}" y="${y}" font-family="Plus Jakarta Sans, Arial, sans-serif" font-size="${(o&&o.fs)||15}" font-weight="${(o&&o.fw)||700}" fill="${(o&&o.fill)||k}" text-anchor="${(o&&o.a)||'middle'}">${s}</text>`;let b='';
+  switch(name){
+  case 'thales':b=`<path d="M170 22 L40 225 L330 225 Z" fill="none" stroke="${k}" stroke-width="2.4" stroke-linejoin="round"/><path d="M98.5 132.8 L258 132.8" stroke="${col}" stroke-width="3"/><path d="M40 225 L330 225" stroke="${col}" stroke-width="3"/><path d="M174 127l7 5.8-7 5.8M181 127l7 5.8-7 5.8M180 219l7 6-7 6M187 219l7 6-7 6" fill="none" stroke="${col}" stroke-width="2"/><circle cx="98.5" cy="132.8" r="4" fill="${k}"/><circle cx="258" cy="132.8" r="4" fill="${k}"/>${t(170,15,'A')}${t(28,242,'B')}${t(344,242,'C')}${t(80,131,'M')}${t(276,131,'N')}`;break;
+  case 'pythagoras':b=`<rect x="85" y="95" width="55" height="55" fill="${col}" fill-opacity=".18" stroke="${col}" stroke-width="1.6"/><rect x="140" y="150" width="80" height="80" fill="#f59e0b" fill-opacity=".18" stroke="#f59e0b" stroke-width="1.6"/><path d="M140 95 L220 150 L275 70 L195 15 Z" fill="#ec4899" fill-opacity=".16" stroke="#ec4899" stroke-width="1.6"/><path d="M140 95 L140 150 L220 150 Z" fill="#fff" stroke="${k}" stroke-width="2.4" stroke-linejoin="round"/><path d="M140 140h10v10" fill="none" stroke="${k}" stroke-width="1.6"/>${t(112,128,'AB²',{fs:13})}${t(180,196,'AC²',{fs:13})}${t(208,90,'BC²',{fs:13})}${t(128,160,'A',{fs:13})}${t(128,92,'B',{fs:13})}${t(232,164,'C',{fs:13})}${t(320,200,'BC² = AB² + AC²',{fs:13,a:'middle'})}`;break;
+  case 'radicals':b=`<path d="M20 170H380" stroke="${k}" stroke-width="2"/>${[0,1,2,3,4].map(i=>`<path d="M${50+80*i} 163v14" stroke="${k}" stroke-width="2"/>${t(50+80*i,197,i)}`).join('')}<rect x="50" y="90" width="80" height="80" fill="${col}" fill-opacity=".12" stroke="${col}" stroke-width="1.6"/><path d="M50 170 L130 90" stroke="${col}" stroke-width="2.4"/><path d="M130 90 A113.1 113.1 0 0 1 163.1 170" fill="none" stroke="${col}" stroke-width="2" stroke-dasharray="5 4"/><circle cx="163.1" cy="170" r="5" fill="${col}"/><circle cx="188.6" cy="170" r="5" fill="#f59e0b"/>${t(160,150,'√2',{fs:14,fill:col})}${t(203,150,'√3',{fs:14,fill:'#b45309'})}${t(275,70,'√2 ≈ 1.414',{fs:14})}${t(275,95,'√3 ≈ 1.732',{fs:14})}`;break;
+  case 'identities':b=`<rect x="30" y="25" width="110" height="110" fill="${col}" fill-opacity=".25" stroke="${k}" stroke-width="1.6"/><rect x="140" y="25" width="90" height="110" fill="#f59e0b" fill-opacity=".2" stroke="${k}" stroke-width="1.6"/><rect x="30" y="135" width="110" height="90" fill="#f59e0b" fill-opacity=".2" stroke="${k}" stroke-width="1.6"/><rect x="140" y="135" width="90" height="90" fill="#ec4899" fill-opacity=".2" stroke="${k}" stroke-width="1.6"/>${t(85,85,'a²')}${t(185,85,'ab')}${t(85,185,'ab')}${t(185,185,'b²')}${t(85,18,'a',{fs:13})}${t(185,18,'b',{fs:13})}${t(315,110,'(a + b)²',{fs:17})}${t(315,140,'= a² + 2ab + b²',{fs:15})}`;break;
+  case 'trig':b=`<path d="M70 40 L70 210 L330 210 Z" fill="${col}" fill-opacity=".08" stroke="${k}" stroke-width="2.4" stroke-linejoin="round"/><path d="M70 198h12v12" fill="none" stroke="${k}" stroke-width="1.6"/><path d="M290 210 A40 40 0 0 0 297 188" fill="none" stroke="${col}" stroke-width="2.2"/>${t(275,200,'B',{fs:13,fill:col})}${t(58,36,'C',{fs:13})}${t(58,226,'A',{fs:13})}${t(342,226,'B',{fs:13})}${t(215,112,'hypotenuse',{fs:13,fill:col})}${t(38,130,'opposite',{fs:12})}${t(200,232,'adjacent',{fs:12})}`;break;
+  case 'circuit':b=`<path d="M70 60H170M230 60H330V200H230M170 200H70V150M70 110V60" fill="none" stroke="${k}" stroke-width="2.4"/><path d="M170 60l6-10 12 20 12-20 12 20 12-20 6 10" fill="none" stroke="${col}" stroke-width="2.6" transform="translate(-6 0)"/><path d="M52 110h36M60 150h20" stroke="${k}" stroke-width="3"/><circle cx="200" cy="200" r="22" fill="#fff" stroke="${k}" stroke-width="2.4"/>${t(200,206,'A',{fs:16})}<path d="M170 60V20h60v40" fill="none" stroke="#94a3b8" stroke-width="1.8" stroke-dasharray="4 3"/><circle cx="200" cy="20" r="14" fill="#fff" stroke="${k}" stroke-width="2"/>${t(200,25,'V',{fs:13})}${t(200,92,'R',{fs:14,fill:col})}${t(32,135,'U',{fs:14})}${t(360,135,'I →',{fs:14})}`;break;
+  case 'neuron':b=`<path d="M60 60l35 45M40 125h50M60 190l35-45M80 40l20 55M75 210l25-55" stroke="${k}" stroke-width="2" fill="none"/><circle cx="110" cy="125" r="30" fill="${col}" fill-opacity=".22" stroke="${k}" stroke-width="2.4"/><circle cx="110" cy="125" r="10" fill="${col}"/><path d="M140 125H330" stroke="${k}" stroke-width="2.4"/>${[160,205,250].map(x=>`<rect x="${x}" y="116" width="36" height="18" rx="9" fill="#fef3c7" stroke="#d97706" stroke-width="1.6"/>`).join('')}<path d="M330 125l30-30M330 125l35 0M330 125l30 30" stroke="${k}" stroke-width="2" fill="none"/>${[[360,95],[365,125],[360,155]].map(([x,y])=>`<circle cx="${x}" cy="${y}" r="5" fill="${col}"/>`).join('')}${t(110,180,'cell body',{fs:12})}${t(40,40,'dendrites',{fs:12,a:'start'})}${t(223,105,'axon + myelin',{fs:12})}${t(345,190,'terminals',{fs:12})}<path d="M150 225h120" stroke="${col}" stroke-width="2"/><path d="M262 219l10 6-10 6" fill="none" stroke="${col}" stroke-width="2"/>${t(210,245,'nerve message',{fs:12,fill:col})}`;break;
+  case 'atom':b=`<ellipse cx="200" cy="125" rx="150" ry="55" fill="none" stroke="#94a3b8" stroke-width="1.8"/><ellipse cx="200" cy="125" rx="150" ry="55" fill="none" stroke="#94a3b8" stroke-width="1.8" transform="rotate(60 200 125)"/><ellipse cx="200" cy="125" rx="150" ry="55" fill="none" stroke="#94a3b8" stroke-width="1.8" transform="rotate(-60 200 125)"/><circle cx="200" cy="125" r="20" fill="${col}"/><circle cx="192" cy="119" r="6" fill="#fff" fill-opacity=".6"/>${[[350,125],[125,60],[125,190]].map(([x,y])=>`<circle cx="${x}" cy="${y}" r="7" fill="#f59e0b"/>`).join('')}${t(200,215,'nucleus',{fs:12})}${t(355,105,'e⁻',{fs:13})}`;break;
+  case 'dna':{let p1='M30 125',p2='M30 125',r='';for(let x=30;x<=370;x+=5){const y1=125+60*Math.sin((x-30)/34),y2=125-60*Math.sin((x-30)/34);p1+=` L${x} ${y1.toFixed(1)}`;p2+=` L${x} ${y2.toFixed(1)}`;if((x-30)%20===0&&x>30&&x<370)r+=`<path d="M${x} ${y1.toFixed(1)}V${y2.toFixed(1)}" stroke="${(x/20)%2?col:'#f59e0b'}" stroke-width="3"/>`;}b=`${r}<path d="${p1}" fill="none" stroke="${k}" stroke-width="3"/><path d="${p2}" fill="none" stroke="${k}" stroke-width="3"/>${t(200,240,'DNA double helix',{fs:13})}`;break;}
+  case 'timeline':b=`<path d="M25 125H375" stroke="${k}" stroke-width="3"/>${[[60,'1920','Greater Lebanon',1],[150,'1926','Constitution',0],[255,'1943','Independence',1],[345,'1946','Troops leave',0]].map(([x,y,l,u])=>`<circle cx="${x}" cy="125" r="9" fill="${x===255?'#e32b2b':col}" stroke="#fff" stroke-width="3"/>${t(x,u?100:160,y,{fs:16})}${t(x,u?80:180,l,{fs:12,fw:600,fill:'#475569'})}`).join('')}<path d="M255 150 L255 195" stroke="#e32b2b" stroke-width="1.6" stroke-dasharray="3 3"/>${t(255,215,'22 Nov 1943',{fs:13,fill:'#e32b2b'})}`;break;
+  case 'institutions':b=`<rect x="130" y="15" width="140" height="44" rx="8" fill="${col}" fill-opacity=".18" stroke="${col}" stroke-width="2"/>${t(200,42,'President',{fs:14})}<path d="M200 59V85M70 85H330M70 85v25M200 85v25M330 85v25" stroke="${k}" stroke-width="2" fill="none"/>${[[70,'Parliament','legislative'],[200,'Council of','Ministers'],[330,'Judiciary','independent']].map(([x,a,c])=>`<rect x="${x-62}" y="110" width="124" height="70" rx="8" fill="#fff" stroke="${k}" stroke-width="2"/>${t(x,140,a,{fs:13})}${t(x,160,c,{fs:12,fw:600,fill:'#475569'})}`).join('')}${t(200,220,'Separation & cooperation of powers',{fs:13,fill:col})}`;break;
+  case 'map':b=`<path d="M20 20 Q40 60 25 100 T30 180 T20 240 L0 240 L0 20Z" fill="#bfdbfe"/><rect x="45" y="20" width="70" height="220" fill="#fde68a" fill-opacity=".6"/><path d="M115 240 L150 90 L175 150 L205 40 L235 140 L250 240Z" fill="#a16207" fill-opacity=".45"/><rect x="250" y="20" width="70" height="220" fill="#86efac" fill-opacity=".6"/><path d="M320 240 L345 100 L365 170 L385 80 L400 240Z" fill="#78716c" fill-opacity=".45"/>${t(80,34,'Coast',{fs:12})}${t(190,34,'Mount Lebanon',{fs:12})}${t(285,34,'Bekaa',{fs:12})}${t(360,60,'Anti-Leb.',{fs:11})}<circle cx="70" cy="140" r="5" fill="#e32b2b"/>${t(70,160,'Beirut',{fs:12,fill:'#e32b2b'})}${t(20,230,'W',{fs:11})}${t(390,230,'E',{fs:11})}`;break;
+  case 'essay':b=`${[['Introduction',20,40,col],['Body paragraph 1',75,30,'#94a3b8'],['Body paragraph 2',115,30,'#94a3b8'],['Body paragraph 3',155,30,'#94a3b8'],['Conclusion',195,40,col]].map(([l,y,h,c])=>`<rect x="70" y="${y}" width="260" height="${h-6}" rx="7" fill="${c}" fill-opacity=".16" stroke="${c}" stroke-width="1.8"/>${t(200,y+(h-6)/2+5,l,{fs:13})}`).join('')}`;break;
+  case 'track':b=`<rect x="30" y="40" width="340" height="170" rx="85" fill="#fca5a5" fill-opacity=".45" stroke="#b91c1c" stroke-width="2"/><rect x="70" y="75" width="260" height="100" rx="50" fill="#86efac" stroke="#fff" stroke-width="3"/><rect x="50" y="57" width="300" height="136" rx="68" fill="none" stroke="#fff" stroke-width="1.5" stroke-dasharray="6 5"/><circle cx="200" cy="125" r="18" fill="none" stroke="#fff" stroke-width="2.5"/><path d="M200 75v100" stroke="#fff" stroke-width="2.5"/>`;break;
+  case 'parabola':{let d='';for(let x=-2.9;x<=2.91;x+=.1){const X=200+x*55,Y=150-(x*x-2)*22;d+=(d?' L':'M')+X.toFixed(1)+' '+Y.toFixed(1);}const r=Math.SQRT2*55;b=`<path d="M20 150H380M200 8V244" stroke="#94a3b8" stroke-width="1.6"/><path d="${d}" fill="none" stroke="${col}" stroke-width="3"/><circle cx="${(200-r).toFixed(1)}" cy="150" r="5.5" fill="#f59e0b"/><circle cx="${(200+r).toFixed(1)}" cy="150" r="5.5" fill="#f59e0b"/><circle cx="200" cy="194" r="4.5" fill="${k}"/>${t(300,40,'y = x² − 2',{fs:15,fill:col})}${t(200-r,176,'x₁',{fs:13})}${t(200+r,176,'x₂',{fs:13})}${t(232,214,'S',{fs:13})}`;break;}
+  case 'vectors':{const ar=(x1,y1,x2,y2,c,w)=>{const a=Math.atan2(y2-y1,x2-x1),h=14;return `<path d="M${x1} ${y1}L${x2} ${y2}" stroke="${c}" stroke-width="${w||3}"/><path d="M${x2} ${y2}L${(x2-h*Math.cos(a-.4)).toFixed(1)} ${(y2-h*Math.sin(a-.4)).toFixed(1)}L${(x2-h*Math.cos(a+.4)).toFixed(1)} ${(y2-h*Math.sin(a+.4)).toFixed(1)}Z" fill="${c}"/>`;};
+    let g='';for(let x=40;x<=360;x+=40)g+=`<path d="M${x} 20V230" stroke="#e5e7eb" stroke-width="1"/>`;for(let y=30;y<=230;y+=40)g+=`<path d="M20 ${y}H380" stroke="#e5e7eb" stroke-width="1"/>`;
+    b=`${g}${ar(80,190,240,150,col)}${ar(240,150,320,50,'#f59e0b')}${ar(80,190,320,50,'#ec4899',3.4)}${[[80,190,'A'],[240,150,'B'],[320,50,'C']].map(([x,y,l])=>`<circle cx="${x}" cy="${y}" r="4.5" fill="${k}"/>${t(x-14,y+22,l,{fs:15})}`).join('')}${t(160,160,'AB',{fs:13,fill:col})}${t(300,110,'BC',{fs:13,fill:'#b45309'})}${t(185,105,'AC = AB + BC',{fs:13,fill:'#be185d'})}`;break;}
+  case 'functions':{const pl=(f,a,z)=>{let d='';for(let x=a;x<=z+.001;x+=.05){const y=f(x);if(!isFinite(y)||Math.abs(y)>4.6)continue;d+=(d?' L':'M')+(200+x*50).toFixed(1)+' '+(125-y*25).toFixed(1);}return d;};
+    b=`<path d="M20 125H380M200 8V244" stroke="#94a3b8" stroke-width="1.6"/><path d="${pl(x=>x*x,-2.1,2.1)}" fill="none" stroke="${col}" stroke-width="3"/><path d="${pl(x=>1/x,.22,3.4)}" fill="none" stroke="#f59e0b" stroke-width="3"/><path d="${pl(x=>1/x,-3.4,-.22)}" fill="none" stroke="#f59e0b" stroke-width="3"/><path d="${pl(x=>Math.sqrt(x),0,3.4)}" fill="none" stroke="#ec4899" stroke-width="3"/>${t(95,30,'y = x²',{fs:13,fill:col})}${t(340,100,'y = 1/x',{fs:13,fill:'#b45309'})}${t(340,70,'y = √x',{fs:13,fill:'#be185d'})}`;break;}
+  default:b=`<path d="M200 50 C160 30 90 30 50 45 V215 C90 200 160 200 200 220 Z" fill="${col}" fill-opacity=".14" stroke="${k}" stroke-width="2.4"/><path d="M200 50 C240 30 310 30 350 45 V215 C310 200 240 200 200 220 Z" fill="#fff" stroke="${k}" stroke-width="2.4"/>${[80,105,130,155,180].map(y=>`<path d="M75 ${y}h100M225 ${y}h100" stroke="#94a3b8" stroke-width="2"/>`).join('')}`;
+  }
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 250" width="400" height="250">${b}</svg>`;}
+
+/* ---- generated documents (textbook pages) and slide decks ---- */
+function rot(a,i){if(!a||!a.length)return [];const k=i%a.length;return a.slice(k).concat(a.slice(0,k));}
+function buildDoc(it){const T=topicOf(it),L=DOC_L[T.lang]||DOC_L.en,c=matCourse(),N=Math.max(2,it.pages||4),P=T.points,F=T.formulas||[],E=T.examples||[],X=T.exercises&&T.exercises.length?T.exercises:P;
+  const pages=[[{k:'kick',t:T.chap},{k:'h1',t:it.n},{k:'p',t:T.intro},{k:'h2',t:L.obj},{k:'ul',items:P.slice(0,3)},{k:'fig',fig:T.fig,cap:T.title}]];
+  const tpl=[
+    i=>[{k:'h2',t:`${i}. ${L.defs}`},{k:'def',h:L.def,t:P[i%P.length]},{k:'def',h:L.def,t:P[(i+1)%P.length]}].concat(F.length?[{k:'f',t:F[i%F.length]}]:[],[{k:'p',t:T.intro}]),
+    i=>[{k:'h2',t:`${i}. ${L.prop}`}].concat(F.length?F.slice(0,3).map(x=>({k:'f',t:x})):[{k:'ul',items:P}],[{k:'ul',items:rot(P,i).slice(0,2)}]),
+    i=>{const e=E[i%Math.max(1,E.length)];return e?[{k:'h2',t:`${i}. ${L.ex}`},{k:'ex',h:e.title,steps:e.steps},{k:'fig',fig:T.fig,cap:T.title,small:1}]:[{k:'h2',t:`${i}. ${L.rem}`},{k:'ul',items:P},{k:'fig',fig:T.fig,cap:T.title,small:1}];},
+    i=>[{k:'h2',t:`${i}. ${L.exs}`},{k:'ol',items:rot(X,i).slice(0,5)}],
+    i=>[{k:'h2',t:`${i}. ${L.rem}`},{k:'ul',items:P}].concat(F.length?[{k:'f',t:F[(i+1)%F.length]}]:[],[{k:'def',h:L.q,t:X[i%X.length]}])];
+  for(let i=1;i<N;i++)pages.push(tpl[(i-1)%tpl.length](i));
+  return {lang:T.lang||'en',rtl:T.lang==='ar',pages,col:c.col,hdr:`${it.textbook?'CRDP':'Al-Arz School'} · ${c.hdr}`,chap:T.chap};}
+function docBlockHTML(b,col){switch(b.k){
+  case 'kick':return `<div class="pp-kick">${hx(b.t)}</div>`;
+  case 'h1':return `<h1>${hx(b.t)}</h1>`;
+  case 'h2':return `<h2>${hx(b.t)}</h2>`;
+  case 'p':return `<p>${hx(b.t)}</p>`;
+  case 'ul':return `<ul>${b.items.map(x=>`<li>${hx(x)}</li>`).join('')}</ul>`;
+  case 'ol':return `<ol>${b.items.map(x=>`<li>${hx(x)}</li>`).join('')}</ol>`;
+  case 'def':return `<div class="pp-def"><b>${hx(b.h)}</b>${hx(b.t)}</div>`;
+  case 'f':return `<div class="pp-f">${hx(b.t)}</div>`;
+  case 'ex':return `<div class="pp-ex"><b>${hx(b.h)}</b><ol>${b.steps.map(x=>`<li>${hx(x)}</li>`).join('')}</ol></div>`;
+  case 'fig':return `<figure class="pp-fig${b.small?' sm':''}">${FIG(b.fig,col)}<figcaption>${hx(b.cap)}</figcaption></figure>`;}
+  return '';}
+function docPageHTML(d,blocks,i){return `<div class="pp"><div class="pp-hd"><span>${hx(d.hdr)}</span><span>${hx(d.chap)}</span></div>${blocks.map(b=>docBlockHTML(b,d.col)).join('')}<div class="pp-ft">${i+1}</div></div>`;}
+function buildDeck(it){const T=topicOf(it),L=DOC_L[T.lang]||DOC_L.en,c=matCourse(),N=Math.max(3,it.slides||8),P=T.points,F=T.formulas||[],E=T.examples||[],X=T.exercises&&T.exercises.length?T.exercises:P;
+  const S=[{k:'title',kick:c.hdr,t:it.n,sub:c.tch},{k:'bullets',h:L.obj,items:P.slice(0,3)}];
+  const cyc=[
+    i=>F.length?{k:'formula',h:L.prop,f:F[i%F.length],note:P[(i+1)%P.length]}:{k:'bullets',h:T.title,items:rot(P,i).slice(0,3)},
+    i=>({k:'diagram',h:T.title,fig:T.fig,items:rot(P,i).slice(0,2)}),
+    i=>({k:'bullets',h:L.defs,items:rot(P,i+1).slice(0,3)}),
+    i=>{const e=E[i%Math.max(1,E.length)];return e?{k:'example',h:L.ex,sub:e.title,steps:e.steps}:{k:'bullets',h:L.rem,items:rot(P,i+2).slice(0,3)};},
+    i=>({k:'question',h:L.q,t:X[i%X.length]})];
+  for(let i=0;S.length<N-1;i++)S.push(cyc[i%cyc.length](i));
+  S.push({k:'summary',h:L.sum,items:P.slice(0,3)});
+  return {lang:T.lang||'en',rtl:T.lang==='ar',slides:S.slice(0,N),col:c.col,hdr:c.hdr};}
+function slideHTML(s,d,i){const foot=`<div class="sl-foot">${i+1}</div>`,k=`<div class="sl-k">${hx(d.hdr)}</div>`,li=a=>a.map(x=>`<li>${hx(x)}</li>`).join('');
+  switch(s.k){
+  case 'title':return `<div class="sl title"><div class="sl-k">${hx(s.kick)}</div><h3>${hx(s.t)}</h3><div class="sl-by">${hx(s.sub)} · Al-Arz School</div><span class="sl-cedar">${CEDAR}</span>${foot}</div>`;
+  case 'bullets':return `<div class="sl">${k}<h3>${hx(s.h)}</h3><ul>${li(s.items)}</ul>${foot}</div>`;
+  case 'formula':return `<div class="sl">${k}<h3>${hx(s.h)}</h3><div class="sl-f">${hx(s.f)}</div><div class="sl-note">${hx(s.note)}</div>${foot}</div>`;
+  case 'diagram':return `<div class="sl">${k}<h3>${hx(s.h)}</h3><div class="sl-2"><div class="sl-fig">${FIG(s.fig,d.col)}</div><ul>${li(s.items)}</ul></div>${foot}</div>`;
+  case 'example':return `<div class="sl">${k}<h3>${hx(s.h)}</h3><div class="sl-sub">${hx(s.sub)}</div><ol class="sl-steps">${li(s.steps)}</ol>${foot}</div>`;
+  case 'question':return `<div class="sl q"><div class="sl-k">${hx(s.h)}</div><div class="sl-qt">${hx(s.t)}</div>${foot}</div>`;
+  case 'summary':return `<div class="sl">${k}<h3>${hx(s.h)}</h3><ul class="sl-check">${li(s.items)}</ul>${foot}</div>`;}
+  return '';}
+
+/* ---- real PDF download (hand-written PDF 1.4, Helvetica, correct xref offsets) ---- */
+function pdfLatin(s){return String(s==null?'':s).replace(/[؀-ۿ][؀-ۿ\s«»،.:؛]*/g,'[Arabic text]').replace(/[’‘]/g,"'").replace(/[“”«»]/g,'"').replace(/[—–−]/g,'-').replace(/…/g,'...').replace(/∥/g,'//').replace(/⊥/g,'_|_').replace(/⇔/g,'<=>').replace(/→/g,'->').replace(/≈/g,'~').replace(/≤/g,'<=').replace(/≥/g,'>=').replace(/√/g,'sqrt').replace(/⁺/g,'+').replace(/⁻/g,'-').replace(/₁/g,'1').replace(/₂/g,'2').replace(/ρ/g,'rho').replace(/Ω/g,'Ohm').replace(/[^\x20-\x7e\xa0-\xff]/g,'?');}
+function pdfEsc(s){return pdfLatin(s).replace(/\\/g,'\\\\').replace(/\(/g,'\\(').replace(/\)/g,'\\)');}
+function pdfRGB(hex){const h=String(hex||'#0f9d8f').replace('#','');return [0,2,4].map(i=>(parseInt(h.substr(i,2),16)/255).toFixed(3)).join(' ');}
+function pdfWrap(s,max){const w=pdfLatin(s).split(/\s+/),out=[];let line='';w.forEach(x=>{if((line+' '+x).trim().length>max){if(line)out.push(line);line=x;}else line=(line+' '+x).trim();});if(line)out.push(line);return out.length?out:[''];}
+function makePdf(pages){const objs=[];objs[1]='<< /Type /Catalog /Pages 2 0 R >>';objs[3]='<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>';objs[4]='<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>';
+  const kids=[];let n=5;pages.forEach(p=>{const pi=n++,ci=n++;kids.push(pi+' 0 R');objs[pi]=`<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ${p.w} ${p.h}] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents ${ci} 0 R >>`;objs[ci]=`<< /Length ${p.ops.length} >>\nstream\n${p.ops}\nendstream`;});
+  objs[2]=`<< /Type /Pages /Kids [${kids.join(' ')}] /Count ${pages.length} >>`;
+  let out='%PDF-1.4\n%\xe2\xe3\xcf\xd3\n';const offs=[];for(let i=1;i<n;i++){offs[i]=out.length;out+=`${i} 0 obj\n${objs[i]}\nendobj\n`;}
+  const xref=out.length;out+=`xref\n0 ${n}\n0000000000 65535 f \n`+offs.slice(1).map(o=>String(o).padStart(10,'0')+' 00000 n \n').join('')+`trailer\n<< /Size ${n} /Root 1 0 R >>\nstartxref\n${xref}\n%%EOF\n`;
+  const bytes=new Uint8Array(out.length);for(let i=0;i<out.length;i++)bytes[i]=out.charCodeAt(i)&255;return bytes;}
+function pdfTextOps(lines,x0,yTop,yMin,wChars){let y=yTop,ops='';for(const l of lines){const size=l.s||11,max=Math.floor((wChars||90)*11/size);for(const w of pdfWrap(l.t,max-(l.ind?4:0))){if(y<yMin)return ops;ops+=`${l.c?pdfRGB(l.c):'0.10 0.12 0.14'} rg BT /${l.b?'F2':'F1'} ${size} Tf ${x0+(l.ind||0)} ${y.toFixed(1)} Td (${pdfEsc(w)}) Tj ET\n`;y-=size*1.42;}y-=l.gap||2;}return ops;}
+function pdfPagesFromDoc(d){const W=595,H=842;return d.pages.map((blocks,pi)=>{const L=[];blocks.forEach(b=>{
+    if(b.k==='kick')L.push({t:String(b.t).toUpperCase(),s:9,b:1,c:d.col});else if(b.k==='h1')L.push({t:b.t,s:20,b:1,gap:6});else if(b.k==='h2')L.push({t:b.t,s:14,b:1,c:d.col,gap:4});
+    else if(b.k==='p')L.push({t:b.t,s:11,gap:6});else if(b.k==='ul')b.items.forEach(x=>L.push({t:'•  '+x,s:11,ind:6}));else if(b.k==='ol')b.items.forEach((x,i)=>L.push({t:`${i+1}.  ${x}`,s:11,ind:6}));
+    else if(b.k==='def')L.push({t:String(b.h).toUpperCase(),s:8.5,b:1,c:d.col},{t:b.t,s:11,ind:8,gap:6});else if(b.k==='f')L.push({t:b.t,s:13,b:1,ind:40,gap:8});
+    else if(b.k==='ex'){L.push({t:b.h,s:11,b:1});b.steps.forEach((x,i)=>L.push({t:`${i+1})  ${x}`,s:11,ind:10}));}else if(b.k==='fig')L.push({t:`[Figure: ${b.cap}]`,s:9.5,c:'#6b7280',ind:6,gap:6});});
+  const ops=`${pdfRGB(d.col)} rg 0 ${H-34} ${W} 34 re f\n1 1 1 rg BT /F2 10 Tf 40 ${H-22} Td (${pdfEsc(d.hdr)}) Tj ET\n`+pdfTextOps(L,50,H-80,60,92)+`0.55 0.58 0.62 rg BT /F1 9 Tf ${W/2-4} 30 Td (${pi+1}) Tj ET\n`;
+  return {w:W,h:H,ops};});}
+function pdfPagesFromDeck(d){const W=842,H=474;return d.slides.map((s,i)=>{let L=[];
+  if(s.k==='title')L=[{t:s.kick,s:12,b:1,c:d.col,gap:10},{t:s.t,s:28,b:1,gap:14},{t:s.sub+' - Al-Arz School',s:14,c:'#475569'}];
+  else if(s.k==='formula')L=[{t:s.h,s:22,b:1,gap:24},{t:s.f,s:26,b:1,ind:40,gap:20},{t:s.note,s:14,c:'#475569'}];
+  else if(s.k==='example')L=[{t:s.h,s:22,b:1,gap:10},{t:s.sub,s:14,b:1,c:d.col,gap:8}].concat(s.steps.map((x,j)=>({t:`${j+1})  ${x}`,s:15,ind:10})));
+  else if(s.k==='question')L=[{t:s.h,s:14,b:1,c:d.col,gap:18},{t:s.t,s:22,b:1}];
+  else L=[{t:s.h,s:22,b:1,gap:14}].concat((s.items||[]).map(x=>({t:'•  '+x,s:15,ind:8,gap:6})));
+  const ops=`${pdfRGB(d.col)} rg 0 0 14 ${H} re f\n`+pdfTextOps(L,60,H-70,40,110)+`0.55 0.58 0.62 rg BT /F1 10 Tf ${W-50} 22 Td (${i+1}) Tj ET\n`;return {w:W,h:H,ops};});}
+function pdfBytesFor(it){return it.t==='pdf'?makePdf(pdfPagesFromDoc(buildDoc(it))):makePdf(pdfPagesFromDeck(buildDeck(it)));}
+function downloadItem(id){const f=findItem(id);if(!f||(f.item.t!=='pdf'&&f.item.t!=='slides'))return;const it=f.item;
+  try{const blob=new Blob([pdfBytesFor(it)],{type:'application/pdf'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=String(it.n).replace(/[\\/:*?"<>|]+/g,'-').trim()+'.pdf';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),5000);}catch(e){}
+  toast('Downloaded ✓');}
+
+/* ---- full-screen viewer (slides up inside the phone) ---- */
+function viewerOpen(){const v=document.getElementById('viewer');return v&&v.classList.contains('open');}
+function openViewer(it,html){vpStop();const v=document.getElementById('viewer');vw={id:it.id,type:it.t,page:1,slide:0,n:0,zoom:1};
+  document.getElementById('v-title').textContent=it.n;document.getElementById('v-dl').style.display=(it.t==='pdf'||it.t==='slides')?'':'none';
+  const body=document.getElementById('v-body');body.innerHTML=html;translateEl(body);v.classList.add('open');v.setAttribute('aria-hidden','false');vFoot();vSub();}
+function closeViewer(){vpStop();const v=document.getElementById('viewer');v.classList.remove('open');v.setAttribute('aria-hidden','true');refreshMat();}
+function vSub(){const f=findItem(vw.id);if(!f)return;const it=f.item;let pos='';
+  if(vw.type==='pdf')pos=` · ${hx(trCore('Page'))} <span dir="ltr">${vw.page} / ${vw.n}</span>`;else if(vw.type==='slides')pos=` · ${hx(trCore('Slide'))} <span dir="ltr">${vw.slide+1} / ${vw.n}</span>`;else if(vw.type==='video')pos=` · <span dir="ltr">${it.dur}</span>`;
+  document.getElementById('v-sub').innerHTML=hx(trCore('Preview'))+' · '+hx(trCore(MAT_TYPES[it.t].l))+pos;}
+function vFoot(){const b=document.getElementById('v-done'),n=document.getElementById('v-next'),nx=nextAfter(vw.id);if(!b)return;const f=findItem(vw.id),pub=!!(f&&f.item.st==='published');
+  b.classList.remove('is-done');b.disabled=!pub;b.innerHTML=`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16"/><path d="M7 20v-6M12 20V8M17 20v-9"/></svg>${hx(trCore(pub?'Student progress':'Not published'))}`;
+  n.innerHTML=nx?`${hx(trCore('Next item'))}<svg class="flip-rtl" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>`:hx(trCore('Back to materials'));}
+function nextItem(){const nx=nextAfter(vw.id);if(!nx){closeViewer();return;}if(nx.t==='pdf'||nx.t==='slides'||nx.t==='video'){openItem(nx.id);return;}closeViewer();setTimeout(()=>openItem(nx.id),340);}
+
+/* PDF reader */
+function openPdf(it){const d=buildDoc(it);
+  openViewer(it,`<div class="pdf-wrap"><div class="pdf-tools"><button class="pt-btn" onclick="pdfZoom(-1)" aria-label="Zoom out">−</button><span class="pt-z tnum" id="pdf-z" dir="ltr">100%</span><button class="pt-btn" onclick="pdfZoom(1)" aria-label="Zoom in">+</button><button class="pt-btn pt-fit" onclick="pdfZoom(0)">Fit</button><span class="grow"></span><span class="pt-page tnum" id="pdf-pg" dir="ltr">1 / ${d.pages.length}</span></div>
+  <div class="pdf-scroll" id="pdf-scroll"><div class="pdf-pages" data-noi18n>${d.pages.map((b,i)=>`<div class="pdf-page" style="--pc:${d.col}" ${d.rtl?'dir="rtl" lang="ar"':`dir="ltr" lang="${d.lang}"`}>${docPageHTML(d,b,i)}</div>`).join('')}</div></div>
+  <div class="pdf-thumbs" id="pdf-thumbs">${d.pages.map((_,i)=>`<button class="pth${i?'':' on'}" onclick="pdfGo(${i+1})"><span class="tnum">${i+1}</span></button>`).join('')}</div></div>`);
+  vw.n=d.pages.length;vSub();const sc=document.getElementById('pdf-scroll');sc.addEventListener('scroll',pdfScroll,{passive:true});pdfLayout(false);}
+function pdfLayout(keep){const sc=document.getElementById('pdf-scroll');if(!sc)return;const ratio=keep?sc.scrollTop/Math.max(1,sc.scrollHeight):0,base=Math.max(220,(sc.clientWidth||360)-28);
+  sc.querySelectorAll('.pdf-page').forEach(p=>{p.style.width=Math.round(base*vw.zoom)+'px';});const z=document.getElementById('pdf-z');if(z)z.textContent=Math.round(vw.zoom*100)+'%';if(keep)sc.scrollTop=ratio*sc.scrollHeight;const over=Math.max(0,sc.scrollWidth-sc.clientWidth)/2;sc.scrollLeft=isRtlDoc()?-over:over;}
+function pdfZoom(d){vw.zoom=d===0?1:Math.max(.6,Math.min(2.5,Math.round((vw.zoom+d*.25)*100)/100));pdfLayout(true);}
+function pdfScroll(){const sc=document.getElementById('pdf-scroll');if(!sc||vw.type!=='pdf')return;const pages=[...sc.querySelectorAll('.pdf-page')],y=sc.scrollTop+sc.clientHeight*.35;let n=1;pages.forEach((p,i)=>{if(p.offsetTop<=y)n=i+1;});
+  if(sc.scrollTop+sc.clientHeight>=sc.scrollHeight-24)n=pages.length;
+  if(n!==vw.page){vw.page=n;vSub();const pg=document.getElementById('pdf-pg');if(pg)pg.textContent=`${n} / ${vw.n}`;const tb=document.getElementById('pdf-thumbs');if(tb){[...tb.children].forEach((b,i)=>b.classList.toggle('on',i===n-1));const el=tb.children[n-1];if(el)tb.scrollLeft=el.offsetLeft-tb.clientWidth/2+el.offsetWidth/2;}}
+  if(n===pages.length)markDone(vw.id);}
+function pdfGo(n){const sc=document.getElementById('pdf-scroll');if(!sc)return;const p=sc.querySelectorAll('.pdf-page')[n-1];if(p)sc.scrollTo({top:p.offsetTop-14,behavior:'smooth'});}
+
+/* Slides viewer */
+function openSlides(it){const d=buildDeck(it),dir=d.rtl?'dir="rtl" lang="ar"':`dir="ltr" lang="${d.lang}"`;
+  openViewer(it,`<div class="sl-wrap"><div class="sl-stage" id="sl-stage"><div class="sl-track" id="sl-track" data-noi18n>${d.slides.map((s,i)=>`<div class="sl-slide"><div class="slc" style="--sc:${d.col}" ${dir}>${slideHTML(s,d,i)}</div></div>`).join('')}</div></div>
+  <div class="sl-nav"><button class="icon-btn" onclick="slideGo(vw.slide-1)" aria-label="Previous"><svg class="flip-rtl" viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></button><div class="sl-count" id="sl-count"></div><button class="icon-btn" onclick="slideGo(vw.slide+1)" aria-label="Next"><svg class="flip-rtl" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button></div>
+  <div class="sl-thumbs" id="sl-thumbs" data-noi18n>${d.slides.map((s,i)=>`<button class="slth${i?'':' on'}" onclick="slideGo(${i})"><div class="slc" style="--sc:${d.col}" ${dir}>${slideHTML(s,d,i)}</div><span class="tnum">${i+1}</span></button>`).join('')}</div></div>`);
+  vw.n=d.slides.length;slBind();slideGo(0);}
+function isRtlDoc(){return document.documentElement.dir==='rtl';}
+function slideGo(i){if(vw.type!=='slides')return;i=Math.max(0,Math.min(vw.n-1,i));vw.slide=i;const tr=document.getElementById('sl-track');if(!tr)return;tr.style.transform=`translateX(${(isRtlDoc()?1:-1)*i*100}%)`;
+  const ct=document.getElementById('sl-count');if(ct)ct.innerHTML=`${hx(trCore('Slide'))} <span dir="ltr">${i+1} / ${vw.n}</span>`;
+  const tb=document.getElementById('sl-thumbs');if(tb){[...tb.children].forEach((b,j)=>b.classList.toggle('on',j===i));const el=tb.children[i];if(el)tb.scrollTo({left:el.offsetLeft-tb.clientWidth/2+el.offsetWidth/2,behavior:'smooth'});}
+  vSub();if(i===vw.n-1)markDone(vw.id);}
+function slBind(){const st=document.getElementById('sl-stage'),tr=document.getElementById('sl-track');if(!st)return;let x0=null,dx=0;
+  st.addEventListener('pointerdown',e=>{x0=e.clientX;dx=0;tr.classList.add('drag');try{st.setPointerCapture(e.pointerId);}catch(_){}});
+  st.addEventListener('pointermove',e=>{if(x0==null)return;dx=e.clientX-x0;tr.style.transform=`translateX(calc(${(isRtlDoc()?1:-1)*vw.slide*100}% + ${dx}px))`;});
+  const up=()=>{if(x0==null)return;x0=null;tr.classList.remove('drag');const r=isRtlDoc(),fwd=r?dx>50:dx<-50,bwd=r?dx<-50:dx>50;slideGo(vw.slide+(fwd?1:bwd?-1:0));};
+  st.addEventListener('pointerup',up);st.addEventListener('pointercancel',up);}
+
+/* Link + quiz sheets */
+function openLinkItem(it){const T=MAT_TYPES.link;openSheet(`<div class="row"><div class="set-ic" style="background:${T.col}1f;color:${T.col}">${matIco('link')}</div><div class="grow"><h2 style="font-size:18px;font-weight:800" data-noi18n dir="auto">${hx(it.n)}</h2><div class="sub mt6">External link</div></div></div>
+  <div class="card mt16" style="padding:12px 14px;background:var(--surface-2)"><div class="sub" style="font-size:11px;font-weight:700">URL</div><div dir="ltr" style="font-weight:700;margin-top:4px;word-break:break-all;color:var(--accent)">${hx(it.url)}</div></div>
+  <p class="sub mt12" style="line-height:1.5">Links open in your browser. The school checks every link before sharing it.</p>
+  <button class="btn mt16" onclick="closeSheet();markDone('${it.id}',true);toast('Opening in browser…')">Open link</button><button class="btn secondary mt8" onclick="closeSheet()">Close</button>`);}
+let quizAns={};
+function openQuizItem(it){const Q=QUIZZES[it.id]||[],T=MAT_TYPES.quiz;quizAns={};openSheet(`<div class="row"><div class="set-ic" style="background:${T.col}1f;color:${T.col}">${matIco('quiz')}</div><div class="grow"><h2 style="font-size:18px;font-weight:800" data-noi18n dir="auto">${hx(it.n)}</h2><div class="sub mt6">${itemMeta(it)}</div></div></div>
+  <div id="quiz-body">${Q.map((q,i)=>`<div class="card mt12 qz" data-q="${i}"><div style="font-weight:700;line-height:1.45" data-noi18n dir="auto">${i+1}. ${hx(q.q)}</div><div class="mt8">${q.a.map((a,j)=>`<button class="qz-o" data-noi18n dir="auto" onclick="quizPick(${i},${j})">${hx(a)}</button>`).join('')}</div></div>`).join('')}</div>
+  <div id="quiz-res"></div><button class="btn mt16" id="quiz-go" onclick="quizSubmit('${it.id}')">Submit answers</button>`);}
+function quizPick(i,j){if(quizAns.locked)return;quizAns[i]=j;document.querySelectorAll(`#quiz-body .qz[data-q="${i}"] .qz-o`).forEach((b,k)=>b.classList.toggle('sel',k===j));}
+function quizSubmit(id){const Q=QUIZZES[id]||[];if(quizAns.locked){closeSheet();return;}if(Q.some((_,i)=>quizAns[i]==null)){toast('Choose an answer for each question');return;}quizAns.locked=true;let s=0;
+  Q.forEach((q,i)=>{document.querySelectorAll(`#quiz-body .qz[data-q="${i}"] .qz-o`).forEach((b,k)=>{b.classList.toggle('ok',k===q.c);b.classList.toggle('bad',k===quizAns[i]&&k!==q.c);});if(quizAns[i]===q.c)s++;});
+  const r=document.getElementById('quiz-res');r.innerHTML=`<div class="card mt12" style="text-align:center;background:${s===Q.length?'var(--ok-bg)':'var(--warn-bg)'};border:none"><div class="tnum" style="font-size:26px;font-weight:800">${s} / ${Q.length}</div><div class="sub mt6">${s===Q.length?'Perfect score 🎉':'Review the lesson and try again'}</div></div>`;translateEl(r);
+  document.getElementById('quiz-go').textContent=trCore('Close');markDone(id,true);}
+
+/* ---- video player: canvas lesson driven by a clock (offline, no media files) ---- */
+const VP_PLAY='<svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg>',VP_PAUSE='<svg viewBox="0 0 24 24"><rect x="6.5" y="5" width="4" height="14" rx="1"/><rect x="13.5" y="5" width="4" height="14" rx="1"/></svg>';
+const VSCRIPTS={
+  thales:{caps:[[0,.07,'Today: Thales’ theorem — chapter 3 of the EB9 programme.'],[.07,.2,'Start with any triangle ABC.'],[.2,.28,'Place a point M on [AB] and a point N on [AC].'],[.28,.42,'Draw (MN) parallel to (BC) — the arrows show the parallel lines.'],[.42,.61,'Thales’ theorem: AM/AB = AN/AC = MN/BC.'],[.61,.71,'Example: AM = 3 cm, AB = 5 cm and AN = 4.2 cm.'],[.71,.82,'Replace in the ratios: 3/5 = 4.2/AC, so AC = 7 cm.'],[.82,.93,'Converse: equal ratios with points in the same order give parallel lines.'],[.93,1.01,'Practise with the Thales worksheet before Wednesday’s class.']],draw:(g,p)=>drawThales(g,p)},
+  pythagoras:{caps:[[0,.08,'Pythagoras’ theorem — chapter 4.'],[.08,.24,'ABC is right-angled at A. BC is the hypotenuse.'],[.24,.48,'Build a square on each side of the triangle.'],[.48,.62,'The two small areas add up to the big one: BC² = AB² + AC².'],[.62,.82,'Example: AB = 6 cm, AC = 8 cm, so BC² = 100 and BC = 10 cm.'],[.82,1.01,'Converse: if BC² = AB² + AC², the triangle is right-angled at A.']],draw:(g,p)=>drawPyth(g,p)},
+};
+function genericCaps(T){const n=T.points.length,cs=[[0,.14,T.intro]];T.points.forEach((x,i)=>cs.push([.14+i*(.68/n),.14+(i+1)*(.68/n),x]));cs.push([.82,1.01,(DOC_L[T.lang]||DOC_L.en).sum+' — '+T.title]);return cs;}
+const vk=(p,a,b)=>Math.max(0,Math.min(1,(p-a)/(b-a))),vEase=x=>x<.5?2*x*x:1-Math.pow(-2*x+2,2)/2;
+function vBoard(g){g.fillStyle='#16332c';g.fillRect(0,0,1280,720);const gr=g.createRadialGradient(640,360,120,640,360,760);gr.addColorStop(0,'rgba(255,255,255,.07)');gr.addColorStop(1,'rgba(0,0,0,.38)');g.fillStyle=gr;g.fillRect(0,0,1280,720);g.fillStyle='rgba(255,255,255,.35)';g.font='600 20px "Plus Jakarta Sans",sans-serif';g.textAlign='right';g.fillText('Al-Arz School · SKL',1240,690);}
+function vLine(g,a,b,k,col,w){if(k<=0)return;g.strokeStyle=col;g.lineWidth=w||5;g.lineCap='round';g.beginPath();g.moveTo(a[0],a[1]);g.lineTo(a[0]+(b[0]-a[0])*k,a[1]+(b[1]-a[1])*k);g.stroke();}
+function vText(g,s,x,y,k,size,col,weight,align){if(k<=0)return;s=String(s);g.font=`${weight||600} ${size}px "Plus Jakarta Sans","IBM Plex Sans Arabic",sans-serif`;g.fillStyle=col||'#f5f5f0';g.textAlign=align||'left';g.fillText(s.slice(0,Math.ceil(s.length*Math.min(1,k))),x,y);}
+function vAlpha(g,a,fn){if(a<=0)return;g.save();g.globalAlpha=Math.min(1,a);fn();g.restore();}
+function vFrac(g,top,bot,x,y,k,col){vAlpha(g,k,()=>{vText(g,top,x,y-16,1,38,col||'#f8fafc',700,'center');g.strokeStyle=col||'#f8fafc';g.lineWidth=3;g.beginPath();g.moveTo(x-48,y);g.lineTo(x+48,y);g.stroke();vText(g,bot,x,y+44,1,38,col||'#f8fafc',700,'center');});}
+function vChev(g,x,y,col){g.strokeStyle=col;g.lineWidth=4;g.beginPath();g.moveTo(x-8,y-9);g.lineTo(x+4,y);g.lineTo(x-8,y+9);g.moveTo(x+6,y-9);g.lineTo(x+18,y);g.lineTo(x+6,y+9);g.stroke();}
+function vDot(g,pt,col){g.fillStyle=col;g.beginPath();g.arc(pt[0],pt[1],9,0,Math.PI*2);g.fill();}
+function drawThales(g,p){vBoard(g);const W='#f8fafc',Y='#fde047',CY='#67e8f9',G='#86efac';
+  vText(g,'Thales’ theorem',70,92,vk(p,0,.05),52,W,800);vText(g,'EB9 · Mathematics · Chapter 3',72,136,vk(p,.02,.07),26,'#a7f3d0',600);
+  const A=[340,210],B=[110,630],C=[620,630],r=.55,M=[A[0]+(B[0]-A[0])*r,A[1]+(B[1]-A[1])*r],N=[A[0]+(C[0]-A[0])*r,A[1]+(C[1]-A[1])*r];
+  const hl=vk(p,.44,.5)*(1-vk(p,.6,.64));if(hl>0){vAlpha(g,hl,()=>{vLine(g,A,M,1,CY,11);vLine(g,A,N,1,'#fda4af',11);});}
+  vLine(g,A,B,vEase(vk(p,.08,.12)),W,5);vLine(g,B,C,vEase(vk(p,.12,.16)),W,5);vLine(g,C,A,vEase(vk(p,.16,.2)),W,5);
+  vAlpha(g,vk(p,.18,.22),()=>{vText(g,'A',A[0],A[1]-24,1,34,W,700,'center');vText(g,'B',B[0]-30,B[1]+36,1,34,W,700,'center');vText(g,'C',C[0]+30,C[1]+36,1,34,W,700,'center');});
+  vAlpha(g,vk(p,.2,.24),()=>{vDot(g,M,Y);vDot(g,N,Y);vText(g,'M',M[0]-44,M[1]+10,1,32,Y,700,'center');vText(g,'N',N[0]+42,N[1]+10,1,32,Y,700,'center');});
+  vLine(g,M,N,vEase(vk(p,.28,.36)),Y,6);
+  vAlpha(g,vk(p,.36,.42),()=>{vChev(g,(M[0]+N[0])/2,M[1],Y);vChev(g,(B[0]+C[0])/2,B[1],Y);});
+  vAlpha(g,vk(p,.42,.47)*(1-vk(p,.6,.63)),()=>{vText(g,'If (MN) // (BC), then',720,260,vk(p,.42,.46),40,W,700);
+    vFrac(g,'AM','AB',790,400,vk(p,.47,.51),CY);vText(g,'=',880,414,vk(p,.5,.52),44,W,700,'center');vFrac(g,'AN','AC',970,400,vk(p,.51,.55),'#fda4af');vText(g,'=',1060,414,vk(p,.54,.56),44,W,700,'center');vFrac(g,'MN','BC',1150,400,vk(p,.55,.59),Y);});
+  vAlpha(g,vk(p,.62,.66)*(1-vk(p,.8,.83)),()=>{vText(g,'Example',720,240,1,40,Y,800);vText(g,'AM = 3 cm    AB = 5 cm',720,310,vk(p,.64,.68),34,W,600);vText(g,'AN = 4.2 cm    AC = ?',720,362,vk(p,.67,.71),34,W,600);
+    vFrac(g,'3','5',790,460,vk(p,.71,.74),CY);vText(g,'=',880,474,vk(p,.73,.75),44,W,700,'center');vFrac(g,'4.2','AC',980,460,vk(p,.74,.76),'#fda4af');
+    vText(g,'AC = 4.2 × 5 ÷ 3',720,590,vk(p,.76,.78),34,W,600);vAlpha(g,vk(p,.78,.8),()=>{g.strokeStyle=G;g.lineWidth=4;g.strokeRect(710,620,300,68);vText(g,'AC = 7 cm',730,668,1,40,G,800);});});
+  vAlpha(g,vk(p,.84,.88),()=>{vText(g,'Converse',720,250,1,40,Y,800);['If AM/AB = AN/AC','and A, M, B and A, N, C','are in the same order,','then (MN) // (BC).'].forEach((s,i)=>vText(g,s,720,320+i*54,vk(p,.86+i*.018,.89+i*.018),34,W,600));
+    vAlpha(g,vk(p,.94,.97),()=>{g.fillStyle='rgba(134,239,172,.16)';g.fillRect(710,560,520,70);vText(g,'✓ Equal ratios mean parallel lines',730,606,1,32,G,700);});});}
+function drawPyth(g,p){vBoard(g);const W='#f8fafc',Y='#fde047',G='#86efac';
+  vText(g,'Pythagoras’ theorem',70,92,vk(p,0,.05),52,W,800);vText(g,'EB9 · Mathematics · Chapter 4',72,136,vk(p,.02,.07),26,'#a7f3d0',600);
+  const A=[260,480],B=[260,320],C=[470,480];
+  const sq=(pts,col,k,label,lx,ly)=>vAlpha(g,k,()=>{g.fillStyle=col+'33';g.strokeStyle=col;g.lineWidth=3;g.beginPath();pts.forEach((q,i)=>i?g.lineTo(q[0],q[1]):g.moveTo(q[0],q[1]));g.closePath();g.fill();g.stroke();vText(g,label,lx,ly,1,32,col,800,'center');});
+  sq([[100,320],[260,320],[260,480],[100,480]],'#67e8f9',vk(p,.25,.32),'AB²',180,412);sq([[260,480],[470,480],[470,690],[260,690]],'#fbbf24',vk(p,.32,.39),'AC²',365,598);sq([[260,320],[470,480],[630,270],[420,110]],'#f472b6',vk(p,.39,.47),'BC²',445,305);
+  vLine(g,A,B,vEase(vk(p,.08,.13)),W,5);vLine(g,A,C,vEase(vk(p,.13,.18)),W,5);vLine(g,B,C,vEase(vk(p,.18,.23)),Y,6);
+  vAlpha(g,vk(p,.2,.24),()=>{g.strokeStyle=W;g.lineWidth=3;g.strokeRect(260,452,28,28);vText(g,'A',236,516,1,32,W,700,'center');vText(g,'B',232,312,1,32,W,700,'center');vText(g,'C',494,516,1,32,W,700,'center');});
+  vAlpha(g,vk(p,.48,.52)*(1-vk(p,.6,.63)),()=>{vText(g,'BC² = AB² + AC²',720,330,vk(p,.49,.55),58,Y,800);vText(g,'(right angle at A)',720,390,vk(p,.54,.58),32,'#a7f3d0',600);});
+  vAlpha(g,vk(p,.63,.66)*(1-vk(p,.8,.83)),()=>{vText(g,'Example',720,240,1,40,Y,800);['AB = 6 cm, AC = 8 cm','BC² = 6² + 8²','BC² = 36 + 64 = 100'].forEach((s,i)=>vText(g,s,720,310+i*58,vk(p,.65+i*.03,.68+i*.03),36,W,600));
+    vAlpha(g,vk(p,.76,.79),()=>{g.strokeStyle=G;g.lineWidth=4;g.strokeRect(710,500,420,70);vText(g,'BC = √100 = 10 cm',730,548,1,38,G,800);});});
+  vAlpha(g,vk(p,.84,.88),()=>{vText(g,'Converse',720,250,1,40,Y,800);['If BC² = AB² + AC²,','then triangle ABC is','right-angled at A.'].forEach((s,i)=>vText(g,s,720,320+i*56,vk(p,.86+i*.02,.89+i*.02),36,W,600));});}
+function vWrap(g,s,maxW){const words=String(s).split(' '),out=[];let line='';words.forEach(w=>{const t=line?line+' '+w:w;if(g.measureText(t).width>maxW&&line){out.push(line);line=w;}else line=t;});if(line)out.push(line);return out;}
+function drawGeneric(g,p,v){const T=v.T,rtl=T.lang==='ar',col=v.col;g.direction=rtl?'rtl':'ltr';
+  g.fillStyle='#f4f7f7';g.fillRect(0,0,1280,720);g.fillStyle=col;g.fillRect(0,0,1280,120);
+  const sx=rtl?1220:60,al=rtl?'right':'left';
+  vAlpha(g,vk(p,0,.05),()=>{g.font=`800 46px "Plus Jakarta Sans","IBM Plex Sans Arabic",sans-serif`;g.fillStyle='#fff';g.textAlign=al;g.fillText(T.title,sx,78);});
+  vAlpha(g,vk(p,.03,.08),()=>{g.font='600 22px "Plus Jakarta Sans","IBM Plex Sans Arabic",sans-serif';g.fillStyle='rgba(255,255,255,.85)';g.textAlign=rtl?'left':'right';g.fillText(T.chap,rtl?60:1220,78);});
+  const cx=rtl?680:60;vAlpha(g,vk(p,.06,.14),()=>{const s=.94+.06*vEase(vk(p,.06,.16));g.save();g.translate(cx+270,410);g.scale(s,s);g.fillStyle='#fff';g.shadowColor='rgba(0,0,0,.12)';g.shadowBlur=30;g.fillRect(-270,-230,540,460);g.shadowBlur=0;if(v.img&&v.img.complete&&v.img.naturalWidth)g.drawImage(v.img,-250,-156,500,312.5);g.restore();});
+  const n=T.points.length,tx=rtl?600:680,maxW=540;g.font='600 28px "Plus Jakarta Sans","IBM Plex Sans Arabic",sans-serif';let y=210;
+  T.points.forEach((pt,i)=>{const k=vk(p,.14+i*(.68/n),.18+i*(.68/n)),lines=vWrap(g,pt,maxW-40);vAlpha(g,k,()=>{g.fillStyle=col;g.beginPath();g.arc(rtl?tx-10:tx+10,y-9,9,0,Math.PI*2);g.fill();g.font='600 28px "Plus Jakarta Sans","IBM Plex Sans Arabic",sans-serif';g.fillStyle='#1f2937';g.textAlign=al;lines.forEach((l,j)=>g.fillText(l,rtl?tx-36:tx+36,y+j*38));});y+=lines.length*38+26;});
+  vAlpha(g,vk(p,.84,.88),()=>{g.fillStyle='rgba(15,23,42,.86)';g.fillRect(0,610,1280,110);g.font='700 30px "Plus Jakarta Sans","IBM Plex Sans Arabic",sans-serif';g.fillStyle='#fff';g.textAlign=al;g.fillText('✓ '+(DOC_L[T.lang]||DOC_L.en).sum+' — '+T.title,sx,675);});
+  g.direction='ltr';}
+function vpEl(){return document.getElementById('vp');}
+function openVideo(it){const c=matCourse(),T=topicOf(it),D=parseDur(it.dur),S=VSCRIPTS[it.video],nx=nextAfter(it.id),NT=nx?MAT_TYPES[nx.t]:null;
+  const SKB='<svg viewBox="0 0 24 24"><path d="M4.5 12a7.5 7.5 0 1 0 2.2-5.3"/><path d="M4.5 4.5v4h4"/><text x="12.6" y="15.2" text-anchor="middle" font-size="7" font-weight="800" fill="#fff" stroke="none">10</text></svg>',SKF='<svg viewBox="0 0 24 24"><path d="M19.5 12a7.5 7.5 0 1 1-2.2-5.3"/><path d="M19.5 4.5v4h-4"/><text x="11.4" y="15.2" text-anchor="middle" font-size="7" font-weight="800" fill="#fff" stroke="none">10</text></svg>';
+  openViewer(it,`<div class="vp-wrap"><div class="vp" id="vp" onclick="vpTap()"><canvas id="vp-c"></canvas><div class="vp-cap" id="vp-cap" dir="auto" data-noi18n></div>
+    <button class="vp-big" id="vp-big" onclick="event.stopPropagation();vpToggle()" aria-label="Play">${VP_PLAY}</button>
+    <div class="vp-end" onclick="event.stopPropagation()"><div><div class="vp-end-ic">✓</div><div class="vp-end-t">Lecture completed</div><div class="row" style="gap:8px;justify-content:center;margin-top:14px"><button class="btn secondary sm" onclick="vpReplay()">Replay</button>${nx?`<button class="btn sm" onclick="nextItem()">Next item</button>`:''}</div></div></div>
+    <div class="vp-ctl" dir="ltr" onclick="event.stopPropagation()"><div class="vp-seek" id="vp-seek"><div class="vp-buf" id="vp-buf"></div><div class="vp-played" id="vp-played"></div><div class="vp-thumb" id="vp-thumb"></div></div>
+      <div class="vp-row"><button class="vp-b" id="vp-pp" onclick="vpToggle()" aria-label="Play">${VP_PLAY}</button><button class="vp-b" onclick="vpSkip(-10)" aria-label="Back 10 seconds">${SKB}</button><button class="vp-b" onclick="vpSkip(10)" aria-label="Forward 10 seconds">${SKF}</button><span class="vp-time" id="vp-time">00:00 / ${fmtT(D)}</span><span class="grow"></span><button class="vp-b vp-txt" id="vp-spd" onclick="vpSpeed()" aria-label="Speed">1×</button><button class="vp-b vp-txt on" id="vp-cc" onclick="vpCC()" aria-label="Captions">CC</button></div></div></div>
+    <div class="card vp-info"><div class="row" style="align-items:flex-start;gap:10px"><div class="grow" style="min-width:0"><div style="font-weight:800;font-size:15px;line-height:1.35" data-noi18n dir="auto">${hx(it.n)}</div><div class="sub mt6">${hx(c.tch)} · ${hx(c.n)}</div></div><span class="tag" style="background:var(--surface-3);color:var(--muted);flex:0 0 auto">Condensed demo lesson</span></div>
+      <div class="sub mt12" style="line-height:1.55;color:var(--text)" data-noi18n dir="auto">${hx(T.intro)}</div></div>
+    ${nx?`<div class="set-label" style="margin:16px 18px 8px">Up next</div><div class="card" style="margin:0 14px 18px;padding:2px 14px"><div class="citem" onclick="nextItem()"><div class="set-ic" style="background:${NT.col}1f;color:${NT.col}">${matIco(nx.t)}</div><div class="grow" style="min-width:0"><div class="citem-t" data-noi18n dir="auto">${hx(nx.n)}</div><div class="sub mt6">${itemMeta(nx)}</div></div></div></div>`:''}</div>`);
+  vid={id:it.id,t:0,D,K:D/VID_LEN,speed:1,playing:false,cc:true,raf:0,last:0,hide:0,caps:S?S.caps:genericCaps(T),draw:S?S.draw:drawGeneric,T,col:c.col,img:null};
+  if(!S){const im=new Image(),vref=vid;im.onload=()=>{vref.img=im;if(vid===vref)vpDraw();};im.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(FIG(T.fig,c.col));}
+  vpBindSeek();vpDraw();vpIcons();}
+function vpDraw(){if(!vid)return;const cv=document.getElementById('vp-c');if(!cv)return;const g=cv.getContext('2d'),w=cv.clientWidth||400,h=cv.clientHeight||225,dpr=Math.min(2,window.devicePixelRatio||1);
+  if(cv.width!==Math.round(w*dpr)||cv.height!==Math.round(h*dpr)){cv.width=Math.round(w*dpr);cv.height=Math.round(h*dpr);}
+  const p=Math.min(1,vid.t/vid.D);g.setTransform(cv.width/1280,0,0,cv.height/720,0,0);g.direction='ltr';g.textBaseline='alphabetic';g.save();vid.draw(g,p,vid);g.restore();
+  const q=p*100;document.getElementById('vp-played').style.width=q+'%';document.getElementById('vp-thumb').style.left=q+'%';document.getElementById('vp-buf').style.width=Math.min(100,q+18)+'%';
+  document.getElementById('vp-time').textContent=`${fmtT(vid.t)} / ${fmtT(vid.D)}`;const cap=vid.caps.find(c=>p>=c[0]&&p<c[1]);document.getElementById('vp-cap').textContent=cap?cap[2]:'';}
+function vpIcons(){if(!vid)return;const ic=vid.playing?VP_PAUSE:VP_PLAY;const pp=document.getElementById('vp-pp'),bg=document.getElementById('vp-big');if(pp)pp.innerHTML=ic;if(bg)bg.innerHTML=VP_PLAY;}
+function vpFrame(ts){if(!vid||!vid.playing)return;const dt=vid.last?Math.min(.1,(ts-vid.last)/1000):0;vid.last=ts;vid.t=Math.min(vid.D,vid.t+dt*vid.speed*vid.K);vpDraw();if(vid.t>=vid.D){vpEnd();return;}vid.raf=requestAnimationFrame(vpFrame);}
+function vpPlay(){if(!vid)return;if(vid.t>=vid.D)vid.t=0;vid.playing=true;vid.last=0;const e=vpEl();e.classList.add('playing');e.classList.remove('ended');vpIcons();vpShowCtl();cancelAnimationFrame(vid.raf);vid.raf=requestAnimationFrame(vpFrame);}
+function vpPause(){if(!vid)return;vid.playing=false;cancelAnimationFrame(vid.raf);clearTimeout(vid.hide);const e=vpEl();if(e)e.classList.remove('playing','hide-ctl');vpIcons();}
+function vpToggle(){if(vid&&vid.playing)vpPause();else vpPlay();}
+function vpTap(){if(!vid)return;const e=vpEl();if(e.classList.contains('ended'))return;if(vid.playing&&e.classList.contains('hide-ctl')){vpShowCtl();return;}vpToggle();}
+function vpShowCtl(){if(!vid)return;const e=vpEl();if(!e)return;e.classList.remove('hide-ctl');clearTimeout(vid.hide);if(vid.playing)vid.hide=setTimeout(()=>{if(vid&&vid.playing&&vpEl())vpEl().classList.add('hide-ctl');},2600);}
+function vpEnd(){if(!vid)return;vid.playing=false;vid.t=vid.D;cancelAnimationFrame(vid.raf);clearTimeout(vid.hide);const e=vpEl();e.classList.remove('playing','hide-ctl');e.classList.add('ended');vpIcons();vpDraw();markDone(vid.id,true);}
+function vpReplay(){if(!vid)return;vid.t=0;vpEl().classList.remove('ended');vpPlay();}
+function vpSkip(s){if(!vid)return;vid.t=Math.max(0,Math.min(vid.D,vid.t+s));vpEl().classList.remove('ended');vpDraw();vpShowCtl();if(vid.t>=vid.D)vpEnd();}
+function vpSpeed(){if(!vid)return;const S=[.75,1,1.25,1.5,2];vid.speed=S[(S.indexOf(vid.speed)+1)%S.length];document.getElementById('vp-spd').textContent=vid.speed+'×';vpShowCtl();}
+function vpCC(){if(!vid)return;vid.cc=!vid.cc;vpEl().classList.toggle('no-cc',!vid.cc);document.getElementById('vp-cc').classList.toggle('on',vid.cc);vpShowCtl();}
+function vpBindSeek(){const s=document.getElementById('vp-seek');if(!s)return;let drag=false;const at=e=>{if(!vid)return;const r=s.getBoundingClientRect();vid.t=Math.max(0,Math.min(1,(e.clientX-r.left)/r.width))*vid.D;vpEl().classList.remove('ended');vpDraw();};
+  s.addEventListener('pointerdown',e=>{drag=true;try{s.setPointerCapture(e.pointerId);}catch(_){}at(e);vpShowCtl();});
+  s.addEventListener('pointermove',e=>{if(drag){at(e);vpShowCtl();}});
+  const up=()=>{if(!drag)return;drag=false;if(vid&&vid.t>=vid.D)vpEnd();};s.addEventListener('pointerup',up);s.addEventListener('pointercancel',up);}
+function vpStop(){if(vid){vid.playing=false;cancelAnimationFrame(vid.raf);clearTimeout(vid.hide);}vid=null;}
+
+/* ---- translations for the materials UI ---- */
+(function(){const add=(en,fr,ar)=>{if(!(en in I18N.fr))I18N.fr[en]=fr;if(!(en in I18N.ar))I18N.ar[en]=ar;};
+[['Course content','Contenu du cours','محتوى المقرر'],['Download','Télécharger','تنزيل'],['Downloaded ✓','Téléchargé ✓','تم التنزيل ✓'],['Page','Page','صفحة'],['Slide','Diapo','الشريحة'],['Slides','Diaporama','شرائح'],['Fit','Ajuster','ملاءمة'],
+ ['Lecture completed','Leçon terminée','اكتمل الدرس'],['Replay','Revoir','إعادة التشغيل'],['Up next','À suivre','التالي'],['Condensed demo lesson','Leçon démo condensée','درس تجريبي مختصر'],['Next item','Élément suivant','العنصر التالي'],['Back to materials','Retour aux supports','العودة إلى المواد التعليمية'],
+ ['External link','Lien externe','رابط خارجي'],['URL','URL','الرابط'],['Links open in your browser. The school checks every link before sharing it.','Les liens s’ouvrent dans votre navigateur. L’école vérifie chaque lien avant de le partager.','تُفتح الروابط في متصفحك. تتحقّق المدرسة من كل رابط قبل مشاركته.'],
+ ['Open link','Ouvrir le lien','فتح الرابط'],['Opening in browser…','Ouverture dans le navigateur…','جارٍ الفتح في المتصفح…'],['Submit answers','Valider les réponses','إرسال الإجابات'],['Choose an answer for each question','Choisissez une réponse pour chaque question','اختر إجابة لكل سؤال'],
+ ['Perfect score 🎉','Sans faute 🎉','علامة كاملة 🎉'],['Review the lesson and try again','Revoir la leçon et réessayer','راجع الدرس وحاول مجدداً'],['Close','Fermer','إغلاق'],
+ ['Preview','Aperçu','معاينة'],['Preview what students see','Aperçu de ce que voient les élèves','معاينة ما يراه التلاميذ'],['Student progress','Progression des élèves','تقدّم التلاميذ'],['Not published','Non publié','غير منشور'],
+ ['Hidden','Masqué','مخفي'],['Not visible to students','Invisible pour les élèves','غير ظاهر للتلاميذ'],['Viewed','Consulté','شوهد'],['Completed','Terminé','مكتمل'],['Not started','Pas commencé','لم يبدأ'],['In progress','En cours','قيد الإنجاز'],
+ ['Average completion','Complétion moyenne','متوسط الإنجاز'],['Items','Éléments','العناصر'],['Published','Publié','منشور'],['Last updated','Dernière mise à jour','آخر تحديث'],['Today','Aujourd’hui','اليوم'],
+ ['Add section','Ajouter une section','إضافة قسم'],['Add item','Ajouter un élément','إضافة عنصر'],['Section title','Titre de la section','عنوان القسم'],['Create section','Créer la section','إنشاء القسم'],['Section added ✓','Section ajoutée ✓','تمت إضافة القسم ✓'],
+ ['Section','Section','القسم'],['Number of pages','Nombre de pages','عدد الصفحات'],['Number of slides','Nombre de diapos','عدد الشرائح'],['Duration (mm:ss)','Durée (mm:ss)','المدة (دقائق:ثوانٍ)'],['Tap to choose a file (demo)','Touchez pour choisir un fichier (démo)','اضغط لاختيار ملف (تجريبي)'],
+ ['A 3-question check based on this chapter is created. You can edit the questions before publishing.','Un contrôle de 3 questions sur ce chapitre est créé. Vous pourrez modifier les questions avant de publier.','يُنشأ اختبار من 3 أسئلة حول هذا الفصل. يمكنك تعديل الأسئلة قبل النشر.'],
+ ['Enter a title','Saisissez un titre','أدخل عنواناً'],['Choose a file first','Choisissez d’abord un fichier','اختر ملفاً أولاً'],['Item added as draft ✓','Élément ajouté en brouillon ✓','أُضيف العنصر كمسودة ✓'],
+ ['Publish to students','Publier pour les élèves','نشر للتلاميذ'],['Hide from students','Masquer aux élèves','إخفاء عن التلاميذ'],['Published to students ✓','Publié pour les élèves ✓','نُشر للتلاميذ ✓'],['Hidden from students','Masqué aux élèves','أُخفي عن التلاميذ'],
+ ['Rename','Renommer','إعادة التسمية'],['Save','Enregistrer','حفظ'],['Renamed ✓','Renommé ✓','تمت إعادة التسمية ✓'],['Move up','Monter','نقل للأعلى'],['Move down','Descendre','نقل للأسفل'],['Moved up','Déplacé vers le haut','نُقل للأعلى'],['Moved down','Déplacé vers le bas','نُقل للأسفل'],
+ ['Share with class','Partager avec la classe','مشاركة مع الصف'],['Delete','Supprimer','حذف'],['Delete this item?','Supprimer cet élément ?','حذف هذا العنصر؟'],['Students will lose access to it. This cannot be undone.','Les élèves n’y auront plus accès. Action irréversible.','سيفقد التلاميذ الوصول إليه. لا يمكن التراجع عن ذلك.'],
+ ['Cancel','Annuler','إلغاء'],['Item deleted','Élément supprimé','تم حذف العنصر'],["Remind students who haven't started",'Relancer les élèves qui n’ont pas commencé','تذكير التلاميذ الذين لم يبدأوا'],['Everyone has opened this item','Tous les élèves ont ouvert cet élément','فتح جميع التلاميذ هذا العنصر'],
+ ['No items yet','Aucun élément pour l’instant','لا عناصر بعد'],['1 item','1 élément','عنصر واحد'],['Draft','Brouillon','مسودة'],['Type','Type','النوع'],['Title','Titre','العنوان'],['Create as draft','Créer en brouillon','إنشاء كمسودة'],['Quiz','Quiz','اختبار قصير'],['Video','Vidéo','فيديو'],['Link','Lien','رابط'],['PDF','PDF','PDF']
+].forEach(r=>add(...r));
+const P=[['{n} slides','{n} diapos','{n} شرائح'],['{n} items','{n} éléments','{n} عناصر'],['{n} sections','{n} sections','{n} أقسام'],['{n} min','{n} min','{n} دقيقة'],['{n} pages','{n} pages','{n} صفحات'],['{n} questions','{n} questions','{n} أسئلة'],
+ ['Viewed {n}','Consulté {n}','شوهد {n}'],['Completed {n}','Terminé {n}','أكمله {n}'],['Reminder sent to {n} students','Relance envoyée à {n} élèves','تم إرسال تذكير إلى {n} تلميذاً'],['{n} more students','{n} autres élèves','{n} تلاميذ آخرين'],
+ ['Shared with {c}','Partagé avec {c}','تمت المشاركة مع {c}'],['Mathematics {c}','Mathématiques {c}','الرياضيات {c}'],['Average completion','Complétion moyenne','متوسط الإنجاز']];
+P.forEach(([en,fr,ar])=>{if(!I18N_P.fr.some(x=>x[0]===en))I18N_P.fr.push([en,fr]);if(!I18N_P.ar.some(x=>x[0]===en))I18N_P.ar.push([en,ar]);});
+Object.keys(_patCache).forEach(k=>delete _patCache[k]);})();
+
 const CEDAR='<svg viewBox="0 0 24 24"><path d="M12 2.5 7.5 8h2.2L6 12.5h2.8L4.5 17.5H11v4h2v-4h6.5l-4.3-5h2.8L14.3 8h2.2z" fill="currentColor"/></svg>';
 /* student IDs (Omar Haddad = ARZ-S-1041) and guardians */
 const stuId=(cls,i)=>'ARZ-S-'+(cls==='m9b'?1041+(i+4)%8:cls==='m9a'?1101+i:1201+i);
@@ -942,12 +1621,15 @@ exams:()=>`
   <button class="btn mt16" onclick="createExam()">+ Create exam</button>
   <div style="height:10px"></div>`,
 
-materials:()=>`
-  <div class="apphead"><span class="lead"></span><h2 class="screen-title">Course materials</h2><div class="grow"></div><div class="icon-btn" onclick="uploadMaterial()"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></div></div>
-  <p class="sub">Notes, slides, videos &amp; links</p>
-  <div class="card mt16" style="padding:6px 16px">${materials.map(m=>`<div class="list-item"><div class="set-ic" style="background:${matColorT(m.t)}1f;color:${matColorT(m.t)}">${matIconT(m.t)}</div><div class="grow"><div style="font-weight:700">${m.n}</div><div class="sub mt6">${m.t==='slides'?'Notes':m.t==='pdf'?'PDF':cap(m.t)} · ${m.cls==='All'?'All classes':m.cls}</div></div><span class="tag" style="background:var(--surface-3);color:var(--muted);cursor:pointer" onclick="toast('Shared with ${m.cls} ✓')">Share</span></div>`).join('')}</div>
-  <button class="btn mt16" onclick="uploadMaterial()">+ Upload material</button>
-  <div style="height:10px"></div>`,
+materials:()=>{const c=classes.find(x=>x.id===matCls),K=matCourse(),secs=secsOf(),its=itemsOf(),pub=its.filter(x=>x.st==='published').length,pct=avgDone(its,matCls)||0,open=matOpen();return `
+  <div class="apphead"><span class="lead"></span><div class="grow" style="min-width:0"><h2 class="screen-title">Course materials</h2><div class="sub">Preview what students see</div></div><div class="icon-btn" onclick="uploadMaterial()" aria-label="Add item"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></div></div>
+  <div class="chip-scroll mt8">${classes.map(x=>`<div class="chip ${x.id===matCls?'active':''}" onclick="matPick('${x.id}')">${x.grp}</div>`).join('')}</div>
+  <div class="card mt12"><div class="row" style="gap:14px"><div class="cring" style="--p:${pct}"><b class="tnum">${pct}%</b></div><div class="grow" style="min-width:0"><div style="font-weight:800">${K.hdr} · ${c.grp}</div><div class="sub mt6">Average completion · ${c.students} students</div><div class="progress mt8"><i style="width:${pct}%"></i></div></div></div>
+    <div class="row mt12" style="gap:8px"><div class="stat"><div class="n tnum">${its.length}</div><div class="l">Items</div></div><div class="stat"><div class="n tnum">${pub}</div><div class="l">Published</div></div><div class="stat"><div class="n" style="font-size:15px">${MAT_UPDATED[matCls]}</div><div class="l">Last updated</div></div></div></div>
+  <div class="row between" style="margin:18px 4px 0"><div class="set-label" style="margin:0">Course content</div><span class="sub" style="font-size:11.5px"><bdi>${secs.length} sections</bdi> · <bdi>${its.length} items</bdi></span></div>
+  ${secs.map((sec,si)=>{const o=open.has(si),p=avgDone(sec.items,matCls);return `<div class="csec${o?' open':''}" data-sec="${si}"><button class="csec-h" onclick="toggleSec(${si})" aria-expanded="${o}"><div class="grow" style="min-width:0"><div class="csec-t" data-noi18n dir="auto">${hx(sec.n)}</div><div class="sub mt6">${sec.items.length?secMeta(sec):'No items yet'}</div></div><span class="csec-n tnum${p===100?' full':''}">${p==null?'—':p+'%'}</span><svg class="chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button><div class="csec-b" style="${o?'':'height:0px'}"><div class="csec-in">${sec.items.map(matRow).join('')}<button class="madd" onclick="addItemSheet(${si})"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg><span>Add item</span></button></div></div></div>`;}).join('')}
+  <button class="btn secondary mt16" onclick="addSectionSheet()"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg> Add section</button>
+  <div style="height:14px"></div>`;},
 
 reports:()=>{
   const attRow=classes.map(c=>{const r=rosters[c.id];const pr=r.filter(s=>s.att!=='a').length;return {g:c.grp,pct:Math.round(pr/r.length*100)};});
@@ -1137,6 +1819,8 @@ applyLang();
 Object.keys(SCREENS).forEach(id=>{const d=document.createElement('div');d.className='screen';d.id='scr-'+id;d.innerHTML=SCREENS[id]();translateEl(d);screensEl.appendChild(d);});
 /* home: show compact sticky header once the hero scrolls away */
 (function(){const el=document.getElementById("scr-home");if(!el)return;el.addEventListener("scroll",()=>{const m=document.getElementById("home-mini"),h=el.querySelector(".hero");if(!m||!h)return;m.classList.toggle("show",el.scrollTop>h.offsetHeight-70);},{passive:true});})();
+['touchstart','mousedown'].forEach(ev=>document.getElementById('viewer').addEventListener(ev,e=>e.stopPropagation(),{passive:true}));
+window.addEventListener('resize',()=>{if(vw.type==='pdf'&&viewerOpen())pdfLayout(true);if(vid)vpDraw();});
 function rebuild(id){const el=document.getElementById('scr-'+id);el.innerHTML=SCREENS[id]();translateEl(el);if(id==='home')initQuick();}
 /* quick access: pages of 8 tiles, swipe / drag left-right, dots */
 let qPage=0;
@@ -1296,15 +1980,6 @@ function openExamT(id){const e=examsT.find(x=>x.id===id);openSheet(`<h2 style="f
   <button class="btn secondary mt8" onclick="closeSheet()">Close</button>`);}
 function publishExam(id){const e=examsT.find(x=>x.id===id);e.status='published';closeSheet();rebuild('exams');show('exams');toast('Exam published to '+e.cls);}
 function gradeExam(id){const e=examsT.find(x=>x.id===id);e.status='graded';closeSheet();rebuild('exams');show('exams');toast(e.type==='MCQ'?'Auto-graded ✓':'Grades saved ✓');}
-function uploadMaterial(){openSheet(`<h2 style="font-size:20px;font-weight:800">Upload material</h2>
-  <div class="set-label">Type</div>
-  <div class="seg" id="mt-type"><button class="active" onclick="pickMat(this,'pdf')">PDF</button><button onclick="pickMat(this,'slides')">Notes</button><button onclick="pickMat(this,'video')">Video</button><button onclick="pickMat(this,'link')">Link</button></div>
-  <div class="field"><label>Title</label><input class="input" id="mt-name" placeholder="e.g. Pythagoras — summary notes"/></div>
-  <div class="field"><label>Class</label><input class="input" id="mt-cls" value="EB9 B"/></div>
-  <div class="card mt12" style="border-style:dashed;text-align:center;background:var(--surface-2)"><div style="font-size:26px">⬆️</div><div class="sub mt8">Tap to choose a file (demo)</div></div>
-  <button class="btn mt16" onclick="addMaterial()">Upload</button>`);matType='pdf';}
-function pickMat(btn,t){matType=t;btn.parentElement.querySelectorAll('button').forEach(b=>b.classList.remove('active'));btn.classList.add('active');}
-function addMaterial(){const n=(document.getElementById('mt-name').value||'New material').trim();const cls=document.getElementById('mt-cls').value||'EB9 B';materials.unshift({t:matType,n,cls});closeSheet();rebuild('materials');show('materials');toast('Material uploaded ✓');}
 function studentProfileT(i){const c=C(),s=rosters[c.id][i],p=stuPctIn(c.id,s);openSheet(`<div class="row"><div class="avatar" style="width:52px;height:52px;font-size:17px;background:${s.c}">${initials(s.n)}</div><div class="grow"><h2 style="font-size:19px;font-weight:800">${s.n}</h2><div class="sub mt6">${c.grp} · ${stuId(c.id,i)}</div></div></div>
   <div class="row mt16" style="gap:10px"><div class="stat"><div class="n accent tnum">${p==null?'—':p.toFixed(1)+'<span style="font-size:13px;color:var(--muted)">/20</span>'}</div><div class="l">Term average</div></div><div class="stat"><div class="n tnum" style="font-size:15px">${s.att==='p'?'Present':s.att==='l'?'Late':s.att==='a'?'Absent':'Excused'}</div><div class="l">Today</div></div></div>
   <div class="set-label">Guardian</div>

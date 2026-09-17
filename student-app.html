@@ -242,6 +242,167 @@
   .lang-chip svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:1.9}
   @media (max-width:500px){body{padding:0;display:block;background:#000;min-height:100dvh}.stage{gap:0;width:100%}.stage-title{display:none}.device{width:100%;height:100vh;height:100dvh;border-radius:0;padding:0;box-shadow:none}.device::before,.btn-side,.home-indicator{display:none}.bezel,.viewport{border-radius:0}}
   @media (max-width:500px) and (min-height:980px){.device{width:min(100vw,440px);height:952px;margin:0 auto;border-radius:66px;padding:5px}.device::before{display:block}.bezel,.viewport{border-radius:61px}.home-indicator{display:block}}
+
+  /* ---- course content (Udemy-style) ---- */
+  .cring{--p:0;width:58px;height:58px;border-radius:50%;flex:0 0 auto;display:grid;place-items:center;background:conic-gradient(var(--accent) calc(var(--p)*1%),var(--surface-3) 0)}
+  .cring::before{content:"";grid-area:1/1;width:46px;height:46px;border-radius:50%;background:var(--surface)}
+  .cring b{grid-area:1/1;position:relative;font-size:13px;font-weight:800}
+  .btn.cont{justify-content:flex-start;padding:14px 16px;font-size:14.5px;text-align:start}
+  .btn.cont svg{flex:0 0 auto;width:20px;height:20px;fill:#fff}
+  .btn.cont .ell{min-width:0}
+  .csec{background:var(--surface);border:1px solid var(--line);border-radius:16px;margin-top:10px;overflow:hidden;box-shadow:0 1px 2px rgba(16,24,40,.04),0 8px 24px -18px rgba(16,24,40,.25)}
+  :root[data-theme="dark"] .csec{box-shadow:none}
+  .csec-h{width:100%;display:flex;align-items:center;gap:10px;padding:13px 14px;background:transparent;border:none;color:var(--text);cursor:pointer;font:inherit;text-align:start;transition:background .2s}
+  .csec.open .csec-h{background:var(--surface-2)}
+  .csec-t{font-weight:800;font-size:14.5px;line-height:1.3}
+  .csec-n{font-size:11.5px;font-weight:800;color:var(--muted);background:var(--surface-3);padding:3px 8px;border-radius:999px;flex:0 0 auto}
+  .csec-n.full{background:var(--ok-bg);color:var(--ok)}
+  .csec-h .chev{width:18px;height:18px;stroke:var(--muted);fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;transition:transform .3s;flex:0 0 auto}
+  .csec.open .chev{transform:rotate(180deg)}
+  .csec-b{overflow:hidden;transition:height .32s cubic-bezier(.2,.8,.2,1)}
+  .csec-in{padding:0 14px 4px;border-top:1px solid var(--line)}
+  .citem{display:flex;align-items:center;gap:11px;padding:11px 0;border-bottom:1px solid var(--line);cursor:pointer}
+  .citem:last-child{border-bottom:none}
+  .citem:active{opacity:.75}
+  .citem-t{font-weight:600;font-size:13.5px;line-height:1.35}
+  .citem.done .citem-t{color:var(--muted)}
+  .citem.now .citem-t{color:var(--accent);font-weight:800}
+  .citem .sub{font-size:11.5px}
+  .cchk{width:22px;height:22px;border-radius:50%;border:2px solid var(--line);flex:0 0 auto;display:grid;place-items:center;color:#fff;transition:.15s;cursor:pointer}
+  .citem.done .cchk{background:var(--ok);border-color:var(--ok)}
+  .cchk svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:3.2;stroke-linecap:round;stroke-linejoin:round}
+  .icon-btn.cdl{width:34px;height:34px;border-radius:10px}
+  .icon-btn.cdl svg{width:17px;height:17px;stroke-linecap:round;stroke-linejoin:round}
+  /* viewer */
+  .viewer{position:absolute;inset:0;z-index:74;background:var(--bg);display:flex;flex-direction:column;transform:translateY(100%);visibility:hidden;transition:transform .38s cubic-bezier(.2,.8,.2,1),visibility 0s linear .38s}
+  .viewer.open{transform:none;visibility:visible;transition:transform .38s cubic-bezier(.2,.8,.2,1)}
+  .viewer .btn,.viewer .icon-btn{transition-property:transform,background-color,color,box-shadow,opacity}
+  .vbar{display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--surface);border-bottom:1px solid var(--line);flex:0 0 auto}
+  .vbar .icon-btn svg{stroke-linecap:round;stroke-linejoin:round}
+  .vtitle{font-weight:800;font-size:15px;line-height:1.3}
+  .vbar .sub{font-size:12px;margin-top:2px}
+  .vbody{flex:1;min-height:0;position:relative;display:flex;flex-direction:column}
+  .vfoot{display:flex;gap:8px;padding:10px 14px 30px;background:var(--surface);border-top:1px solid var(--line);flex:0 0 auto}
+  .vfoot .btn{padding:13px 10px;font-size:14px;box-shadow:none}
+  .vfoot .btn.secondary.is-done{background:var(--ok-bg);color:var(--ok)}
+  /* pdf */
+  .pdf-wrap{flex:1;min-height:0;display:flex;flex-direction:column;background:#3b4048}
+  .pdf-tools,.pdf-thumbs{display:flex;align-items:center;gap:6px;padding:8px 12px;background:#2a2e34;color:#e5e7eb;flex:0 0 auto}
+  .pt-btn{min-width:34px;height:30px;border-radius:8px;border:none;background:rgba(255,255,255,.12);color:#fff;font:inherit;font-weight:800;font-size:15px;cursor:pointer;padding:0 10px}
+  .pt-btn.pt-fit{font-size:12px}
+  .pt-z,.pt-page{font-size:12.5px;font-weight:700;min-width:44px;text-align:center}
+  .pt-page{color:#cbd5e1}
+  .pdf-scroll{flex:1;min-height:0;overflow:auto;position:relative;overscroll-behavior:contain;scrollbar-width:thin}
+  .pdf-pages{display:flex;flex-direction:column;align-items:center;gap:14px;padding:14px;width:max-content;min-width:100%}
+  .pdf-page{background:#fff;color:#1b1f24;aspect-ratio:1/1.4142;box-shadow:0 6px 22px rgba(0,0,0,.4);container-type:inline-size;overflow:hidden;flex:0 0 auto;border-radius:2px}
+  .pp{font-family:Georgia,"Times New Roman",serif;font-size:2.75cqw;line-height:1.5;padding:4.5cqw 7cqw 3.5cqw;height:100%;display:flex;flex-direction:column}
+  .pdf-page[lang="ar"] .pp{font-family:"IBM Plex Sans Arabic",sans-serif}
+  .pp-hd{display:flex;justify-content:space-between;gap:3cqw;font-family:"Plus Jakarta Sans","IBM Plex Sans Arabic",sans-serif;font-size:2cqw;color:#6b7280;border-bottom:.35cqw solid var(--pc);padding-bottom:1.4cqw;margin-bottom:3cqw;font-weight:700}
+  .pp-kick{font-family:"Plus Jakarta Sans","IBM Plex Sans Arabic",sans-serif;font-size:2.3cqw;font-weight:800;color:var(--pc);text-transform:uppercase;letter-spacing:.08em}
+  .pp h1{font-family:"Plus Jakarta Sans","IBM Plex Sans Arabic",sans-serif;font-size:5.2cqw;line-height:1.15;margin:1cqw 0 2.4cqw;color:#111827}
+  .pp h2{font-family:"Plus Jakarta Sans","IBM Plex Sans Arabic",sans-serif;font-size:3.6cqw;line-height:1.25;margin:2.6cqw 0 1.6cqw;color:var(--pc)}
+  .pp p{margin:0 0 2cqw}
+  .pp ul,.pp ol{margin:0 0 2cqw;padding-inline-start:5cqw}
+  .pp li{margin-bottom:.9cqw}
+  .pp-def{border-inline-start:1cqw solid var(--pc);background:#f1f6f5;padding:1.8cqw 3cqw;margin:0 0 2cqw;border-radius:1cqw}
+  .pp-def b{display:block;font-family:"Plus Jakarta Sans","IBM Plex Sans Arabic",sans-serif;font-size:2cqw;text-transform:uppercase;letter-spacing:.06em;color:var(--pc);margin-bottom:.5cqw}
+  .pp-f{font-family:"Cambria Math","Times New Roman",serif;font-size:3.8cqw;text-align:center;background:#fafaf4;border:.25cqw dashed #d6d3c4;border-radius:1cqw;padding:1.8cqw;margin:0 0 2cqw;direction:ltr;unicode-bidi:isolate}
+  .pdf-page[lang="ar"] .pp-f{direction:rtl;font-family:"IBM Plex Sans Arabic",sans-serif}
+  .pp-ex{background:#fff7e8;border-radius:1cqw;padding:2cqw 3cqw;margin:0 0 2cqw}
+  .pp-ex b{display:block;font-family:"Plus Jakarta Sans","IBM Plex Sans Arabic",sans-serif;font-size:2.7cqw;margin-bottom:.6cqw}
+  .pp-ex ol{margin:0}
+  .pp-fig{margin:.5cqw 0 1.5cqw;text-align:center}
+  .pp-fig svg{width:62%;height:auto}
+  .pp-fig.sm svg{width:48%}
+  .pp-fig figcaption{font-size:2cqw;color:#6b7280;font-style:italic}
+  .pp-ft{margin-top:auto;text-align:center;font-family:"Plus Jakarta Sans",sans-serif;font-size:2cqw;color:#9ca3af}
+  .pdf-thumbs{overflow-x:auto;scrollbar-width:none}
+  .pdf-thumbs::-webkit-scrollbar{display:none}
+  .pth{flex:0 0 auto;width:30px;height:40px;border-radius:4px;border:2px solid transparent;background:#f8fafc;color:#374151;font:inherit;font-size:11px;font-weight:800;cursor:pointer;display:flex;align-items:flex-end;justify-content:center;padding-bottom:3px}
+  .pth.on{border-color:var(--accent);box-shadow:0 0 0 2px rgba(255,255,255,.3)}
+  /* slides */
+  .sl-wrap{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center;gap:14px;background:var(--surface-3);padding:14px 0;overflow:hidden}
+  .sl-stage{overflow:hidden;touch-action:pan-y;cursor:grab;user-select:none;-webkit-user-select:none}
+  .sl-track{display:flex;transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+  .sl-track.drag{transition:none;cursor:grabbing}
+  .sl-slide{flex:0 0 100%;padding:0 14px}
+  .slc{container-type:inline-size}
+  .sl{aspect-ratio:16/9;background:#fff;color:#17212b;border-radius:1.8cqw;overflow:hidden;position:relative;box-shadow:0 10px 30px -12px rgba(0,0,0,.4);font-size:2.9cqw;line-height:1.4;padding:4.6cqw 7cqw 4.6cqw;display:flex;flex-direction:column}
+  .sl::before{content:"";position:absolute;inset-block:0;inset-inline-start:0;width:1.3cqw;background:var(--sc)}
+  .slc[lang="ar"] .sl{font-family:"IBM Plex Sans Arabic",sans-serif}
+  .sl-k{font-size:2cqw;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--sc)}
+  .sl h3{font-size:4.8cqw;line-height:1.15;margin:.8cqw 0 2.2cqw;font-weight:800}
+  .sl ul,.sl ol{padding-inline-start:4cqw;margin:0}
+  .sl li{margin-bottom:1.2cqw}
+  .sl-f{font-family:"Cambria Math","Times New Roman",serif;font-size:6cqw;text-align:center;margin:auto 0;direction:ltr;unicode-bidi:isolate;color:#0f172a}
+  .slc[lang="ar"] .sl-f{direction:rtl;font-family:"IBM Plex Sans Arabic",sans-serif}
+  .sl-note{font-size:2.5cqw;color:#5b6572;text-align:center}
+  .sl-2{display:grid;grid-template-columns:1.05fr 1fr;gap:4cqw;align-items:center;flex:1;min-height:0}
+  .sl-fig svg{width:100%;height:auto;display:block}
+  .sl-sub{font-weight:700;color:var(--sc);margin-bottom:1.6cqw}
+  .sl-steps li{margin-bottom:.9cqw}
+  .sl.q{background:#fffbeb;justify-content:center;text-align:center}
+  .sl.q::before{display:none}
+  .sl-qt{font-size:4.2cqw;font-weight:800;line-height:1.3;margin-top:2cqw}
+  .sl-check{list-style:none;padding:0!important}
+  .sl-check li{padding-inline-start:4.5cqw;position:relative}
+  .sl-check li::before{content:"✓";position:absolute;inset-inline-start:0;color:var(--sc);font-weight:800}
+  .sl.title{background:linear-gradient(150deg,var(--sc),#0b2f2b);color:#fff;justify-content:center}
+  .sl.title::before{display:none}
+  .sl.title h3{font-size:6.4cqw;margin-bottom:1.6cqw}
+  .sl.title .sl-k{color:rgba(255,255,255,.8)}
+  .sl-by{font-size:2.6cqw;opacity:.85}
+  .sl-cedar{position:absolute;inset-inline-end:-2cqw;bottom:-5cqw;width:30cqw;height:30cqw;opacity:.14;color:#fff}
+  .sl-cedar svg{width:100%;height:100%}
+  .sl-foot{position:absolute;inset-inline-end:3cqw;bottom:2.2cqw;font-size:1.8cqw;color:#98a2ae;font-weight:700}
+  .sl.title .sl-foot{color:rgba(255,255,255,.7)}
+  .sl-nav{display:flex;align-items:center;justify-content:center;gap:14px}
+  .sl-count{font-weight:800;font-size:13.5px;min-width:96px;text-align:center}
+  .sl-thumbs{display:flex;gap:8px;overflow-x:auto;padding:4px 14px;scrollbar-width:none}
+  .sl-thumbs::-webkit-scrollbar{display:none}
+  .slth{flex:0 0 auto;border:none;background:transparent;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px;color:var(--muted);font:inherit;font-size:10.5px;font-weight:700;padding:0}
+  .slth .slc{width:92px;border-radius:6px;outline:2px solid transparent;outline-offset:2px;pointer-events:none}
+  .slth .sl{box-shadow:none}
+  .slth.on .slc{outline-color:var(--accent)}
+  .slth.on{color:var(--accent)}
+  /* video */
+  .vp-wrap{flex:1;min-height:0;overflow-y:auto;background:var(--bg)}
+  .vp{position:relative;background:#000;aspect-ratio:16/9;overflow:hidden;cursor:pointer;user-select:none;-webkit-user-select:none}
+  .vp canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+  .vp-cap{position:absolute;left:50%;transform:translateX(-50%);bottom:50px;max-width:90%;width:max-content;background:rgba(0,0,0,.75);color:#fff;font-size:12px;line-height:1.35;padding:4px 9px;border-radius:6px;text-align:center;transition:bottom .25s,opacity .2s;pointer-events:none}
+  .vp.hide-ctl .vp-cap{bottom:10px}
+  .vp-cap:empty,.vp.no-cc .vp-cap{opacity:0}
+  .vp-big{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:60px;height:60px;border-radius:50%;border:none;background:rgba(0,0,0,.55);display:grid;place-items:center;cursor:pointer;transition:opacity .2s,transform .2s;padding:0}
+  .vp-big svg{width:28px;height:28px;fill:#fff;margin-left:3px}
+  .vp.playing .vp-big{opacity:0;pointer-events:none;transform:translate(-50%,-50%) scale(.8)}
+  .vp-ctl{position:absolute;left:0;right:0;bottom:0;padding:16px 8px 4px;background:linear-gradient(transparent,rgba(0,0,0,.78));color:#fff;transition:opacity .25s}
+  .vp.hide-ctl .vp-ctl{opacity:0;pointer-events:none}
+  .vp-seek{position:relative;height:16px;cursor:pointer;touch-action:none;margin:0 6px}
+  .vp-seek::before{content:"";position:absolute;left:0;right:0;top:6px;height:4px;border-radius:2px;background:rgba(255,255,255,.25)}
+  .vp-buf,.vp-played{position:absolute;left:0;top:6px;height:4px;border-radius:2px}
+  .vp-buf{background:rgba(255,255,255,.42)}
+  .vp-played{background:var(--accent)}
+  .vp-thumb{position:absolute;top:2px;width:12px;height:12px;border-radius:50%;background:#fff;transform:translateX(-50%);box-shadow:0 1px 4px rgba(0,0,0,.5)}
+  .vp-row{display:flex;align-items:center;gap:0}
+  .vp-b{height:30px;min-width:30px;border:none;background:transparent;color:#fff;display:grid;place-items:center;cursor:pointer;border-radius:6px;font:inherit;font-weight:800;font-size:11.5px;padding:0 5px;letter-spacing:0}
+  .vp-b svg{width:21px;height:21px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  #vp-pp svg{fill:#fff;stroke:none}
+  .vp-b.vp-txt{min-width:34px}
+  .vp-b.vp-txt.on{background:rgba(255,255,255,.2)}
+  #vp-cc:not(.on){color:rgba(255,255,255,.55);text-decoration:line-through}
+  .vp-time{font-size:11.5px;font-weight:700;margin-left:4px;font-variant-numeric:tabular-nums;white-space:nowrap}
+  .vp-end{position:absolute;inset:0;background:rgba(6,14,13,.84);display:none;place-items:center;color:#fff;text-align:center;cursor:default}
+  .vp.ended .vp-end{display:grid}
+  .vp.ended .vp-big,.vp.ended .vp-cap,.vp.ended .vp-ctl{display:none}
+  .vp-end-ic{width:44px;height:44px;border-radius:50%;background:var(--ok);display:grid;place-items:center;margin:0 auto 8px;font-size:22px;font-weight:800;color:#fff}
+  .vp-end-t{font-weight:800;font-size:16px}
+  .btn.sm{width:auto;padding:9px 14px;font-size:13px;box-shadow:none}
+  .vp-info{margin:12px 14px 0}
+  /* quiz */
+  .qz-o{display:block;width:100%;text-align:start;padding:11px 12px;border-radius:12px;border:1.5px solid var(--line);background:var(--surface);color:var(--text);font:inherit;font-size:13.5px;font-weight:600;margin-top:8px;cursor:pointer;transition:.15s}
+  .qz-o.sel{border-color:var(--accent);background:var(--accent-soft)}
+  .qz-o.ok{border-color:var(--ok);background:var(--ok-bg);color:var(--ok)}
+  .qz-o.bad{border-color:var(--danger);background:var(--danger-bg);color:var(--danger)}
 </style>
 </head>
 <body>
@@ -259,6 +420,7 @@
       <div class="app">
         <div class="screens" id="screens"></div>
         <div class="toast" id="toast"></div>
+        <div class="viewer" id="viewer" aria-hidden="true"><div class="vbar"><div class="icon-btn" onclick="closeViewer()" aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></div><div class="grow" style="min-width:0"><div class="vtitle ell" id="v-title" data-noi18n dir="auto"></div><div class="sub" id="v-sub"></div></div><div class="icon-btn" id="v-dl" onclick="downloadItem(vw.id)" aria-label="Download"><svg viewBox="0 0 24 24"><path d="M12 4v11M7 10.5l5 5 5-5M5 20h14"/></svg></div></div><div class="vbody" id="v-body"></div><div class="vfoot"><button class="btn secondary" id="v-done" onclick="toggleDone(vw.id)"></button><button class="btn" id="v-next" onclick="nextItem()"></button></div></div>
         <div class="act-wrap" id="actsheet" data-noi18n><div class="act-back" onclick="closeLangActions()"></div><div class="act" id="act-body"></div></div>
         <div class="sheet-wrap" id="sheet"><div class="sheet-back" data-close-sheet></div><div class="sheet"><div class="grab"></div><div id="sheet-body"></div></div></div>
         <div class="drawer-wrap" id="drawer">
@@ -445,10 +607,17 @@ const I18N_SRC=[
 ['Pay fees','Payer les frais','دفع الأقساط'],['Amount (USD)','Montant (USD)','المبلغ (دولار أميركي)'],['Payment method','Moyen de paiement','طريقة الدفع'],['Card','Carte','بطاقة'],
 ['Bank transfer','Virement bancaire','تحويل مصرفي'],['OMT','OMT','OMT'],['Whish Money','Whish Money','Whish Money'],['Cash at the Finance Office','Espèces au service financier','نقداً في الدائرة المالية'],
 ['Get payment slip','Obtenir le bordereau','الحصول على إيصال الدفع'],['Payment slip ready','Bordereau prêt','إيصال الدفع جاهز'],['bring it to the Finance Office','apporte-le au service financier','أحضره إلى الدائرة المالية'],
+['Your progress','Ta progression','تقدّمك'],['Continue','Continuer','متابعة'],['Course content','Contenu du cours','محتوى المقرر'],['Mark as complete','Marquer comme terminé','وضع علامة مكتمل'],['Complete','Terminé','مكتمل'],['Next item','Élément suivant','العنصر التالي'],['Back to course','Retour au cours','العودة إلى المقرر'],['Download','Télécharger','تنزيل'],['Downloaded ✓','Téléchargé ✓','تم التنزيل ✓'],['Page','Page','صفحة'],['Slide','Diapo','الشريحة'],['Slides','Diaporama','شرائح'],['Link','Lien','رابط'],['Fit','Ajuster','ملاءمة'],['Lecture completed','Leçon terminée','اكتمل الدرس'],['Replay','Revoir','إعادة التشغيل'],['Up next','À suivre','التالي'],['Condensed demo lesson','Leçon démo condensée','درس تجريبي مختصر'],['All items completed','Tous les éléments sont terminés','اكتملت جميع العناصر'],['Marked as complete ✓','Marqué comme terminé ✓','تم وضع علامة مكتمل ✓'],['Marked as not complete','Marqué comme non terminé','أُزيلت علامة الإكمال'],['External link','Lien externe','رابط خارجي'],['URL','URL','الرابط'],['Links open in your browser. The school checks every link before sharing it.','Les liens s’ouvrent dans ton navigateur. L’école vérifie chaque lien avant de le partager.','تُفتح الروابط في متصفحك. تتحقّق المدرسة من كل رابط قبل مشاركته.'],['Open link','Ouvrir le lien','فتح الرابط'],['Opening in browser…','Ouverture dans le navigateur…','جارٍ الفتح في المتصفح…'],['Submit answers','Valider les réponses','إرسال الإجابات'],['Choose an answer for each question','Choisis une réponse pour chaque question','اختر إجابة لكل سؤال'],['Perfect score 🎉','Sans faute 🎉','علامة كاملة 🎉'],['Review the lesson and try again','Revois la leçon et réessaie','راجع الدرس وحاول مجدداً'],
 ];
 const I18N={fr:{},ar:{}};I18N_SRC.forEach(([en,fr,ar])=>{I18N.fr[en]=fr;I18N.ar[en]=ar;});
 /* patterns: $n = translated capture, %n = raw capture (names, authored titles) */
 const I18P=[
+[/^(\d+) of (\d+) items completed$/,'%1 éléments terminés sur %2','أُنجز %1 من %2 عنصراً'],
+[/^(\d+) sections?$/,'%1 sections','%1 أقسام'],
+[/^1 item$/,'1 élément','عنصر واحد'],
+[/^(\d+) items$/,'%1 éléments','%1 عناصر'],
+[/^(\d+) slides$/,'%1 diapos','%1 شرائح'],
+[/^(\d+) questions$/,'%1 questions','%1 أسئلة'],
 [/^Hi, (.+) 👋$/,'Salut %1 👋','مرحباً %1 👋'],
 [/^PERIOD (\d+)$/,'HEURE %1','الحصة %1'],
 [/^ends (.+)$/,'fin à %1','تنتهي عند %1'],
@@ -717,6 +886,534 @@ const courses=[
   {c:'Hi',n:'History, Geography & Civics',col:SUBJ.Hi,tch:'Ms. Rita Salameh',room:'108',desc:'Lebanon under the Mandate and independence (1943), the geography of Lebanon, and civic education.',mats:[{t:'pdf',n:'Timeline — Independence of Lebanon'},{t:'slides',n:'Lebanese state institutions'}]},
   {c:'PE',n:'Physical Education',col:SUBJ.PE,tch:'Mr. Georges Nehme',room:'Gym',desc:'Fitness, athletics and team sports.',mats:[{t:'pdf',n:'1st term fixtures'}]},
 ];
+
+/* ================= COURSE CONTENT · Udemy-style sections, viewers (PDF · slides · video), completion ================= */
+const MAT_TYPES={pdf:{l:'PDF',col:'#0ea5e9'},slides:{l:'Slides',col:'#f59e0b'},video:{l:'Video',col:'#ef4444'},link:{l:'Link',col:'#8b5cf6'},quiz:{l:'Quiz',col:'#10b981'}};
+const MAT_ICO={pdf:'<path d="M7 3h8l4 4v14H7z"/><path d="M14 3v5h5"/><path d="M9.5 13h5M9.5 16.5h3.5"/>',slides:'<rect x="3" y="4" width="18" height="12.5" rx="2"/><path d="M12 16.5V20M8 20.5h8"/><path d="M7.5 12.5l3-3 2.5 2 3.5-3.5"/>',video:'<rect x="3" y="5" width="18" height="14" rx="3"/><path d="M10 9l5 3-5 3z"/>',link:'<path d="M10 14a4.5 4.5 0 0 0 6.4 0l3-3a4.5 4.5 0 0 0-6.4-6.4l-1 1"/><path d="M14 10a4.5 4.5 0 0 0-6.4 0l-3 3a4.5 4.5 0 0 0 6.4 6.4l1-1"/>',quiz:'<circle cx="12" cy="12" r="9"/><path d="M9.6 9.4a2.5 2.5 0 1 1 3.4 2.3c-.7.3-1 .8-1 1.5v.4"/><circle cx="12" cy="16.9" r=".6" fill="currentColor" stroke="none"/>'};
+function matIco(t){return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">${MAT_ICO[t]||MAT_ICO.pdf}</svg>`;}
+function hx(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+const COURSE_HDR={M:'Mathematics EB9',Ar:'اللغة العربية EB9',Fr:'Français EB9',En:'English EB9',Ph:'Physics & Chemistry EB9',Bi:'Life & Earth Sciences EB9',Hi:'History, Geography & Civics EB9',PE:'Physical Education EB9'};
+const DOC_L={
+  en:{obj:'Objectives',def:'Definition',defs:'Key notions',prop:'Key formulas',ex:'Worked example',exs:'Exercises',rem:'Remember',sum:'Summary',q:'Quick question'},
+  fr:{obj:'Objectifs',def:'Définition',defs:'Notions clés',prop:'À retenir',ex:'Exemple commenté',exs:'Exercices',rem:'L’essentiel',sum:'Synthèse',q:'Question rapide'},
+  ar:{obj:'الأهداف',def:'تعريف',defs:'مفاهيم أساسية',prop:'قواعد أساسية',ex:'مثال محلول',exs:'تمارين',rem:'تذكّر',sum:'خلاصة',q:'سؤال سريع'}};
+
+/* topics feed the generated textbook pages, slide decks, video lessons and quizzes (authored content — not translated) */
+const TOPICS={
+  radicals:{lang:'en',chap:'Chapter 1',title:'Real numbers & radicals',fig:'radicals',
+    intro:'Square roots let us write exact values such as √2 instead of rounded decimals. In EB9 we learn to simplify radicals and to calculate with them.',
+    points:['The square root √a (a ≥ 0) is the non-negative number whose square is a.','For a ≥ 0 and b ≥ 0: √(a × b) = √a × √b.','Simplify a radical by extracting perfect squares: √50 = √(25 × 2) = 5√2.','Rationalise a denominator: 1/√2 = √2/2.'],
+    formulas:['√a × √b = √(ab)','(√a)² = a','√(a²) = |a|','a / √b = a√b / b'],
+    examples:[{title:'Simplify A = √72 + 3√8 − √18',steps:['√72 = √(36 × 2) = 6√2','3√8 = 3 × 2√2 = 6√2','√18 = √(9 × 2) = 3√2','A = 6√2 + 6√2 − 3√2 = 9√2']}],
+    exercises:['Simplify √48 − 2√27 + √75.','Write 6/√3 with a rational denominator.','Compare 3√5 and 2√11 without a calculator.','Show that (√7 − 2)(√7 + 2) is an integer.','Solve x² = 18 and give exact values.']},
+  identities:{lang:'en',chap:'Chapter 2',title:'Algebraic calculus',fig:'identities',
+    intro:'Expanding and factorising are the two directions of the same work. The remarkable identities make both faster and are essential for the Brevet.',
+    points:['To expand, distribute every term of the first bracket over the second.','(a + b)² = a² + 2ab + b² and (a − b)² = a² − 2ab + b².','(a + b)(a − b) = a² − b² — the difference of two squares.','To factorise, look for a common factor first, then for an identity.'],
+    formulas:['(a + b)² = a² + 2ab + b²','(a − b)² = a² − 2ab + b²','(a + b)(a − b) = a² − b²'],
+    examples:[{title:'Factorise E = (2x − 3)² − 16',steps:['E = (2x − 3)² − 4²','E = (2x − 3 − 4)(2x − 3 + 4)','E = (2x − 7)(2x + 1)','Check: expand to get 4x² − 12x − 7']}],
+    exercises:['Expand (3x + 2)² and (5 − x)².','Factorise 9x² − 25.','Factorise (x + 1)² − 4(x + 1).','Solve (2x − 7)(2x + 1) = 0.']},
+  thales:{lang:'en',chap:'Chapter 3',title:'Thales’ theorem',fig:'thales',
+    intro:'Thales’ theorem links parallel lines and proportional lengths. It lets us compute unknown lengths and prove that two lines are parallel.',
+    points:['In a triangle ABC, M is a point of [AB] and N a point of [AC].','If (MN) // (BC), then AM/AB = AN/AC = MN/BC.','Converse: if AM/AB = AN/AC with the points in the same order, then (MN) // (BC).','Always check the parallel lines before using the ratios.'],
+    formulas:['AM/AB = AN/AC = MN/BC','(MN) // (BC) ⇔ AM/AB = AN/AC'],
+    examples:[{title:'AM = 3 cm, AB = 5 cm, AN = 4.2 cm and (MN) // (BC). Find AC.',steps:['(MN) // (BC), so by Thales: AM/AB = AN/AC','3/5 = 4.2/AC','AC = 4.2 × 5 ÷ 3','AC = 7 cm']}],
+    exercises:['AM = 2, AB = 6, MN = 3 and (MN) // (BC). Find BC.','Prove that (MN) // (BC) when AM = 4, AB = 10, AN = 6 and AC = 15.','Explain why the converse needs the points in the same order.','A 1.6 m student casts a 2 m shadow while a tree casts 15 m. How tall is the tree?']},
+  pythagoras:{lang:'en',chap:'Chapter 4',title:'Pythagoras’ theorem',fig:'pythagoras',
+    intro:'In a right-angled triangle the square of the hypotenuse equals the sum of the squares of the other two sides.',
+    points:['The hypotenuse is the side opposite the right angle — the longest side.','If ABC is right-angled at A, then BC² = AB² + AC².','Converse: if BC² = AB² + AC², the triangle is right-angled at A.','Use it to compute a missing side, then round only at the end.'],
+    formulas:['BC² = AB² + AC²','BC = √(AB² + AC²)'],
+    examples:[{title:'ABC right-angled at A with AB = 6 cm and AC = 8 cm. Find BC.',steps:['BC² = AB² + AC²','BC² = 6² + 8² = 36 + 64','BC² = 100','BC = √100 = 10 cm']}],
+    exercises:['A ladder of 5 m leans 3 m from a wall. How high does it reach?','Is the triangle with sides 7, 24 and 25 right-angled?','Find the diagonal of a 12 cm × 9 cm rectangle.']},
+  trig:{lang:'en',chap:'Chapter 4',title:'Trigonometric ratios',fig:'trig',
+    intro:'In a right-angled triangle, the ratios between sides depend only on the angle: cosine, sine and tangent.',
+    points:['cos B = adjacent side / hypotenuse.','sin B = opposite side / hypotenuse.','tan B = opposite side / adjacent side.','cos² x + sin² x = 1 for any acute angle x.'],
+    formulas:['cos B = AB / BC','sin B = AC / BC','tan B = AC / AB','cos² x + sin² x = 1'],
+    examples:[{title:'ABC right-angled at A, BC = 10 cm and angle B = 30°. Find AC.',steps:['sin B = AC / BC','AC = BC × sin 30°','AC = 10 × 0.5','AC = 5 cm']}],
+    exercises:['Find angle B when AB = 4 and BC = 8.','Compute tan 45° using an isosceles right triangle.','Show that (cos x + sin x)² = 1 + 2 sin x cos x.']},
+  ohm:{lang:'en',chap:'Chapter 1',title:'Electric circuits & Ohm’s law',fig:'circuit',
+    intro:'The voltage across a resistor is proportional to the current through it. The constant of proportionality is its resistance.',
+    points:['Voltage U is measured in volts (V) with a voltmeter in parallel.','Current I is measured in amperes (A) with an ammeter in series.','Ohm’s law: U = R × I, with R in ohms (Ω).','In series, resistances add: R = R₁ + R₂.'],
+    formulas:['U = R × I','P = U × I','R = R₁ + R₂ (series)'],
+    examples:[{title:'A 220 Ω resistor carries 0.05 A. Find U.',steps:['U = R × I','U = 220 × 0.05','U = 11 V']}],
+    exercises:['A lamp draws 0.5 A under 12 V. Find its resistance.','Two resistors of 100 Ω and 150 Ω are in series. Find R.','Draw a circuit with a generator, a resistor, an ammeter and a voltmeter.']},
+  matter:{lang:'en',chap:'Chapter 2',title:'Atoms, ions & molecules',fig:'atom',
+    intro:'All matter is made of atoms. Atoms can share or exchange electrons to form molecules and ions.',
+    points:['An atom has a nucleus (protons + neutrons) surrounded by electrons.','An atom is electrically neutral: as many protons as electrons.','An ion is an atom that has lost or gained electrons.','Density ρ = m / V, usually in g/cm³.'],
+    formulas:['ρ = m / V','Na → Na⁺ + e⁻','Cl + e⁻ → Cl⁻'],
+    examples:[{title:'A 27 g aluminium cube has a volume of 10 cm³. Find its density.',steps:['ρ = m / V','ρ = 27 ÷ 10','ρ = 2.7 g/cm³']}],
+    exercises:['How many electrons does Mg²⁺ have (Z = 12)?','Write the formula of the ion formed by oxygen (Z = 8).','Explain why iron sinks in water but floats on mercury.']},
+  neuron:{lang:'en',chap:'Chapter 1',title:'The nervous system — the neuron',fig:'neuron',
+    intro:'The neuron is the functional unit of the nervous system. It receives, conducts and transmits nerve messages.',
+    points:['A neuron has a cell body, dendrites and an axon.','The nerve message travels from the dendrites to the axon terminals.','The myelin sheath speeds up conduction along the axon.','Neurons communicate at synapses using neurotransmitters.'],
+    formulas:[],
+    examples:[{title:'Label the parts of a motor neuron',steps:['Cell body with the nucleus','Dendrites — receive the message','Axon covered by myelin','Axon terminals — synapse with the muscle']}],
+    exercises:['Draw and label a neuron.','Explain the role of the myelin sheath.','What happens at a synapse?']},
+  reflex:{lang:'en',chap:'Chapter 1',title:'The reflex arc',fig:'neuron',
+    intro:'A reflex is a rapid, involuntary response to a stimulus. Its pathway is called the reflex arc.',
+    points:['Receptor: detects the stimulus (e.g. the stretch of a muscle).','Sensory neuron: carries the message to the spinal cord.','Nerve centre: the spinal cord relays the message.','Motor neuron and effector: the muscle contracts.'],
+    formulas:[],
+    examples:[{title:'The knee-jerk reflex',steps:['The hammer stretches the thigh muscle','The sensory neuron sends the message to the spinal cord','The motor neuron carries the order back','The muscle contracts and the leg kicks']}],
+    exercises:['Name the five elements of a reflex arc.','Why is a reflex faster than a voluntary movement?','Design an experiment to show the role of the spinal cord.']},
+  genetics:{lang:'en',chap:'Chapter 2',title:'Chromosomes & DNA',fig:'dna',
+    intro:'Hereditary information is carried by DNA, packed in chromosomes inside the nucleus of every cell.',
+    points:['A human body cell contains 23 pairs of chromosomes (46).','A chromosome is made of one DNA molecule.','A gene is a portion of DNA that controls a trait.','Alleles are different versions of the same gene.'],
+    formulas:['46 = 23 pairs','XX = female · XY = male'],
+    examples:[{title:'Read a karyotype',steps:['Count the chromosomes: 46','Pair them by size and shape','Look at pair 23: XY','Conclusion: a boy with a normal karyotype']}],
+    exercises:['What is the difference between a gene and an allele?','How many chromosomes are in a sperm cell?','Explain why siblings do not look identical.']},
+  labsafety:{lang:'en',chap:'Lab',title:'Lab safety rules',fig:'atom',
+    intro:'Every lab session at Al-Arz School follows the same safety rules. Read them before your first practical.',
+    points:['Wear a lab coat, goggles and tie long hair back.','Never taste or smell chemicals directly.','Report any broken glass or spill to the teacher.','Wash your hands before leaving the lab.'],
+    formulas:[],examples:[],exercises:['List three rules for handling chemicals.','What should you do in case of a spill?']},
+  independence:{lang:'en',chap:'History',title:'Lebanon: from the Mandate to Independence',fig:'timeline',
+    intro:'Between 1920 and 1946 Lebanon moved from the French Mandate to full independence, celebrated every year on 22 November.',
+    points:['1920: proclamation of the State of Greater Lebanon.','1926: the Lebanese Constitution is adopted.','1943: the National Pact; independence on 22 November.','1946: the last foreign troops leave Lebanon.'],
+    formulas:[],
+    examples:[{title:'Why do we celebrate 22 November?',steps:['November 1943: leaders arrested at Rashaya','Popular protests across the country','Release of the leaders on 22 November 1943','The date becomes Independence Day']}],
+    exercises:['Place the key dates on a timeline.','Who were the leaders arrested in 1943?','Explain the meaning of the National Pact.']},
+  institutions:{lang:'en',chap:'Civics',title:'Lebanese state institutions',fig:'institutions',
+    intro:'Lebanon is a parliamentary democratic republic based on the separation and cooperation of powers.',
+    points:['The Parliament holds legislative power and elects the President.','The Council of Ministers holds executive power.','The judiciary is independent and applies the law.','Citizens take part through elections from the age of 21.'],
+    formulas:[],
+    examples:[{title:'How is a law made?',steps:['A draft law is proposed','Parliamentary committees study it','Parliament votes on it','The President promulgates it']}],
+    exercises:['Name the three powers and who holds each.','What is the role of the Constitutional Council?','Why is the separation of powers important?']},
+  geography:{lang:'en',chap:'Geography',title:'Relief and regions of Lebanon',fig:'map',
+    intro:'Lebanon, 10,452 km², is organised in four parallel relief units running north to south.',
+    points:['The coastal plain along the Mediterranean.','Mount Lebanon, rising above 3,000 m at Qornet es Saouda.','The fertile Bekaa valley.','The Anti-Lebanon range on the eastern border.'],
+    formulas:[],
+    examples:[{title:'Cross-section from Beirut to the Bekaa',steps:['Beirut on the coast (0 m)','Dahr el Baidar pass (≈1,500 m)','Zahle in the Bekaa (≈950 m)','Anti-Lebanon further east']}],
+    exercises:['Draw a simple cross-section of Lebanon.','Why is the Bekaa good for agriculture?','Locate the main rivers on the map.']},
+  prophet:{lang:'en',chap:'Unit 1',title:'The Prophet — Khalil Gibran',fig:'book',
+    intro:'Published in 1923, The Prophet is a book of 26 prose poems by Lebanese-American writer Khalil Gibran, born in Bsharri.',
+    points:['Almustafa shares his wisdom before leaving the city of Orphalese.','Themes include love, marriage, children, work and freedom.','“Your children are not your children.” — On Children.','Gibran’s style blends poetry, parable and spiritual reflection.'],
+    formulas:[],
+    examples:[{title:'Analyse a quotation from On Work',steps:['Identify the speaker and context','Explain the metaphor','Link it to the theme of the chapter','Give your personal response']}],
+    exercises:['Choose one chapter and summarise it in 80 words.','Explain a metaphor from On Love.','Essay: Is Gibran’s message still relevant today?']},
+  essay:{lang:'en',chap:'Unit 2',title:'Essay structure',fig:'essay',
+    intro:'A clear essay guides the reader from a thesis to a convincing conclusion.',
+    points:['Introduction: hook, context and a clear thesis statement.','Body paragraphs: one idea each, with evidence and explanation.','Use linking words: moreover, however, therefore.','Conclusion: restate the thesis and open the discussion.'],
+    formulas:[],
+    examples:[{title:'Build a thesis statement',steps:['Topic: school uniforms','Position: they should stay','Reasons: equality, focus, identity','Thesis: Uniforms promote equality, focus and school identity.']}],
+    exercises:['Write a thesis about social media and teenagers.','Plan three body paragraphs for your thesis.','Rewrite a weak conclusion to make it stronger.']},
+  petitprince:{lang:'fr',chap:'Séquence 1',title:'Le Petit Prince — fiche de lecture',fig:'book',
+    intro:'Publié en 1943, Le Petit Prince d’Antoine de Saint-Exupéry est un conte poétique et philosophique sur l’amitié et le sens de la vie.',
+    points:['Le narrateur, un aviateur, tombe en panne dans le désert du Sahara.','Il rencontre le petit prince venu de l’astéroïde B 612.','Le renard lui apprend : « On ne voit bien qu’avec le cœur. »','Le conte critique le monde des « grandes personnes ».'],
+    formulas:[],
+    examples:[{title:'Analyser la rencontre avec le renard',steps:['Situer le passage (chapitre XXI)','Relever le vocabulaire de l’amitié','Expliquer le verbe « apprivoiser »','Dégager la leçon du renard']}],
+    exercises:['Résume les chapitres 1 à 5 en dix lignes.','Qui sont les « grandes personnes » ? Justifie.','Rédaction : raconte ta rencontre avec un personnage imaginaire.']},
+  discours:{lang:'fr',chap:'Séquence 2',title:'Le discours rapporté',fig:'essay',
+    intro:'On peut rapporter les paroles d’un personnage au style direct, indirect ou indirect libre.',
+    points:['Style direct : les paroles sont citées entre guillemets.','Style indirect : les paroles dépendent d’un verbe introducteur.','Au passé, les temps changent : présent → imparfait.','Les pronoms et les indicateurs de temps changent aussi.'],
+    formulas:['Il dit : « Je viens. » → Il dit qu’il vient.','Elle a dit : « J’arrive demain. » → Elle a dit qu’elle arrivait le lendemain.'],
+    examples:[{title:'Transformer au style indirect',steps:['Repérer le verbe introducteur','Supprimer les guillemets','Adapter pronoms et temps','Vérifier les indicateurs de temps']}],
+    exercises:['Mets au style indirect : Il demande : « Où vas-tu ? »','Mets au style direct : Elle affirma qu’elle viendrait.','Écris un dialogue de six répliques.']},
+  ayyam:{lang:'ar',chap:'الوحدة الأولى',title:'الأيام — طه حسين',fig:'book',
+    intro:'«الأيام» سيرة ذاتية كتبها طه حسين، يروي فيها طفولته في صعيد مصر ورحلته إلى الأزهر رغم فقدانه البصر.',
+    points:['يستخدم الكاتب ضمير الغائب ليروي سيرته.','يصف طفولته في القرية وعلاقته بأسرته.','يبرز إرادة الصبي في التعلّم وتحدّي العمى.','يتميّز الأسلوب بدقة الوصف وجمال اللغة.'],
+    formulas:[],
+    examples:[{title:'تحليل مقطع من الفصل الأول',steps:['تحديد موضوع المقطع','استخراج مظاهر الوصف','بيان مشاعر الصبي','استنتاج القيمة التربوية']}],
+    exercises:['لخّص الفصل الأول في عشرة أسطر.','لماذا اختار الكاتب ضمير الغائب؟','تعبير: تحدّث عن شخص تحدّى الصعوبات.']},
+  qawaed:{lang:'ar',chap:'الوحدة الثانية',title:'ملخص قواعد اللغة العربية',fig:'book',
+    intro:'ملخّص لأهم القواعد المقرّرة في الفصل الأول من صف التاسع الأساسي.',
+    points:['المبتدأ والخبر مرفوعان.','كان وأخواتها ترفع الاسم وتنصب الخبر.','إنّ وأخواتها تنصب الاسم وترفع الخبر.','الفعل المضارع يُنصب بـ «أن، لن، كي» ويُجزم بـ «لم، لا الناهية».'],
+    formulas:['كان الطقسُ جميلاً','إنّ العلمَ نورٌ'],
+    examples:[{title:'أعرب: كان الطالبُ مجتهداً',steps:['كان: فعل ماضٍ ناقص','الطالبُ: اسم كان مرفوع','مجتهداً: خبر كان منصوب','وعلامة نصبه الفتحة']}],
+    exercises:['أدخل «إنّ» على الجملة: الدرسُ سهلٌ.','استخرج خبر كان من نص الأيام.','صغ ثلاث جمل فيها فعل مضارع مجزوم.']},
+  pe:{lang:'en',chap:'Term 1',title:'Athletics & team sports',fig:'track',
+    intro:'This term we work on endurance, sprint technique and basketball fundamentals, with inter-class fixtures in December.',
+    points:['Warm up for 10 minutes before every session.','Sprint: drive with the arms and stay on the balls of your feet.','Basketball: dribble with your fingertips, eyes up.','Stay hydrated and bring your PE uniform every Tuesday.'],
+    formulas:[],
+    examples:[{title:'10-minute warm-up routine',steps:['2 min light jogging','Dynamic stretches for legs','Arm circles and lunges','3 short accelerations']}],
+    exercises:['Plan your own warm-up.','Explain the rules for travelling in basketball.','Record your 1 km time each week.']},
+};
+
+/* course sections (chapters) · ids are unique across courses */
+const COURSE_SECS={
+  M:[
+    {n:'Ch.1 Real numbers & radicals',items:[
+      {id:'m1',t:'pdf',n:'Mathematics EB9 — CRDP textbook',topic:'radicals',pages:12,size:'2.4 MB',textbook:1},
+      {id:'m2',t:'video',n:'Radicals — introduction',topic:'radicals',dur:'08:35'},
+      {id:'m3',t:'slides',n:'Radicals — summary notes',topic:'radicals',slides:14},
+      {id:'m4',t:'quiz',n:'Quick check — radicals',topic:'radicals'}]},
+    {n:'Ch.2 Algebraic calculus',items:[
+      {id:'m5',t:'video',n:'Remarkable identities',topic:'identities',dur:'10:12'},
+      {id:'m6',t:'pdf',n:'Factorisation — worked examples',topic:'identities',pages:6,size:'1.1 MB'},
+      {id:'m7',t:'slides',n:'Expanding & factorising',topic:'identities',slides:10},
+      {id:'m8',t:'link',n:'CRDP digital resources — algebra',url:'https://www.crdp.org'}]},
+    {n:'Ch.3 Thales’ theorem',items:[
+      {id:'m9',t:'video',n:'Thales’ theorem explained (14:20)',topic:'thales',dur:'14:20',video:'thales'},
+      {id:'m10',t:'slides',n:'Thales — converse & applications',topic:'thales',slides:12},
+      {id:'m11',t:'pdf',n:'Worksheet — Thales’ theorem',topic:'thales',pages:4,size:'640 KB'},
+      {id:'m12',t:'quiz',n:'Quick check — Thales',topic:'thales'},
+      {id:'m13',t:'link',n:'GeoGebra — Thales construction',url:'https://www.geogebra.org/geometry'}]},
+    {n:'Ch.4 Pythagoras & trigonometry',items:[
+      {id:'m14',t:'video',n:'Pythagoras’ theorem',topic:'pythagoras',dur:'09:48',video:'pythagoras'},
+      {id:'m15',t:'slides',n:'Trigonometric ratios',topic:'trig',slides:15},
+      {id:'m16',t:'pdf',n:'Trigonometry formula sheet',topic:'trig',pages:2,size:'310 KB'},
+      {id:'m17',t:'video',n:'Solving right triangles',topic:'trig',dur:'12:05'},
+      {id:'m18',t:'quiz',n:'Chapter test — trigonometry',topic:'trig'}]},
+  ],
+  Ar:[
+    {n:'الوحدة الأولى — الأيام لطه حسين',items:[
+      {id:'ar1',t:'pdf',n:'الأيام — study guide',topic:'ayyam',pages:8,size:'1.3 MB'},
+      {id:'ar2',t:'slides',n:'طه حسين: حياته وأدبه',topic:'ayyam',slides:9},
+      {id:'ar3',t:'video',n:'قراءة وتحليل: الفصل الأول',topic:'ayyam',dur:'07:50'}]},
+    {n:'الوحدة الثانية — القواعد',items:[
+      {id:'ar4',t:'pdf',n:'Grammar rules summary',topic:'qawaed',pages:6,size:'820 KB'},
+      {id:'ar5',t:'quiz',n:'اختبار قصير — كان وأخواتها',topic:'qawaed'}]},
+  ],
+  Fr:[
+    {n:'Séquence 1 — Le Petit Prince',items:[
+      {id:'fr1',t:'pdf',n:'Le Petit Prince — fiche de lecture',topic:'petitprince',pages:8,size:'1.6 MB'},
+      {id:'fr2',t:'video',n:'Saint-Exupéry et Le Petit Prince',topic:'petitprince',dur:'06:45'},
+      {id:'fr3',t:'quiz',n:'Quiz — chapitres 1 à 5',topic:'petitprince'}]},
+    {n:'Séquence 2 — Le discours rapporté',items:[
+      {id:'fr4',t:'slides',n:'Le discours rapporté',topic:'discours',slides:10},
+      {id:'fr5',t:'pdf',n:'Exercices — discours indirect',topic:'discours',pages:4,size:'540 KB'}]},
+  ],
+  En:[
+    {n:'Unit 1 — The Prophet',items:[
+      {id:'en1',t:'pdf',n:'The Prophet — study guide',topic:'prophet',pages:10,size:'1.8 MB'},
+      {id:'en2',t:'video',n:'Khalil Gibran: life and legacy',topic:'prophet',dur:'08:10'},
+      {id:'en3',t:'link',n:'Gibran Museum, Bsharri',url:'https://www.gibrankhalilgibran.org'}]},
+    {n:'Unit 2 — Essay writing',items:[
+      {id:'en4',t:'pdf',n:'Essay structure handout',topic:'essay',pages:3,size:'420 KB'},
+      {id:'en5',t:'slides',n:'Writing a strong thesis',topic:'essay',slides:8}]},
+  ],
+  Ph:[
+    {n:'Ch.1 Electric circuits',items:[
+      {id:'ph1',t:'pdf',n:'Formula sheet',topic:'ohm',pages:2,size:'290 KB'},
+      {id:'ph2',t:'video',n:'Ohm’s law demo (09:41)',topic:'ohm',dur:'09:41'},
+      {id:'ph3',t:'slides',n:'Series and parallel circuits',topic:'ohm',slides:11}]},
+    {n:'Ch.2 Atoms, ions & molecules',items:[
+      {id:'ph4',t:'slides',n:'Atoms, ions and molecules',topic:'matter',slides:9},
+      {id:'ph5',t:'quiz',n:'Quick check — atoms',topic:'matter'},
+      {id:'ph6',t:'video',n:'Measuring density in the lab',topic:'matter',dur:'05:30'}]},
+  ],
+  Bi:[
+    {n:'Ch.1 The nervous system',items:[
+      {id:'bi1',t:'slides',n:'The neuron',topic:'neuron',slides:12},
+      {id:'bi2',t:'video',n:'Reflex arc explained (11:30)',topic:'reflex',dur:'11:30'},
+      {id:'bi3',t:'pdf',n:'Worksheet — the reflex arc',topic:'reflex',pages:4,size:'700 KB'}]},
+    {n:'Ch.2 Genetics',items:[
+      {id:'bi4',t:'pdf',n:'Chromosomes & DNA — course notes',topic:'genetics',pages:8,size:'1.5 MB'},
+      {id:'bi5',t:'quiz',n:'Quick check — genetics',topic:'genetics'}]},
+    {n:'Lab sessions',items:[
+      {id:'bi6',t:'pdf',n:'Lab safety rules',topic:'labsafety',pages:2,size:'250 KB'}]},
+  ],
+  Hi:[
+    {n:'History — Independence of Lebanon',items:[
+      {id:'hi1',t:'pdf',n:'Timeline — Independence of Lebanon',topic:'independence',pages:4,size:'900 KB'},
+      {id:'hi2',t:'video',n:'22 November 1943',topic:'independence',dur:'07:15'},
+      {id:'hi3',t:'link',n:'Lebanese Parliament — official site',url:'https://www.lp.gov.lb'}]},
+    {n:'Civics — State institutions',items:[
+      {id:'hi4',t:'slides',n:'Lebanese state institutions',topic:'institutions',slides:10},
+      {id:'hi5',t:'quiz',n:'Quick check — institutions',topic:'institutions'}]},
+    {n:'Geography — Regions of Lebanon',items:[
+      {id:'hi6',t:'pdf',n:'Map pack — regions of Lebanon',topic:'geography',pages:3,size:'2.1 MB'},
+      {id:'hi7',t:'slides',n:'Relief and climate',topic:'geography',slides:8}]},
+  ],
+  PE:[
+    {n:'Term 1 — Athletics & team sports',items:[
+      {id:'pe1',t:'pdf',n:'1st term fixtures',topic:'pe',pages:2,size:'180 KB'},
+      {id:'pe2',t:'video',n:'Warm-up routine',topic:'pe',dur:'04:20'},
+      {id:'pe3',t:'slides',n:'Basketball rules — basics',topic:'pe',slides:7}]},
+  ],
+};
+
+const QUIZZES={
+  m4:[{q:'√50 simplifies to…',a:['2√5','5√2','25√2','10√5'],c:1},{q:'(√7)² = …',a:['7','49','√14','14'],c:0},{q:'1/√2 with a rational denominator is…',a:['2/√2','√2','√2/2','1/2'],c:2}],
+  m12:[{q:'(MN) // (BC), AM = 2, AB = 6 and AN = 3. Then AC = …',a:['4','9','6','12'],c:1},{q:'To apply Thales’ theorem we need…',a:['(MN) ⊥ (BC)','AB = AC','(MN) // (BC)','a right angle'],c:2},{q:'The converse of Thales’ theorem is used to prove that…',a:['two lines are parallel','a triangle is right-angled','two angles are equal','a length is maximal'],c:0}],
+  m18:[{q:'In a right triangle, the hypotenuse is…',a:['the shortest side','the side opposite the right angle','any side','the height'],c:1},{q:'cos B = …',a:['opposite / hypotenuse','opposite / adjacent','adjacent / hypotenuse','hypotenuse / adjacent'],c:2},{q:'Right angle at A, AB = 6 and AC = 8. BC = …',a:['10','14','48','√14'],c:0}],
+  ar5:[{q:'«كان» فعل ماضٍ…',a:['تام','ناقص','مبني للمجهول'],c:1},{q:'في جملة «كان الجوُّ صافياً»، «صافياً» هو…',a:['اسم كان','خبر كان منصوب','مفعول به'],c:1},{q:'من أخوات «كان»:',a:['إنّ','ظنّ','أصبح'],c:2}],
+  fr3:[{q:'D’où vient le petit prince ?',a:['De la Lune','De l’astéroïde B 612','Du Sahara'],c:1},{q:'Quel est le métier du narrateur ?',a:['Aviateur','Géographe','Allumeur de réverbères'],c:0},{q:'Qui dit : « On ne voit bien qu’avec le cœur » ?',a:['La rose','Le serpent','Le renard'],c:2}],
+  ph5:[{q:'An atom is electrically…',a:['positive','neutral','negative'],c:1},{q:'Na⁺ is formed when sodium…',a:['gains an electron','loses an electron','loses a proton'],c:1},{q:'Density is calculated with…',a:['ρ = m / V','ρ = V / m','ρ = m × V'],c:0}],
+  bi5:[{q:'A human body cell contains…',a:['23 chromosomes','46 chromosomes','92 chromosomes'],c:1},{q:'A gene is…',a:['a portion of DNA','a type of cell','a protein'],c:0},{q:'Pair 23 in a boy is…',a:['XX','XY','YY'],c:1}],
+  hi5:[{q:'Legislative power in Lebanon belongs to…',a:['the Parliament','the Council of Ministers','the army'],c:0},{q:'The President of the Republic is elected by…',a:['the people','the Parliament','the government'],c:1},{q:'Lebanon’s Independence Day is on…',a:['22 November','1 August','25 May'],c:0}],
+};
+
+const COURSE_DONE_KEY='skl-course-done';
+const COURSE_DONE=new Set((()=>{try{const v=JSON.parse(localStorage.getItem(COURSE_DONE_KEY));if(Array.isArray(v))return v;}catch(e){}return ['m1','m2','m3','m4','m5','m6','m7','m8','ar1','fr1','fr2','en1','ph1','ph2','bi1','hi1','hi2','pe1'];})());
+const COURSE_OPEN={};
+let vw={id:null,type:null,page:1,slide:0,n:0,zoom:1},vid=null;
+const VID_LEN=120; /* condensed demo: a whole lesson plays in about 2 minutes at 1× while the clock shows the real lecture time */
+
+/* ---- course helpers ---- */
+function secsOf(ci){const c=courses[ci];return (c&&COURSE_SECS[c.c])||[];}
+function itemsOf(ci){return secsOf(ci).flatMap((s,si)=>s.items.map(it=>Object.assign({sec:si},it)));}
+function findItem(id){for(let ci=0;ci<courses.length;ci++){const secs=secsOf(ci);for(let si=0;si<secs.length;si++){const it=secs[si].items.find(x=>x.id===id);if(it)return {ci,si,item:it};}}return null;}
+function isDone(id){return COURSE_DONE.has(id);}
+function courseProg(ci){const its=itemsOf(ci),d=its.filter(x=>isDone(x.id)).length;return {done:d,total:its.length,pct:its.length?Math.round(d/its.length*100):0};}
+function nextUnfinished(ci){return itemsOf(ci).find(x=>!isDone(x.id))||null;}
+function nextAfter(id){const f=findItem(id);if(!f)return null;const its=itemsOf(f.ci),i=its.findIndex(x=>x.id===id);return its[i+1]||null;}
+function topicOf(it){return TOPICS[it.topic]||TOPICS.radicals;}
+function hostOf(u){return String(u||'').replace(/^https?:\/\//,'').replace(/^www\./,'').split('/')[0];}
+function itemMeta(it){const L=MAT_TYPES[it.t].l,parts=it.t==='pdf'?[L,`${it.pages} pages`,`<span dir="ltr">${it.size}</span>`]:it.t==='slides'?[L,`${it.slides} slides`]:it.t==='video'?[L,it.dur]:it.t==='quiz'?[L,`${(QUIZZES[it.id]||[]).length} questions`]:it.t==='link'?[L,`<span dir="ltr">${hostOf(it.url)}</span>`]:[L];return parts.map(x=>`<bdi>${x}</bdi>`).join(' · ');}
+function parseDur(s){const m=String(s||'').match(/(\d+):(\d{2})/);return m?(+m[1])*60+(+m[2]):300;}
+function fmtT(s){s=Math.max(0,Math.floor(s));return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');}
+function secMeta(s){const n=s.items.length,mins=Math.round(s.items.filter(x=>x.t==='video').reduce((a,x)=>a+parseDur(x.dur),0)/60),pages=s.items.filter(x=>x.t==='pdf').reduce((a,x)=>a+(x.pages||0),0);return [n===1?'1 item':`${n} items`].concat(mins?[`${mins} min`]:[],pages?[`${pages} pages`]:[]).map(x=>`<bdi>${x}</bdi>`).join(' · ');}
+function openSecs(ci){if(!COURSE_OPEN[ci]){const nx=nextUnfinished(ci),f=nx?findItem(nx.id):null;COURSE_OPEN[ci]=new Set([f?f.si:0]);}return COURSE_OPEN[ci];}
+function courseItemRow(it,nowId){const d=isDone(it.id),T=MAT_TYPES[it.t],dl=it.t==='pdf'||it.t==='slides';
+  return `<div class="citem${d?' done':''}${it.id===nowId?' now':''}" onclick="openItem('${it.id}')"><span class="cchk" role="checkbox" aria-checked="${d}" onclick="event.stopPropagation();toggleDone('${it.id}')">${d?'<svg viewBox="0 0 24 24"><path d="M5 12.5 10 17.5 19 7"/></svg>':''}</span><div class="set-ic" style="background:${T.col}1f;color:${T.col}">${matIco(it.t)}</div><div class="grow" style="min-width:0"><div class="citem-t" data-noi18n dir="auto">${hx(it.n)}</div><div class="sub mt6">${itemMeta(it)}</div></div>${dl?`<div class="icon-btn cdl" onclick="event.stopPropagation();downloadItem('${it.id}')" aria-label="Download"><svg viewBox="0 0 24 24"><path d="M12 4v11M7 10.5l5 5 5-5M5 20h14"/></svg></div>`:''}</div>`;}
+function toggleSec(si){const set=openSecs(curCourse),el=document.querySelector(`#scr-course .csec[data-sec="${si}"]`);if(!el)return;const b=el.querySelector('.csec-b');
+  if(set.has(si)){set.delete(si);b.style.height=b.scrollHeight+'px';void b.offsetHeight;b.style.height='0px';el.classList.remove('open');}
+  else{set.add(si);el.classList.add('open');b.style.height=b.scrollHeight+'px';const end=e=>{if(e.target!==b)return;b.removeEventListener('transitionend',end);if(set.has(si))b.style.height='';};b.addEventListener('transitionend',end);}}
+function saveCourseDone(){try{localStorage.setItem(COURSE_DONE_KEY,JSON.stringify([...COURSE_DONE]));}catch(e){}}
+function refreshCourse(){const sc=document.getElementById('scr-course');if(sc){const st=sc.scrollTop;rebuild('course');sc.scrollTop=st;if(current==='course')setLead(sc);}const cl=document.getElementById('scr-courses');if(cl){rebuild('courses');if(current==='courses')setLead(cl);}if(vw.id&&document.getElementById('viewer').classList.contains('open'))vFoot();}
+function markDone(id,quiet){if(!id||isDone(id))return;COURSE_DONE.add(id);saveCourseDone();refreshCourse();if(!quiet)toast('Marked as complete ✓');}
+function toggleDone(id){if(isDone(id)){COURSE_DONE.delete(id);toast('Marked as not complete');}else{COURSE_DONE.add(id);toast('Marked as complete ✓');}saveCourseDone();refreshCourse();}
+function openItem(id){const f=findItem(id);if(!f)return;const it=f.item;curCourse=f.ci;
+  if(it.t==='pdf')openPdf(it);else if(it.t==='slides')openSlides(it);else if(it.t==='video')openVideo(it);else if(it.t==='link')openLinkItem(it);else if(it.t==='quiz')openQuizItem(it);}
+
+/* ---- figures (plain SVG, work on white paper and as <img> for the video canvas) ---- */
+function FIG(name,col){const k='#1f2937',t=(x,y,s,o)=>`<text x="${x}" y="${y}" font-family="Plus Jakarta Sans, Arial, sans-serif" font-size="${(o&&o.fs)||15}" font-weight="${(o&&o.fw)||700}" fill="${(o&&o.fill)||k}" text-anchor="${(o&&o.a)||'middle'}">${s}</text>`;let b='';
+  switch(name){
+  case 'thales':b=`<path d="M170 22 L40 225 L330 225 Z" fill="none" stroke="${k}" stroke-width="2.4" stroke-linejoin="round"/><path d="M98.5 132.8 L258 132.8" stroke="${col}" stroke-width="3"/><path d="M40 225 L330 225" stroke="${col}" stroke-width="3"/><path d="M174 127l7 5.8-7 5.8M181 127l7 5.8-7 5.8M180 219l7 6-7 6M187 219l7 6-7 6" fill="none" stroke="${col}" stroke-width="2"/><circle cx="98.5" cy="132.8" r="4" fill="${k}"/><circle cx="258" cy="132.8" r="4" fill="${k}"/>${t(170,15,'A')}${t(28,242,'B')}${t(344,242,'C')}${t(80,131,'M')}${t(276,131,'N')}`;break;
+  case 'pythagoras':b=`<rect x="85" y="95" width="55" height="55" fill="${col}" fill-opacity=".18" stroke="${col}" stroke-width="1.6"/><rect x="140" y="150" width="80" height="80" fill="#f59e0b" fill-opacity=".18" stroke="#f59e0b" stroke-width="1.6"/><path d="M140 95 L220 150 L275 70 L195 15 Z" fill="#ec4899" fill-opacity=".16" stroke="#ec4899" stroke-width="1.6"/><path d="M140 95 L140 150 L220 150 Z" fill="#fff" stroke="${k}" stroke-width="2.4" stroke-linejoin="round"/><path d="M140 140h10v10" fill="none" stroke="${k}" stroke-width="1.6"/>${t(112,128,'AB²',{fs:13})}${t(180,196,'AC²',{fs:13})}${t(208,90,'BC²',{fs:13})}${t(128,160,'A',{fs:13})}${t(128,92,'B',{fs:13})}${t(232,164,'C',{fs:13})}${t(320,200,'BC² = AB² + AC²',{fs:13,a:'middle'})}`;break;
+  case 'radicals':b=`<path d="M20 170H380" stroke="${k}" stroke-width="2"/>${[0,1,2,3,4].map(i=>`<path d="M${50+80*i} 163v14" stroke="${k}" stroke-width="2"/>${t(50+80*i,197,i)}`).join('')}<rect x="50" y="90" width="80" height="80" fill="${col}" fill-opacity=".12" stroke="${col}" stroke-width="1.6"/><path d="M50 170 L130 90" stroke="${col}" stroke-width="2.4"/><path d="M130 90 A113.1 113.1 0 0 1 163.1 170" fill="none" stroke="${col}" stroke-width="2" stroke-dasharray="5 4"/><circle cx="163.1" cy="170" r="5" fill="${col}"/><circle cx="188.6" cy="170" r="5" fill="#f59e0b"/>${t(160,150,'√2',{fs:14,fill:col})}${t(203,150,'√3',{fs:14,fill:'#b45309'})}${t(275,70,'√2 ≈ 1.414',{fs:14})}${t(275,95,'√3 ≈ 1.732',{fs:14})}`;break;
+  case 'identities':b=`<rect x="30" y="25" width="110" height="110" fill="${col}" fill-opacity=".25" stroke="${k}" stroke-width="1.6"/><rect x="140" y="25" width="90" height="110" fill="#f59e0b" fill-opacity=".2" stroke="${k}" stroke-width="1.6"/><rect x="30" y="135" width="110" height="90" fill="#f59e0b" fill-opacity=".2" stroke="${k}" stroke-width="1.6"/><rect x="140" y="135" width="90" height="90" fill="#ec4899" fill-opacity=".2" stroke="${k}" stroke-width="1.6"/>${t(85,85,'a²')}${t(185,85,'ab')}${t(85,185,'ab')}${t(185,185,'b²')}${t(85,18,'a',{fs:13})}${t(185,18,'b',{fs:13})}${t(315,110,'(a + b)²',{fs:17})}${t(315,140,'= a² + 2ab + b²',{fs:15})}`;break;
+  case 'trig':b=`<path d="M70 40 L70 210 L330 210 Z" fill="${col}" fill-opacity=".08" stroke="${k}" stroke-width="2.4" stroke-linejoin="round"/><path d="M70 198h12v12" fill="none" stroke="${k}" stroke-width="1.6"/><path d="M290 210 A40 40 0 0 0 297 188" fill="none" stroke="${col}" stroke-width="2.2"/>${t(275,200,'B',{fs:13,fill:col})}${t(58,36,'C',{fs:13})}${t(58,226,'A',{fs:13})}${t(342,226,'B',{fs:13})}${t(215,112,'hypotenuse',{fs:13,fill:col})}${t(38,130,'opposite',{fs:12})}${t(200,232,'adjacent',{fs:12})}`;break;
+  case 'circuit':b=`<path d="M70 60H170M230 60H330V200H230M170 200H70V150M70 110V60" fill="none" stroke="${k}" stroke-width="2.4"/><path d="M170 60l6-10 12 20 12-20 12 20 12-20 6 10" fill="none" stroke="${col}" stroke-width="2.6" transform="translate(-6 0)"/><path d="M52 110h36M60 150h20" stroke="${k}" stroke-width="3"/><circle cx="200" cy="200" r="22" fill="#fff" stroke="${k}" stroke-width="2.4"/>${t(200,206,'A',{fs:16})}<path d="M170 60V20h60v40" fill="none" stroke="#94a3b8" stroke-width="1.8" stroke-dasharray="4 3"/><circle cx="200" cy="20" r="14" fill="#fff" stroke="${k}" stroke-width="2"/>${t(200,25,'V',{fs:13})}${t(200,92,'R',{fs:14,fill:col})}${t(32,135,'U',{fs:14})}${t(360,135,'I →',{fs:14})}`;break;
+  case 'neuron':b=`<path d="M60 60l35 45M40 125h50M60 190l35-45M80 40l20 55M75 210l25-55" stroke="${k}" stroke-width="2" fill="none"/><circle cx="110" cy="125" r="30" fill="${col}" fill-opacity=".22" stroke="${k}" stroke-width="2.4"/><circle cx="110" cy="125" r="10" fill="${col}"/><path d="M140 125H330" stroke="${k}" stroke-width="2.4"/>${[160,205,250].map(x=>`<rect x="${x}" y="116" width="36" height="18" rx="9" fill="#fef3c7" stroke="#d97706" stroke-width="1.6"/>`).join('')}<path d="M330 125l30-30M330 125l35 0M330 125l30 30" stroke="${k}" stroke-width="2" fill="none"/>${[[360,95],[365,125],[360,155]].map(([x,y])=>`<circle cx="${x}" cy="${y}" r="5" fill="${col}"/>`).join('')}${t(110,180,'cell body',{fs:12})}${t(40,40,'dendrites',{fs:12,a:'start'})}${t(223,105,'axon + myelin',{fs:12})}${t(345,190,'terminals',{fs:12})}<path d="M150 225h120" stroke="${col}" stroke-width="2"/><path d="M262 219l10 6-10 6" fill="none" stroke="${col}" stroke-width="2"/>${t(210,245,'nerve message',{fs:12,fill:col})}`;break;
+  case 'atom':b=`<ellipse cx="200" cy="125" rx="150" ry="55" fill="none" stroke="#94a3b8" stroke-width="1.8"/><ellipse cx="200" cy="125" rx="150" ry="55" fill="none" stroke="#94a3b8" stroke-width="1.8" transform="rotate(60 200 125)"/><ellipse cx="200" cy="125" rx="150" ry="55" fill="none" stroke="#94a3b8" stroke-width="1.8" transform="rotate(-60 200 125)"/><circle cx="200" cy="125" r="20" fill="${col}"/><circle cx="192" cy="119" r="6" fill="#fff" fill-opacity=".6"/>${[[350,125],[125,60],[125,190]].map(([x,y])=>`<circle cx="${x}" cy="${y}" r="7" fill="#f59e0b"/>`).join('')}${t(200,215,'nucleus',{fs:12})}${t(355,105,'e⁻',{fs:13})}`;break;
+  case 'dna':{let p1='M30 125',p2='M30 125',r='';for(let x=30;x<=370;x+=5){const y1=125+60*Math.sin((x-30)/34),y2=125-60*Math.sin((x-30)/34);p1+=` L${x} ${y1.toFixed(1)}`;p2+=` L${x} ${y2.toFixed(1)}`;if((x-30)%20===0&&x>30&&x<370)r+=`<path d="M${x} ${y1.toFixed(1)}V${y2.toFixed(1)}" stroke="${(x/20)%2?col:'#f59e0b'}" stroke-width="3"/>`;}b=`${r}<path d="${p1}" fill="none" stroke="${k}" stroke-width="3"/><path d="${p2}" fill="none" stroke="${k}" stroke-width="3"/>${t(200,240,'DNA double helix',{fs:13})}`;break;}
+  case 'timeline':b=`<path d="M25 125H375" stroke="${k}" stroke-width="3"/>${[[60,'1920','Greater Lebanon',1],[150,'1926','Constitution',0],[255,'1943','Independence',1],[345,'1946','Troops leave',0]].map(([x,y,l,u])=>`<circle cx="${x}" cy="125" r="9" fill="${x===255?'#e32b2b':col}" stroke="#fff" stroke-width="3"/>${t(x,u?100:160,y,{fs:16})}${t(x,u?80:180,l,{fs:12,fw:600,fill:'#475569'})}`).join('')}<path d="M255 150 L255 195" stroke="#e32b2b" stroke-width="1.6" stroke-dasharray="3 3"/>${t(255,215,'22 Nov 1943',{fs:13,fill:'#e32b2b'})}`;break;
+  case 'institutions':b=`<rect x="130" y="15" width="140" height="44" rx="8" fill="${col}" fill-opacity=".18" stroke="${col}" stroke-width="2"/>${t(200,42,'President',{fs:14})}<path d="M200 59V85M70 85H330M70 85v25M200 85v25M330 85v25" stroke="${k}" stroke-width="2" fill="none"/>${[[70,'Parliament','legislative'],[200,'Council of','Ministers'],[330,'Judiciary','independent']].map(([x,a,c])=>`<rect x="${x-62}" y="110" width="124" height="70" rx="8" fill="#fff" stroke="${k}" stroke-width="2"/>${t(x,140,a,{fs:13})}${t(x,160,c,{fs:12,fw:600,fill:'#475569'})}`).join('')}${t(200,220,'Separation & cooperation of powers',{fs:13,fill:col})}`;break;
+  case 'map':b=`<path d="M20 20 Q40 60 25 100 T30 180 T20 240 L0 240 L0 20Z" fill="#bfdbfe"/><rect x="45" y="20" width="70" height="220" fill="#fde68a" fill-opacity=".6"/><path d="M115 240 L150 90 L175 150 L205 40 L235 140 L250 240Z" fill="#a16207" fill-opacity=".45"/><rect x="250" y="20" width="70" height="220" fill="#86efac" fill-opacity=".6"/><path d="M320 240 L345 100 L365 170 L385 80 L400 240Z" fill="#78716c" fill-opacity=".45"/>${t(80,34,'Coast',{fs:12})}${t(190,34,'Mount Lebanon',{fs:12})}${t(285,34,'Bekaa',{fs:12})}${t(360,60,'Anti-Leb.',{fs:11})}<circle cx="70" cy="140" r="5" fill="#e32b2b"/>${t(70,160,'Beirut',{fs:12,fill:'#e32b2b'})}${t(20,230,'W',{fs:11})}${t(390,230,'E',{fs:11})}`;break;
+  case 'essay':b=`${[['Introduction',20,40,col],['Body paragraph 1',75,30,'#94a3b8'],['Body paragraph 2',115,30,'#94a3b8'],['Body paragraph 3',155,30,'#94a3b8'],['Conclusion',195,40,col]].map(([l,y,h,c])=>`<rect x="70" y="${y}" width="260" height="${h-6}" rx="7" fill="${c}" fill-opacity=".16" stroke="${c}" stroke-width="1.8"/>${t(200,y+(h-6)/2+5,l,{fs:13})}`).join('')}`;break;
+  case 'track':b=`<rect x="30" y="40" width="340" height="170" rx="85" fill="#fca5a5" fill-opacity=".45" stroke="#b91c1c" stroke-width="2"/><rect x="70" y="75" width="260" height="100" rx="50" fill="#86efac" stroke="#fff" stroke-width="3"/><rect x="50" y="57" width="300" height="136" rx="68" fill="none" stroke="#fff" stroke-width="1.5" stroke-dasharray="6 5"/><circle cx="200" cy="125" r="18" fill="none" stroke="#fff" stroke-width="2.5"/><path d="M200 75v100" stroke="#fff" stroke-width="2.5"/>`;break;
+  default:b=`<path d="M200 50 C160 30 90 30 50 45 V215 C90 200 160 200 200 220 Z" fill="${col}" fill-opacity=".14" stroke="${k}" stroke-width="2.4"/><path d="M200 50 C240 30 310 30 350 45 V215 C310 200 240 200 200 220 Z" fill="#fff" stroke="${k}" stroke-width="2.4"/>${[80,105,130,155,180].map(y=>`<path d="M75 ${y}h100M225 ${y}h100" stroke="#94a3b8" stroke-width="2"/>`).join('')}`;
+  }
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 250" width="400" height="250">${b}</svg>`;}
+
+/* ---- generated documents (textbook pages) and slide decks ---- */
+function rot(a,i){if(!a||!a.length)return [];const k=i%a.length;return a.slice(k).concat(a.slice(0,k));}
+function buildDoc(it){const T=topicOf(it),L=DOC_L[T.lang]||DOC_L.en,f=findItem(it.id),c=courses[f?f.ci:0],N=Math.max(2,it.pages||4),P=T.points,F=T.formulas||[],E=T.examples||[],X=T.exercises&&T.exercises.length?T.exercises:P;
+  const pages=[[{k:'kick',t:T.chap},{k:'h1',t:it.n},{k:'p',t:T.intro},{k:'h2',t:L.obj},{k:'ul',items:P.slice(0,3)},{k:'fig',fig:T.fig,cap:T.title}]];
+  const tpl=[
+    i=>[{k:'h2',t:`${i}. ${L.defs}`},{k:'def',h:L.def,t:P[i%P.length]},{k:'def',h:L.def,t:P[(i+1)%P.length]}].concat(F.length?[{k:'f',t:F[i%F.length]}]:[],[{k:'p',t:T.intro}]),
+    i=>[{k:'h2',t:`${i}. ${L.prop}`}].concat(F.length?F.slice(0,3).map(x=>({k:'f',t:x})):[{k:'ul',items:P}],[{k:'ul',items:rot(P,i).slice(0,2)}]),
+    i=>{const e=E[i%Math.max(1,E.length)];return e?[{k:'h2',t:`${i}. ${L.ex}`},{k:'ex',h:e.title,steps:e.steps},{k:'fig',fig:T.fig,cap:T.title,small:1}]:[{k:'h2',t:`${i}. ${L.rem}`},{k:'ul',items:P},{k:'fig',fig:T.fig,cap:T.title,small:1}];},
+    i=>[{k:'h2',t:`${i}. ${L.exs}`},{k:'ol',items:rot(X,i).slice(0,5)}],
+    i=>[{k:'h2',t:`${i}. ${L.rem}`},{k:'ul',items:P}].concat(F.length?[{k:'f',t:F[(i+1)%F.length]}]:[],[{k:'def',h:L.q,t:X[i%X.length]}])];
+  for(let i=1;i<N;i++)pages.push(tpl[(i-1)%tpl.length](i));
+  return {lang:T.lang||'en',rtl:T.lang==='ar',pages,col:c.col,hdr:`${it.textbook?'CRDP':'Al-Arz School'} · ${COURSE_HDR[c.c]||c.n}`,chap:T.chap};}
+function docBlockHTML(b,col){switch(b.k){
+  case 'kick':return `<div class="pp-kick">${hx(b.t)}</div>`;
+  case 'h1':return `<h1>${hx(b.t)}</h1>`;
+  case 'h2':return `<h2>${hx(b.t)}</h2>`;
+  case 'p':return `<p>${hx(b.t)}</p>`;
+  case 'ul':return `<ul>${b.items.map(x=>`<li>${hx(x)}</li>`).join('')}</ul>`;
+  case 'ol':return `<ol>${b.items.map(x=>`<li>${hx(x)}</li>`).join('')}</ol>`;
+  case 'def':return `<div class="pp-def"><b>${hx(b.h)}</b>${hx(b.t)}</div>`;
+  case 'f':return `<div class="pp-f">${hx(b.t)}</div>`;
+  case 'ex':return `<div class="pp-ex"><b>${hx(b.h)}</b><ol>${b.steps.map(x=>`<li>${hx(x)}</li>`).join('')}</ol></div>`;
+  case 'fig':return `<figure class="pp-fig${b.small?' sm':''}">${FIG(b.fig,col)}<figcaption>${hx(b.cap)}</figcaption></figure>`;}
+  return '';}
+function docPageHTML(d,blocks,i){return `<div class="pp"><div class="pp-hd"><span>${hx(d.hdr)}</span><span>${hx(d.chap)}</span></div>${blocks.map(b=>docBlockHTML(b,d.col)).join('')}<div class="pp-ft">${i+1}</div></div>`;}
+function buildDeck(it){const T=topicOf(it),L=DOC_L[T.lang]||DOC_L.en,f=findItem(it.id),c=courses[f?f.ci:0],N=Math.max(3,it.slides||8),P=T.points,F=T.formulas||[],E=T.examples||[],X=T.exercises&&T.exercises.length?T.exercises:P;
+  const S=[{k:'title',kick:COURSE_HDR[c.c]||c.n,t:it.n,sub:c.tch},{k:'bullets',h:L.obj,items:P.slice(0,3)}];
+  const cyc=[
+    i=>F.length?{k:'formula',h:L.prop,f:F[i%F.length],note:P[(i+1)%P.length]}:{k:'bullets',h:T.title,items:rot(P,i).slice(0,3)},
+    i=>({k:'diagram',h:T.title,fig:T.fig,items:rot(P,i).slice(0,2)}),
+    i=>({k:'bullets',h:L.defs,items:rot(P,i+1).slice(0,3)}),
+    i=>{const e=E[i%Math.max(1,E.length)];return e?{k:'example',h:L.ex,sub:e.title,steps:e.steps}:{k:'bullets',h:L.rem,items:rot(P,i+2).slice(0,3)};},
+    i=>({k:'question',h:L.q,t:X[i%X.length]})];
+  for(let i=0;S.length<N-1;i++)S.push(cyc[i%cyc.length](i));
+  S.push({k:'summary',h:L.sum,items:P.slice(0,3)});
+  return {lang:T.lang||'en',rtl:T.lang==='ar',slides:S.slice(0,N),col:c.col,hdr:COURSE_HDR[c.c]||c.n};}
+function slideHTML(s,d,i){const foot=`<div class="sl-foot">${i+1}</div>`,k=`<div class="sl-k">${hx(d.hdr)}</div>`,li=a=>a.map(x=>`<li>${hx(x)}</li>`).join('');
+  switch(s.k){
+  case 'title':return `<div class="sl title"><div class="sl-k">${hx(s.kick)}</div><h3>${hx(s.t)}</h3><div class="sl-by">${hx(s.sub)} · Al-Arz School</div><span class="sl-cedar">${CEDAR_SVG}</span>${foot}</div>`;
+  case 'bullets':return `<div class="sl">${k}<h3>${hx(s.h)}</h3><ul>${li(s.items)}</ul>${foot}</div>`;
+  case 'formula':return `<div class="sl">${k}<h3>${hx(s.h)}</h3><div class="sl-f">${hx(s.f)}</div><div class="sl-note">${hx(s.note)}</div>${foot}</div>`;
+  case 'diagram':return `<div class="sl">${k}<h3>${hx(s.h)}</h3><div class="sl-2"><div class="sl-fig">${FIG(s.fig,d.col)}</div><ul>${li(s.items)}</ul></div>${foot}</div>`;
+  case 'example':return `<div class="sl">${k}<h3>${hx(s.h)}</h3><div class="sl-sub">${hx(s.sub)}</div><ol class="sl-steps">${li(s.steps)}</ol>${foot}</div>`;
+  case 'question':return `<div class="sl q"><div class="sl-k">${hx(s.h)}</div><div class="sl-qt">${hx(s.t)}</div>${foot}</div>`;
+  case 'summary':return `<div class="sl">${k}<h3>${hx(s.h)}</h3><ul class="sl-check">${li(s.items)}</ul>${foot}</div>`;}
+  return '';}
+
+/* ---- real PDF download (hand-written PDF 1.4, Helvetica, correct xref offsets) ---- */
+function pdfLatin(s){return String(s==null?'':s).replace(/[؀-ۿ][؀-ۿ\s«»،.:؛]*/g,'[Arabic text]').replace(/[’‘]/g,"'").replace(/[“”«»]/g,'"').replace(/[—–−]/g,'-').replace(/…/g,'...').replace(/∥/g,'//').replace(/⊥/g,'_|_').replace(/⇔/g,'<=>').replace(/→/g,'->').replace(/≈/g,'~').replace(/≤/g,'<=').replace(/≥/g,'>=').replace(/√/g,'sqrt').replace(/⁺/g,'+').replace(/⁻/g,'-').replace(/₁/g,'1').replace(/₂/g,'2').replace(/ρ/g,'rho').replace(/Ω/g,'Ohm').replace(/[^\x20-\x7e\xa0-\xff]/g,'?');}
+function pdfEsc(s){return pdfLatin(s).replace(/\\/g,'\\\\').replace(/\(/g,'\\(').replace(/\)/g,'\\)');}
+function pdfRGB(hex){const h=String(hex||'#0f9d8f').replace('#','');return [0,2,4].map(i=>(parseInt(h.substr(i,2),16)/255).toFixed(3)).join(' ');}
+function pdfWrap(s,max){const w=pdfLatin(s).split(/\s+/),out=[];let line='';w.forEach(x=>{if((line+' '+x).trim().length>max){if(line)out.push(line);line=x;}else line=(line+' '+x).trim();});if(line)out.push(line);return out.length?out:[''];}
+function makePdf(pages){const objs=[];objs[1]='<< /Type /Catalog /Pages 2 0 R >>';objs[3]='<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>';objs[4]='<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>';
+  const kids=[];let n=5;pages.forEach(p=>{const pi=n++,ci=n++;kids.push(pi+' 0 R');objs[pi]=`<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ${p.w} ${p.h}] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents ${ci} 0 R >>`;objs[ci]=`<< /Length ${p.ops.length} >>\nstream\n${p.ops}\nendstream`;});
+  objs[2]=`<< /Type /Pages /Kids [${kids.join(' ')}] /Count ${pages.length} >>`;
+  let out='%PDF-1.4\n%\xe2\xe3\xcf\xd3\n';const offs=[];for(let i=1;i<n;i++){offs[i]=out.length;out+=`${i} 0 obj\n${objs[i]}\nendobj\n`;}
+  const xref=out.length;out+=`xref\n0 ${n}\n0000000000 65535 f \n`+offs.slice(1).map(o=>String(o).padStart(10,'0')+' 00000 n \n').join('')+`trailer\n<< /Size ${n} /Root 1 0 R >>\nstartxref\n${xref}\n%%EOF\n`;
+  const bytes=new Uint8Array(out.length);for(let i=0;i<out.length;i++)bytes[i]=out.charCodeAt(i)&255;return bytes;}
+function pdfTextOps(lines,x0,yTop,yMin,wChars){let y=yTop,ops='';for(const l of lines){const size=l.s||11,max=Math.floor((wChars||90)*11/size);for(const w of pdfWrap(l.t,max-(l.ind?4:0))){if(y<yMin)return ops;ops+=`${l.c?pdfRGB(l.c):'0.10 0.12 0.14'} rg BT /${l.b?'F2':'F1'} ${size} Tf ${x0+(l.ind||0)} ${y.toFixed(1)} Td (${pdfEsc(w)}) Tj ET\n`;y-=size*1.42;}y-=l.gap||2;}return ops;}
+function pdfPagesFromDoc(d){const W=595,H=842;return d.pages.map((blocks,pi)=>{const L=[];blocks.forEach(b=>{
+    if(b.k==='kick')L.push({t:String(b.t).toUpperCase(),s:9,b:1,c:d.col});else if(b.k==='h1')L.push({t:b.t,s:20,b:1,gap:6});else if(b.k==='h2')L.push({t:b.t,s:14,b:1,c:d.col,gap:4});
+    else if(b.k==='p')L.push({t:b.t,s:11,gap:6});else if(b.k==='ul')b.items.forEach(x=>L.push({t:'•  '+x,s:11,ind:6}));else if(b.k==='ol')b.items.forEach((x,i)=>L.push({t:`${i+1}.  ${x}`,s:11,ind:6}));
+    else if(b.k==='def')L.push({t:String(b.h).toUpperCase(),s:8.5,b:1,c:d.col},{t:b.t,s:11,ind:8,gap:6});else if(b.k==='f')L.push({t:b.t,s:13,b:1,ind:40,gap:8});
+    else if(b.k==='ex'){L.push({t:b.h,s:11,b:1});b.steps.forEach((x,i)=>L.push({t:`${i+1})  ${x}`,s:11,ind:10}));}else if(b.k==='fig')L.push({t:`[Figure: ${b.cap}]`,s:9.5,c:'#6b7280',ind:6,gap:6});});
+  const ops=`${pdfRGB(d.col)} rg 0 ${H-34} ${W} 34 re f\n1 1 1 rg BT /F2 10 Tf 40 ${H-22} Td (${pdfEsc(d.hdr)}) Tj ET\n`+pdfTextOps(L,50,H-80,60,92)+`0.55 0.58 0.62 rg BT /F1 9 Tf ${W/2-4} 30 Td (${pi+1}) Tj ET\n`;
+  return {w:W,h:H,ops};});}
+function pdfPagesFromDeck(d){const W=842,H=474;return d.slides.map((s,i)=>{let L=[];
+  if(s.k==='title')L=[{t:s.kick,s:12,b:1,c:d.col,gap:10},{t:s.t,s:28,b:1,gap:14},{t:s.sub+' - Al-Arz School',s:14,c:'#475569'}];
+  else if(s.k==='formula')L=[{t:s.h,s:22,b:1,gap:24},{t:s.f,s:26,b:1,ind:40,gap:20},{t:s.note,s:14,c:'#475569'}];
+  else if(s.k==='example')L=[{t:s.h,s:22,b:1,gap:10},{t:s.sub,s:14,b:1,c:d.col,gap:8}].concat(s.steps.map((x,j)=>({t:`${j+1})  ${x}`,s:15,ind:10})));
+  else if(s.k==='question')L=[{t:s.h,s:14,b:1,c:d.col,gap:18},{t:s.t,s:22,b:1}];
+  else L=[{t:s.h,s:22,b:1,gap:14}].concat((s.items||[]).map(x=>({t:'•  '+x,s:15,ind:8,gap:6})));
+  const ops=`${pdfRGB(d.col)} rg 0 0 14 ${H} re f\n`+pdfTextOps(L,60,H-70,40,110)+`0.55 0.58 0.62 rg BT /F1 10 Tf ${W-50} 22 Td (${i+1}) Tj ET\n`;return {w:W,h:H,ops};});}
+function pdfBytesFor(it){return it.t==='pdf'?makePdf(pdfPagesFromDoc(buildDoc(it))):makePdf(pdfPagesFromDeck(buildDeck(it)));}
+function downloadItem(id){const f=findItem(id);if(!f||(f.item.t!=='pdf'&&f.item.t!=='slides'))return;const it=f.item;
+  try{const blob=new Blob([pdfBytesFor(it)],{type:'application/pdf'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=String(it.n).replace(/[\\/:*?"<>|]+/g,'-').trim()+'.pdf';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),5000);}catch(e){}
+  toast('Downloaded ✓');}
+
+/* ---- full-screen viewer (slides up inside the phone) ---- */
+function viewerOpen(){const v=document.getElementById('viewer');return v&&v.classList.contains('open');}
+function openViewer(it,html){vpStop();const v=document.getElementById('viewer');vw={id:it.id,type:it.t,page:1,slide:0,n:0,zoom:1};
+  document.getElementById('v-title').textContent=it.n;document.getElementById('v-dl').style.display=(it.t==='pdf'||it.t==='slides')?'':'none';
+  const body=document.getElementById('v-body');body.innerHTML=html;trEl(body);v.classList.add('open');v.setAttribute('aria-hidden','false');vFoot();vSub();}
+function closeViewer(){vpStop();const v=document.getElementById('viewer');v.classList.remove('open');v.setAttribute('aria-hidden','true');refreshCourse();}
+function vSub(){const f=findItem(vw.id);if(!f)return;const it=f.item;let pos='';
+  if(vw.type==='pdf')pos=` · ${hx(trCore('Page'))} <span dir="ltr">${vw.page} / ${vw.n}</span>`;else if(vw.type==='slides')pos=` · ${hx(trCore('Slide'))} <span dir="ltr">${vw.slide+1} / ${vw.n}</span>`;else if(vw.type==='video')pos=` · <span dir="ltr">${it.dur}</span>`;
+  document.getElementById('v-sub').innerHTML=hx(trCore(MAT_TYPES[it.t].l))+pos;}
+function vFoot(){const d=isDone(vw.id),b=document.getElementById('v-done'),n=document.getElementById('v-next'),nx=nextAfter(vw.id);if(!b)return;
+  b.classList.toggle('is-done',d);b.innerHTML=d?`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17.5 19 7"/></svg>${hx(trCore('Complete'))}`:hx(trCore('Mark as complete'));
+  n.innerHTML=nx?`${hx(trCore('Next item'))}<svg class="flip-rtl" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>`:hx(trCore('Back to course'));}
+function nextItem(){const nx=nextAfter(vw.id);if(!nx){closeViewer();return;}if(nx.t==='pdf'||nx.t==='slides'||nx.t==='video'){openItem(nx.id);return;}closeViewer();setTimeout(()=>openItem(nx.id),340);}
+
+/* PDF reader */
+function openPdf(it){const d=buildDoc(it);
+  openViewer(it,`<div class="pdf-wrap"><div class="pdf-tools"><button class="pt-btn" onclick="pdfZoom(-1)" aria-label="Zoom out">−</button><span class="pt-z tnum" id="pdf-z" dir="ltr">100%</span><button class="pt-btn" onclick="pdfZoom(1)" aria-label="Zoom in">+</button><button class="pt-btn pt-fit" onclick="pdfZoom(0)">Fit</button><span class="grow"></span><span class="pt-page tnum" id="pdf-pg" dir="ltr">1 / ${d.pages.length}</span></div>
+  <div class="pdf-scroll" id="pdf-scroll"><div class="pdf-pages" data-noi18n>${d.pages.map((b,i)=>`<div class="pdf-page" style="--pc:${d.col}" ${d.rtl?'dir="rtl" lang="ar"':`dir="ltr" lang="${d.lang}"`}>${docPageHTML(d,b,i)}</div>`).join('')}</div></div>
+  <div class="pdf-thumbs" id="pdf-thumbs">${d.pages.map((_,i)=>`<button class="pth${i?'':' on'}" onclick="pdfGo(${i+1})"><span class="tnum">${i+1}</span></button>`).join('')}</div></div>`);
+  vw.n=d.pages.length;vSub();const sc=document.getElementById('pdf-scroll');sc.addEventListener('scroll',pdfScroll,{passive:true});pdfLayout(false);}
+function pdfLayout(keep){const sc=document.getElementById('pdf-scroll');if(!sc)return;const ratio=keep?sc.scrollTop/Math.max(1,sc.scrollHeight):0,base=Math.max(220,(sc.clientWidth||360)-28);
+  sc.querySelectorAll('.pdf-page').forEach(p=>{p.style.width=Math.round(base*vw.zoom)+'px';});const z=document.getElementById('pdf-z');if(z)z.textContent=Math.round(vw.zoom*100)+'%';if(keep)sc.scrollTop=ratio*sc.scrollHeight;const over=Math.max(0,sc.scrollWidth-sc.clientWidth)/2;sc.scrollLeft=isRtlDoc()?-over:over;}
+function pdfZoom(d){vw.zoom=d===0?1:Math.max(.6,Math.min(2.5,Math.round((vw.zoom+d*.25)*100)/100));pdfLayout(true);}
+function pdfScroll(){const sc=document.getElementById('pdf-scroll');if(!sc||vw.type!=='pdf')return;const pages=[...sc.querySelectorAll('.pdf-page')],y=sc.scrollTop+sc.clientHeight*.35;let n=1;pages.forEach((p,i)=>{if(p.offsetTop<=y)n=i+1;});
+  if(sc.scrollTop+sc.clientHeight>=sc.scrollHeight-24)n=pages.length;
+  if(n!==vw.page){vw.page=n;vSub();const pg=document.getElementById('pdf-pg');if(pg)pg.textContent=`${n} / ${vw.n}`;const tb=document.getElementById('pdf-thumbs');if(tb){[...tb.children].forEach((b,i)=>b.classList.toggle('on',i===n-1));const el=tb.children[n-1];if(el)tb.scrollLeft=el.offsetLeft-tb.clientWidth/2+el.offsetWidth/2;}}
+  if(n===pages.length)markDone(vw.id);}
+function pdfGo(n){const sc=document.getElementById('pdf-scroll');if(!sc)return;const p=sc.querySelectorAll('.pdf-page')[n-1];if(p)sc.scrollTo({top:p.offsetTop-14,behavior:'smooth'});}
+
+/* Slides viewer */
+function openSlides(it){const d=buildDeck(it),dir=d.rtl?'dir="rtl" lang="ar"':`dir="ltr" lang="${d.lang}"`;
+  openViewer(it,`<div class="sl-wrap"><div class="sl-stage" id="sl-stage"><div class="sl-track" id="sl-track" data-noi18n>${d.slides.map((s,i)=>`<div class="sl-slide"><div class="slc" style="--sc:${d.col}" ${dir}>${slideHTML(s,d,i)}</div></div>`).join('')}</div></div>
+  <div class="sl-nav"><button class="icon-btn" onclick="slideGo(vw.slide-1)" aria-label="Previous"><svg class="flip-rtl" viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></button><div class="sl-count" id="sl-count"></div><button class="icon-btn" onclick="slideGo(vw.slide+1)" aria-label="Next"><svg class="flip-rtl" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button></div>
+  <div class="sl-thumbs" id="sl-thumbs" data-noi18n>${d.slides.map((s,i)=>`<button class="slth${i?'':' on'}" onclick="slideGo(${i})"><div class="slc" style="--sc:${d.col}" ${dir}>${slideHTML(s,d,i)}</div><span class="tnum">${i+1}</span></button>`).join('')}</div></div>`);
+  vw.n=d.slides.length;slBind();slideGo(0);}
+function isRtlDoc(){return document.documentElement.dir==='rtl';}
+function slideGo(i){if(vw.type!=='slides')return;i=Math.max(0,Math.min(vw.n-1,i));vw.slide=i;const tr=document.getElementById('sl-track');if(!tr)return;tr.style.transform=`translateX(${(isRtlDoc()?1:-1)*i*100}%)`;
+  const ct=document.getElementById('sl-count');if(ct)ct.innerHTML=`${hx(trCore('Slide'))} <span dir="ltr">${i+1} / ${vw.n}</span>`;
+  const tb=document.getElementById('sl-thumbs');if(tb){[...tb.children].forEach((b,j)=>b.classList.toggle('on',j===i));const el=tb.children[i];if(el)tb.scrollTo({left:el.offsetLeft-tb.clientWidth/2+el.offsetWidth/2,behavior:'smooth'});}
+  vSub();if(i===vw.n-1)markDone(vw.id);}
+function slBind(){const st=document.getElementById('sl-stage'),tr=document.getElementById('sl-track');if(!st)return;let x0=null,dx=0;
+  st.addEventListener('pointerdown',e=>{x0=e.clientX;dx=0;tr.classList.add('drag');try{st.setPointerCapture(e.pointerId);}catch(_){}});
+  st.addEventListener('pointermove',e=>{if(x0==null)return;dx=e.clientX-x0;tr.style.transform=`translateX(calc(${(isRtlDoc()?1:-1)*vw.slide*100}% + ${dx}px))`;});
+  const up=()=>{if(x0==null)return;x0=null;tr.classList.remove('drag');const r=isRtlDoc(),fwd=r?dx>50:dx<-50,bwd=r?dx<-50:dx>50;slideGo(vw.slide+(fwd?1:bwd?-1:0));};
+  st.addEventListener('pointerup',up);st.addEventListener('pointercancel',up);}
+
+/* Link + quiz sheets */
+function openLinkItem(it){const T=MAT_TYPES.link;openSheet(`<div class="row"><div class="set-ic" style="background:${T.col}1f;color:${T.col}">${matIco('link')}</div><div class="grow"><h2 style="font-size:18px;font-weight:800" data-noi18n dir="auto">${hx(it.n)}</h2><div class="sub mt6">External link</div></div></div>
+  <div class="card mt16" style="padding:12px 14px;background:var(--surface-2)"><div class="sub" style="font-size:11px;font-weight:700">URL</div><div dir="ltr" style="font-weight:700;margin-top:4px;word-break:break-all;color:var(--accent)">${hx(it.url)}</div></div>
+  <p class="sub mt12" style="line-height:1.5">Links open in your browser. The school checks every link before sharing it.</p>
+  <button class="btn mt16" onclick="closeSheet();markDone('${it.id}',true);toast('Opening in browser…')">Open link</button><button class="btn secondary mt8" onclick="closeSheet()">Close</button>`);}
+let quizAns={};
+function openQuizItem(it){const Q=QUIZZES[it.id]||[],T=MAT_TYPES.quiz;quizAns={};openSheet(`<div class="row"><div class="set-ic" style="background:${T.col}1f;color:${T.col}">${matIco('quiz')}</div><div class="grow"><h2 style="font-size:18px;font-weight:800" data-noi18n dir="auto">${hx(it.n)}</h2><div class="sub mt6">${itemMeta(it)}</div></div></div>
+  <div id="quiz-body">${Q.map((q,i)=>`<div class="card mt12 qz" data-q="${i}"><div style="font-weight:700;line-height:1.45" data-noi18n dir="auto">${i+1}. ${hx(q.q)}</div><div class="mt8">${q.a.map((a,j)=>`<button class="qz-o" data-noi18n dir="auto" onclick="quizPick(${i},${j})">${hx(a)}</button>`).join('')}</div></div>`).join('')}</div>
+  <div id="quiz-res"></div><button class="btn mt16" id="quiz-go" onclick="quizSubmit('${it.id}')">Submit answers</button>`);}
+function quizPick(i,j){if(quizAns.locked)return;quizAns[i]=j;document.querySelectorAll(`#quiz-body .qz[data-q="${i}"] .qz-o`).forEach((b,k)=>b.classList.toggle('sel',k===j));}
+function quizSubmit(id){const Q=QUIZZES[id]||[];if(quizAns.locked){closeSheet();return;}if(Q.some((_,i)=>quizAns[i]==null)){toast('Choose an answer for each question');return;}quizAns.locked=true;let s=0;
+  Q.forEach((q,i)=>{document.querySelectorAll(`#quiz-body .qz[data-q="${i}"] .qz-o`).forEach((b,k)=>{b.classList.toggle('ok',k===q.c);b.classList.toggle('bad',k===quizAns[i]&&k!==q.c);});if(quizAns[i]===q.c)s++;});
+  const r=document.getElementById('quiz-res');r.innerHTML=`<div class="card mt12" style="text-align:center;background:${s===Q.length?'var(--ok-bg)':'var(--warn-bg)'};border:none"><div class="tnum" style="font-size:26px;font-weight:800">${s} / ${Q.length}</div><div class="sub mt6">${s===Q.length?'Perfect score 🎉':'Review the lesson and try again'}</div></div>`;trEl(r);
+  document.getElementById('quiz-go').textContent=trCore('Close');markDone(id,true);}
+
+/* ---- video player: canvas lesson driven by a clock (offline, no media files) ---- */
+const VP_PLAY='<svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg>',VP_PAUSE='<svg viewBox="0 0 24 24"><rect x="6.5" y="5" width="4" height="14" rx="1"/><rect x="13.5" y="5" width="4" height="14" rx="1"/></svg>';
+const VSCRIPTS={
+  thales:{caps:[[0,.07,'Today: Thales’ theorem — chapter 3 of the EB9 programme.'],[.07,.2,'Start with any triangle ABC.'],[.2,.28,'Place a point M on [AB] and a point N on [AC].'],[.28,.42,'Draw (MN) parallel to (BC) — the arrows show the parallel lines.'],[.42,.61,'Thales’ theorem: AM/AB = AN/AC = MN/BC.'],[.61,.71,'Example: AM = 3 cm, AB = 5 cm and AN = 4.2 cm.'],[.71,.82,'Replace in the ratios: 3/5 = 4.2/AC, so AC = 7 cm.'],[.82,.93,'Converse: equal ratios with points in the same order give parallel lines.'],[.93,1.01,'Practise with the Thales worksheet before Wednesday’s class.']],draw:(g,p)=>drawThales(g,p)},
+  pythagoras:{caps:[[0,.08,'Pythagoras’ theorem — chapter 4.'],[.08,.24,'ABC is right-angled at A. BC is the hypotenuse.'],[.24,.48,'Build a square on each side of the triangle.'],[.48,.62,'The two small areas add up to the big one: BC² = AB² + AC².'],[.62,.82,'Example: AB = 6 cm, AC = 8 cm, so BC² = 100 and BC = 10 cm.'],[.82,1.01,'Converse: if BC² = AB² + AC², the triangle is right-angled at A.']],draw:(g,p)=>drawPyth(g,p)},
+};
+function genericCaps(T){const n=T.points.length,cs=[[0,.14,T.intro]];T.points.forEach((x,i)=>cs.push([.14+i*(.68/n),.14+(i+1)*(.68/n),x]));cs.push([.82,1.01,(DOC_L[T.lang]||DOC_L.en).sum+' — '+T.title]);return cs;}
+const vk=(p,a,b)=>Math.max(0,Math.min(1,(p-a)/(b-a))),vEase=x=>x<.5?2*x*x:1-Math.pow(-2*x+2,2)/2;
+function vBoard(g){g.fillStyle='#16332c';g.fillRect(0,0,1280,720);const gr=g.createRadialGradient(640,360,120,640,360,760);gr.addColorStop(0,'rgba(255,255,255,.07)');gr.addColorStop(1,'rgba(0,0,0,.38)');g.fillStyle=gr;g.fillRect(0,0,1280,720);g.fillStyle='rgba(255,255,255,.35)';g.font='600 20px "Plus Jakarta Sans",sans-serif';g.textAlign='right';g.fillText('Al-Arz School · SKL',1240,690);}
+function vLine(g,a,b,k,col,w){if(k<=0)return;g.strokeStyle=col;g.lineWidth=w||5;g.lineCap='round';g.beginPath();g.moveTo(a[0],a[1]);g.lineTo(a[0]+(b[0]-a[0])*k,a[1]+(b[1]-a[1])*k);g.stroke();}
+function vText(g,s,x,y,k,size,col,weight,align){if(k<=0)return;s=String(s);g.font=`${weight||600} ${size}px "Plus Jakarta Sans","IBM Plex Sans Arabic",sans-serif`;g.fillStyle=col||'#f5f5f0';g.textAlign=align||'left';g.fillText(s.slice(0,Math.ceil(s.length*Math.min(1,k))),x,y);}
+function vAlpha(g,a,fn){if(a<=0)return;g.save();g.globalAlpha=Math.min(1,a);fn();g.restore();}
+function vFrac(g,top,bot,x,y,k,col){vAlpha(g,k,()=>{vText(g,top,x,y-16,1,38,col||'#f8fafc',700,'center');g.strokeStyle=col||'#f8fafc';g.lineWidth=3;g.beginPath();g.moveTo(x-48,y);g.lineTo(x+48,y);g.stroke();vText(g,bot,x,y+44,1,38,col||'#f8fafc',700,'center');});}
+function vChev(g,x,y,col){g.strokeStyle=col;g.lineWidth=4;g.beginPath();g.moveTo(x-8,y-9);g.lineTo(x+4,y);g.lineTo(x-8,y+9);g.moveTo(x+6,y-9);g.lineTo(x+18,y);g.lineTo(x+6,y+9);g.stroke();}
+function vDot(g,pt,col){g.fillStyle=col;g.beginPath();g.arc(pt[0],pt[1],9,0,Math.PI*2);g.fill();}
+function drawThales(g,p){vBoard(g);const W='#f8fafc',Y='#fde047',CY='#67e8f9',G='#86efac';
+  vText(g,'Thales’ theorem',70,92,vk(p,0,.05),52,W,800);vText(g,'EB9 · Mathematics · Chapter 3',72,136,vk(p,.02,.07),26,'#a7f3d0',600);
+  const A=[340,210],B=[110,630],C=[620,630],r=.55,M=[A[0]+(B[0]-A[0])*r,A[1]+(B[1]-A[1])*r],N=[A[0]+(C[0]-A[0])*r,A[1]+(C[1]-A[1])*r];
+  const hl=vk(p,.44,.5)*(1-vk(p,.6,.64));if(hl>0){vAlpha(g,hl,()=>{vLine(g,A,M,1,CY,11);vLine(g,A,N,1,'#fda4af',11);});}
+  vLine(g,A,B,vEase(vk(p,.08,.12)),W,5);vLine(g,B,C,vEase(vk(p,.12,.16)),W,5);vLine(g,C,A,vEase(vk(p,.16,.2)),W,5);
+  vAlpha(g,vk(p,.18,.22),()=>{vText(g,'A',A[0],A[1]-24,1,34,W,700,'center');vText(g,'B',B[0]-30,B[1]+36,1,34,W,700,'center');vText(g,'C',C[0]+30,C[1]+36,1,34,W,700,'center');});
+  vAlpha(g,vk(p,.2,.24),()=>{vDot(g,M,Y);vDot(g,N,Y);vText(g,'M',M[0]-44,M[1]+10,1,32,Y,700,'center');vText(g,'N',N[0]+42,N[1]+10,1,32,Y,700,'center');});
+  vLine(g,M,N,vEase(vk(p,.28,.36)),Y,6);
+  vAlpha(g,vk(p,.36,.42),()=>{vChev(g,(M[0]+N[0])/2,M[1],Y);vChev(g,(B[0]+C[0])/2,B[1],Y);});
+  vAlpha(g,vk(p,.42,.47)*(1-vk(p,.6,.63)),()=>{vText(g,'If (MN) // (BC), then',720,260,vk(p,.42,.46),40,W,700);
+    vFrac(g,'AM','AB',790,400,vk(p,.47,.51),CY);vText(g,'=',880,414,vk(p,.5,.52),44,W,700,'center');vFrac(g,'AN','AC',970,400,vk(p,.51,.55),'#fda4af');vText(g,'=',1060,414,vk(p,.54,.56),44,W,700,'center');vFrac(g,'MN','BC',1150,400,vk(p,.55,.59),Y);});
+  vAlpha(g,vk(p,.62,.66)*(1-vk(p,.8,.83)),()=>{vText(g,'Example',720,240,1,40,Y,800);vText(g,'AM = 3 cm    AB = 5 cm',720,310,vk(p,.64,.68),34,W,600);vText(g,'AN = 4.2 cm    AC = ?',720,362,vk(p,.67,.71),34,W,600);
+    vFrac(g,'3','5',790,460,vk(p,.71,.74),CY);vText(g,'=',880,474,vk(p,.73,.75),44,W,700,'center');vFrac(g,'4.2','AC',980,460,vk(p,.74,.76),'#fda4af');
+    vText(g,'AC = 4.2 × 5 ÷ 3',720,590,vk(p,.76,.78),34,W,600);vAlpha(g,vk(p,.78,.8),()=>{g.strokeStyle=G;g.lineWidth=4;g.strokeRect(710,620,300,68);vText(g,'AC = 7 cm',730,668,1,40,G,800);});});
+  vAlpha(g,vk(p,.84,.88),()=>{vText(g,'Converse',720,250,1,40,Y,800);['If AM/AB = AN/AC','and A, M, B and A, N, C','are in the same order,','then (MN) // (BC).'].forEach((s,i)=>vText(g,s,720,320+i*54,vk(p,.86+i*.018,.89+i*.018),34,W,600));
+    vAlpha(g,vk(p,.94,.97),()=>{g.fillStyle='rgba(134,239,172,.16)';g.fillRect(710,560,520,70);vText(g,'✓ Equal ratios mean parallel lines',730,606,1,32,G,700);});});}
+function drawPyth(g,p){vBoard(g);const W='#f8fafc',Y='#fde047',G='#86efac';
+  vText(g,'Pythagoras’ theorem',70,92,vk(p,0,.05),52,W,800);vText(g,'EB9 · Mathematics · Chapter 4',72,136,vk(p,.02,.07),26,'#a7f3d0',600);
+  const A=[260,480],B=[260,320],C=[470,480];
+  const sq=(pts,col,k,label,lx,ly)=>vAlpha(g,k,()=>{g.fillStyle=col+'33';g.strokeStyle=col;g.lineWidth=3;g.beginPath();pts.forEach((q,i)=>i?g.lineTo(q[0],q[1]):g.moveTo(q[0],q[1]));g.closePath();g.fill();g.stroke();vText(g,label,lx,ly,1,32,col,800,'center');});
+  sq([[100,320],[260,320],[260,480],[100,480]],'#67e8f9',vk(p,.25,.32),'AB²',180,412);sq([[260,480],[470,480],[470,690],[260,690]],'#fbbf24',vk(p,.32,.39),'AC²',365,598);sq([[260,320],[470,480],[630,270],[420,110]],'#f472b6',vk(p,.39,.47),'BC²',445,305);
+  vLine(g,A,B,vEase(vk(p,.08,.13)),W,5);vLine(g,A,C,vEase(vk(p,.13,.18)),W,5);vLine(g,B,C,vEase(vk(p,.18,.23)),Y,6);
+  vAlpha(g,vk(p,.2,.24),()=>{g.strokeStyle=W;g.lineWidth=3;g.strokeRect(260,452,28,28);vText(g,'A',236,516,1,32,W,700,'center');vText(g,'B',232,312,1,32,W,700,'center');vText(g,'C',494,516,1,32,W,700,'center');});
+  vAlpha(g,vk(p,.48,.52)*(1-vk(p,.6,.63)),()=>{vText(g,'BC² = AB² + AC²',720,330,vk(p,.49,.55),58,Y,800);vText(g,'(right angle at A)',720,390,vk(p,.54,.58),32,'#a7f3d0',600);});
+  vAlpha(g,vk(p,.63,.66)*(1-vk(p,.8,.83)),()=>{vText(g,'Example',720,240,1,40,Y,800);['AB = 6 cm, AC = 8 cm','BC² = 6² + 8²','BC² = 36 + 64 = 100'].forEach((s,i)=>vText(g,s,720,310+i*58,vk(p,.65+i*.03,.68+i*.03),36,W,600));
+    vAlpha(g,vk(p,.76,.79),()=>{g.strokeStyle=G;g.lineWidth=4;g.strokeRect(710,500,420,70);vText(g,'BC = √100 = 10 cm',730,548,1,38,G,800);});});
+  vAlpha(g,vk(p,.84,.88),()=>{vText(g,'Converse',720,250,1,40,Y,800);['If BC² = AB² + AC²,','then triangle ABC is','right-angled at A.'].forEach((s,i)=>vText(g,s,720,320+i*56,vk(p,.86+i*.02,.89+i*.02),36,W,600));});}
+function vWrap(g,s,maxW){const words=String(s).split(' '),out=[];let line='';words.forEach(w=>{const t=line?line+' '+w:w;if(g.measureText(t).width>maxW&&line){out.push(line);line=w;}else line=t;});if(line)out.push(line);return out;}
+function drawGeneric(g,p,v){const T=v.T,rtl=T.lang==='ar',col=v.col;g.direction=rtl?'rtl':'ltr';
+  g.fillStyle='#f4f7f7';g.fillRect(0,0,1280,720);g.fillStyle=col;g.fillRect(0,0,1280,120);
+  const sx=rtl?1220:60,al=rtl?'right':'left';
+  vAlpha(g,vk(p,0,.05),()=>{g.font=`800 46px "Plus Jakarta Sans","IBM Plex Sans Arabic",sans-serif`;g.fillStyle='#fff';g.textAlign=al;g.fillText(T.title,sx,78);});
+  vAlpha(g,vk(p,.03,.08),()=>{g.font='600 22px "Plus Jakarta Sans","IBM Plex Sans Arabic",sans-serif';g.fillStyle='rgba(255,255,255,.85)';g.textAlign=rtl?'left':'right';g.fillText(T.chap,rtl?60:1220,78);});
+  const cx=rtl?680:60;vAlpha(g,vk(p,.06,.14),()=>{const s=.94+.06*vEase(vk(p,.06,.16));g.save();g.translate(cx+270,410);g.scale(s,s);g.fillStyle='#fff';g.shadowColor='rgba(0,0,0,.12)';g.shadowBlur=30;g.fillRect(-270,-230,540,460);g.shadowBlur=0;if(v.img&&v.img.complete&&v.img.naturalWidth)g.drawImage(v.img,-250,-156,500,312.5);g.restore();});
+  const n=T.points.length,tx=rtl?600:680,maxW=540;g.font='600 28px "Plus Jakarta Sans","IBM Plex Sans Arabic",sans-serif';let y=210;
+  T.points.forEach((pt,i)=>{const k=vk(p,.14+i*(.68/n),.18+i*(.68/n)),lines=vWrap(g,pt,maxW-40);vAlpha(g,k,()=>{g.fillStyle=col;g.beginPath();g.arc(rtl?tx-10:tx+10,y-9,9,0,Math.PI*2);g.fill();g.font='600 28px "Plus Jakarta Sans","IBM Plex Sans Arabic",sans-serif';g.fillStyle='#1f2937';g.textAlign=al;lines.forEach((l,j)=>g.fillText(l,rtl?tx-36:tx+36,y+j*38));});y+=lines.length*38+26;});
+  vAlpha(g,vk(p,.84,.88),()=>{g.fillStyle='rgba(15,23,42,.86)';g.fillRect(0,610,1280,110);g.font='700 30px "Plus Jakarta Sans","IBM Plex Sans Arabic",sans-serif';g.fillStyle='#fff';g.textAlign=al;g.fillText('✓ '+(DOC_L[T.lang]||DOC_L.en).sum+' — '+T.title,sx,675);});
+  g.direction='ltr';}
+function vpEl(){return document.getElementById('vp');}
+function openVideo(it){const f=findItem(it.id),c=courses[f.ci],T=topicOf(it),D=parseDur(it.dur),S=VSCRIPTS[it.video],nx=nextAfter(it.id),NT=nx?MAT_TYPES[nx.t]:null;
+  const SKB='<svg viewBox="0 0 24 24"><path d="M4.5 12a7.5 7.5 0 1 0 2.2-5.3"/><path d="M4.5 4.5v4h4"/><text x="12.6" y="15.2" text-anchor="middle" font-size="7" font-weight="800" fill="#fff" stroke="none">10</text></svg>',SKF='<svg viewBox="0 0 24 24"><path d="M19.5 12a7.5 7.5 0 1 1-2.2-5.3"/><path d="M19.5 4.5v4h-4"/><text x="11.4" y="15.2" text-anchor="middle" font-size="7" font-weight="800" fill="#fff" stroke="none">10</text></svg>';
+  openViewer(it,`<div class="vp-wrap"><div class="vp" id="vp" onclick="vpTap()"><canvas id="vp-c"></canvas><div class="vp-cap" id="vp-cap" dir="auto" data-noi18n></div>
+    <button class="vp-big" id="vp-big" onclick="event.stopPropagation();vpToggle()" aria-label="Play">${VP_PLAY}</button>
+    <div class="vp-end" onclick="event.stopPropagation()"><div><div class="vp-end-ic">✓</div><div class="vp-end-t">Lecture completed</div><div class="row" style="gap:8px;justify-content:center;margin-top:14px"><button class="btn secondary sm" onclick="vpReplay()">Replay</button>${nx?`<button class="btn sm" onclick="nextItem()">Next item</button>`:''}</div></div></div>
+    <div class="vp-ctl" dir="ltr" onclick="event.stopPropagation()"><div class="vp-seek" id="vp-seek"><div class="vp-buf" id="vp-buf"></div><div class="vp-played" id="vp-played"></div><div class="vp-thumb" id="vp-thumb"></div></div>
+      <div class="vp-row"><button class="vp-b" id="vp-pp" onclick="vpToggle()" aria-label="Play">${VP_PLAY}</button><button class="vp-b" onclick="vpSkip(-10)" aria-label="Back 10 seconds">${SKB}</button><button class="vp-b" onclick="vpSkip(10)" aria-label="Forward 10 seconds">${SKF}</button><span class="vp-time" id="vp-time">00:00 / ${fmtT(D)}</span><span class="grow"></span><button class="vp-b vp-txt" id="vp-spd" onclick="vpSpeed()" aria-label="Speed">1×</button><button class="vp-b vp-txt on" id="vp-cc" onclick="vpCC()" aria-label="Captions">CC</button></div></div></div>
+    <div class="card vp-info"><div class="row" style="align-items:flex-start;gap:10px"><div class="grow" style="min-width:0"><div style="font-weight:800;font-size:15px;line-height:1.35" data-noi18n dir="auto">${hx(it.n)}</div><div class="sub mt6">${hx(c.tch)} · ${hx(c.n)}</div></div><span class="tag" style="background:var(--surface-3);color:var(--muted);flex:0 0 auto">Condensed demo lesson</span></div>
+      <div class="sub mt12" style="line-height:1.55;color:var(--text)" data-noi18n dir="auto">${hx(T.intro)}</div></div>
+    ${nx?`<div class="set-label" style="margin:16px 18px 8px">Up next</div><div class="card" style="margin:0 14px 18px;padding:2px 14px"><div class="citem" onclick="nextItem()"><div class="set-ic" style="background:${NT.col}1f;color:${NT.col}">${matIco(nx.t)}</div><div class="grow" style="min-width:0"><div class="citem-t" data-noi18n dir="auto">${hx(nx.n)}</div><div class="sub mt6">${itemMeta(nx)}</div></div></div></div>`:''}</div>`);
+  vid={id:it.id,t:0,D,K:D/VID_LEN,speed:1,playing:false,cc:true,raf:0,last:0,hide:0,caps:S?S.caps:genericCaps(T),draw:S?S.draw:drawGeneric,T,col:c.col,img:null};
+  if(!S){const im=new Image(),vref=vid;im.onload=()=>{vref.img=im;if(vid===vref)vpDraw();};im.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(FIG(T.fig,c.col));}
+  vpBindSeek();vpDraw();vpIcons();}
+function vpDraw(){if(!vid)return;const cv=document.getElementById('vp-c');if(!cv)return;const g=cv.getContext('2d'),w=cv.clientWidth||400,h=cv.clientHeight||225,dpr=Math.min(2,window.devicePixelRatio||1);
+  if(cv.width!==Math.round(w*dpr)||cv.height!==Math.round(h*dpr)){cv.width=Math.round(w*dpr);cv.height=Math.round(h*dpr);}
+  const p=Math.min(1,vid.t/vid.D);g.setTransform(cv.width/1280,0,0,cv.height/720,0,0);g.direction='ltr';g.textBaseline='alphabetic';g.save();vid.draw(g,p,vid);g.restore();
+  const q=p*100;document.getElementById('vp-played').style.width=q+'%';document.getElementById('vp-thumb').style.left=q+'%';document.getElementById('vp-buf').style.width=Math.min(100,q+18)+'%';
+  document.getElementById('vp-time').textContent=`${fmtT(vid.t)} / ${fmtT(vid.D)}`;const cap=vid.caps.find(c=>p>=c[0]&&p<c[1]);document.getElementById('vp-cap').textContent=cap?cap[2]:'';}
+function vpIcons(){if(!vid)return;const ic=vid.playing?VP_PAUSE:VP_PLAY;const pp=document.getElementById('vp-pp'),bg=document.getElementById('vp-big');if(pp)pp.innerHTML=ic;if(bg)bg.innerHTML=VP_PLAY;}
+function vpFrame(ts){if(!vid||!vid.playing)return;const dt=vid.last?Math.min(.1,(ts-vid.last)/1000):0;vid.last=ts;vid.t=Math.min(vid.D,vid.t+dt*vid.speed*vid.K);vpDraw();if(vid.t>=vid.D){vpEnd();return;}vid.raf=requestAnimationFrame(vpFrame);}
+function vpPlay(){if(!vid)return;if(vid.t>=vid.D)vid.t=0;vid.playing=true;vid.last=0;const e=vpEl();e.classList.add('playing');e.classList.remove('ended');vpIcons();vpShowCtl();cancelAnimationFrame(vid.raf);vid.raf=requestAnimationFrame(vpFrame);}
+function vpPause(){if(!vid)return;vid.playing=false;cancelAnimationFrame(vid.raf);clearTimeout(vid.hide);const e=vpEl();if(e)e.classList.remove('playing','hide-ctl');vpIcons();}
+function vpToggle(){if(vid&&vid.playing)vpPause();else vpPlay();}
+function vpTap(){if(!vid)return;const e=vpEl();if(e.classList.contains('ended'))return;if(vid.playing&&e.classList.contains('hide-ctl')){vpShowCtl();return;}vpToggle();}
+function vpShowCtl(){if(!vid)return;const e=vpEl();if(!e)return;e.classList.remove('hide-ctl');clearTimeout(vid.hide);if(vid.playing)vid.hide=setTimeout(()=>{if(vid&&vid.playing&&vpEl())vpEl().classList.add('hide-ctl');},2600);}
+function vpEnd(){if(!vid)return;vid.playing=false;vid.t=vid.D;cancelAnimationFrame(vid.raf);clearTimeout(vid.hide);const e=vpEl();e.classList.remove('playing','hide-ctl');e.classList.add('ended');vpIcons();vpDraw();markDone(vid.id,true);}
+function vpReplay(){if(!vid)return;vid.t=0;vpEl().classList.remove('ended');vpPlay();}
+function vpSkip(s){if(!vid)return;vid.t=Math.max(0,Math.min(vid.D,vid.t+s));vpEl().classList.remove('ended');vpDraw();vpShowCtl();if(vid.t>=vid.D)vpEnd();}
+function vpSpeed(){if(!vid)return;const S=[.75,1,1.25,1.5,2];vid.speed=S[(S.indexOf(vid.speed)+1)%S.length];document.getElementById('vp-spd').textContent=vid.speed+'×';vpShowCtl();}
+function vpCC(){if(!vid)return;vid.cc=!vid.cc;vpEl().classList.toggle('no-cc',!vid.cc);document.getElementById('vp-cc').classList.toggle('on',vid.cc);vpShowCtl();}
+function vpBindSeek(){const s=document.getElementById('vp-seek');if(!s)return;let drag=false;const at=e=>{if(!vid)return;const r=s.getBoundingClientRect();vid.t=Math.max(0,Math.min(1,(e.clientX-r.left)/r.width))*vid.D;vpEl().classList.remove('ended');vpDraw();};
+  s.addEventListener('pointerdown',e=>{drag=true;try{s.setPointerCapture(e.pointerId);}catch(_){}at(e);vpShowCtl();});
+  s.addEventListener('pointermove',e=>{if(drag){at(e);vpShowCtl();}});
+  const up=()=>{if(!drag)return;drag=false;if(vid&&vid.t>=vid.D)vpEnd();};s.addEventListener('pointerup',up);s.addEventListener('pointercancel',up);}
+function vpStop(){if(vid){vid.playing=false;cancelAnimationFrame(vid.raf);clearTimeout(vid.hide);}vid=null;}
+
 /* 1st term so far: 33 school days, 32 attended (1 late on Thu 12 Nov), 1 excused absence (Fri 6 Nov) */
 const TERM_ATT={days:33,attended:32,late:1,absent:0,excused:1};
 const attRows=[
@@ -1017,17 +1714,19 @@ settings:()=>`
 courses:()=>`
   <div class="apphead"><span class="lead"></span><h2 class="screen-title">Courses</h2></div>
   <p class="sub">EB9 B · Lebanese curriculum · ${courses.length} subjects</p>
-  <div class="mt16">${courses.map((c,i)=>`<div class="card mt12" style="cursor:pointer" onclick="openCourse(${i})"><div class="row"><div class="subj" style="background:${c.col}">${c.c}</div><div class="grow"><div style="font-weight:800">${c.n}</div><div class="sub mt6">${c.tch} · Room ${c.room}</div></div><span class="tag" style="background:var(--surface-3);color:var(--muted)">${c.mats.length} files</span></div></div>`).join('')}</div>
+  <div class="mt16">${courses.map((c,i)=>{const P=courseProg(i);return `<div class="card mt12" style="cursor:pointer" onclick="openCourse(${i})"><div class="row"><div class="subj" style="background:${c.col}">${c.c}</div><div class="grow" style="min-width:0"><div style="font-weight:800">${c.n}</div><div class="sub mt6">${c.tch} · Room ${c.room}</div><div class="row mt8" style="gap:8px"><div class="progress grow" style="height:5px"><i style="width:${P.pct}%"></i></div><span class="sub tnum" style="font-size:11px;font-weight:700">${P.pct}%</span></div></div></div></div>`;}).join('')}</div>
   <div style="height:10px"></div>`,
 
-course:()=>{const c=courses[curCourse];return `
+course:()=>{const c=courses[curCourse],P=courseProg(curCourse),nx=nextUnfinished(curCourse),secs=secsOf(curCourse),open=openSecs(curCourse);return `
   <div class="apphead"><span class="lead"></span><div><h2 style="font-size:20px;font-weight:800">${c.n}</h2><div class="sub">Room ${c.room}</div></div></div>
   <div class="card mt16"><div class="row"><div class="avatar" style="width:44px;height:44px;font-size:14px;background:${c.col}">${c.tch.split(' ').map(x=>x[0]).slice(0,2).join('')}</div><div class="grow"><div style="font-weight:800">${c.tch}</div><div class="sub mt6">Course teacher</div></div><div class="icon-btn" onclick="show('chats')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M4 5.5h16v11H9l-4 3.5v-3.5H4z"/></svg></div></div></div>
+  <div class="card mt12"><div class="row" style="gap:14px"><div class="cring" style="--p:${P.pct}"><b class="tnum">${P.pct}%</b></div><div class="grow"><div style="font-weight:800">Your progress</div><div class="sub mt6">${P.done} of ${P.total} items completed</div><div class="progress mt8"><i style="width:${P.pct}%"></i></div></div></div>
+    ${nx?`<button class="btn cont mt16" onclick="openItem('${nx.id}')"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg><span class="ell"><span>Continue</span>: <span data-noi18n>${hx(nx.n)}</span></span></button>`:`<div class="tag ok mt12">All items completed</div>`}</div>
   <div class="set-label">About this course</div>
   <div class="card"><div class="sub" style="line-height:1.6;color:var(--text)" data-noi18n>${c.desc}</div></div>
-  <div class="set-label">Materials</div>
-  <div class="card" style="padding:6px 16px">${c.mats.map(m=>`<div class="list-item" style="cursor:pointer" onclick="toast('Opening file…')"><div class="set-ic" style="background:${matColor(m.t)}1f;color:${matColor(m.t)}">${matIcon(m.t)}</div><div class="grow"><div style="font-weight:600" data-noi18n>${m.n}</div><div class="sub mt6" style="text-transform:capitalize">${m.t}</div></div><span style="color:var(--faint)">↓</span></div>`).join('')}</div>
-  <div style="height:10px"></div>`;},
+  <div class="row between" style="margin:18px 4px 0"><div class="set-label" style="margin:0">Course content</div><span class="sub" style="font-size:11.5px"><bdi>${secs.length} sections</bdi> · <bdi>${P.total} items</bdi></span></div>
+  ${secs.map((sec,si)=>{const d=sec.items.filter(x=>isDone(x.id)).length,o=open.has(si);return `<div class="csec${o?' open':''}" data-sec="${si}"><button class="csec-h" onclick="toggleSec(${si})" aria-expanded="${o}"><div class="grow" style="min-width:0"><div class="csec-t" data-noi18n dir="auto">${hx(sec.n)}</div><div class="sub mt6">${secMeta(sec)}</div></div><span class="csec-n tnum${d===sec.items.length?' full':''}">${d}/${sec.items.length}</span><svg class="chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button><div class="csec-b" style="${o?'':'height:0px'}"><div class="csec-in">${sec.items.map(it=>courseItemRow(it,nx&&nx.id)).join('')}</div></div></div>`;}).join('')}
+  <div style="height:14px"></div>`;},
 
 attendance:()=>{const p=attRows.filter(r=>r.s==='present').length,l=attRows.filter(r=>r.s==='late').length,a=attRows.filter(r=>r.s==='absent').length,e=attRows.filter(r=>r.s==='excused').length;const pct=Math.round(TERM_ATT.attended/TERM_ATT.days*100);const label={present:'Present',late:'Late',absent:'Absent',excused:'Excused'},tg={present:'ok',late:'warn',absent:'bad',excused:'a'};return `
   <div class="apphead"><span class="lead"></span><h2 class="screen-title">Attendance</h2></div>
@@ -1195,6 +1894,8 @@ function examInfo(idx){const e=exams[idx];openSheet(`<div class="row"><div class
 function matColor(t){return t==='video'||t==='lecture'?'#ef4444':t==='slides'?'#f59e0b':t==='note'?'#0f9d8f':'#0ea5e9';}
 function matIcon(t){const m={pdf:'<path d="M7 3h8l4 4v14H7z"/><path d="M9 12h6M9 16h4"/>',slides:'<rect x="3" y="4" width="18" height="13" rx="2"/><path d="M12 17v3M8 21h8"/>',video:'<rect x="3" y="5" width="18" height="14" rx="3"/><path d="M10 9l5 3-5 3z"/>',note:'<path d="M7 3h8l4 4v14H7z"/><path d="M9 8h4M9 12h6M9 16h4"/>',lecture:'<path d="M12 3a3 3 0 0 1 3 3v5a3 3 0 0 1-6 0V6a3 3 0 0 1 3-3z"/><path d="M6 11a6 6 0 0 0 12 0M12 17v4"/>'};return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">${m[t]||m.pdf}</svg>`;}
 function openCourse(i){curCourse=i;rebuild('course');show('course');}
+['touchstart','mousedown'].forEach(ev=>document.getElementById('viewer').addEventListener(ev,e=>e.stopPropagation(),{passive:true}));
+window.addEventListener('resize',()=>{if(vw.type==='pdf'&&viewerOpen())pdfLayout(true);if(vid)vpDraw();});
 function resList(type){const items=type==='all'?resources:resources.filter(r=>r.t===type);if(!items.length)return `<div class="card" style="text-align:center;padding:24px"><div class="sub">Nothing here yet</div></div>`;return `<div class="card" style="padding:6px 16px">${items.map(r=>`<div class="list-item" style="cursor:pointer" onclick="toast('Opening resource…')"><div class="set-ic" style="background:${matColor(r.t)}1f;color:${matColor(r.t)}">${matIcon(r.t)}</div><div class="grow"><div style="font-weight:600" data-noi18n>${r.n}</div><div class="sub mt6">${r.subj} · ${r.meta}</div></div><span style="color:var(--faint)">↓</span></div>`).join('')}</div>`;}
 function resFilter(btn,type){document.querySelectorAll('#res-chips .chip').forEach(c=>c.classList.remove('active'));btn.classList.add('active');const rb=document.getElementById('res-body');rb.innerHTML=resList(type);trEl(rb);}
 function markNotifs(){notifs.forEach(n=>n.unread=false);rebuild('notifs');show('notifs');toast('All marked as read');}

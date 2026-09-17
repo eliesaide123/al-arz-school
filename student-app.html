@@ -502,7 +502,6 @@
               <div class="drawer-item" data-goto="conduct" onclick="go('conduct')"><svg viewBox="0 0 24 24"><path d="M12 3.5l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9l-5.3 2.7 1-5.8-4.2-4.1 5.9-.9z"/></svg><span class="lbl" data-i18n="Conduct notes">Conduct notes</span></div>
               <div class="drawer-item" data-goto="attendance" onclick="go('attendance')"><svg viewBox="0 0 24 24"><path d="M4 12.5 9 17.5 20 6.5"/></svg><span class="lbl" data-i18n="Attendance">Attendance</span></div>
               <div class="drawer-sep"></div>
-              <div class="drawer-item" data-goto="resources" onclick="go('resources')"><svg viewBox="0 0 24 24"><path d="M4 5.5h6a2 2 0 0 1 2 2v11a2 2 0 0 0-2-2H4z"/><path d="M20 5.5h-6a2 2 0 0 0-2 2v11a2 2 0 0 1 2-2h6z"/></svg><span class="lbl" data-i18n="Learning resources">Learning resources</span></div>
               <div class="drawer-item" data-goto="library" onclick="go('library')"><svg viewBox="0 0 24 24"><path d="M5 4h9a3 3 0 0 1 3 3v13H8a3 3 0 0 0-3 3z"/><path d="M17 4h2v16"/></svg><span class="lbl" data-i18n="Library">Library</span></div>
               <div class="drawer-item" data-goto="calendar" onclick="go('calendar')"><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="16" rx="3"/><path d="M3.5 9.5h17M8 3v4M16 3v4"/></svg><span class="lbl" data-i18n="Calendar">Calendar</span></div>
               <div class="drawer-item" data-goto="chats" onclick="go('chats')"><svg viewBox="0 0 24 24"><path d="M4 5.5h16v11H9l-4 3.5v-3.5H4z"/></svg><span class="lbl" data-i18n="Messages">Messages</span></div>
@@ -670,7 +669,7 @@ const I18N_SRC=[
 ['Bank transfer','Virement bancaire','تحويل مصرفي'],['OMT','OMT','OMT'],['Whish Money','Whish Money','Whish Money'],['Cash at the Finance Office','Espèces au service financier','نقداً في الدائرة المالية'],
 ['Get payment slip','Obtenir le bordereau','الحصول على إيصال الدفع'],['Payment slip ready','Bordereau prêt','إيصال الدفع جاهز'],['bring it to the Finance Office','apporte-le au service financier','أحضره إلى الدائرة المالية'],
 ['Class materials','Supports de cours','المواد التعليمية'],['By lesson','Par séance','حسب الحصة'],['Revision','Révisions','مراجعة'],['Textbooks','Manuels','الكتب المدرسية'],
-['Missed a class?','Tu as manqué un cours ?','فاتتك حصة؟'],['Past paper','Annale','امتحان سابق'],['Summary sheet','Fiche de synthèse','ورقة ملخّص'],['Board photo','Photo du tableau','صورة اللوح'],
+['Missed a class?','Tu as manqué un cours ?','فاتتك حصة؟'],['Past paper','Annale','امتحان سابق'],['Study resource','Ressource','مورد تعليمي'],['Summary sheet','Fiche de synthèse','ورقة ملخّص'],['Board photo','Photo du tableau','صورة اللوح'],
 ['Saved offline','Disponible hors ligne','محفوظ بدون إنترنت'],['Saved offline ✓','Disponible hors ligne ✓','تم الحفظ للاستخدام بدون إنترنت ✓'],['Save offline','Enregistrer hors ligne','حفظ للاستخدام بدون إنترنت'],
 ['New','Nouveau','جديد'],['Next attachment','Pièce suivante','المرفق التالي'],['Today','Aujourd’hui','اليوم'],['best on Wi-Fi','de préférence en Wi-Fi','يُفضّل عبر Wi-Fi'],['End of lesson','Fin de la leçon','نهاية الدرس'],
 ['notes, board photos and files from your classes','notes, photos du tableau et fichiers de tes cours','ملاحظات وصور اللوح وملفات حصصك'],
@@ -1267,6 +1266,12 @@ const MAT_REVISION=[
   {id:'r7',c:'Fr',t:'pdf',kind:'past',n:'Brevet 2024 — Français, rédaction',topic:'discours',pages:2,size:'260 KB'},
   {id:'r8',c:'Ar',t:'pdf',kind:'past',n:'الشهادة المتوسطة 2024 — اللغة العربية',topic:'qawaed',pages:3,size:'390 KB'},
   {id:'r9',c:'En',t:'pdf',kind:'past',n:'Brevet 2024 — English',topic:'essay',pages:3,size:'350 KB'},
+  /* study resources (formerly "Learning resources") */
+  {id:'r10',c:'En',t:'pdf',kind:'extra',n:'The Prophet — study guide',topic:'prophet',pages:6,size:'820 KB'},
+  {id:'r11',c:'Bi',t:'video',kind:'extra',n:'Reflex arc explained',topic:'reflex',dur:'11:30',size:'42 MB'},
+  {id:'r12',c:'Ph',t:'video',kind:'extra',n:'Ohm’s law demo',topic:'ohm',dur:'09:41',size:'36 MB'},
+  {id:'r13',c:'Hi',t:'video',kind:'extra',n:'Independence of Lebanon (1943) — recorded class',topic:'independence',dur:'41:12',size:'150 MB'},
+  {id:'r14',c:'Fr',t:'pdf',kind:'extra',n:'Le discours rapporté — fiche',topic:'discours',pages:2,size:'240 KB'},
 ];
 const MAT_BOOKS=[
   {id:'bk-M',c:'M',t:'pdf',textbook:1,n:'Mathematics EB9 — CRDP textbook',topic:'radicals',pages:12,size:'2.4 MB'},
@@ -1301,7 +1306,7 @@ function matCtxList(){if(matTab==='lesson')return MAT_LESSONS.filter(l=>matSubj=
 function nextAfter(id){const i=matCtx.indexOf(id);if(i<0||i>=matCtx.length-1)return null;const f=findItem(matCtx[i+1]);return f?f.item:null;}
 function topicOf(it){return TOPICS[it.topic]||TOPICS.radicals;}
 function hostOf(u){return String(u||'').replace(/^https?:\/\//,'').replace(/^www\./,'').split('/')[0];}
-function itemMeta(it){const L=MAT_TYPES[it.t].l,K=it.kind==='past'?['Past paper']:it.kind==='summary'?['Summary sheet']:[];
+function itemMeta(it){const L=MAT_TYPES[it.t].l,K=it.kind==='past'?['Past paper']:it.kind==='summary'?['Summary sheet']:it.kind==='extra'?['Study resource']:[];
   const parts=K.concat(it.t==='pdf'?[L,it.pages===1?'1 page':`${it.pages} pages`,`<span dir="ltr">${it.size}</span>`]:it.t==='slides'?[L,`${it.slides} slides`]:it.t==='video'?[L,`<span dir="ltr">${it.dur}</span>`]:it.t==='link'?[L,`<span dir="ltr">${hostOf(it.url)}</span>`]:[L]);
   return parts.map(x=>`<bdi>${x}</bdi>`).join(' · ');}
 function parseDur(s){const m=String(s||'').match(/(\d+):(\d{2})/);return m?(+m[1])*60+(+m[2]):300;}
@@ -1636,16 +1641,6 @@ const attRows=[
   {d:'Mon 16 Nov',s:'present'},{d:'Fri 13 Nov',s:'present'},{d:'Thu 12 Nov',s:'late'},{d:'Wed 11 Nov',s:'present'},
   {d:'Tue 10 Nov',s:'present'},{d:'Mon 9 Nov',s:'present'},{d:'Fri 6 Nov',s:'excused'},{d:'Thu 5 Nov',s:'present'},
 ];
-const resources=[
-  {t:'note',n:'Radicals summary notes',subj:'Mathematics',meta:'PDF · 4 pages'},
-  {t:'pdf',n:'Mathematics EB9 — CRDP textbook',subj:'Mathematics',meta:'CRDP digital resources · PDF'},
-  {t:'pdf',n:'Brevet past papers — Mathematics',subj:'Mathematics',meta:'Official exams · PDF'},
-  {t:'pdf',n:'The Prophet — study guide',subj:'English',meta:'PDF · 12 pages'},
-  {t:'video',n:'Reflex arc explained',subj:'Life & Earth Sciences',meta:'Video · 11:30'},
-  {t:'lecture',n:'Independence of Lebanon (1943) — recorded class',subj:'History & Geography',meta:'Recording · 41:12'},
-  {t:'video',n:'Ohm’s law demo',subj:'Physics & Chemistry',meta:'Video · 09:41'},
-  {t:'note',n:'Le discours rapporté — fiche',subj:'French',meta:'PDF · 2 pages'},
-];
 const calEvents=[
   {d:'18 Nov',day:'Wed',title:"Maths — Thales' theorem worksheet due",type:'deadline',col:'#f59e0b'},
   {d:'18 Nov',day:'Wed',title:'Parent–teacher meetings (EB9) · 3:00pm',type:'meeting',col:'#4f46e5'},
@@ -1736,7 +1731,6 @@ home:()=>`
     <div class="qtile" onclick="show('reportcards')"><div class="qi"><svg viewBox="0 0 24 24"><path d="M7 3h8l4 4v14H7z"/><path d="M14 3v5h5"/><path d="M10 13h6M10 17h4"/></svg></div><div class="ql">Report card</div></div>
     <div class="qtile" onclick="show('conduct')"><div class="qi"><svg viewBox="0 0 24 24"><path d="M12 3.5l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9l-5.3 2.7 1-5.8-4.2-4.1 5.9-.9z"/></svg></div><div class="ql">Conduct</div></div>
     <div class="qtile" onclick="show('attendance')"><div class="qi"><svg viewBox="0 0 24 24"><path d="M4 12.5 9 17.5 20 6.5"/></svg></div><div class="ql">Attendance</div></div>
-    <div class="qtile" onclick="show('resources')"><div class="qi"><svg viewBox="0 0 24 24"><path d="M4 5.5h6a2 2 0 0 1 2 2v11a2 2 0 0 0-2-2H4z"/><path d="M20 5.5h-6a2 2 0 0 0-2 2v11a2 2 0 0 1 2-2h6z"/></svg></div><div class="ql">Resources</div></div>
     <div class="qtile" onclick="show('library')"><div class="qi"><svg viewBox="0 0 24 24"><path d="M6 4h11a2 2 0 0 1 2 2v14H8a2 2 0 0 0-2 2z"/><path d="M6 4v16"/></svg></div><div class="ql">Library</div></div>
     <div class="qtile" onclick="show('calendar')"><div class="qi"><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="16" rx="3"/><path d="M3.5 9.5h17M8 3v4M16 3v4"/></svg></div><div class="ql">Calendar</div></div>
     <div class="qtile" onclick="show('chats')"><div class="qi"><svg viewBox="0 0 24 24"><path d="M4 5.5h16v11H9l-4 3.5v-3.5H4z"/></svg></div><div class="ql">Messages</div></div>
@@ -1960,11 +1954,6 @@ attendance:()=>{const p=attRows.filter(r=>r.s==='present').length,l=attRows.filt
   <div class="card" style="padding:6px 16px">${attRows.map(r=>`<div class="list-item"><div class="grow" style="font-weight:600">${r.d}</div><span class="tag ${tg[r.s]}">${label[r.s]}</span></div>`).join('')}</div>
   <div style="height:10px"></div>`;},
 
-resources:()=>`
-  <div class="apphead"><span class="lead"></span><h2 class="screen-title">Learning resources</h2></div>
-  <div class="chip-scroll mt16" id="res-chips"><div class="chip active" onclick="resFilter(this,'all')">All</div><div class="chip" onclick="resFilter(this,'note')">Notes</div><div class="chip" onclick="resFilter(this,'pdf')">PDFs</div><div class="chip" onclick="resFilter(this,'video')">Videos</div><div class="chip" onclick="resFilter(this,'lecture')">Lectures</div></div>
-  <div id="res-body" class="mt16">${resList('all')}</div>
-  <div style="height:10px"></div>`,
 
 calendar:()=>{const list=selDay?calEvents.filter(e=>{const p=e.d.split(' ');return p[1]==='Nov'&&+p[0]===selDay;}):calEvents;return `
   <div class="apphead"><span class="lead"></span><h2 class="screen-title">Calendar</h2></div>
@@ -2116,8 +2105,6 @@ function matColor(t){return t==='video'||t==='lecture'?'#ef4444':t==='slides'?'#
 function matIcon(t){const m={pdf:'<path d="M7 3h8l4 4v14H7z"/><path d="M9 12h6M9 16h4"/>',slides:'<rect x="3" y="4" width="18" height="13" rx="2"/><path d="M12 17v3M8 21h8"/>',video:'<rect x="3" y="5" width="18" height="14" rx="3"/><path d="M10 9l5 3-5 3z"/>',note:'<path d="M7 3h8l4 4v14H7z"/><path d="M9 8h4M9 12h6M9 16h4"/>',lecture:'<path d="M12 3a3 3 0 0 1 3 3v5a3 3 0 0 1-6 0V6a3 3 0 0 1 3-3z"/><path d="M6 11a6 6 0 0 0 12 0M12 17v4"/>'};return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">${m[t]||m.pdf}</svg>`;}
 ['touchstart','mousedown'].forEach(ev=>document.getElementById('viewer').addEventListener(ev,e=>e.stopPropagation(),{passive:true}));
 window.addEventListener('resize',()=>{if(vw.type==='pdf'&&viewerOpen())pdfLayout(true);if(vid)vpDraw();});
-function resList(type){const items=type==='all'?resources:resources.filter(r=>r.t===type);if(!items.length)return `<div class="card" style="text-align:center;padding:24px"><div class="sub">Nothing here yet</div></div>`;return `<div class="card" style="padding:6px 16px">${items.map(r=>`<div class="list-item" style="cursor:pointer" onclick="toast('Opening resource…')"><div class="set-ic" style="background:${matColor(r.t)}1f;color:${matColor(r.t)}">${matIcon(r.t)}</div><div class="grow"><div style="font-weight:600" data-noi18n>${r.n}</div><div class="sub mt6">${r.subj} · ${r.meta}</div></div><span style="color:var(--faint)">↓</span></div>`).join('')}</div>`;}
-function resFilter(btn,type){document.querySelectorAll('#res-chips .chip').forEach(c=>c.classList.remove('active'));btn.classList.add('active');const rb=document.getElementById('res-body');rb.innerHTML=resList(type);trEl(rb);}
 function markNotifs(){notifs.forEach(n=>n.unread=false);rebuild('notifs');show('notifs');toast('All marked as read');}
 function openChat(id){curChat=id;const c=chats.find(x=>x.id===id);if(c)c.unread=0;rebuild('chatroom');rebuild('chats');show('chatroom');setTimeout(()=>{const l=document.getElementById('chat-log');if(l)l.scrollIntoView(false);},40);}
 function sendMsg(){const inp=document.getElementById('chat-in'),v=inp.value.trim();if(!v)return;const now=new Date();(msgs[curChat]=msgs[curChat]||[]).push({who:'me',t:v,time:now.getHours()+':'+String(now.getMinutes()).padStart(2,'0')});rebuild('chatroom');show('chatroom');setTimeout(()=>{const l=document.getElementById('chat-log');if(l)l.scrollIntoView(false);},50);}

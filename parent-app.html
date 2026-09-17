@@ -577,7 +577,7 @@ const D={
 "By lesson":["Par séance","حسب الحصة"],
 "Revision":["Révisions","مراجعة"],
 "Textbooks":["Manuels","الكتب المدرسية"],
-"Past paper":["Annale","امتحان سابق"],
+"Past paper":["Annale","امتحان سابق"],"Study resource":["Ressource","مورد تعليمي"],
 "Past papers":["Annales","امتحانات سابقة"],
 "Summary sheet":["Fiche de synthèse","ملخّص"],
 "Board photo":["Photo du tableau","صورة اللوح"],
@@ -1835,7 +1835,7 @@ const DOC_L={
 
 /* topics feed the generated textbook pages, slide decks, video lessons and quizzes (authored content — not translated) */
 const TOPICS={
-  radicals:{lang:'en',chap:'Chapter 1',title:'Real numbers & radicals',fig:'radicals',
+  radicals:{lang:'en',chap:'Chapter 3',title:'Real numbers & radicals',fig:'radicals',
     intro:'Square roots let us write exact values such as √2 instead of rounded decimals. In EB9 we learn to simplify radicals and to calculate with them.',
     points:['The square root √a (a ≥ 0) is the non-negative number whose square is a.','For a ≥ 0 and b ≥ 0: √(a × b) = √a × √b.','Simplify a radical by extracting perfect squares: √50 = √(25 × 2) = 5√2.','Rationalise a denominator: 1/√2 = √2/2.'],
     formulas:['√a × √b = √(ab)','(√a)² = a','√(a²) = |a|','a / √b = a√b / b'],
@@ -1847,19 +1847,19 @@ const TOPICS={
     formulas:['(a + b)² = a² + 2ab + b²','(a − b)² = a² − 2ab + b²','(a + b)(a − b) = a² − b²'],
     examples:[{title:'Factorise E = (2x − 3)² − 16',steps:['E = (2x − 3)² − 4²','E = (2x − 3 − 4)(2x − 3 + 4)','E = (2x − 7)(2x + 1)','Check: expand to get 4x² − 12x − 7']}],
     exercises:['Expand (3x + 2)² and (5 − x)².','Factorise 9x² − 25.','Factorise (x + 1)² − 4(x + 1).','Solve (2x − 7)(2x + 1) = 0.']},
-  thales:{lang:'en',chap:'Chapter 3',title:'Thales’ theorem',fig:'thales',
+  thales:{lang:'en',chap:'Chapter 4',title:'Thales’ theorem',fig:'thales',
     intro:'Thales’ theorem links parallel lines and proportional lengths. It lets us compute unknown lengths and prove that two lines are parallel.',
     points:['In a triangle ABC, M is a point of [AB] and N a point of [AC].','If (MN) // (BC), then AM/AB = AN/AC = MN/BC.','Converse: if AM/AB = AN/AC with the points in the same order, then (MN) // (BC).','Always check the parallel lines before using the ratios.'],
     formulas:['AM/AB = AN/AC = MN/BC','(MN) // (BC) ⇔ AM/AB = AN/AC'],
     examples:[{title:'AM = 3 cm, AB = 5 cm, AN = 4.2 cm and (MN) // (BC). Find AC.',steps:['(MN) // (BC), so by Thales: AM/AB = AN/AC','3/5 = 4.2/AC','AC = 4.2 × 5 ÷ 3','AC = 7 cm']}],
     exercises:['AM = 2, AB = 6, MN = 3 and (MN) // (BC). Find BC.','Prove that (MN) // (BC) when AM = 4, AB = 10, AN = 6 and AC = 15.','Explain why the converse needs the points in the same order.','A 1.6 m student casts a 2 m shadow while a tree casts 15 m. How tall is the tree?']},
-  pythagoras:{lang:'en',chap:'Chapter 4',title:'Pythagoras’ theorem',fig:'pythagoras',
+  pythagoras:{lang:'en',chap:'Chapter 5',title:'Pythagoras’ theorem',fig:'pythagoras',
     intro:'In a right-angled triangle the square of the hypotenuse equals the sum of the squares of the other two sides.',
     points:['The hypotenuse is the side opposite the right angle — the longest side.','If ABC is right-angled at A, then BC² = AB² + AC².','Converse: if BC² = AB² + AC², the triangle is right-angled at A.','Use it to compute a missing side, then round only at the end.'],
     formulas:['BC² = AB² + AC²','BC = √(AB² + AC²)'],
     examples:[{title:'ABC right-angled at A with AB = 6 cm and AC = 8 cm. Find BC.',steps:['BC² = AB² + AC²','BC² = 6² + 8² = 36 + 64','BC² = 100','BC = √100 = 10 cm']}],
     exercises:['A ladder of 5 m leans 3 m from a wall. How high does it reach?','Is the triangle with sides 7, 24 and 25 right-angled?','Find the diagonal of a 12 cm × 9 cm rectangle.']},
-  trig:{lang:'en',chap:'Chapter 4',title:'Trigonometric ratios',fig:'trig',
+  trig:{lang:'en',chap:'Chapter 5',title:'Trigonometric ratios',fig:'trig',
     intro:'In a right-angled triangle, the ratios between sides depend only on the angle: cosine, sine and tangent.',
     points:['cos B = adjacent side / hypotenuse.','sin B = opposite side / hypotenuse.','tan B = opposite side / adjacent side.','cos² x + sin² x = 1 for any acute angle x.'],
     formulas:['cos B = AB / BC','sin B = AC / BC','tan B = AC / AB','cos² x + sin² x = 1'],
@@ -2070,11 +2070,16 @@ const MATS={
         {id:'or2',t:'pdf',kind:'paper',n:'Brevet 2024 — Mathematics (MEHE, 1st session)',topic:'pythagoras',pages:3,size:'520 KB'},
         {id:'or3',t:'pdf',kind:'paper',n:'Brevet 2024 — Mathematics solutions',topic:'trig',pages:4,size:'580 KB'},
         {id:'or4',t:'slides',kind:'summary',n:'Summary — Radicals & Thales',topic:'radicals',slides:8}]},
-      {s:'Ph',items:[{id:'or5',t:'pdf',kind:'paper',n:'Brevet 2024 — Physics & Chemistry',topic:'ohm',pages:3,size:'610 KB'}]},
-      {s:'Bi',items:[{id:'or6',t:'pdf',kind:'summary',n:'Summary — the nervous system',topic:'neuron',pages:2,size:'340 KB'}]},
-      {s:'Fr',items:[{id:'or7',t:'pdf',kind:'paper',n:'Brevet 2024 — Français, rédaction',topic:'discours',pages:2,size:'300 KB'}]},
+      {s:'Ph',items:[{id:'or5',t:'pdf',kind:'paper',n:'Brevet 2024 — Physics & Chemistry',topic:'ohm',pages:3,size:'610 KB'},
+        {id:'or12',t:'video',kind:'extra',n:'Ohm’s law demo',topic:'ohm',dur:'09:41',mb:36}]},
+      {s:'Bi',items:[{id:'or6',t:'pdf',kind:'summary',n:'Summary — the nervous system',topic:'neuron',pages:2,size:'340 KB'},
+        {id:'or11',t:'video',kind:'extra',n:'Reflex arc explained',topic:'reflex',dur:'11:30',mb:42}]},
+      {s:'Fr',items:[{id:'or7',t:'pdf',kind:'paper',n:'Brevet 2024 — Français, rédaction',topic:'discours',pages:2,size:'300 KB'},
+        {id:'or14',t:'pdf',kind:'extra',n:'Le discours rapporté — fiche',topic:'discours',pages:2,size:'240 KB'}]},
       {s:'Ar',items:[{id:'or8',t:'pdf',kind:'paper',n:'الشهادة المتوسطة 2024 — اللغة العربية',topic:'qawaed',pages:3,size:'450 KB'}]},
-      {s:'En',items:[{id:'or9',t:'pdf',kind:'paper',n:'Brevet 2024 — English',topic:'essay',pages:3,size:'410 KB'}]},
+      {s:'En',items:[{id:'or9',t:'pdf',kind:'paper',n:'Brevet 2024 — English',topic:'essay',pages:3,size:'410 KB'},
+        {id:'or10',t:'pdf',kind:'extra',n:'The Prophet — study guide',topic:'prophet',pages:6,size:'820 KB'}]},
+      {s:'Hi',items:[{id:'or13',t:'video',kind:'extra',n:'Independence of Lebanon (1943) — recorded class',topic:'independence',dur:'41:12',mb:150}]},
     ],
     textbooks:[
       {id:'ot1',s:'M',t:'pdf',n:'Mathematics EB9 — CRDP textbook',topic:'radicals',pages:12,size:'2.4 MB',textbook:1},
@@ -2154,7 +2159,7 @@ function matRow(it){const T=MAT_TYPES[it.t],off=matOff.has(it.id),nw=isNewMat(it
   const right=it.t==='link'?'<span style="color:var(--faint)">›</span>'
     :`<div class="icon-btn cdl${off?' off':''}" onclick="event.stopPropagation();downloadItem('${it.id}')" aria-label="${off?'Saved offline':it.t==='video'?'Save offline':'Download'}">${off?SVG_OK:SVG_DL}</div>`;
   return `<div class="mrow" onclick="openItem('${it.id}')"><div class="set-ic" style="background:${T.col}1f;color:${T.col}">${matIco(it.t)}</div><div class="grow" style="min-width:0">
-    <div class="mrow-t"><span data-noi18n dir="auto">${hx(it.n)}</span>${it.kind?` <span class="ml-kind${it.kind==='paper'?' paper':''}">${it.kind==='paper'?'Past paper':'Summary sheet'}</span>`:''}${nw?' <span class="mnew">New</span>':''}</div>
+    <div class="mrow-t"><span data-noi18n dir="auto">${hx(it.n)}</span>${it.kind?` <span class="ml-kind${it.kind==='paper'?' paper':''}">${it.kind==='paper'?'Past paper':it.kind==='extra'?'Study resource':'Summary sheet'}</span>`:''}${nw?' <span class="mnew">New</span>':''}</div>
     <div class="sub mt6">${itemMeta(it)}</div>
     ${it.t==='video'&&!off?`<div class="mhint">${SVG_WIFI}<span><bdi dir="ltr">~${it.mb} MB</bdi> · best on Wi-Fi</span></div>`:''}
     ${off?`<div class="moff">${SVG_OFF}<span>Saved offline</span></div>`:''}
@@ -2361,7 +2366,7 @@ function vFrac(g,top,bot,x,y,k,col){vAlpha(g,k,()=>{vText(g,top,x,y-16,1,38,col|
 function vChev(g,x,y,col){g.strokeStyle=col;g.lineWidth=4;g.beginPath();g.moveTo(x-8,y-9);g.lineTo(x+4,y);g.lineTo(x-8,y+9);g.moveTo(x+6,y-9);g.lineTo(x+18,y);g.lineTo(x+6,y+9);g.stroke();}
 function vDot(g,pt,col){g.fillStyle=col;g.beginPath();g.arc(pt[0],pt[1],9,0,Math.PI*2);g.fill();}
 function drawThales(g,p){vBoard(g);const W='#f8fafc',Y='#fde047',CY='#67e8f9',G='#86efac';
-  vText(g,'Thales’ theorem',70,92,vk(p,0,.05),52,W,800);vText(g,'EB9 · Mathematics · Chapter 3',72,136,vk(p,.02,.07),26,'#a7f3d0',600);
+  vText(g,'Thales’ theorem',70,92,vk(p,0,.05),52,W,800);vText(g,'EB9 · Mathematics · Chapter 4',72,136,vk(p,.02,.07),26,'#a7f3d0',600);
   const A=[340,210],B=[110,630],C=[620,630],r=.55,M=[A[0]+(B[0]-A[0])*r,A[1]+(B[1]-A[1])*r],N=[A[0]+(C[0]-A[0])*r,A[1]+(C[1]-A[1])*r];
   const hl=vk(p,.44,.5)*(1-vk(p,.6,.64));if(hl>0){vAlpha(g,hl,()=>{vLine(g,A,M,1,CY,11);vLine(g,A,N,1,'#fda4af',11);});}
   vLine(g,A,B,vEase(vk(p,.08,.12)),W,5);vLine(g,B,C,vEase(vk(p,.12,.16)),W,5);vLine(g,C,A,vEase(vk(p,.16,.2)),W,5);
@@ -2377,7 +2382,7 @@ function drawThales(g,p){vBoard(g);const W='#f8fafc',Y='#fde047',CY='#67e8f9',G=
   vAlpha(g,vk(p,.84,.88),()=>{vText(g,'Converse',720,250,1,40,Y,800);['If AM/AB = AN/AC','and A, M, B and A, N, C','are in the same order,','then (MN) // (BC).'].forEach((s,i)=>vText(g,s,720,320+i*54,vk(p,.86+i*.018,.89+i*.018),34,W,600));
     vAlpha(g,vk(p,.94,.97),()=>{g.fillStyle='rgba(134,239,172,.16)';g.fillRect(710,560,520,70);vText(g,'✓ Equal ratios mean parallel lines',730,606,1,32,G,700);});});}
 function drawPyth(g,p){vBoard(g);const W='#f8fafc',Y='#fde047',G='#86efac';
-  vText(g,'Pythagoras’ theorem',70,92,vk(p,0,.05),52,W,800);vText(g,'EB9 · Mathematics · Chapter 4',72,136,vk(p,.02,.07),26,'#a7f3d0',600);
+  vText(g,'Pythagoras’ theorem',70,92,vk(p,0,.05),52,W,800);vText(g,'EB9 · Mathematics · Chapter 5',72,136,vk(p,.02,.07),26,'#a7f3d0',600);
   const A=[260,480],B=[260,320],C=[470,480];
   const sq=(pts,col,k,label,lx,ly)=>vAlpha(g,k,()=>{g.fillStyle=col+'33';g.strokeStyle=col;g.lineWidth=3;g.beginPath();pts.forEach((q,i)=>i?g.lineTo(q[0],q[1]):g.moveTo(q[0],q[1]));g.closePath();g.fill();g.stroke();vText(g,label,lx,ly,1,32,col,800,'center');});
   sq([[100,320],[260,320],[260,480],[100,480]],'#67e8f9',vk(p,.25,.32),'AB²',180,412);sq([[260,480],[470,480],[470,690],[260,690]],'#fbbf24',vk(p,.32,.39),'AC²',365,598);sq([[260,320],[470,480],[630,270],[420,110]],'#f472b6',vk(p,.39,.47),'BC²',445,305);
